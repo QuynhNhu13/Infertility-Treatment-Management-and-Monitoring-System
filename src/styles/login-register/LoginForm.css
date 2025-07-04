@@ -171,7 +171,7 @@
 .divider {
   display: flex;
   align-items: center;
-  margin: 10px 0 1px 0px;
+  margin: 15px 0 1px 0px;
 }
 
 .divider .line {
@@ -188,6 +188,7 @@
 
 /* Google button */
 .google-button {
+  margin-top: 10px;
   background-color: white;
   color: red;
   border: 1px solid #ccc;
