@@ -42,7 +42,7 @@
 .login-container h2 {
   text-align: center;
   margin-bottom: 5px;
-  margin-top: -15px;
+  margin-top: -10px;
   color: #077BF6;
   font-size: 30px !important;
 }
@@ -122,13 +122,29 @@
 /* Lỗi */
 .error-box {
   background-color: #ffdddd;
-  border-left: 4px solid red;
-  padding: 10px;
-  margin-bottom: 16px;
-  font-size: 14px;
+  border-left: 3px solid red;
+  padding: 2px 6px;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  font-size: 12px;
   color: #a30000;
-  border-radius: 6px;
+  border-radius: 4px;
+  line-height: 1.5;
 }
+
+.success-box {
+  background-color: #ddffdd;
+  border-left: 3px solid #00a300;
+  padding: 2px 6px;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #006600;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+
+
 
 /* Footer */
 .login-footer {
@@ -155,7 +171,7 @@
 .divider {
   display: flex;
   align-items: center;
-  margin: 16px 0;
+  margin: 10px 0 1px 0px;
 }
 
 .divider .line {
@@ -204,4 +220,23 @@
   border-radius: 0;
 }
 
+input:valid,
+input:invalid,
+input:focus:valid,
+input:focus:invalid {
+  background-color: #f2f6fc !important;
+  border-color: #ccc !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: #f2f6fc !important;
+  box-shadow: 0 0 0px 1000px #f2f6fc inset !important;
+  -webkit-text-fill-color: #001D54 !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
 
