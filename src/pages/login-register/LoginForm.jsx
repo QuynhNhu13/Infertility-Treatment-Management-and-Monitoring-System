@@ -46,7 +46,7 @@ const LoginForm = () => {
 
         const profileResponse = await fetch(PROFILE, {
           method: "GET",
-          headers: getJsonAuthHeader(), 
+          headers: getJsonAuthHeader(),
         });
 
         if (profileResponse.ok) {
