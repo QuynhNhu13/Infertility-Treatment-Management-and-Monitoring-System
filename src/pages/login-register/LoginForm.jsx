@@ -51,7 +51,7 @@ const LoginForm = () => {
 
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
-          login({ ...profileData, token }); 
+          login({ ...profileData.data, token }); 
           setErrorMessage("");
           navigate("/trang-chu");
         } else {
