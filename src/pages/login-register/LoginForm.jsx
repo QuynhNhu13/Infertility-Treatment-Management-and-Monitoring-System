@@ -4,6 +4,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 
 import { useAuth } from "../../context/AuthContext";
 import { LOGIN, GG_LOGIN, PROFILE } from "../../api/apiUrls";
+import ROUTES from "../../routes/RoutePath";
 
 import Header from "../../components/Header.jsx";
 import Navbar from "../../components/Navbar.jsx";
@@ -19,7 +20,7 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
-  const { login, getJsonAuthHeader } = useAuth(); 
+  const { login, getJsonAuthHeader } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,18 +43,41 @@ const LoginForm = () => {
         const data = await response.json();
         const token = data.data.token;
 
-        localStorage.setItem("token", token); 
+        localStorage.setItem("token", token);
 
         const profileResponse = await fetch(PROFILE, {
           method: "GET",
-          headers: getJsonAuthHeader(),
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
-          login({ ...profileData.data, token }); 
+          const user = { ...profileData.data, token };
+          login(user);
+
           setErrorMessage("");
-          navigate("/trang-chu");
+
+          // Điều hướng theo role
+          switch (user.role) {
+            case "ROLE_ADMIN":
+              navigate(ROUTES.ADMIN);
+              break;
+            case "ROLE_MANAGER":
+              navigate(ROUTES.MANAGER);
+              break;
+            case "ROLE_DOCTOR":
+              navigate(ROUTES.DOCTOR);
+              break;
+            case "ROLE_STAFF":
+               navigate(ROUTES.STAFF);
+               break;
+            case "ROLE_USER":
+              navigate(ROUTES.HOME);
+              break;
+            default:
+              navigate(ROUTES.HOME);
+              break;
+          }
         } else {
           setErrorMessage("Đăng nhập thành công nhưng không lấy được thông tin người dùng.");
         }
