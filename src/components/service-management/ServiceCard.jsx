@@ -1,20 +1,29 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // import nếu bạn đã có context
+import { useAuth } from '../../context/AuthContext';
 import '../../styles/service-management/ServiceCard.css';
 
-const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug }) => {
+const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price }) => {
   const defaultImg = 'https://via.placeholder.com/400x300?text=No+Image';
   const navigate = useNavigate();
   const { user } = useAuth();
 
   const handleBookingClick = () => {
     if (!user) {
-      alert("Vui lòng đăng nhập để đặt lịch khám"); // hoặc toast
-      navigate('/dang-nhap'); // đường dẫn đến trang đăng nhập của bạn
+      alert("Vui lòng đăng nhập để đặt lịch khám");
+      navigate('/dang-nhap');
     } else {
       navigate('/booking');
     }
+  };
+
+  const formatPrice = (p) => {
+    if (!p || isNaN(p)) return "Đang cập nhật";
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+      maximumFractionDigits: 0
+    }).format(p);
   };
 
   return (
@@ -33,7 +42,10 @@ const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug }) => {
 
       <div className="service-card-content">
         <h3>{serviceName}</h3>
-        <p>{subTitle}</p>
+        <p className="service-subtitle">{subTitle}</p>
+
+        {/* Thêm phần hiển thị giá */}
+        <p className="service-price">{formatPrice(price)}</p>
 
         <div className="service-card-buttons">
           <button onClick={handleBookingClick} className="btn btn-booking">
