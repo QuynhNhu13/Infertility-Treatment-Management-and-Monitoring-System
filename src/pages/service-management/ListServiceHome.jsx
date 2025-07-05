@@ -48,7 +48,7 @@ const ListServiceHome = () => {
             bệnh viện còn cung cấp nhiều dịch vụ khác như trữ lạnh tinh trùng, trứng và phôi để hỗ trợ sinh sản
             trong tương lai, cùng các kỹ thuật hỗ trợ phôi làm tổ nhằm nâng cao tỷ lệ thành công. <strong>Với đội ngũ
               bác sĩ giàu kinh nghiệm và quy trình điều trị cá thể hóa</strong>, chúng tôi cam kết đồng hành cùng mỗi
-            cặp vợ chồng trên hành trình chạm tới ước mơ làm cha mẹ.
+            cặp vợ chồng trên hành trình chạm tới ước mơ.
           </p>
         </div>
       </div>
@@ -62,6 +62,7 @@ const ListServiceHome = () => {
             subTitle={service.subTitle}
             imgUrl={service.imgUrl}
             slug={service.slug}
+            price={service.price}
           />
         ))}
       </div>
