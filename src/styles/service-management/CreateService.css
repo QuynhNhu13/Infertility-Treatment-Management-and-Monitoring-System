@@ -1,0 +1,206 @@
+/* Overlay */
+.create-service-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Modal content */
+.create-service-modal-content {
+  background: white;
+  width: 90%;
+  max-width: 680px;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideDown 0.3s ease-out;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Close button */
+.create-service-modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.create-service-modal-close-btn:hover {
+  color: #333;
+}
+
+/* Headings */
+.create-service-modal-content h2 {
+  font-size: 2rem;
+  color: #077BF6;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+/* Form layout */
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+.required {
+  color: #e74c3c;
+  margin-left: 5px;
+}
+
+/* Input styles */
+.create-service-modal-content input[type="text"],
+.create-service-modal-content input[type="number"],
+.create-service-modal-content input[type="file"],
+.create-service-modal-content textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid #cfd9e4;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit; 
+  background-color: #F2F6FC !important;
+}
+
+.create-service-modal-content input:focus,
+.create-service-modal-content textarea:focus {
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.2);
+  outline: none;
+}
+
+/* File input note */
+.form-group p {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Submit button */
+.create-service-modal-content button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background-color: #077BF6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+.create-service-modal-content button[type="submit"]:hover:not(:disabled) {
+  background-color: #005bb5;
+  transform: translateY(-1px);
+}
+.create-service-modal-content button[type="submit"]:disabled {
+  background-color: #aacdf9;
+  cursor: not-allowed;
+}
+
+/* Message styles */
+.error-message-cs {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-top: 16px;
+  text-align: center;
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #e57373;
+}
+
+.success-message-cs {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-top: 16px;
+  text-align: center;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+/* react-select overrides */
+.react-select__control {
+  caret-color: transparent;
+  border-radius: 8px;
+  border: 1px solid #cfd9e4;
+  box-shadow: none;
+  font-size: 0.95rem;
+  padding: 2px 4px;
+  background-color: #F2F6FC !important;
+  color: black;
+}
+.react-select__control--is-focused {
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.2);
+}
+.react-select__menu {
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+.react-select__option {
+  font-size: 0.95rem;
+  color: #004080;
+  padding: 10px 14px;
+}
+.react-select__option--is-focused {
+  background-color: #f0f8ff;
+}
+.react-select__option--is-selected {
+  background-color: #077BF6;
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .create-service-modal-content {
+    padding: 20px;
+  }
+  .create-service-modal-content h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-service-modal-content {
+    padding: 16px;
+  }
+  .form-group label {
+    font-size: 0.95rem;
+  }
+}
