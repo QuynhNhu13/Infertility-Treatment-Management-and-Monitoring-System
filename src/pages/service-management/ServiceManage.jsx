@@ -5,13 +5,17 @@ import { useAuth } from "../../context/AuthContext";
 import { LIST_SERVICE_MANAGE } from "../../api/apiUrls";
 import "../../styles/service-management/ServiceManage.css";
 import CreateService from "./CreateService";
+import EditService from "./EditService"; // ✅ THÊM
 
 const ServiceManage = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeMenuId, setActiveMenuId] = useState(null);
+
   const [showCreatePopup, setShowCreatePopup] = useState(false);
+  const [showUpdatePopup, setShowUpdatePopup] = useState(false); // ✅ THÊM
+  const [selectedService, setSelectedService] = useState(null); // ✅ THÊM
 
   const { getJsonAuthHeader } = useAuth();
   const navigate = useNavigate();
@@ -56,9 +60,16 @@ const ServiceManage = () => {
     fetchServices();
   };
 
-  const handleUpdate = (id) => {
-    navigate(`/quan-ly-dich-vu/cap-nhat/${id}`);
+  const handleOpenUpdateModal = (service) => { // ✅ THAY THẾ handleUpdate
+    setSelectedService(service);
+    setShowUpdatePopup(true);
     setActiveMenuId(null);
+  };
+
+  const handleCloseUpdateModal = () => { // ✅ THÊM
+    setShowUpdatePopup(false);
+    setSelectedService(null);
+    fetchServices();
   };
 
   const handleAddDetails = (id) => {
@@ -134,7 +145,7 @@ const ServiceManage = () => {
                     </button>
                     {activeMenuId === service.id && (
                       <div className="sm-action-menu">
-                        <button onClick={() => handleUpdate(service.id)}>Cập nhật</button>
+                        <button onClick={() => handleOpenUpdateModal(service)}>Cập nhật</button>
                         <button onClick={() => handleAddDetails(service.id)}>Thêm chi tiết</button>
                         <button onClick={() => handleAddStages(service.id)}>Thêm giai đoạn</button>
                       </div>
@@ -147,6 +158,7 @@ const ServiceManage = () => {
         </div>
       )}
 
+      {/* Modal tạo mới dịch vụ */}
       {showCreatePopup && (
         <div className="create-service-modal-overlay" onClick={handleCloseCreateModal}>
           <div
@@ -160,6 +172,28 @@ const ServiceManage = () => {
               &times;
             </button>
             <CreateService onClose={handleCloseCreateModal} />
+          </div>
+        </div>
+      )}
+
+      {/* ✅ Modal cập nhật dịch vụ */}
+      {showUpdatePopup && selectedService && (
+        <div className="create-service-modal-overlay" onClick={handleCloseUpdateModal}>
+          <div
+            className="create-service-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="create-service-modal-close-btn"
+              onClick={handleCloseUpdateModal}
+            >
+              &times;
+            </button>
+            <EditService
+              serviceData={selectedService}
+              onClose={handleCloseUpdateModal}
+              onUpdate={fetchServices}
+            />
           </div>
         </div>
       )}

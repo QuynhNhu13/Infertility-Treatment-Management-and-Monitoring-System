@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { useAuth } from '../../context/AuthContext';
-import { CREATE_SERVICE, UP_IMG } from '../../api/apiUrls';
+import { UP_IMG, EDIT_SERVICE } from '../../api/apiUrls';
 import "../../styles/service-management/CreateService.css";
 
 const statusOptions = [
@@ -12,7 +12,7 @@ const statusOptions = [
   { value: 'COMING_SOON', label: 'Sắp triển khai' }
 ];
 
-const CreateService = ({ onClose }) => {
+const EditService = ({ serviceData, onClose, onUpdate }) => {
   const { getAuthHeader, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,8 +25,24 @@ const CreateService = ({ onClose }) => {
     summary: '',
     status: 'AVAILABLE',
     imgFile: null,
-    imgFileName: ''
+    imgFileName: '',
+    imgUrl: ''
   });
+
+  useEffect(() => {
+    if (serviceData) {
+      setFormData({
+        serviceName: serviceData.serviceName || '',
+        subTitle: serviceData.subTitle || '',
+        price: serviceData.price?.toString() || '',
+        summary: serviceData.summary || '',
+        status: serviceData.status || 'AVAILABLE',
+        imgFile: null,
+        imgFileName: '',
+        imgUrl: serviceData.imgUrl || ''
+      });
+    }
+  }, [serviceData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,8 +80,8 @@ const CreateService = ({ onClose }) => {
     setError(null);
     setSuccess(false);
 
-    if (!formData.serviceName || !formData.price || !formData.imgFile) {
-      setError("Vui lòng điền đầy đủ Tên phương pháp, Giá và Tải ảnh lên!");
+    if (!formData.serviceName || !formData.price) {
+      setError("Vui lòng điền đầy đủ Tên dịch vụ và Giá.");
       setLoading(false);
       return;
     }
@@ -77,55 +93,50 @@ const CreateService = ({ onClose }) => {
     }
 
     try {
-      const uploadData = new FormData();
-      uploadData.append("image", formData.imgFile);
+      let updatedImgUrl = formData.imgUrl;
 
-      const imgRes = await axios.post(UP_IMG, uploadData, {
-        headers: {
-          Authorization: getAuthHeader().Authorization
-        }
-      });
+      if (formData.imgFile) {
+        const uploadData = new FormData();
+        uploadData.append("image", formData.imgFile);
 
-      const imgUrl = imgRes.data.data;
+        const imgRes = await axios.post(UP_IMG, uploadData, {
+          headers: {
+            Authorization: getAuthHeader().Authorization
+          }
+        });
 
-      const servicePayload = {
+        updatedImgUrl = imgRes.data.data;
+      }
+
+      const payload = {
         serviceName: formData.serviceName,
         subTitle: formData.subTitle,
         price: parseFloat(formData.price),
         summary: formData.summary,
         status: formData.status,
-        imgUrl,
+        imgUrl: updatedImgUrl,
         managerAccount: {
           fullName: user.fullName,
           email: user.email
         }
       };
 
-      const res = await axios.post(CREATE_SERVICE, servicePayload, {
-        headers: getAuthHeader()
-      });
+      const res = await axios.put(
+        EDIT_SERVICE(serviceData.id),
+        payload,
+        { headers: getAuthHeader() }
+      );
 
-      if (res.status === 201 || res.data.statusCode === 201) {
+      if (res.status === 200) {
         setSuccess(true);
-        setFormData({
-          serviceName: '',
-          subTitle: '',
-          price: '',
-          summary: '',
-          status: 'AVAILABLE',
-          imgFile: null,
-          imgFileName: ''
-        });
-
-        setTimeout(() => {
-          onClose();
-        }, 3000);
+        if (onUpdate) onUpdate();
+        setTimeout(() => onClose(), 3000);
       } else {
-        setError("Tạo mới phương pháp thất bại.");
+        setError("Cập nhật dịch vụ thất bại.");
       }
 
     } catch (err) {
-      console.error("Lỗi khi tạo phương pháp:", err);
+      console.error("Lỗi khi cập nhật dịch vụ:", err);
       setError("Lỗi kết nối hoặc dữ liệu không hợp lệ.");
     } finally {
       setLoading(false);
@@ -134,15 +145,14 @@ const CreateService = ({ onClose }) => {
 
   return (
     <div className="create-service-container">
-      <h2>TẠO PHƯƠNG PHÁP MỚI</h2>
+      <h2>CẬP NHẬT DỊCH VỤ</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Tên phương pháp <span className="required">*</span></label>
+          <label>Tên dịch vụ <span className="required">*</span></label>
           <input
             type="text"
             name="serviceName"
-            placeholder="Nhập tên phương pháp"
             value={formData.serviceName}
             onChange={handleChange}
             required
@@ -154,7 +164,6 @@ const CreateService = ({ onClose }) => {
           <input
             type="text"
             name="subTitle"
-            placeholder="Nhập tiêu đề phụ"
             value={formData.subTitle}
             onChange={handleChange}
           />
@@ -165,7 +174,6 @@ const CreateService = ({ onClose }) => {
           <input
             type="text"
             name="price"
-            placeholder="Nhập giá tiền"
             value={formData.price}
             onChange={handleChange}
             required
@@ -176,7 +184,6 @@ const CreateService = ({ onClose }) => {
           <label>Tóm tắt</label>
           <textarea
             name="summary"
-            placeholder="Nhập tóm tắt"
             value={formData.summary}
             onChange={handleChange}
           />
@@ -190,30 +197,40 @@ const CreateService = ({ onClose }) => {
             onChange={handleStatusChange}
             className="react-select-container"
             classNamePrefix="react-select"
-             isSearchable={false}
+            isSearchable={false}
           />
         </div>
 
         <div className="form-group">
-          <label>Chọn ảnh phương pháp <span className="required">*</span></label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageSelect}
-          />
-          {formData.imgFileName && (
-            <p style={{ fontStyle: "italic", marginTop: "6px" }}>
-              Đã chọn: {formData.imgFileName}
-            </p>
-          )}
-        </div>
+  <label>Ảnh dịch vụ</label>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleImageSelect}
+  />
+  {formData.imgFileName && (
+    <p style={{ fontStyle: "italic", marginTop: "6px" }}>
+      Đã chọn: {formData.imgFileName}
+    </p>
+  )}
+  {!formData.imgFile && formData.imgUrl && (
+    <div style={{ marginTop: "10px" }}>
+      <p style={{ fontStyle: "italic" }}>Ảnh hiện tại:</p>
+      <img
+        src={formData.imgUrl}
+        alt="Ảnh hiện tại"
+        style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "6px", border: "1px solid #ccc" }}
+      />
+    </div>
+  )}
+</div>
 
         <button type="submit" disabled={loading}>
-          {loading ? "Đang tạo..." : "Tạo mới"}
+          {loading ? "Đang cập nhật..." : "Cập nhật"}
         </button>
 
         {success ? (
-          <p className="success-message-cs">Tạo mới phương pháp thành công!</p>
+          <p className="success-message-cs">Cập nhật dịch vụ thành công!</p>
         ) : error && (
           <p className="error-message-cs">{error}</p>
         )}
@@ -222,4 +239,4 @@ const CreateService = ({ onClose }) => {
   );
 };
 
-export default CreateService;
+export default EditService;
