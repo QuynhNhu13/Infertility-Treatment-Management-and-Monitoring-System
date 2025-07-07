@@ -190,7 +190,7 @@ const CreateService = ({ onClose }) => {
             onChange={handleStatusChange}
             className="react-select-container"
             classNamePrefix="react-select"
-             isSearchable={false}
+            isSearchable={false}
           />
         </div>
 

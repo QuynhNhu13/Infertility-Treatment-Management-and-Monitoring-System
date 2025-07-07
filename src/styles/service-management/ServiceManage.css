@@ -1,3 +1,4 @@
+
 .sm-container {
   font-family: Arial, sans-serif;
   color: #333;
@@ -6,7 +7,6 @@
   padding: 30px;
 }
 
-/* Header */
 .sm-header {
   display: flex;
   justify-content: space-between;
@@ -30,7 +30,7 @@
   border-radius: 38px;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 600;
+  /* font-weight: 600; */
   transition: all 0.3s ease;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
@@ -38,10 +38,22 @@
 .sm-btn-create {
   background-color: white;
   color: #077BF6;
-
 }
 
 .sm-btn-create:hover {
+  color: white;
+  background-color: #077BF6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(7, 123, 246, 0.3);
+}
+
+/* ✅ MỚI: Nút phụ toggle bảng chi tiết */
+.sm-btn-secondary {
+  background-color: white;
+  color: #077BF6;
+}
+
+.sm-btn-secondary:hover {
   color: white;
   background-color: #077BF6;
   transform: translateY(-2px);
@@ -55,6 +67,7 @@
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   background-color: #FFFFFF;
+  margin-bottom: 30px;
 }
 
 /* Table */
@@ -122,59 +135,38 @@
   vertical-align: middle;
 }
 
-/* Column widths */
-/* Cột chung */
-.sm-table th:nth-child(1),
-.sm-table th:nth-child(2),
-.sm-table th:nth-child(3),
-.sm-table th:nth-child(4),
-.sm-table th:nth-child(5),
-.sm-table th:nth-child(6) {
-  font-weight: 600;
-    text-align: center;
-  color: white;
-}
-
-.sm-table td:nth-child(1),
-.sm-table td:nth-child(2),
-.sm-table td:nth-child(3),
-.sm-table td:nth-child(4),
-.sm-table td:nth-child(5),
-.sm-table td:nth-child(6) {
-  font-weight: normal;
-  color: #001D54;
-}
-
-/* Đặt độ rộng cột (nếu muốn giữ nguyên) */
 .sm-table th:nth-child(1),
 .sm-table td:nth-child(1) {
   width: 5%;
 }
+
 .sm-table th:nth-child(2),
 .sm-table td:nth-child(2) {
-  width: 20%;
+  width: 15%;
 }
+
 .sm-table th:nth-child(3),
 .sm-table td:nth-child(3) {
   width: 25%;
 }
+
 .sm-table th:nth-child(4),
 .sm-table td:nth-child(4) {
-  width: 15%;
+  width: 20%;
   white-space: nowrap;
 }
+
 .sm-table th:nth-child(5),
 .sm-table td:nth-child(5) {
-  width: 15%;
+  width: 25%;
 }
+
 .sm-table th:nth-child(6),
 .sm-table td:nth-child(6) {
   width: 20%;
   position: relative;
 }
 
-
-/* Status */
 .status-available {
   font-weight: 600;
   color: #28a745;
@@ -195,9 +187,6 @@
   color: #555;
 }
 
-
-
-/* Action dropdown */
 .sm-btn-action {
   background-color: #F0F2F5;
   color: #004080;
@@ -241,7 +230,33 @@
   background-color: #f0f0f0;
 }
 
-/* Messages */
+.sm-table td button {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-right: 8px;
+  padding: 6px 14px;
+  border: none;
+  background-color: #f1f5ff;
+  color: #004080;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sm-table td button:hover {
+  background-color: #d7e8ff;
+  color: #077BF6;
+}
+
+.sm-table-wrapper h3 {
+  margin: 20px 0 10px;
+  color: #001D54;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
 .sm-loading-message,
 .sm-error-message,
 .sm-empty-message {
@@ -262,7 +277,6 @@
   color: #D32F2F;
 }
 
-/* Scrollbars */
 .sm-table-wrapper::-webkit-scrollbar,
 .sm-table tbody::-webkit-scrollbar {
   height: 8px;
@@ -280,6 +294,67 @@
   background: #555;
 }
 
+.sm-stage-delete-select {
+  width: 100%;
+  max-width: 220px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-top: 6px;
+}
+
+.sm-stage-delete-select:hover {
+  border-color: #077BF6;
+}
+
+.sm-stage-delete-select:focus {
+  outline: none;
+  border-color: #077BF6;
+  box-shadow: 0 0 0 2px rgba(7, 123, 246, 0.2);
+}
+
+.sm-modal-overlay-a {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.sm-modal-close-btn-a {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 1000;
+}
+
+.sm-modal-close-btn-a:hover {
+  color: #f44336;
+}
+
+
+
+
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .sm-header h2 { font-size: 1.8rem; }
@@ -294,7 +369,8 @@
     gap: 15px;
   }
 
-  .sm-btn-create {
+  .sm-btn-create,
+  .sm-btn-secondary {
     width: 100%;
     text-align: center;
   }
@@ -353,7 +429,7 @@
 
 @media (max-width: 480px) {
   .sm-header h2 { font-size: 1.3rem; }
-  .sm-btn-create { font-size: 0.9rem; padding: 10px 15px; }
+  .sm-btn-create, .sm-btn-secondary { font-size: 0.9rem; padding: 10px 15px; }
   .sm-table td { padding-left: 15px; text-align: left; }
   .sm-table td::before { display: block; position: static; margin-bottom: 5px; }
   .sm-btn-action { width: 100%; margin: 5px 0; }

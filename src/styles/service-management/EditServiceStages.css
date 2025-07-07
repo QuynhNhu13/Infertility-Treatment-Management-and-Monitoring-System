@@ -1,0 +1,162 @@
+/* Overlay */
+.edit-stages-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Modal content */
+.edit-stages-wrapper {
+    margin-left: 450px;
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 680px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideDown 0.3s ease-out;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Title */
+.edit-stages-title {
+  font-size: 2rem;
+  color: #077BF6;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* List */
+.edit-stages-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Stage item */
+.edit-stages-item {
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid #cfd9e4;
+  border-radius: 12px;
+  background-color: #F2F6FC;
+  transition: box-shadow 0.2s ease;
+}
+
+.edit-stages-item:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Fields */
+.edit-stages-field {
+  margin-bottom: 16px;
+}
+.edit-stages-field label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+.edit-stages-field input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid #cfd9e4;
+  border-radius: 8px;
+  background-color: #F2F6FC !important;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+.edit-stages-field input:focus {
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.2);
+  outline: none;
+}
+
+/* Stage order note */
+.edit-stages-order {
+  margin-top: 8px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Action buttons */
+.edit-stages-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.edit-stages-btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.edit-stages-btn.cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.edit-stages-btn.save {
+  background-color: #077BF6;
+  color: white;
+}
+.edit-stages-btn.save:hover {
+  background-color: #005bb5;
+  transform: translateY(-1px);
+}
+.edit-stages-btn.cancel:hover {
+  background-color: #b0b0b0;
+}
+
+/* Close button */
+.edit-stages-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.edit-stages-close-btn:hover {
+  color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-stages-wrapper {
+    padding: 20px;
+  }
+  .edit-stages-title {
+    font-size: 1.6rem;
+  }
+}

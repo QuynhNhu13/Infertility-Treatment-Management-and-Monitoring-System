@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { UP_IMG, CREATE_SERVICE_DETAILS } from '../../api/apiUrls';
-import RichTextEditor from '../../components/RichTextEditor'; 
+import RichTextEditor from '../../components/RichTextEditor';
 import '../../styles/service-management/CreateService.css';
 
 const CreateServiceDetails = ({ serviceId, onClose }) => {
@@ -52,14 +52,21 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
   };
 
   const uploadImage = async (file) => {
-    const uploadData = new FormData();
-    uploadData.append("image", file);
-    const res = await axios.post(UP_IMG, uploadData, {
-      headers: {
-        Authorization: getAuthHeader().Authorization
-      }
-    });
-    return res.data.data;
+    try {
+      const uploadData = new FormData();
+      uploadData.append('image', file); 
+
+      const res = await axios.post(UP_IMG, uploadData, {
+        headers: {
+          Authorization: getAuthHeader().Authorization,
+        },
+      });
+
+      return res.data.data;
+    } catch (err) {
+      console.error('Lỗi upload ảnh:', err);
+      throw new Error('Không thể upload ảnh.');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -93,7 +100,7 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
         experience: formData.experience,
         risk: formData.risk,
         hospitalProcedure: formData.hospitalProcedure,
-        hospitalProcedureImgUrl
+        hospitalProcedureImgUrl,
       };
 
       const res = await axios.post(
@@ -104,13 +111,13 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
 
       if (res.status === 201 || res.data.statusCode === 201) {
         setSuccess(true);
-        setTimeout(() => onClose(), 3000);
+        setTimeout(() => onClose(), 2000);
       } else {
-        setError("Tạo mới chi tiết dịch vụ thất bại.");
+        setError('Tạo mới chi tiết dịch vụ thất bại.');
       }
     } catch (err) {
-      console.error("Lỗi khi tạo chi tiết dịch vụ:", err);
-      setError("Lỗi kết nối hoặc dữ liệu không hợp lệ.");
+      console.error('Lỗi khi tạo chi tiết dịch vụ:', err);
+      setError('Lỗi kết nối hoặc dữ liệu không hợp lệ.');
     } finally {
       setLoading(false);
     }
@@ -123,10 +130,7 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
         {/* Khái niệm */}
         <div className="form-group">
           <label>Khái niệm</label>
-          <RichTextEditor
-            value={formData.concept}
-            onChange={(val) => handleRichTextChange('concept', val)}
-          />
+          <RichTextEditor value={formData.concept} onChange={(val) => handleRichTextChange('concept', val)} />
         </div>
         <div className="form-group">
           <label>Ảnh khái niệm</label>
@@ -137,33 +141,21 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
         {/* Điều kiện áp dụng */}
         <div className="form-group">
           <label>Điều kiện áp dụng</label>
-          <RichTextEditor
-            value={formData.condition}
-            onChange={(val) => handleRichTextChange('condition', val)}
-          />
+          <RichTextEditor value={formData.condition} onChange={(val) => handleRichTextChange('condition', val)} />
         </div>
         <div className="form-group">
           <label>Phân công</label>
-          <RichTextEditor
-            value={formData.assignment}
-            onChange={(val) => handleRichTextChange('assignment', val)}
-          />
+          <RichTextEditor value={formData.assignment} onChange={(val) => handleRichTextChange('assignment', val)} />
         </div>
         <div className="form-group">
           <label>Không áp dụng cho</label>
-          <RichTextEditor
-            value={formData.unAssignment}
-            onChange={(val) => handleRichTextChange('unAssignment', val)}
-          />
+          <RichTextEditor value={formData.unAssignment} onChange={(val) => handleRichTextChange('unAssignment', val)} />
         </div>
 
         {/* Quy trình */}
         <div className="form-group">
           <label>Chi tiết quy trình</label>
-          <RichTextEditor
-            value={formData.procedureDetails}
-            onChange={(val) => handleRichTextChange('procedureDetails', val)}
-          />
+          <RichTextEditor value={formData.procedureDetails} onChange={(val) => handleRichTextChange('procedureDetails', val)} />
         </div>
         <div className="form-group">
           <label>Ảnh quy trình</label>
@@ -178,26 +170,17 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
         </div>
         <div className="form-group">
           <label>Kinh nghiệm</label>
-          <RichTextEditor
-            value={formData.experience}
-            onChange={(val) => handleRichTextChange('experience', val)}
-          />
+          <RichTextEditor value={formData.experience} onChange={(val) => handleRichTextChange('experience', val)} />
         </div>
         <div className="form-group">
           <label>Rủi ro</label>
-          <RichTextEditor
-            value={formData.risk}
-            onChange={(val) => handleRichTextChange('risk', val)}
-          />
+          <RichTextEditor value={formData.risk} onChange={(val) => handleRichTextChange('risk', val)} />
         </div>
 
         {/* Bệnh viện */}
         <div className="form-group">
           <label>Quy trình tại bệnh viện</label>
-          <RichTextEditor
-            value={formData.hospitalProcedure}
-            onChange={(val) => handleRichTextChange('hospitalProcedure', val)}
-          />
+          <RichTextEditor value={formData.hospitalProcedure} onChange={(val) => handleRichTextChange('hospitalProcedure', val)} />
         </div>
         <div className="form-group">
           <label>Ảnh quy trình tại bệnh viện</label>
