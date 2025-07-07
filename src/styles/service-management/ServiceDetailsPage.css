@@ -1,0 +1,66 @@
+.service-details-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+  color: #003366;
+  background-color: #E2EFFF;
+}
+
+.service-details-container h2 {
+  text-align: center;
+  font-size: 32px;
+  color: #001D54;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.service-name {
+  text-align: center;
+  font-size: 24px;
+  color: #004080;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.section-block h3 {
+  color: #004080;
+  font-size: 20px;
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.section-block div,
+.section-block p {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #333;
+}
+
+.detail-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 16px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero-icons-service {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 48px 0;
+}
+
+.icon-img-service {
+  width: 120px;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.icon-img-service:hover {
+  transform: scale(1.05);
+}
