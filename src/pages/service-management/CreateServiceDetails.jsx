@@ -113,10 +113,10 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
         setSuccess(true);
         setTimeout(() => onClose(), 2000);
       } else {
-        setError('Tạo mới chi tiết dịch vụ thất bại.');
+        setError('Tạo mới chi tiết phương pháp thất bại.');
       }
     } catch (err) {
-      console.error('Lỗi khi tạo chi tiết dịch vụ:', err);
+      console.error('Lỗi khi tạo chi tiết phương pháp', err);
       setError('Lỗi kết nối hoặc dữ liệu không hợp lệ.');
     } finally {
       setLoading(false);
@@ -125,7 +125,7 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
 
   return (
     <div className="create-service-container">
-      <h2>TẠO CHI TIẾT DỊCH VỤ</h2>
+      <h2>TẠO CHI TIẾT PHƯƠNG PHÁP</h2>
       <form onSubmit={handleSubmit}>
         {/* Khái niệm */}
         <div className="form-group">
@@ -192,7 +192,7 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
           {loading ? 'Đang tạo...' : 'Tạo chi tiết'}
         </button>
 
-        {success && <p className="success-message-cs">Tạo mới chi tiết dịch vụ thành công!</p>}
+        {success && <p className="success-message-cs">Tạo mới chi tiết phương pháp thành công!</p>}
         {error && <p className="error-message-cs">{error}</p>}
       </form>
     </div>
