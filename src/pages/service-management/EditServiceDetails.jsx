@@ -136,7 +136,7 @@ const EditServiceDetails = ({ serviceId, id, existingData, onClose }) => {
         setError("Cập nhật thất bại");
       }
     } catch (err) {
-      console.error("Lỗi cập nhật chi tiết dịch vụ:", err);
+      console.error("Lỗi cập nhật chi tiết phương pháp:", err);
       setError("Lỗi kết nối hoặc dữ liệu không hợp lệ");
     } finally {
       setLoading(false);
@@ -145,7 +145,7 @@ const EditServiceDetails = ({ serviceId, id, existingData, onClose }) => {
 
   return (
     <div className="create-service-container">
-      <h2>CẬP NHẬT CHI TIẾT DỊCH VỤ</h2>
+      <h2>CẬP NHẬT CHI TIẾT PHƯƠNG PHÁP</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Khái niệm</label>
