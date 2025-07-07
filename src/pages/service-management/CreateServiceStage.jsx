@@ -71,7 +71,7 @@ const CreateServiceStage = ({ serviceId, onClose, onCreated }) => {
 
   return (
     <div className="create-service-container">
-      <h2>TẠO GIAI ĐOẠN DỊCH VỤ</h2>
+      <h2>TẠO GIAI ĐOẠN PHƯƠNG PHÁP</h2>
 
       <form onSubmit={handleSubmit}>
         {stages.map((stage, index) => (
