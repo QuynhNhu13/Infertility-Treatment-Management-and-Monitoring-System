@@ -1,0 +1,163 @@
+.lbm-container {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: transparent;
+}
+
+.lbm-title {
+  color: #001D54;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Bảng quản lý blog */
+.lbm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.lbm-table thead {
+  background-color: #077BF6;
+  color: white;
+}
+
+.lbm-table th,
+.lbm-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.lbm-table th {
+  font-weight: 700;
+}
+
+.lbm-table td {
+  color: #333;
+}
+
+.lbm-table td:hover {
+  background-color: #E2F0FF;
+}
+
+.lbm-table td button {
+  background-color: #077BF6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.lbm-table td button:hover {
+  background-color: #005bb5;
+}
+
+/* Modal overlay */
+.lbm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal content */
+.lbm-modal-content {
+  background-color: white;
+  width: 90%;
+  max-width: 650px;
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.lbm-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.lbm-modal-close:hover {
+  color: #333;
+}
+
+.lbm-modal-body {
+  margin: 20px 0;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Modal nút duyệt / từ chối */
+.lbm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.lbm-modal-actions .approve {
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.lbm-modal-actions .approve:hover {
+  background-color: #27ae60;
+}
+
+.lbm-modal-actions .reject {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.lbm-modal-actions .reject:hover {
+  background-color: #c0392b;
+}
+
+/* Thông báo sau khi duyệt */
+.lbm-modal-success {
+  margin-top: 20px;
+  color: #2ecc71;
+  font-weight: bold;
+  text-align: center;
+}
+
+.lbm-container p {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  padding: 20px 0;
+}

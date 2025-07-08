@@ -1,0 +1,80 @@
+.doctor-blog-manager {
+  padding: 30px;
+  max-width: auto;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Tiêu đề */
+.doctor-blog-manager h2 {
+  color: #001D54;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Nút tạo blog */
+.create-blog-btn {
+  background-color: #077BF6;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  margin-bottom: 24px;
+  float: right;
+}
+.create-blog-btn:hover {
+  background-color: #005bb5;
+  transform: translateY(-1px);
+}
+
+/* Bảng blog */
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.blog-table thead {
+  background-color: #077BF6; 
+  color: white;           
+}
+
+.blog-table th, .blog-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.blog-table th {
+  font-weight: 700;
+}
+
+.blog-table td:hover {
+  background-color: #E2F0FF; 
+}
+
+.blog-table td {
+  color: #333;
+}
+
+/* Loading & empty */
+.doctor-blog-manager p {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  padding: 20px 0;
+}
+

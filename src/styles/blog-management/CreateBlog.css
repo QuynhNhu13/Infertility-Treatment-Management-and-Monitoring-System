@@ -1,0 +1,182 @@
+/* Overlay */
+.cb-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Modal content */
+.cb-modal-content {
+  background: white;
+  width: 90%;
+  max-width: 680px;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideDown 0.3s ease-out;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  color: #001D54;
+}
+
+/* Close button */
+.cb-modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.cb-modal-close-btn:hover {
+  color: #333;
+}
+
+/* Heading */
+.cb-modal-content h2 {
+  font-size: 2rem;
+  color: #077BF6;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+/* Form layout */
+.cb-form-group {
+  margin-bottom: 20px;
+}
+.cb-form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+.cb-required {
+  color: #e74c3c;
+  margin-left: 5px;
+}
+
+/* Input & Textarea styles */
+.cb-form-group input[type="text"],
+.cb-form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid #cfd9e4;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #F2F6FC;
+  color: #001D54;
+  font-family: inherit;
+}
+.cb-form-group input:focus,
+.cb-form-group textarea:focus {
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.2);
+  outline: none;
+}
+
+/* Quill Editor styles */
+.cb-form-group .ql-container {
+  border-radius: 0 0 8px 8px;
+  font-family: inherit;
+  background-color: #F2F6FC;
+  color: #001D54;
+  font-size: 1rem;
+  border: 1px solid #cfd9e4;
+}
+.cb-form-group .ql-toolbar {
+  border-radius: 8px 8px 0 0;
+  background-color: #f0f4ff;
+  border: 1px solid #cfd9e4;
+  border-bottom: none;
+}
+.cb-form-group .ql-editor {
+  min-height: 200px;
+  padding: 12px 14px;
+  color: #001D54;
+}
+
+/* Message styles */
+.cb-error {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #e57373;
+}
+.cb-success {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-top: 16px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+  text-align: center;
+}
+
+/* Submit button */
+.cb-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #077BF6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+.cb-submit-btn:hover:not(:disabled) {
+  background-color: #005bb5;
+  transform: translateY(-1px);
+}
+.cb-submit-btn:disabled {
+  background-color: #aacdf9;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cb-modal-content {
+    padding: 20px;
+  }
+  .cb-modal-content h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cb-modal-content {
+    padding: 16px;
+  }
+  .cb-form-group label {
+    font-size: 0.95rem;
+  }
+}
