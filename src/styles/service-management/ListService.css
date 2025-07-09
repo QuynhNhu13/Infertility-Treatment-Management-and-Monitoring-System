@@ -1,0 +1,19 @@
+.service-list-page {
+  padding: 40px 80px;
+  background-color: #f7fbff;
+  min-height: 100vh;
+}
+
+.service-list-title {
+  font-size: 2rem;
+  color: #001d54;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.service-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  justify-content: center;
+}
