@@ -8,7 +8,6 @@
   border-radius: 0;
 }
 
-/* Tiêu đề */
 .doctor-blog-manager h2 {
   color: #001D54;
   font-size: 1.8rem;
@@ -17,7 +16,6 @@
   text-transform: uppercase;
 }
 
-/* Nút tạo blog */
 .create-blog-btn {
   background-color: #077BF6;
   color: white;
@@ -36,7 +34,6 @@
   transform: translateY(-1px);
 }
 
-/* Bảng blog */
 .blog-table {
   width: 100%;
   border-collapse: collapse;
@@ -70,7 +67,6 @@
   color: #333;
 }
 
-/* Loading & empty */
 .doctor-blog-manager p {
   text-align: center;
   font-size: 1rem;

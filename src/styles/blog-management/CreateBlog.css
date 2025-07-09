@@ -1,4 +1,3 @@
-/* Overlay */
 .cb-modal-overlay {
   position: fixed;
   inset: 0;
@@ -10,7 +9,6 @@
   animation: fadeIn 0.25s ease-out;
 }
 
-/* Modal content */
 .cb-modal-content {
   background: white;
   width: 90%;
@@ -27,7 +25,6 @@
   color: #001D54;
 }
 
-/* Close button */
 .cb-modal-close-btn {
   position: absolute;
   top: 15px;
@@ -43,7 +40,6 @@
   color: #333;
 }
 
-/* Heading */
 .cb-modal-content h2 {
   font-size: 2rem;
   color: #077BF6;
@@ -53,7 +49,6 @@
   margin-top: 5px;
 }
 
-/* Form layout */
 .cb-form-group {
   margin-bottom: 20px;
 }
@@ -68,7 +63,6 @@
   margin-left: 5px;
 }
 
-/* Input & Textarea styles */
 .cb-form-group input[type="text"],
 .cb-form-group textarea {
   width: 100%;
@@ -88,7 +82,6 @@
   outline: none;
 }
 
-/* Quill Editor styles */
 .cb-form-group .ql-container {
   border-radius: 0 0 8px 8px;
   font-family: inherit;
@@ -109,7 +102,6 @@
   color: #001D54;
 }
 
-/* Message styles */
 .cb-error {
   padding: 12px 18px;
   border-radius: 8px;
@@ -130,7 +122,6 @@
   text-align: center;
 }
 
-/* Submit button */
 .cb-submit-btn {
   width: 100%;
   padding: 14px;
@@ -152,7 +143,6 @@
   cursor: not-allowed;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -162,7 +152,6 @@
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .cb-modal-content {
     padding: 20px;

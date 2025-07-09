@@ -20,7 +20,7 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
-  const { login, getJsonAuthHeader } = useAuth();
+  const { login } = useAuth(); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -53,11 +53,19 @@ const LoginForm = () => {
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
           const user = { ...profileData.data, token };
-          login(user);
 
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          if (payload.roles && payload.roles.length > 0) {
+            user.role = payload.roles[0];
+          }
+
+          if (user.userName && !user.fullName) {
+            user.fullName = user.userName;
+          }
+
+          login(user);
           setErrorMessage("");
 
-          // Điều hướng theo role
           switch (user.role) {
             case "ROLE_ADMIN":
               navigate(ROUTES.ADMIN);
@@ -69,8 +77,8 @@ const LoginForm = () => {
               navigate(ROUTES.DOCTOR);
               break;
             case "ROLE_STAFF":
-               navigate(ROUTES.STAFF);
-               break;
+              navigate(ROUTES.STAFF);
+              break;
             case "ROLE_USER":
               navigate(ROUTES.HOME);
               break;

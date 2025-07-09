@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/blog-management/CreateBlog.css";
 import { CREATE_BLOG } from '../../api/apiUrls';
-import RichTextEditor from "../../components/RichTextEditor"; // 👈 Thêm dòng này
+import RichTextEditor from "../../components/RichTextEditor"; 
 
 const CreateBlog = ({ onClose, onBlogCreated }) => {
   const { getJsonAuthHeader } = useAuth();
