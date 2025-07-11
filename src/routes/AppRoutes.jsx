@@ -20,19 +20,35 @@ import DoctorDashboard from "../pages/DoctorDashboard";
 import DoctorBlogManager from "../pages/blog-management/DoctorBlogManager";
 import CreateBlog from "../pages/blog-management/CreateBlog";
 import ListBlogMana from "../pages/blog-management/ListBlogMana";
+import DoctorAppointmentManager from "../pages/appointment-management/DoctorAppointmentManager";
+import MedicalRecord from "../pages/medical-record-management/MedicalRecord";
+import StaffDashboard from "../pages/StaffDashboard";
+import ScheduleTemplateForm from "../pages/schedule-management/ScheduleTemplateForm";
+import ScheduleGeneratorForm from "../pages/schedule-management/ScheduleGeneratorForm";
+import LabTestResultList from "../pages/medical-record-management/LabTestResultList";
+import LabTestResultForm from "../pages/medical-record-management/LabTestResultForm";
+import MedicalRecordCreate from "../pages/medical-record-management/MedicalRecordCreate";
 
 
 function AppRoutes() {
   return (
     <Routes>
       <Route path={ROUTES.HOME} element={<Home />} />
+
       <Route path={ROUTES.MANAGER} element={<ManagerDashboard />}>
         <Route path={ROUTES.SERVICE_MANAGE} element={<ServiceManage />} />
-        <Route path={ROUTES.LIST_BLOG_MANA} element={<ListBlogMana/>}/>
+        <Route path={ROUTES.LIST_BLOG_MANA} element={<ListBlogMana />} />
       </Route>
-      <Route path={ROUTES.DOCTOR} element={<DoctorDashboard/>}>
-        <Route path={ROUTES.DOCTOR_BLOG_MANAGER} element={<DoctorBlogManager/>}/>
+
+      <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
+        <Route path={ROUTES.DOCTOR_BLOG_MANAGER} element={<DoctorBlogManager />} />
+        <Route path={ROUTES.DOCTOR_APPOINTMENT_MANAGER} element={<DoctorAppointmentManager />} />
       </Route>
+
+      <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
+      <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList/>}/>
+      </Route>
+
 
       {/* Login - Register */}
       <Route path={ROUTES.LOGIN} element={<LoginForm />} />
@@ -50,8 +66,15 @@ function AppRoutes() {
       <Route path="/chi-tiet-phuong-phap/:serviceId" element={<ServiceDetailsPage />} />
 
       {/* Blog - Management */}
-      <Route path={ROUTES.CREATE_BLOG} element={<CreateBlog/>}/>
-      
+      <Route path={ROUTES.CREATE_BLOG} element={<CreateBlog />} />
+
+      {/* Medical - Record */}
+      <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecord />} />
+      <Route path="/ket-qua-xet-nghiem/:labTestId" element={<LabTestResultForm />} />
+
+      {/* Schedule - Management */}
+      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm/>}/>
+      <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm/>}/>
 
     </Routes>
   );

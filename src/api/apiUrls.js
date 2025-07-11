@@ -33,3 +33,28 @@ export const GET_DOCTOR_BLOGS = `${BASE_URL}api/blogs/mine`;
 export const GET_ALL_BLOGS = `${BASE_URL}api/blogs`; //cùng link với put 
 export const APPROVE_BLOG = (id) => `${BASE_URL}api/blogs/${id}/approve`;
 export const REJECT_BLOG = (id) => `${BASE_URL}api/blogs/${id}/reject`;
+
+//Appointment-Management
+export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/test`; //lấy api hiển thị cho doctor appointment manager
+
+
+//Medical-Record
+export const MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/${accountId}`; //trang thông tin 
+export const MEDICAL_RECORD_CREATE = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}`; //tạo
+export const LAB_TEST = `${BASE_URL}api/lab-test`; 
+export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
+export const GET_LAB_TEST_RESULTS = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
+export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
+export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
+export const LAB_TEST_RESULT_SEARCH = `${BASE_URL}api/lab-test-result/search`;
+export const LAB_TEST_RESULT_FROM = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+export const SEARCH_LAB_TEST_RESULT = (params) => {
+  const query = new URLSearchParams(params).toString();
+  return `${BASE_URL}api/lab-test-result/search?${query}`;
+};
+
+//Schedule-Management
+export const SCHEDULE_TEMPLATE_FORM = `${BASE_URL}api/schedule-template/staff-template`;
+export const SCHEDULE_GENERATOR_FORM = (templateId) => `${BASE_URL}api/schedules/generate/staff/template/${templateId}`; 
+

@@ -2,7 +2,7 @@
 const ROUTES = {
   HOME: '/',
   STAFF: '/nhan-vien',
-  DOCTOR: '/bac-si',
+  DOCTOR: '/bac-si', 
   MANAGER: '/quan-ly',
   ADMIN: '/admin',
 
@@ -23,12 +23,21 @@ const ROUTES = {
   CREATE_SERVICE_DETAILS: '/tao-moi-chi-tiet-phuong-phap',
   SERVICE_DETAIL_PAGE: (id) => `/chi-tiet-phuong-phap/${id}`,
 
-  //blog - management
+  // blog - management
   DOCTOR_BLOG_MANAGER: 'goc-chia-se-cua-toi',
   CREATE_BLOG: '/tao-moi-bai-viet',
   LIST_BLOG_MANA: 'quan-ly-goc-chia-se',
 
+  // appointment -management
+  DOCTOR_APPOINTMENT_MANAGER: 'quan-ly-lich-hen', 
 
+  // medical-record-management
+  MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,
+  LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
+
+  // schedule-management
+  SCHEDULE_TEMPLATE_FORM: `/form-tao`, //test
+  SCHEDULE_GENERATOR_FORM: `/form`,
 
 };
 

@@ -1,19 +1,19 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import HeaderDashboard from "../components/HeaderDashboard";
-import SidebarDoctor from "../components/SidebarDoctor";
+import SidebarMana from "../components/SidebarStaff";
 
-const DoctorDashboard = () => {
+const StaffDashboard = () => {
   return (
     <>
       <HeaderDashboard />
-      <SidebarDoctor />
+      <SidebarMana />
       <div
         style={{
           marginLeft: "260px",
           marginTop: "-85px",
           padding: "20px",
-          backgroundColor: "#ffffff",
+          backgroundColor: "#e2efff",
           minHeight: "100vh",
         }}
       >
@@ -23,4 +23,4 @@ const DoctorDashboard = () => {
   );
 };
 
-export default DoctorDashboard;
+export default StaffDashboard;

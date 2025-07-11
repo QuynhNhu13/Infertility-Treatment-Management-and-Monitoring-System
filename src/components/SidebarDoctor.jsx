@@ -48,8 +48,12 @@ const SidebarDoctor = () => {
 
       <div className="sidebar-section">
         <div className="section-title section-special">QUẢN LÝ CHUYÊN MÔN</div>
-        <Link to="/manager/reports" className={isActive("/manager/reports") ? "active" : ""}>
-          <BarChart2 size={18} />
+
+        <Link
+          to={`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_APPOINTMENT_MANAGER}`}
+          className={isActive(`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_APPOINTMENT_MANAGER}`) ? "active" : ""}
+        >
+          <Users size={18} />
           <span>Hồ sơ bệnh nhân</span>
         </Link>
         <Link to={`${ROUTES.MANAGER}/${ROUTES.SERVICE_MANAGE}`} className={isActive("/manager/methods") ? "active" : ""}>
