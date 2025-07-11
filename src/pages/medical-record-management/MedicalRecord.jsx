@@ -129,7 +129,6 @@ export default function MedicalRecord() {
           </div>
 
           <div className="mr-content">
-            {/* Thông tin bệnh nhân */}
             <div className="mr-card">
               <div className="mr-card-header"><h2>Thông tin bệnh nhân</h2></div>
               <div className="mr-card-body">
@@ -147,7 +146,6 @@ export default function MedicalRecord() {
               </div>
             </div>
 
-            {/* Thông tin y tế */}
             <div className="mr-card">
               <div className="mr-card-header">
                 <h2>Thông tin y tế</h2>
@@ -179,7 +177,6 @@ export default function MedicalRecord() {
               </div>
             </div>
 
-            {/* Kết quả xét nghiệm */}
             <div className="mr-card">
               <div className="mr-card-header">
                 <h2>Kết quả xét nghiệm</h2>
@@ -216,7 +213,6 @@ export default function MedicalRecord() {
               </div>
             </div>
 
-            {/* Kết quả siêu âm */}
             <div className="mr-card">
               <div className="mr-card-header">
                 <h2>Kết quả siêu âm</h2>
@@ -244,7 +240,6 @@ export default function MedicalRecord() {
         </div>
       </div>
 
-      {/* MODALS */}
       {selectedLabTestId && (
         <LabTestResultView
           labTestId={selectedLabTestId}
