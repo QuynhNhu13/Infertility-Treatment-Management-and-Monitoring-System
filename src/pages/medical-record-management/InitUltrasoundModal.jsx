@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
-import { INIT_ULTRASOUND_FORM } from "../../api/apiUrls";
+import { INIT_ULTRASOUND_FORM, UP_IMG } from "../../api/apiUrls";
 import axios from "axios";
 import "../../styles/medical-record-management/InitUltrasoundModal.css";
 import { Upload, XCircle, Trash2, Loader2, Image, X } from "lucide-react";
@@ -18,7 +18,6 @@ export default function InitUltrasoundModal({
   const [loading, setLoading] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
 
-  // Đóng modal và reset form
   const handleClose = () => {
     if (loading || uploadingImages) return;
     setResult("");
@@ -49,7 +48,7 @@ export default function InitUltrasoundModal({
 
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/upload-image",
+          UP_IMG,
           formData,
           { headers: getAuthHeader() }
         );
@@ -114,14 +113,12 @@ export default function InitUltrasoundModal({
     }
   };
 
-  // Xử lý click vào backdrop
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       handleClose();
     }
   };
 
-  // Xử lý phím ESC
   React.useEffect(() => {
     const handleEscKey = (e) => {
       if (e.key === "Escape") {
