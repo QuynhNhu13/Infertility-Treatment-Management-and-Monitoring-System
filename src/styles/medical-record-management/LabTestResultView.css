@@ -1,6 +1,3 @@
-/* src/styles/medical-record-management/LabTestResultView.css */
-
-/* Modal Overlay */
 .ltf-modal-overlay {
   position: fixed;
   top: 0;
@@ -25,7 +22,6 @@
   }
 }
 
-/* Modal Container */
 .ltf-modal-container {
   background: white;
   border-radius: 20px;
@@ -50,7 +46,6 @@
   }
 }
 
-/* Modal Header */
 .ltf-modal-header {
   display: flex;
   align-items: center;
@@ -105,7 +100,6 @@
   stroke-width: 2;
 }
 
-/* Modal Body */
 .ltf-modal-body {
   flex: 1;
   overflow-y: auto;
@@ -116,7 +110,6 @@
   padding: 28px;
 }
 
-/* Loading State */
 .ltf-loading-container {
   display: flex;
   flex-direction: column;
@@ -147,7 +140,6 @@
   font-weight: 500;
 }
 
-/* Error State */
 .ltf-error-container {
   display: flex;
   flex-direction: column;
@@ -172,7 +164,6 @@
   max-width: 400px;
 }
 
-/* Sections */
 .ltf-section {
   background: #f8fafc;
   border-radius: 16px;
@@ -206,8 +197,6 @@
   font-weight: 600;
   letter-spacing: -0.3px;
 }
-
-/* Info Grid */
 .ltf-info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -242,7 +231,6 @@
   font-weight: 600;
 }
 
-/* Status Badge */
 .ltf-status-badge {
   display: inline-flex;
   align-items: center;
@@ -269,7 +257,6 @@
   color: #6b7280;
 }
 
-/* Results Section */
 .ltf-results-section {
   background: white;
   padding: 24px;
@@ -335,7 +322,6 @@
   font-style: italic;
 }
 
-/* Modal Footer */
 .ltf-modal-footer {
   display: flex;
   align-items: center;
@@ -386,7 +372,6 @@
   stroke-width: 2;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .ltf-modal-container {
     width: 98vw;
@@ -471,7 +456,6 @@
   }
 }
 
-/* Print Styles */
 @media print {
   .ltf-modal-overlay {
     position: static;
@@ -511,14 +495,12 @@
   }
 }
 
-/* Accessibility */
 .ltf-close-btn:focus,
 .ltf-footer-btn:focus {
   outline: 2px solid #077BF6;
   outline-offset: 2px;
 }
 
-/* Smooth scrolling for modal body */
 .ltf-modal-body {
   scrollbar-width: thin;
   scrollbar-color: #077BF6 #f1f5f9;

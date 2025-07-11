@@ -1,4 +1,3 @@
-// src/pages/medical-record-management/UltrasoundImageFetcher.jsx
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useAuth } from "../../context/AuthContext";

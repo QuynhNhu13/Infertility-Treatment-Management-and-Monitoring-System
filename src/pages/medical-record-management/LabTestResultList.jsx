@@ -219,7 +219,6 @@ export default function LabTestResultList() {
         )}
       </div>
 
-      {/* Modal Xem hoặc Gửi Kết Quả */}
       {selectedTestId && modalMode === "view" && (
         <LabTestResultView labTestId={selectedTestId} onClose={handleCloseModal} />
       )}

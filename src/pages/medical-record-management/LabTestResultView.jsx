@@ -1,4 +1,3 @@
-// src/pages/medical-record-management/LabTestResultView.jsx
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { GET_LAB_TEST_RESULT_VIEW } from "../../api/apiUrls";
@@ -16,10 +15,8 @@ export default function LabTestResultView({ labTestId, onClose }) {
   }, [labTestId]);
 
   useEffect(() => {
-    // Lock body scroll when modal is open
     document.body.style.overflow = 'hidden';
     
-    // Handle ESC key
     const handleEsc = (e) => {
       if (e.key === 'Escape') {
         onClose();
@@ -136,7 +133,6 @@ export default function LabTestResultView({ labTestId, onClose }) {
             </div>
           ) : (
             <div className="ltf-content">
-              {/* Patient Information Section */}
               <div className="ltf-section">
                 <div className="ltf-section-header">
                   <svg className="ltf-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -165,7 +161,6 @@ export default function LabTestResultView({ labTestId, onClose }) {
                 </div>
               </div>
 
-              {/* Test Information Section */}
               <div className="ltf-section">
                 <div className="ltf-section-header">
                   <svg className="ltf-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
