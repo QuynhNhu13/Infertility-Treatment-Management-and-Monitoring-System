@@ -14,7 +14,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
   const [submitting, setSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Memoize filtered tests to avoid unnecessary recalculations
   const filteredTests = React.useMemo(() => {
     if (!searchTerm.trim()) return labTests;
     return labTests.filter(test =>
@@ -22,7 +21,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
     );
   }, [labTests, searchTerm]);
 
-  // Fetch lab tests with proper error handling
   const fetchLabTests = useCallback(async () => {
     try {
       setLoading(true);
@@ -46,7 +44,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
     fetchLabTests();
   }, [fetchLabTests]);
 
-  // Handle test selection toggle
   const handleToggle = useCallback((id) => {
     setSelectedIds(prev => 
       prev.includes(id) 
@@ -55,23 +52,19 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
     );
   }, []);
 
-  // Handle select all/deselect all
   const handleSelectAll = useCallback(() => {
     const filteredIds = filteredTests.map(test => test.id);
     const allSelected = filteredIds.every(id => selectedIds.includes(id));
     
     setSelectedIds(prev => {
       if (allSelected) {
-        // Deselect all filtered tests
         return prev.filter(id => !filteredIds.includes(id));
       } else {
-        // Select all filtered tests (avoid duplicates)
         return [...new Set([...prev, ...filteredIds])];
       }
     });
   }, [filteredTests, selectedIds]);
 
-  // Handle form submission
   const handleSubmit = async () => {
     if (!selectedIds.length) {
       setError("Vui lòng chọn ít nhất một xét nghiệm.");
@@ -95,7 +88,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
         { headers: getJsonAuthHeader() }
       );
 
-      // Call success callback and close modal
       onSuccess?.();
       onClose?.();
     } catch (err) {
@@ -107,21 +99,18 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
     }
   };
 
-  // Handle modal close
   const handleClose = useCallback(() => {
     if (!submitting) {
       onClose?.();
     }
   }, [submitting, onClose]);
 
-  // Handle overlay click
   const handleOverlayClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       handleClose();
     }
   }, [handleClose]);
 
-  // Handle retry
   const handleRetry = useCallback(() => {
     fetchLabTests();
   }, [fetchLabTests]);
@@ -133,7 +122,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
   return (
     <div className="lab-modal-overlay" onClick={handleOverlayClick}>
       <div className="lab-modal-content">
-        {/* Header */}
         <div className="lab-modal-header">
           <div className="lab-modal-title-section">
             <h2 className="lab-modal-title">Chọn xét nghiệm</h2>
@@ -151,9 +139,7 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
           </button>
         </div>
 
-        {/* Body */}
         <div className="lab-modal-body">
-          {/* Error Message */}
           {error && (
             <div className="lab-modal-error">
               <span>{error}</span>
@@ -165,7 +151,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
             </div>
           )}
 
-          {/* Controls */}
           <div className="lab-modal-controls">
             <div className="search-container">
               <Search size={18} className="search-icon" />
@@ -198,7 +183,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
             </div>
           </div>
 
-          {/* Test Options */}
           <div className="lab-modal-options">
             {loading ? (
               <div className="loading-container">
@@ -241,7 +225,6 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
           </div>
         </div>
 
-        {/* Footer */}
         <div className="lab-modal-footer">
           <div className="lab-modal-actions">
             <button 

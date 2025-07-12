@@ -302,7 +302,6 @@
   font-style: italic;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .tp-container {
     padding: 16px;

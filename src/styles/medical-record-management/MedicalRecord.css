@@ -592,7 +592,7 @@
 }
 
 .mr-ultrasound-actions button:first-child {
-  background-color: #077BF6; /* Xanh biển */
+  background-color: #077BF6;
   color: white;
 }
 
@@ -601,7 +601,7 @@
 }
 
 .mr-ultrasound-actions button:last-child {
-  background-color: #ff4d4f; /* Đỏ cảnh báo */
+  background-color: #ff4d4f;
   color: white;
 }
 

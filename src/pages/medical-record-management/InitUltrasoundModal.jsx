@@ -11,7 +11,7 @@ export default function InitUltrasoundModal({
   onClose,
   medicalRecordId,
   onSuccess,
-  initialData = null // nếu có => cập nhật
+  initialData = null 
 }) {
   const { getAuthHeader } = useAuth();
   const [result, setResult] = useState("");

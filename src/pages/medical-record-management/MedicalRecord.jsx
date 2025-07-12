@@ -36,7 +36,7 @@ export default function MedicalRecord() {
   const [showUltrasoundForm, setShowUltrasoundForm] = useState(false);
   const [selectedLabTestId, setSelectedLabTestId] = useState(null);
   const [activeTab, setActiveTab] = useState(TABS.INIT);
-const [selectedUltrasound, setSelectedUltrasound] = useState(null); //
+const [selectedUltrasound, setSelectedUltrasound] = useState(null); 
 
 
   const formatDate = useCallback((dateStr) => {
@@ -130,7 +130,7 @@ const [selectedUltrasound, setSelectedUltrasound] = useState(null); //
 
 const handleUltrasoundModalClose = useCallback(() => {
   setShowUltrasoundForm(false);
-  setSelectedUltrasound(null); // reset sau khi đóng
+  setSelectedUltrasound(null); 
 }, []);
 
   const handleUltrasoundSuccess = useCallback((newData) => {
