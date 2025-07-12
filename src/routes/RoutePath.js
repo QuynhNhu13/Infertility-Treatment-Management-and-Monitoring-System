@@ -39,6 +39,7 @@ const ROUTES = {
   SCHEDULE_TEMPLATE_FORM: `/form-tao`, //test
   SCHEDULE_GENERATOR_FORM: `/form`,
 
+  
 };
 
 export default ROUTES;

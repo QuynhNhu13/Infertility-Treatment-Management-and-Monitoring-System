@@ -11,6 +11,8 @@ import ServiceSelectionModal from "./ServiceSelectionModal";
 import TreatmentSessionFormModal from "./TreatmentSessionFormModal";
 import TreatmentSessionDetailModal from "./TreatmentSessionDetailModal";
 import "../../styles/medical-record-management/TreatmentPlan.css";
+import { useNavigate } from "react-router-dom";
+
 
 export default function TreatmentPlan({ medicalRecordId }) {
   const { getAuthHeader } = useAuth();
@@ -25,6 +27,8 @@ export default function TreatmentPlan({ medicalRecordId }) {
   const [sessionMap, setSessionMap] = useState({});
   const [openSessionMap, setOpenSessionMap] = useState({});
   const [selectedSessionForDetail, setSelectedSessionForDetail] = useState(null);
+  const navigate = useNavigate();
+
 
   const fetchTreatmentPlans = async () => {
     try {
@@ -255,8 +259,26 @@ export default function TreatmentPlan({ medicalRecordId }) {
                                         <p>Triệu chứng: {s.symptoms}</p>
                                         <p>Ghi chú: {s.notes}</p>
                                         <div className="session-actions">
+                                          <button
+                                            style={{
+                                              backgroundColor: "#077BF6", // màu vàng gold
+                                            }}
+                                            onClick={() =>
+                                              navigate(`/don-thuoc/${s.id}`, {
+                                                state: {
+                                                  session: s,
+                                                  medicalRecordId: medicalRecordId,
+                                                  stageId: stage.id,
+                                                },
+                                              })
+                                            }
+                                          >
+                                            Đơn thuốc
+                                          </button>
                                           <button onClick={() => setEditSession({ session: s, stageId: stage.id })}>Cập nhật</button>
                                           <button onClick={() => handleDeleteSession(stage.id, s.id)}>Xóa</button>
+
+
                                         </div>
                                         <hr />
                                       </div>
@@ -333,7 +355,7 @@ export default function TreatmentPlan({ medicalRecordId }) {
         <TreatmentSessionDetailModal
           session={{
             ...selectedSessionForDetail,
-            medicalRecordId: medicalRecordId, // ✅ Thêm id vào session object
+            medicalRecordId: medicalRecordId,
           }}
           onClose={() => setSelectedSessionForDetail(null)}
         />
