@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import { LAB_TEST, LAB_TEST_RESULT_INIT } from "../../api/apiUrls";
-import { Search, X, ClipboardList } from "lucide-react"; // ✅ Lucide icons
+import { Search, X, ClipboardList } from "lucide-react";
 import "../../styles/medical-record-management/LabTestRequestModal.css";
 
 const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
@@ -64,8 +64,7 @@ const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
       setSubmitting(true);
       setError("");
 
-      console.log("Gửi yêu cầu với recordId:", numericRecordId); // ✅ debug
-
+      console.log("Gửi yêu cầu với recordId:", numericRecordId); 
       await axios.post(
         LAB_TEST_RESULT_INIT(numericRecordId),
         { testIds: selectedIds },

@@ -128,7 +128,6 @@ export default function InitUltrasoundModal({
 
     if (isOpen) {
       document.addEventListener("keydown", handleEscKey);
-      // Ngăn scroll khi modal mở
       document.body.style.overflow = "hidden";
     }
 
