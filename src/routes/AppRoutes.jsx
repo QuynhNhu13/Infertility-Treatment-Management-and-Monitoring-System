@@ -28,6 +28,7 @@ import ScheduleGeneratorForm from "../pages/schedule-management/ScheduleGenerato
 import LabTestResultList from "../pages/medical-record-management/LabTestResultList";
 import LabTestResultForm from "../pages/medical-record-management/LabTestResultForm";
 import MedicalRecordCreate from "../pages/medical-record-management/MedicalRecordCreate";
+import TreatmentPlan from "../pages/medical-record-management/TreatmentPlan";
 
 
 function AppRoutes() {
@@ -46,7 +47,7 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
-      <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList/>}/>
+        <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
       </Route>
 
 
@@ -71,10 +72,12 @@ function AppRoutes() {
       {/* Medical - Record */}
       <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecord />} />
       <Route path="/ket-qua-xet-nghiem/:labTestId" element={<LabTestResultForm />} />
+      <Route path="/ho-so-benh-nhan/:record.id/phac-do-dieu-tri" element={<TreatmentPlan />} />
+
 
       {/* Schedule - Management */}
-      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm/>}/>
-      <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm/>}/>
+      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm />} />
+      <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm />} />
 
     </Routes>
   );
