@@ -1,4 +1,3 @@
-/* Tổng quan */
 .doctor-apm-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -8,7 +7,6 @@
   min-height: 100vh;
 }
 
-/* Header */
 .doctor-apm-header {
   background: linear-gradient(135deg, #077BF6, #005bbb);
   color: white;
@@ -32,7 +30,6 @@
   opacity: 0.95;
 }
 
-/* Controls */
 .doctor-apm-controls {
   background: white;
   padding: 25px;
@@ -56,7 +53,6 @@
   font-size: 0.95rem;
 }
 
-/* react-select custom */
 .doctor-apm-react-select .react-select__control {
   border: 2px solid #d1d5db;
   border-radius: 8px;
@@ -89,7 +85,6 @@
   margin-top: 10px;
 }
 
-/* Loading */
 .spinner {
   width: 48px;
   height: 48px;
@@ -100,7 +95,6 @@
   margin: 20px auto;
 }
 
-/* Error & Retry */
 .doctor-apm-error {
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -125,7 +119,6 @@
   background: #b91c1c;
 }
 
-/* Empty */
 .doctor-apm-empty {
   background: white;
   border: 2px dashed #d1d5db;
@@ -149,7 +142,6 @@
   background: #005bbb;
 }
 
-/* Table */
 .doctor-apm-table-container {
   background: white;
   border-radius: 12px;
@@ -247,7 +239,6 @@
   cursor: not-allowed;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .doctor-apm-title {
     font-size: 2rem;
