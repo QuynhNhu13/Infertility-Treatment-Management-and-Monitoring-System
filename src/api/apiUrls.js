@@ -17,7 +17,7 @@ export const RESET_PASSWORD = `${BASE_URL}api/auth/reset-password`;
 export const LIST_SERVICE_HOME = `${BASE_URL}api/home/services`;
 export const LIST_SERVICE = `${BASE_URL}api/list/services`;
 export const CREATE_SERVICE = `${BASE_URL}api/manage/services`;
-export const LIST_SERVICE_MANAGE =`${BASE_URL}api/manage/services`;
+export const LIST_SERVICE_MANAGE = `${BASE_URL}api/manage/services`;
 export const EDIT_SERVICE = (id) => `${BASE_URL}api/manage/services/${id}`;
 
 export const CREATE_SERVICE_DETAILS = (serviceId) => `${BASE_URL}api/manage/services/${serviceId}/service-details`;
@@ -39,13 +39,24 @@ export const LIST_BLOG = `${BASE_URL}api/blogs/for-user`;
 
 //Appointment-Management
 export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/test`; //lấy api hiển thị cho doctor appointment manager
+export const GET_LAST_APPOINTMENT = `${BASE_URL}api/appointments/last-appointment`; //cua nhan
+export const APPOINTMENT_DOCTOR = `${BASE_URL}api/user/appointments/available-doctors`; //nhan
+export const APPOINTMENT_DATE = `${BASE_URL}api/schedules/available-dates-by-date`; //nhan
+export const AVAILABLE_DATES_BY_DOCTOR = `${BASE_URL}api/schedules/available-dates-by-doctor`; //nhan
+export const SCHEDULE_SLOTS_BY_DOCTOR_AND_DATE = `${BASE_URL}api/schedules/slots`; //nhan
+export const SCHEDULE_SLOTS_BY_DATE = `${BASE_URL}api/schedules/slots-by-date`; //nhan
+export const CREATE_APPOINTMENT = `${BASE_URL}api/appointments/create`;//nhan
+export const PAYMENT_VNPAY = `${BASE_URL}api/payment/vn-pay`;//nhan
+export const PAYMENT_VNPAY_CALLBACK = `${BASE_URL}api/payment/vn-pay-callback`;//nhan
+export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointment`;//nhan
+
 
 
 //Medical-Record
 export const MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/${accountId}`; //trang thông tin 
 export const MEDICAL_RECORD_CREATE = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}`; //tạo
 
-export const LAB_TEST = `${BASE_URL}api/lab-test`; 
+export const LAB_TEST = `${BASE_URL}api/lab-test`;
 export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
 export const GET_LAB_TEST_RESULTS = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
 export const LAB_TEST_RESULT_SEARCH = `${BASE_URL}api/lab-test-result/search`;

@@ -1,0 +1,507 @@
+/* DatLichKhamBenh.css */
+
+.form-dangkylichkham {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fbff;
+    min-height: 100vh;
+}
+
+.form-dangkylichkham .title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-dangkylichkham .title h1 {
+    color: #077BF6;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    margin-top: 15px;
+    text-shadow: 0 2px 4px rgba(7, 123, 246, 0.1);
+}
+
+.khung-dat-lich {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(7, 123, 246, 0.1);
+    border: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.loi_mo_dau {
+    background: linear-gradient(135deg, #077BF6, #0563d1);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-style: italic;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(7, 123, 246, 0.2);
+}
+
+.chon-loai-dich-vu {
+    margin-bottom: 30px;
+}
+
+.chon-loai-dich-vu p {
+    color: #077BF6;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nut-chon-dich-vu {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nut-chon-dich-vu button {
+    background: white;
+    border: 2px solid #077BF6;
+    color: #077BF6;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nut-chon-dich-vu button:hover {
+    background: rgba(7, 123, 246, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(7, 123, 246, 0.2);
+}
+
+.nut-chon-dich-vu button.active {
+    background: linear-gradient(135deg, #077BF6, #0563d1);
+    color: white;
+    box-shadow: 0 5px 15px rgba(7, 123, 246, 0.3);
+}
+
+.hang_dau {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.doctor p,
+.date p {
+    color: #077BF6;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.doctor select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1f0ff;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.doctor select:focus {
+    outline: none;
+    border-color: #077BF6;
+    box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+}
+
+.input-calendar-wrapper {
+    position: relative;
+}
+
+.chon-ngay,
+.input-date {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1f0ff;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chon-ngay:focus,
+.input-date:focus {
+    outline: none;
+    border-color: #077BF6;
+    box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+}
+
+.lich-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(7, 123, 246, 0.15);
+    padding: 20px;
+    z-index: 1000;
+    border: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.khung-lich {
+    width: 100%;
+    border: none;
+    background: transparent;
+}
+
+.react-calendar {
+    border: none !important;
+    font-family: inherit;
+}
+
+.react-calendar__tile {
+    background: white;
+    border: 1px solid #e1f0ff;
+    color: #333;
+    padding: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.react-calendar__tile:hover {
+    background: rgba(7, 123, 246, 0.1);
+    border-color: #077BF6;
+}
+
+.react-calendar__tile--active {
+    background: #077BF6 !important;
+    color: white !important;
+    border-color: #077BF6;
+}
+
+.react-calendar__tile.has-appointment {
+    background: rgba(7, 123, 246, 0.1);
+    border-color: #077BF6;
+    color: #077BF6;
+    font-weight: 600;
+}
+
+.react-calendar__tile.disabled-day {
+    background: #f5f5f5;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: #077BF6;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
+    color: #077BF6;
+    font-size: 0.9rem;
+}
+
+.dot_blue {
+    width: 8px;
+    height: 8px;
+    background: #077BF6;
+    border-radius: 50%;
+}
+
+.time-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e1f0ff;
+}
+
+.time-section h4 {
+    color: #077BF6;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.time-box {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+.time-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-btn {
+    background: white;
+    border: 2px solid #e1f0ff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.time-btn:hover {
+    border-color: #077BF6;
+    background: rgba(7, 123, 246, 0.1);
+    color: #077BF6;
+}
+
+.time-btn.active {
+    background: #077BF6;
+    color: white;
+    border-color: #077BF6;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #077BF6, #0563d1);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(7, 123, 246, 0.3);
+}
+
+.submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.hang_hai,
+.hang_ba {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+}
+
+.information p {
+    color: #077BF6;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.information input,
+.information select {
+    padding: 12px 15px;
+    border: 2px solid #e1f0ff;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.information input:focus,
+.information select:focus {
+    outline: none;
+    border-color: #077BF6;
+    box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+}
+
+.information input::placeholder,
+.information select option:first-child {
+    color: #999;
+}
+
+.submit_but {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.submit_but button {
+    background: linear-gradient(135deg, #077BF6, #0563d1);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(7, 123, 246, 0.3);
+}
+
+.submit_but button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(7, 123, 246, 0.4);
+}
+
+.submit_but button p {
+    margin: 0;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-dangkylichkham {
+        padding: 15px;
+    }
+
+    .title h1 {
+        font-size: 2rem;
+    }
+
+    .hang_dau,
+    .hang_hai,
+    .hang_ba {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .nut-chon-dich-vu {
+        flex-direction: column;
+    }
+
+    .nut-chon-dich-vu button {
+        width: 100%;
+    }
+
+    .time-list {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .khung-dat-lich {
+        padding: 20px;
+    }
+}
+
+/* Calendar Navigation Styling */
+.react-calendar__navigation {
+    background: rgba(7, 123, 246, 0.1);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.react-calendar__navigation button {
+    background: none;
+    border: none;
+    color: #077BF6;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.react-calendar__navigation button:hover {
+    background: rgba(7, 123, 246, 0.2);
+    border-radius: 6px;
+}
+
+.react-calendar__navigation button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Month View Styling */
+.react-calendar__month-view__weekdays {
+    background: rgba(7, 123, 246, 0.05);
+    font-weight: 600;
+    color: #077BF6;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    padding: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Animation for form elements */
+.information input:focus,
+.information select:focus,
+.chon-ngay:focus {
+    animation: focusGlow 0.3s ease;
+}
+
+@keyframes focusGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(7, 123, 246, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+    }
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Success states */
+.success-message {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.react-select__control {
+    border-radius: 6px;
+    border: 1px solid #077BF6;
+    box-shadow: none;
+}
+
+.react-select__option--is-focused {
+    background-color: #E2EFFF;
+    color: #001D54;
+}
+
+.css-13cymwt-control {
+    border-radius: 8px;
+    min-height: 42px;
+    font-size: 16px;
+    box-shadow: none;
+}
+
+.css-1u9des2-indicatorSeparator {
+    display: none;
+}

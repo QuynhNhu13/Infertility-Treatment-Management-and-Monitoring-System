@@ -31,6 +31,9 @@ import PublicBlogList from "../pages/blog-management/PublicBlogList";
 import CreateSchedule from "../pages/schedule-management/CreateSchedule";
 import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateList";
 
+import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
+import PaymentResult from "../pages/appointment-management/PaymentResult";
+
 
 function AppRoutes() {
   return (
@@ -79,6 +82,13 @@ function AppRoutes() {
 
       {/* Schedule - Management */}
       <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />
+      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm />} />
+      <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm />} />
+
+      {/* Appointment - Management */}
+      <Route path={ROUTES.BOOKING_FORM} element={<DatLichKhamBenh />} />
+      <Route path={ROUTES.PAYMENT_RESULT} element={<PaymentResult />} />
+
     </Routes>
   );
 }
