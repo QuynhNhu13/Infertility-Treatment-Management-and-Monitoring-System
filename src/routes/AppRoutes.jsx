@@ -29,6 +29,8 @@ import LabTestResultList from "../pages/medical-record-management/LabTestResultL
 import LabTestResultForm from "../pages/medical-record-management/LabTestResultForm";
 import MedicalRecordCreate from "../pages/medical-record-management/MedicalRecordCreate";
 import TreatmentPlan from "../pages/medical-record-management/TreatmentPlan";
+import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
+import PaymentResult from "../pages/appointment-management/PaymentResult";
 
 
 function AppRoutes() {
@@ -79,6 +81,9 @@ function AppRoutes() {
       <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm />} />
       <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm />} />
 
+      {/* Appointment - Management */}
+      <Route path={ROUTES.BOOKING_FORM} element={<DatLichKhamBenh />} />
+      <Route path={ROUTES.PAYMENT_RESULT} element={<PaymentResult />} />
     </Routes>
   );
 }

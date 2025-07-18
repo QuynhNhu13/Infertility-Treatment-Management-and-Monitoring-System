@@ -2,7 +2,7 @@
 const ROUTES = {
   HOME: '/',
   STAFF: '/nhan-vien',
-  DOCTOR: '/bac-si', 
+  DOCTOR: '/bac-si',
   MANAGER: '/quan-ly',
   ADMIN: '/admin',
 
@@ -29,8 +29,8 @@ const ROUTES = {
   LIST_BLOG_MANA: 'quan-ly-goc-chia-se',
 
   // appointment -management
-  DOCTOR_APPOINTMENT_MANAGER: 'quan-ly-lich-hen', 
-  BOOKING_FORM: 'CHUA-CO',
+  DOCTOR_APPOINTMENT_MANAGER: 'quan-ly-lich-hen',
+  BOOKING_FORM: 'dat-lich-kham',
 
   // medical-record-management
   MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,
@@ -39,8 +39,8 @@ const ROUTES = {
   // schedule-management
   SCHEDULE_TEMPLATE_FORM: `/form-tao`, //test
   SCHEDULE_GENERATOR_FORM: `/form`,
+  PAYMENT_SCHEDULE: '/payment-result',
 
-  
 };
 
 export default ROUTES;

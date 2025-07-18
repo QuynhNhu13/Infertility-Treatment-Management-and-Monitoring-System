@@ -45,7 +45,6 @@ const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price, showPrice
         <h3>{serviceName}</h3>
         <p className="service-subtitle">{subTitle}</p>
 
-        {/* ✅ Chỉ hiện giá nếu showPrice === true */}
         {showPrice && (
           <p className="service-price">{formatPrice(price)}</p>
         )}

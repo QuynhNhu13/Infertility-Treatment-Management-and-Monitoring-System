@@ -40,7 +40,7 @@ const Home = () => {
               <FaStethoscope className="action-icon" />
               <span>TƯ VẤN KHÁM</span>
             </a>
-            <a href="/dat-lich-kham-benh" className="action-link-text">
+            <a href="/dat-lich-kham" className="action-link-text">
               <FaCalendarCheck className="action-icon" />
               <span>ĐẶT LỊCH KHÁM</span>
             </a>
@@ -75,8 +75,8 @@ const Home = () => {
         </section>
 
         <ListServiceHome />
-       
-        <Footer/>
+
+        <Footer />
 
       </div >
 
