@@ -56,7 +56,7 @@ const ListService = () => {
                                 subTitle={service.subTitle}
                                 imgUrl={service.imgUrl}
                                 slug={service.slug}
-                                price={service.price} // thêm dòng này
+                                price={service.price} 
                             />
                         ))}
 

@@ -30,6 +30,7 @@ const ROUTES = {
 
   // appointment -management
   DOCTOR_APPOINTMENT_MANAGER: 'quan-ly-lich-hen', 
+  BOOKING_FORM: 'CHUA-CO',
 
   // medical-record-management
   MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,

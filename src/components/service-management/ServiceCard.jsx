@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import ROUTES from '../../routes/RoutePath';
 import '../../styles/service-management/ServiceCard.css';
 
-const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price }) => {
+const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price, showPrice = true }) => {
   const defaultImg = 'https://via.placeholder.com/400x300?text=No+Image';
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -11,14 +12,14 @@ const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price }) => {
   const handleBookingClick = () => {
     if (!user) {
       alert("Vui lòng đăng nhập để đặt lịch khám");
-      navigate('/dang-nhap');
+      navigate(ROUTES.LOGIN);
     } else {
-      navigate('/booking');
+      navigate(ROUTES.BOOKING_FORM);
     }
   };
 
   const formatPrice = (p) => {
-    if (!p || isNaN(p)) return "Đang cập nhật";
+    if (p === null || p === undefined || isNaN(p)) return "Đang cập nhật";
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
@@ -28,7 +29,7 @@ const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price }) => {
 
   return (
     <div className="service-card">
-      <Link to={`/services/${slug || id}`}>
+      <Link to={ROUTES.SERVICE_DETAIL_PAGE(id)}>
         <img
           src={imgUrl || defaultImg}
           alt={serviceName}
@@ -44,14 +45,17 @@ const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price }) => {
         <h3>{serviceName}</h3>
         <p className="service-subtitle">{subTitle}</p>
 
-        {/* Thêm phần hiển thị giá */}
-        <p className="service-price">{formatPrice(price)}</p>
+        {/* ✅ Chỉ hiện giá nếu showPrice === true */}
+        {showPrice && (
+          <p className="service-price">{formatPrice(price)}</p>
+        )}
 
         <div className="service-card-buttons">
           <button onClick={handleBookingClick} className="btn btn-booking">
             Đặt lịch khám
           </button>
-          <Link to={`/services/${slug || id}`} className="btn btn-detail">
+
+          <Link to={ROUTES.SERVICE_DETAIL_PAGE(id)} className="btn btn-detail">
             Xem chi tiết
           </Link>
         </div>

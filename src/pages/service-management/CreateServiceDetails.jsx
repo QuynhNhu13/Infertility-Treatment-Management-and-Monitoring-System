@@ -54,7 +54,7 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
   const uploadImage = async (file) => {
     try {
       const uploadData = new FormData();
-      uploadData.append('image', file); 
+      uploadData.append('image', file);
 
       const res = await axios.post(UP_IMG, uploadData, {
         headers: {
@@ -127,7 +127,7 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
     <div className="create-service-container">
       <h2>TẠO CHI TIẾT PHƯƠNG PHÁP</h2>
       <form onSubmit={handleSubmit}>
-        {/* Khái niệm */}
+
         <div className="form-group">
           <label>Khái niệm</label>
           <RichTextEditor value={formData.concept} onChange={(val) => handleRichTextChange('concept', val)} />
@@ -138,21 +138,19 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
           {formData.conceptImgPreview && <img src={formData.conceptImgPreview} alt="preview" className="img-preview" />}
         </div>
 
-        {/* Điều kiện áp dụng */}
         <div className="form-group">
           <label>Điều kiện áp dụng</label>
           <RichTextEditor value={formData.condition} onChange={(val) => handleRichTextChange('condition', val)} />
         </div>
         <div className="form-group">
-          <label>Phân công</label>
+          <label>Nhiệm vụ của bác sĩ</label>
           <RichTextEditor value={formData.assignment} onChange={(val) => handleRichTextChange('assignment', val)} />
         </div>
         <div className="form-group">
-          <label>Không áp dụng cho</label>
+          <label>Trường hợp không nên sử dụng</label>
           <RichTextEditor value={formData.unAssignment} onChange={(val) => handleRichTextChange('unAssignment', val)} />
         </div>
 
-        {/* Quy trình */}
         <div className="form-group">
           <label>Chi tiết quy trình</label>
           <RichTextEditor value={formData.procedureDetails} onChange={(val) => handleRichTextChange('procedureDetails', val)} />
@@ -162,22 +160,19 @@ const CreateServiceDetails = ({ serviceId, onClose }) => {
           <input type="file" accept="image/*" onChange={(e) => handleImageSelect(e, 'procedureDetailsImg')} />
           {formData.procedureDetailsImgPreview && <img src={formData.procedureDetailsImgPreview} alt="preview" className="img-preview" />}
         </div>
-
-        {/* Kết quả và rủi ro */}
         <div className="form-group">
           <label>Tỉ lệ thành công</label>
-          <input type="text" name="successRate" value={formData.successRate} onChange={handleChange} />
+          <RichTextEditor value={formData.successRate} onChange={(val) => handleRichTextChange('successRate', val)} />
         </div>
         <div className="form-group">
-          <label>Kinh nghiệm</label>
+          <label>Kinh nghiệm giúp tăng tỉ lệ thành công</label>
           <RichTextEditor value={formData.experience} onChange={(val) => handleRichTextChange('experience', val)} />
         </div>
         <div className="form-group">
-          <label>Rủi ro</label>
+          <label>Các yếu tố rủi ro</label>
           <RichTextEditor value={formData.risk} onChange={(val) => handleRichTextChange('risk', val)} />
         </div>
 
-        {/* Bệnh viện */}
         <div className="form-group">
           <label>Quy trình tại bệnh viện</label>
           <RichTextEditor value={formData.hospitalProcedure} onChange={(val) => handleRichTextChange('hospitalProcedure', val)} />

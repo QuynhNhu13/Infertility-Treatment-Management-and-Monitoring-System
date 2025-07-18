@@ -35,11 +35,11 @@ const ServiceManage = () => {
   const [showDetailTable, setShowDetailTable] = useState(false);
   const [servicesWithDetails, setServicesWithDetails] = useState([]);
 
-  const [showStagePopup, setShowStagePopup] = useState(false); 
-  const [showStageTable, setShowStageTable] = useState(false); 
-  const [servicesWithStages, setServicesWithStages] = useState([]); 
+  const [showStagePopup, setShowStagePopup] = useState(false);
+  const [showStageTable, setShowStageTable] = useState(false);
+  const [servicesWithStages, setServicesWithStages] = useState([]);
 
-  const [showEditStagePopup, setShowEditStagePopup] = useState(false); 
+  const [showEditStagePopup, setShowEditStagePopup] = useState(false);
 
 
   const { getJsonAuthHeader } = useAuth();
@@ -212,6 +212,9 @@ const ServiceManage = () => {
     setSelectedDetailId(null);
     setSelectedDetailData(null);
     fetchServices();
+    if (showDetailTable) {
+      fetchServicesWithDetails();
+    }
   };
 
   const handleAddStages = (id) => {
@@ -296,8 +299,21 @@ const ServiceManage = () => {
                     {activeMenuId === service.id && (
                       <div className="sm-action-menu-1">
                         <button onClick={() => handleOpenUpdateModal(service)}>Cập nhật</button>
-                        <button onClick={() => handleAddDetails(service.id)}>Thêm chi tiết</button>
-                        <button onClick={() => handleAddStages(service.id)}>Thêm giai đoạn</button>
+                        {servicesWithDetails &&
+                          servicesWithDetails.length > 0 &&
+                          !servicesWithDetails.some((s) => s.id === service.id) && (
+                            <button onClick={() => handleAddDetails(service.id)}>
+                              Thêm chi tiết
+                            </button>
+                          )}
+                        {servicesWithStages &&
+                          servicesWithStages.length > 0 &&
+                          !servicesWithStages.some((s) => s.id === service.id) && (
+                            <button onClick={() => handleAddStages(service.id)}>
+                              Thêm giai đoạn
+                            </button>
+                          )}
+
                       </div>
                     )}
                   </td>
@@ -382,7 +398,7 @@ const ServiceManage = () => {
                 <th>Tên phương pháp</th>
                 <th>Danh sách giai đoạn</th>
                 <th>Trạng thái</th>
-                <th>Hành động</th> 
+                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
@@ -513,30 +529,30 @@ const ServiceManage = () => {
           </div>
         </div>
       )}
-  {showEditStagePopup && selectedServiceId && (
-  <div
-    className="sm-modal-overlay-a"
-    onClick={() => setShowEditStagePopup(false)}
-  >
-    <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%" }}>
-      <button
-        className="sm-modal-close-btn-a"
-        onClick={() => setShowEditStagePopup(false)}
-      >
-        &times;
-      </button>
+      {showEditStagePopup && selectedServiceId && (
+        <div
+          className="sm-modal-overlay-a"
+          onClick={() => setShowEditStagePopup(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%" }}>
+            <button
+              className="sm-modal-close-btn-a"
+              onClick={() => setShowEditStagePopup(false)}
+            >
+              &times;
+            </button>
 
-      <EditServiceStages
-        serviceId={selectedServiceId}
-        onClose={() => setShowEditStagePopup(false)}
-        onUpdated={() => {
-          fetchServices();
-          fetchServicesWithStages();
-        }}
-      />
-    </div>
-  </div>
-)}
+            <EditServiceStages
+              serviceId={selectedServiceId}
+              onClose={() => setShowEditStagePopup(false)}
+              onUpdated={() => {
+                fetchServices();
+                fetchServicesWithStages();
+              }}
+            />
+          </div>
+        </div>
+      )}
 
 
 

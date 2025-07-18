@@ -53,20 +53,15 @@ const SidebarMana = () => {
       <div className="sidebar-section">
         <div className="section-title section-special">QUẢN LÝ CHUYÊN MÔN</div>
 
-{/* 
         <Link
           to={`${ROUTES.MANAGER}/${ROUTES.SERVICE_MANAGE}`}
           className={isActive(`${ROUTES.MANAGER}/${ROUTES.SERVICE_MANAGE}`) ? "active" : ""}
         >
           <Stethoscope size={18} />
           <span>Phương pháp</span>
-        </Link> */}
+        </Link>
 
-
-
-
-
-        <Link to="/quan-ly/quan-ly-phuong-phap" className={isActive("/quan-ly/quan-ly-phuong-phap") ? "active" : ""}>
+        <Link to="" className={isActive("") ? "active" : ""}>
           <Users size={18} />
           <span>Chuyên gia & Bác sĩ</span>
         </Link>

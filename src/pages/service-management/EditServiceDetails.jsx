@@ -1,4 +1,3 @@
-// EditServiceDetails.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
@@ -92,9 +91,9 @@ const EditServiceDetails = ({ serviceId, id, existingData, onClose }) => {
         return;
       }
 
-       console.log("→ serviceId:", serviceId);
-    console.log("→ detailId:", id);
-    console.log("→ API URL:", EDIT_SERVICE_DETAILS(serviceId, id));
+      console.log("→ serviceId:", serviceId);
+      console.log("→ detailId:", id);
+      console.log("→ API URL:", EDIT_SERVICE_DETAILS(serviceId, id));
 
       const conceptImgUrl = formData.conceptImgFile
         ? await uploadImage(formData.conceptImgFile)
@@ -162,11 +161,11 @@ const EditServiceDetails = ({ serviceId, id, existingData, onClose }) => {
           <RichTextEditor value={formData.condition} onChange={(val) => handleRichTextChange('condition', val)} />
         </div>
         <div className="form-group">
-          <label>Phân công</label>
+          <label>Nhiệm vụ của bác sĩ</label>
           <RichTextEditor value={formData.assignment} onChange={(val) => handleRichTextChange('assignment', val)} />
         </div>
         <div className="form-group">
-          <label>Không áp dụng cho</label>
+          <label>Trường hợp không nên sử dụng</label>
           <RichTextEditor value={formData.unAssignment} onChange={(val) => handleRichTextChange('unAssignment', val)} />
         </div>
         <div className="form-group">
@@ -178,16 +177,16 @@ const EditServiceDetails = ({ serviceId, id, existingData, onClose }) => {
           <input type="file" accept="image/*" onChange={(e) => handleImageSelect(e, 'procedureDetailsImg')} />
           {formData.procedureDetailsImgPreview && <img src={formData.procedureDetailsImgPreview} alt="preview" className="img-preview" />}
         </div>
-        <div className="form-group">
+         <div className="form-group">
           <label>Tỉ lệ thành công</label>
-          <input type="text" name="successRate" value={formData.successRate} onChange={handleInputChange} />
+          <RichTextEditor value={formData.successRate} onChange={(val) => handleRichTextChange('successRate', val)} />
         </div>
         <div className="form-group">
-          <label>Kinh nghiệm</label>
+          <label>Kinh nghiệm giúp tăng tỉ lệ thành công</label>
           <RichTextEditor value={formData.experience} onChange={(val) => handleRichTextChange('experience', val)} />
         </div>
         <div className="form-group">
-          <label>Rủi ro</label>
+          <label>Các yếu tố rủi ro</label>
           <RichTextEditor value={formData.risk} onChange={(val) => handleRichTextChange('risk', val)} />
         </div>
         <div className="form-group">

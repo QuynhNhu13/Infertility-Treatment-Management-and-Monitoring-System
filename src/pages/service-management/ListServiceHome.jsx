@@ -29,18 +29,18 @@ const ListServiceHome = () => {
 
   return (
     <div>
-      <div className="service-card-name">
-        <div className="service-card-name01">
-          <h1 className="service-h1">CÁC PHƯƠNG PHÁP</h1>
-          <h1 className="service-h2">HỖ TRỢ SINH SẢN</h1>
+      <div className="list-service-home-header">
+        <div className="list-service-home-header-left">
+          <h1 className="list-service-home-h1">CÁC PHƯƠNG PHÁP</h1>
+          <h1 className="list-service-home-h2">HỖ TRỢ SINH SẢN</h1>
           <div style={{ textAlign: "center", marginTop: "5px", marginBottom: "15px" }}>
-            <Link to="/dich-vu" className="view-all-button">
+            <Link to="/danh-sach-phuong-phap" className="list-service-home-button">
               Xem tất cả phương pháp
             </Link>
           </div>
         </div>
-        <div className="service-card-name02">
-          <p className="service-p">
+        <div className="list-service-home-header-right">
+          <p className="list-service-home-description">
             Tại <strong>Bệnh viện Đa khoa Thành Nhân</strong>, chúng tôi triển khai nhiều phương pháp hỗ trợ sinh sản hiện đại
             nhằm đáp ứng nhu cầu đa dạng của các cặp vợ chồng. Một số kỹ thuật nổi bật bao gồm: theo dõi rụng
             trứng tự nhiên để xác định thời điểm thụ thai tối ưu, <strong>bơm tinh trùng vào buồng tử cung (IUI)</strong> giúp
@@ -53,7 +53,7 @@ const ListServiceHome = () => {
         </div>
       </div>
 
-      <div className="service-list">
+      <div className="list-service-home-list">
         {services.slice(0, 3).map((service, index) => (
           <ServiceCard
             key={service.slug || index}
@@ -63,6 +63,7 @@ const ListServiceHome = () => {
             imgUrl={service.imgUrl}
             slug={service.slug}
             price={service.price}
+            showPrice={false}
           />
         ))}
       </div>

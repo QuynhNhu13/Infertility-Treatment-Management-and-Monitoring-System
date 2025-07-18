@@ -1,4 +1,4 @@
-.service-card-name {
+.list-service-home-header {
     max-width: 1332px;
     margin: -10px auto -4px;
     padding: 0 16px;
@@ -9,12 +9,12 @@
     flex-wrap: wrap;
 }
 
-.service-card-name01 {
+.list-service-home-header-left {
     flex: 1;
     min-width: 300px;
 }
 
-.service-card-name .service-h1 {
+.list-service-home-h1 {
     font-size: 35px;
     color: #001D53;
     margin-top: 19px;
@@ -22,7 +22,7 @@
     text-align: left;
 }
 
-.service-card-name .service-h2 {
+.list-service-home-h2 {
     font-size: 46px;
     color: #077BF6;
     margin-bottom: 16px;
@@ -30,28 +30,44 @@
     text-align: left;
 }
 
-.service-card-name02 {
+.list-service-home-header-right {
     flex: 2;
     min-width: 300px;
 }
 
-.service-card-name .service-p {
+.list-service-home-description {
     font-size: 15px;
     color: #474646;
     line-height: 1.6;
     text-align: justify;
 }
 
-.service-list {
+.list-service-home-list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 24px;
     padding: 0px 16px 40px;
     margin-top: 13px;
+    margin-left: 150px;
+    margin-right: 50px;
+    scroll-behavior: smooth;
 }
 
-.view-all-button {
+.service-card {
+    flex: 0 0 350px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+}
+
+.list-service-home-button {
     display: block;
     width: fit-content;
     margin: 4px;
@@ -62,11 +78,22 @@
     border: none;
     border-radius: 25px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     text-align: center;
 }
 
-.view-all-button:hover {
+.list-service-home-button:hover {
     background-color: #007bff;
     color: white;
+}
+
+.list-service-home-list::-webkit-scrollbar {
+    height: 8px;
+}
+.list-service-home-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+.list-service-home-list::-webkit-scrollbar-track {
+    background: transparent;
 }

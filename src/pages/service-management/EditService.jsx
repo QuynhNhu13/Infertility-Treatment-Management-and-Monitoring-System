@@ -202,28 +202,28 @@ const EditService = ({ serviceData, onClose, onUpdate }) => {
         </div>
 
         <div className="form-group">
-  <label>Ảnh dịch vụ</label>
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleImageSelect}
-  />
-  {formData.imgFileName && (
-    <p style={{ fontStyle: "italic", marginTop: "6px" }}>
-      Đã chọn: {formData.imgFileName}
-    </p>
-  )}
-  {!formData.imgFile && formData.imgUrl && (
-    <div style={{ marginTop: "10px" }}>
-      <p style={{ fontStyle: "italic" }}>Ảnh hiện tại:</p>
-      <img
-        src={formData.imgUrl}
-        alt="Ảnh hiện tại"
-        style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "6px", border: "1px solid #ccc" }}
-      />
-    </div>
-  )}
-</div>
+          <label>Ảnh dịch vụ</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageSelect}
+          />
+          {formData.imgFileName && (
+            <p style={{ fontStyle: "italic", marginTop: "6px" }}>
+              Đã chọn: {formData.imgFileName}
+            </p>
+          )}
+          {!formData.imgFile && formData.imgUrl && (
+            <div style={{ marginTop: "10px" }}>
+              <p style={{ fontStyle: "italic" }}>Ảnh hiện tại:</p>
+              <img
+                src={formData.imgUrl}
+                alt="Ảnh hiện tại"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "6px", border: "1px solid #ccc" }}
+              />
+            </div>
+          )}
+        </div>
 
         <button type="submit" disabled={loading}>
           {loading ? "Đang cập nhật..." : "Cập nhật"}

@@ -1,12 +1,12 @@
 .service-list-page {
-  padding: 40px 80px;
+  padding: 5px 80px;
   background-color: #f7fbff;
   min-height: 100vh;
 }
 
 .service-list-title {
   font-size: 2rem;
-  color: #001d54;
+  color: #077BF6;
   margin-bottom: 30px;
   text-align: center;
 }
