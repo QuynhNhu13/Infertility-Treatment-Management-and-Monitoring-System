@@ -1,9 +1,7 @@
-/* Reset box-sizing cho toàn bộ */
 * {
   box-sizing: border-box;
 }
 
-/* Nền trang */
 .login-background {
   min-height: 100vh;
   width: 100%;
@@ -16,7 +14,6 @@
   position: relative;
 }
 
-/* Lớp phủ màu xanh */
 .login-overlay {
   background-color: rgba(7, 123, 246, 0.5);
   width: 100%;
@@ -27,7 +24,6 @@
   padding: 40px 20px;
 }
 
-/* Container trắng */
 .login-container {
   background: white;
   border-radius: 16px;
@@ -64,14 +60,11 @@
   text-decoration: none;
 }
 
-
-/* Form */
 .login-form {
   display: flex;
   flex-direction: column;
 }
 
-/* Nhóm input với icon */
 .input-group {
   position: relative;
   display: flex;
@@ -101,7 +94,6 @@
   pointer-events: none;
 }
 
-/* Nút đăng nhập */
 .login-button {
   background-color: #077BF6;
   color: white;
@@ -119,7 +111,6 @@
   transform: scale(1.02);
 }
 
-/* Lỗi */
 .error-box {
   background-color: #ffdddd;
   border-left: 3px solid red;
@@ -144,9 +135,6 @@
   line-height: 1.5;
 }
 
-
-
-/* Footer */
 .login-footer {
   margin-top: 8px;
 }
@@ -186,7 +174,6 @@
   color: #555;
 }
 
-/* Google button */
 .google-button {
   margin-top: 10px;
   background-color: white;
