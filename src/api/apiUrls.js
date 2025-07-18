@@ -75,6 +75,8 @@ export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 
 
 //Schedule-Management
-export const SCHEDULE_TEMPLATE_FORM = `${BASE_URL}api/schedule-template/staff-template`;
-export const SCHEDULE_GENERATOR_FORM = (templateId) => `${BASE_URL}api/schedules/generate/staff/template/${templateId}`; 
+export const CREATE_SCHEDULE = `${BASE_URL}api/schedules`;
+export const CREATE_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;
+export const UPDATE_SCHEDULE_TEMPLATE = (id) => `${BASE_URL}api/schedule-template?id=${id}`;
+export const GET_ALL_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;
 

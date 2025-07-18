@@ -36,7 +36,7 @@ const SidebarMana = () => {
           <BarChart2 size={18} />
           <span>Báo cáo</span>
         </Link>
-        <Link to="/manager/schedule" className={isActive("/manager/schedule") ? "active" : ""}>
+         <Link to={`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`} className={isActive(`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`) ? "active" : ""}>
           <Calendar size={18} />
           <span>Lịch làm việc</span>
         </Link>

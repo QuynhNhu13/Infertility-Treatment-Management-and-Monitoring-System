@@ -23,13 +23,13 @@ import ListBlogMana from "../pages/blog-management/ListBlogMana";
 import DoctorAppointmentManager from "../pages/appointment-management/DoctorAppointmentManager";
 import MedicalRecord from "../pages/medical-record-management/MedicalRecord";
 import StaffDashboard from "../pages/StaffDashboard";
-import ScheduleTemplateForm from "../pages/schedule-management/ScheduleTemplateForm";
-import ScheduleGeneratorForm from "../pages/schedule-management/ScheduleGeneratorForm";
 import LabTestResultList from "../pages/medical-record-management/LabTestResultList";
 import LabTestResultForm from "../pages/medical-record-management/LabTestResultForm";
 import MedicalRecordCreate from "../pages/medical-record-management/MedicalRecordCreate";
 import TreatmentPlan from "../pages/medical-record-management/TreatmentPlan";
 import PublicBlogList from "../pages/blog-management/PublicBlogList";
+import CreateSchedule from "../pages/schedule-management/CreateSchedule";
+import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateList";
 
 
 function AppRoutes() {
@@ -40,6 +40,7 @@ function AppRoutes() {
       <Route path={ROUTES.MANAGER} element={<ManagerDashboard />}>
         <Route path={ROUTES.SERVICE_MANAGE} element={<ServiceManage />} />
         <Route path={ROUTES.LIST_BLOG_MANA} element={<ListBlogMana />} />
+        <Route path={ROUTES.SCHEDULE_TEMPLATE_LIST} element={<ScheduleTemplateList />} />
       </Route>
 
       <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
@@ -76,11 +77,8 @@ function AppRoutes() {
       <Route path="/ket-qua-xet-nghiem/:labTestId" element={<LabTestResultForm />} />
       <Route path="/ho-so-benh-nhan/:record.id/phac-do-dieu-tri" element={<TreatmentPlan />} />
 
-
       {/* Schedule - Management */}
-      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm />} />
-      <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm />} />
-
+      <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />
     </Routes>
   );
 }

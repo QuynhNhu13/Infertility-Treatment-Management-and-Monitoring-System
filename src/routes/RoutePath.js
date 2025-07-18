@@ -38,9 +38,8 @@ const ROUTES = {
   LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
 
   // schedule-management
-  SCHEDULE_TEMPLATE_FORM: `/form-tao`, //test
-  SCHEDULE_GENERATOR_FORM: `/form`,
-
+  SCHEDULE_TEMPLATE_LIST: `quan-ly-lich`,
+  CREATE_SCHEDULE: `/tao-lich-lam-viec`,
   
 };
 
