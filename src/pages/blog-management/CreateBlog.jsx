@@ -1,98 +1,170 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { CREATE_BLOG, UP_IMG } from "../../api/apiUrls";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import axios from "axios";
 import "../../styles/blog-management/CreateBlog.css";
-import { CREATE_BLOG } from '../../api/apiUrls';
-import RichTextEditor from "../../components/RichTextEditor"; 
 
 const CreateBlog = ({ onClose, onBlogCreated }) => {
-  const { getJsonAuthHeader } = useAuth();
-
+  const { getAuthHeader } = useAuth();
   const [formData, setFormData] = useState({
     title: "",
     content: "",
+    image: null,
   });
-
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleOverlayClick = (e) => {
+    if (e.target.classList.contains("create-blog__overlay")) {
+      onClose();
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "image") {
+      setFormData((prev) => ({ ...prev, image: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleContentChange = (value) => {
+    setFormData((prev) => ({ ...prev, content: value }));
+  };
 
   const validate = () => {
     const newErrors = {};
     if (!formData.title.trim()) newErrors.title = "Tiêu đề không được để trống.";
-    if (!formData.content.trim() || formData.content === "<p><br></p>") newErrors.content = "Nội dung không được để trống.";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const handleContentChange = (value) => {
-    setFormData({ ...formData, content: value });
-    setErrors({ ...errors, content: "" });
+    if (!formData.content.trim()) newErrors.content = "Nội dung không được để trống.";
+    if (!formData.image) newErrors.image = "Vui lòng chọn ảnh.";
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
+    setIsSubmitting(true);
     try {
-      const response = await fetch(CREATE_BLOG, {
-        method: "POST",
+      const imgForm = new FormData();
+      imgForm.append("image", formData.image); 
+
+      const imgResponse = await axios.post(UP_IMG, imgForm, {
         headers: {
-          ...getJsonAuthHeader(),
-          "Content-Type": "application/json",
+          Authorization: getAuthHeader().Authorization,
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setSuccessMessage("Gửi blog thành công!");
-        setFormData({ title: "", content: "" });
+      const imgUrl = imgResponse.data.data; 
 
-        if (onBlogCreated) onBlogCreated();
-        if (onClose) setTimeout(onClose, 1000);
-      } else {
-        const errorData = await response.json();
-        setSuccessMessage("");
-        setErrors({ server: errorData.message || "Đã xảy ra lỗi!" });
-      }
-    } catch (error) {
-      console.error("Lỗi khi gửi blog:", error);
-      setErrors({ server: "Lỗi kết nối đến máy chủ." });
+      const payload = {
+        title: formData.title,
+        content: formData.content,
+        imgUrl: imgUrl,
+      };
+
+      await axios.post(CREATE_BLOG, payload, { headers: getAuthHeader() });
+      onBlogCreated();
+      onClose();
+    } catch (err) {
+      console.error("Lỗi khi tạo blog:", err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="cb-modal-overlay" onClick={onClose}>
-      <div className="cb-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="cb-modal-close-btn" onClick={onClose}>&times;</button>
+    <div className="create-blog__overlay" onClick={handleOverlayClick}>
+      <div className="create-blog__modal">
+        <div className="create-blog__header">
+          <h2 className="create-blog__title">Tạo Blog Mới</h2>
+          <button
+            className="create-blog__close-btn"
+            onClick={onClose}
+            disabled={isSubmitting}
+            aria-label="Đóng modal"
+          >
+            ×
+          </button>
+        </div>
 
-        <h2 className="cb-title">Tạo Blog Mới</h2>
-        <form onSubmit={handleSubmit} className="cb-form">
-          <div className="cb-form-group">
-            <label>Tiêu đề:</label>
+        <form onSubmit={handleSubmit} className="create-blog__form">
+          <div className="create-blog__form-group">
+            <label htmlFor="title" className="create-blog__label">
+              Tiêu đề <span className="create-blog__required">*</span>
+            </label>
             <input
+              id="title"
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="cb-input"
+              className={`create-blog__input ${errors.title ? "create-blog__input--error" : ""}`}
+              placeholder="Nhập tiêu đề blog..."
+              disabled={isSubmitting}
+              maxLength={200}
             />
-            {errors.title && <p className="cb-error">{errors.title}</p>}
+            <div className="create-blog__input-info">
+              <span className="create-blog__char-count">
+                {formData.title.length}/200
+              </span>
+              {errors.title && (
+                <span className="create-blog__error-text">{errors.title}</span>
+              )}
+            </div>
           </div>
 
-          <div className="cb-form-group">
-            <label>Nội dung:</label>
-            <RichTextEditor value={formData.content} onChange={handleContentChange} />
-            {errors.content && <p className="cb-error">{errors.content}</p>}
+          <div className="create-blog__form-group">
+            <label htmlFor="content" className="create-blog__label">
+              Nội dung <span className="create-blog__required">*</span>
+            </label>
+            <ReactQuill
+              value={formData.content}
+              onChange={handleContentChange}
+              className={`create-blog__quill ${errors.content ? "create-blog__quill--error" : ""}`}
+              placeholder="Nhập nội dung blog..."
+              readOnly={isSubmitting}
+            />
+            {errors.content && (
+              <span className="create-blog__error-text">{errors.content}</span>
+            )}
           </div>
 
-          {errors.server && <p className="cb-error">{errors.server}</p>}
-          {successMessage && <p className="cb-success">{successMessage}</p>}
+          <div className="create-blog__form-group">
+            <label htmlFor="image" className="create-blog__label">
+              Ảnh minh họa <span className="create-blog__required">*</span>
+            </label>
+            <input
+              id="image"
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleChange}
+              className={`create-blog__input ${errors.image ? "create-blog__input--error" : ""}`}
+              disabled={isSubmitting}
+            />
+            {errors.image && (
+              <span className="create-blog__error-text">{errors.image}</span>
+            )}
+          </div>
 
-          <button type="submit" className="cb-submit-btn">Gửi Blog</button>
+          <div className="create-blog__footer">
+            <button
+              type="submit"
+              className="create-blog__submit-btn"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Đang lưu..." : "Lưu blog"}
+            </button>
+          </div>
         </form>
       </div>
     </div>

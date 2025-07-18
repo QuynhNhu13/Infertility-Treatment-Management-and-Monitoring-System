@@ -27,6 +27,7 @@ const ROUTES = {
   DOCTOR_BLOG_MANAGER: 'goc-chia-se-cua-toi',
   CREATE_BLOG: '/tao-moi-bai-viet',
   LIST_BLOG_MANA: 'quan-ly-goc-chia-se',
+  BLOG_LIST: '/goc-chia-se',
 
   // appointment -management
   DOCTOR_APPOINTMENT_MANAGER: 'quan-ly-lich-hen', 

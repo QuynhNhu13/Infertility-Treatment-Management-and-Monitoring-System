@@ -29,6 +29,7 @@ import LabTestResultList from "../pages/medical-record-management/LabTestResultL
 import LabTestResultForm from "../pages/medical-record-management/LabTestResultForm";
 import MedicalRecordCreate from "../pages/medical-record-management/MedicalRecordCreate";
 import TreatmentPlan from "../pages/medical-record-management/TreatmentPlan";
+import PublicBlogList from "../pages/blog-management/PublicBlogList";
 
 
 function AppRoutes() {
@@ -68,6 +69,7 @@ function AppRoutes() {
 
       {/* Blog - Management */}
       <Route path={ROUTES.CREATE_BLOG} element={<CreateBlog />} />
+      <Route path={ROUTES.BLOG_LIST} element={<PublicBlogList />} />
 
       {/* Medical - Record */}
       <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecord />} />
