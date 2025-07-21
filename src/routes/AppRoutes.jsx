@@ -30,10 +30,11 @@ import TreatmentPlan from "../pages/medical-record-management/TreatmentPlan";
 import PublicBlogList from "../pages/blog-management/PublicBlogList";
 import CreateSchedule from "../pages/schedule-management/CreateSchedule";
 import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateList";
-
 import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
 import PaymentResult from "../pages/appointment-management/PaymentResult";
 import ScheduleTemplateFormModal from "../pages/schedule-management/ScheduleTemplateFormModal";
+import ConsultationForm from "../pages/consultation-management/ConsultationForm";
+
 
 
 function AppRoutes() {
@@ -83,12 +84,14 @@ function AppRoutes() {
 
       {/* Schedule - Management */}
       <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />
-      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM_MODAL} element={<ScheduleTemplateFormModal/>}/>
+      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM_MODAL} element={<ScheduleTemplateFormModal />} />
 
       {/* Appointment - Management */}
       <Route path={ROUTES.BOOKING_FORM} element={<DatLichKhamBenh />} />
       <Route path={ROUTES.PAYMENT_RESULT} element={<PaymentResult />} />
 
+      {/* Consultation - Management */}
+      <Route path={ROUTES.CONSULTATION_FORM} element={<ConsultationForm />} />
     </Routes>
   );
 }
