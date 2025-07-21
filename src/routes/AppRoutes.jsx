@@ -54,7 +54,7 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
-        <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
+        {/* <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} /> */}
       </Route>
 
 
@@ -77,10 +77,10 @@ function AppRoutes() {
       <Route path={ROUTES.CREATE_BLOG} element={<CreateBlog />} />
       <Route path={ROUTES.BLOG_LIST} element={<PublicBlogList />} />
 
-      {/* Medical - Record */}
+      {/* Medical - Record
       <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecord />} />
       <Route path="/ket-qua-xet-nghiem/:labTestId" element={<LabTestResultForm />} />
-      <Route path="/ho-so-benh-nhan/:record.id/phac-do-dieu-tri" element={<TreatmentPlan />} />
+      <Route path="/ho-so-benh-nhan/:record.id/phac-do-dieu-tri" element={<TreatmentPlan />} /> */}
 
       {/* Schedule - Management */}
       <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />

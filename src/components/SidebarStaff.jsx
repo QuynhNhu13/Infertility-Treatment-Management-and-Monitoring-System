@@ -52,13 +52,13 @@ const SidebarStaff = () => {
           <span>Lịch sử cuộc hẹn</span>
         </Link>
 
-        <Link
+        {/* <Link
           to={`${ROUTES.STAFF}/${ROUTES.LAB_TEST_RESULT_LIST}`}
           className={isActive(`${ROUTES.STAFF}/${ROUTES.LAB_TEST_RESULT_LIST}`) ? "active" : ""}
         >
           <Users size={18} />
           <span>Kết quả xét nghiệm</span>
-        </Link>
+        </Link> */}
 
         <Link to="/staff/direct-booking" className={isActive("/staff/direct-booking") ? "active" : ""}>
           <CheckCircle size={18} />

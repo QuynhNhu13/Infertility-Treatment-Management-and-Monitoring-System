@@ -34,9 +34,9 @@ const ROUTES = {
   BOOKING_FORM: 'dat-lich-kham',
   PAYMENT_RESULT: '/payment-result',
 
-  // medical-record-management
-  MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,
-  LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
+  // // medical-record-management
+  // MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,
+  // LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
 
   // schedule-management
   CREATE_SCHEDULE: `/tao-lich-lam-viec`,
