@@ -33,6 +33,7 @@ import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateL
 
 import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
 import PaymentResult from "../pages/appointment-management/PaymentResult";
+import ConsultationForm from "../pages/consultation-management/ConsultationForm";
 
 
 function AppRoutes() {
@@ -89,6 +90,8 @@ function AppRoutes() {
       <Route path={ROUTES.BOOKING_FORM} element={<DatLichKhamBenh />} />
       <Route path={ROUTES.PAYMENT_RESULT} element={<PaymentResult />} />
 
+      {/* Consultation - Management */}
+      <Route path={ROUTES.CONSULTATION_FORM} element={<ConsultationForm />} />
     </Routes>
   );
 }
