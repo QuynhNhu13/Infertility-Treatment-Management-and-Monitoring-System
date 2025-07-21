@@ -1,0 +1,229 @@
+.consultation-form-wrapper {
+    min-height: 70vh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%);
+}
+
+.consultation-form-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.consultation-form-title h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #077BF6;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(7, 123, 246, 0.1);
+    letter-spacing: 1px;
+}
+
+.consultation-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(7, 123, 246, 0.12);
+    border: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.consultation-form-container p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555555;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.consultation-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.consultation-form-container input,
+.consultation-form-container textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e1e8ed;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #fafbfc;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.consultation-form-container input:focus,
+.consultation-form-container textarea:focus {
+    outline: none;
+    border-color: #077BF6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+    transform: translateY(-1px);
+}
+
+.consultation-form-container input:hover,
+.consultation-form-container textarea:hover {
+    border-color: #077BF6;
+    background-color: #ffffff;
+}
+
+.consultation-form-container input::placeholder,
+.consultation-form-container textarea::placeholder {
+    color: #888888;
+    font-weight: 400;
+}
+
+.consultation-form-container textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.consultation-form-submit-button {
+    background: linear-gradient(135deg, #077BF6 0%, #0567d9 100%);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(7, 123, 246, 0.3);
+}
+
+.consultation-form-submit-button:hover {
+    background: linear-gradient(135deg, #0567d9 0%, #044fb8 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(7, 123, 246, 0.4);
+}
+
+.consultation-form-submit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(7, 123, 246, 0.3);
+}
+
+.consultation-form-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    min-width: 300px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.3s ease-out;
+}
+
+.consultation-form-toast.success {
+    background: linear-gradient(135deg, #077BF6 0%, #0567d9 100%);
+    border-left: 4px solid #ffffff;
+}
+
+.consultation-form-toast.error {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border-left: 4px solid #ffffff;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.consultation-form-container input:invalid,
+.consultation-form-container textarea:invalid {
+    border-color: #e74c3c;
+    background-color: #fdf2f2;
+}
+
+.consultation-form-container input:invalid:focus,
+.consultation-form-container textarea:invalid:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+    border-color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+    .consultation-form-wrapper {
+        padding: 20px 15px;
+    }
+
+    .consultation-form-title h2 {
+        font-size: 1.8rem;
+    }
+
+    .consultation-form-container {
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
+
+    .consultation-form-container input,
+    .consultation-form-container textarea {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+    }
+
+    .consultation-form-submit-button {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+
+    .consultation-form-toast {
+        right: 15px;
+        left: 15px;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .consultation-form-title h2 {
+        font-size: 1.6rem;
+    }
+
+    .consultation-form-container {
+        padding: 25px 15px;
+    }
+
+    .consultation-form-container p {
+        font-size: 1rem;
+    }
+}
+
+.consultation-form-submit-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.consultation-form-submit-button:disabled:hover {
+    background: #cccccc;
+    transform: none;
+    box-shadow: none;
+}
+
+
+.consultation-form-submit-button:focus {
+    outline: 2px solid #077BF6;
+    outline-offset: 2px;
+}
+
+.consultation-form-container input:focus,
+.consultation-form-container textarea:focus {
+    outline: 2px solid transparent;
+}
