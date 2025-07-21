@@ -43,6 +43,10 @@ const ROUTES = {
   SCHEDULE_TEMPLATE_LIST: `mau-lich-lam-viec`,
   SCHEDULE_TEMPLATE_FORM_MODAL: `/tao-mau-lich-lam-viec`,
 
+  // consultation - management
+  CONSULTATION_FORM: `/don-tu-van-kham`,
+
+
 };
 
 export default ROUTES;
