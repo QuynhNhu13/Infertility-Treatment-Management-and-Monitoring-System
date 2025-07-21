@@ -21,12 +21,7 @@ import DoctorBlogManager from "../pages/blog-management/DoctorBlogManager";
 import CreateBlog from "../pages/blog-management/CreateBlog";
 import ListBlogMana from "../pages/blog-management/ListBlogMana";
 import DoctorAppointmentManager from "../pages/appointment-management/DoctorAppointmentManager";
-import MedicalRecord from "../pages/medical-record-management/MedicalRecord";
 import StaffDashboard from "../pages/StaffDashboard";
-import LabTestResultList from "../pages/medical-record-management/LabTestResultList";
-import LabTestResultForm from "../pages/medical-record-management/LabTestResultForm";
-import MedicalRecordCreate from "../pages/medical-record-management/MedicalRecordCreate";
-import TreatmentPlan from "../pages/medical-record-management/TreatmentPlan";
 import PublicBlogList from "../pages/blog-management/PublicBlogList";
 import CreateSchedule from "../pages/schedule-management/CreateSchedule";
 import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateList";
@@ -54,7 +49,7 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
-        {/* <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} /> */}
+      
       </Route>
 
 
@@ -77,10 +72,6 @@ function AppRoutes() {
       <Route path={ROUTES.CREATE_BLOG} element={<CreateBlog />} />
       <Route path={ROUTES.BLOG_LIST} element={<PublicBlogList />} />
 
-      {/* Medical - Record
-      <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecord />} />
-      <Route path="/ket-qua-xet-nghiem/:labTestId" element={<LabTestResultForm />} />
-      <Route path="/ho-so-benh-nhan/:record.id/phac-do-dieu-tri" element={<TreatmentPlan />} /> */}
 
       {/* Schedule - Management */}
       <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />
