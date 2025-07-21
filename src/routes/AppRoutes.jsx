@@ -33,6 +33,7 @@ import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateL
 
 import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
 import PaymentResult from "../pages/appointment-management/PaymentResult";
+import ScheduleTemplateFormModal from "../pages/schedule-management/ScheduleTemplateFormModal";
 
 
 function AppRoutes() {
@@ -82,8 +83,7 @@ function AppRoutes() {
 
       {/* Schedule - Management */}
       <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />
-      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM} element={<ScheduleTemplateForm />} />
-      <Route path={ROUTES.SCHEDULE_GENERATOR_FORM} element={<ScheduleGeneratorForm />} />
+      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM_MODAL} element={<ScheduleTemplateFormModal/>}/>
 
       {/* Appointment - Management */}
       <Route path={ROUTES.BOOKING_FORM} element={<DatLichKhamBenh />} />

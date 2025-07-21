@@ -39,9 +39,9 @@ const ROUTES = {
   LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
 
   // schedule-management
-  SCHEDULE_TEMPLATE_LIST: `quan-ly-lich`,
   CREATE_SCHEDULE: `/tao-lich-lam-viec`,
-
+  SCHEDULE_TEMPLATE_LIST: `mau-lich-lam-viec`,
+  SCHEDULE_TEMPLATE_FORM_MODAL: `/tao-mau-lich-lam-viec`,
 
 };
 
