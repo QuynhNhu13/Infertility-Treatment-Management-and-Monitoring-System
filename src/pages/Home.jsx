@@ -36,7 +36,7 @@ const Home = () => {
             <img src={doctor01} alt="Bác sĩ" className="doctor-image1" />
           </div>
           <div className="action-links-right">
-            <a href="/tu-van-kham-benh" className="action-link-text">
+            <a href="/don-tu-van-kham" className="action-link-text">
               <FaStethoscope className="action-icon" />
               <span>TƯ VẤN KHÁM</span>
             </a>

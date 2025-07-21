@@ -42,6 +42,8 @@ const ROUTES = {
   SCHEDULE_TEMPLATE_LIST: `quan-ly-lich`,
   CREATE_SCHEDULE: `/tao-lich-lam-viec`,
 
+  // consultation - management
+  CONSULTATION_FORM: `/don-tu-van-kham`,
 
 };
 
