@@ -50,39 +50,40 @@ export const PAYMENT_VNPAY = `${BASE_URL}api/payment/vn-pay`;//nhan
 export const PAYMENT_VNPAY_CALLBACK = `${BASE_URL}api/payment/vn-pay-callback`;//nhan
 export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointment`;//nhan
 
-
-
 //Medical-Record
-export const MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/${accountId}`; //trang thông tin 
-export const MEDICAL_RECORD_CREATE = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}`; //tạo
+// export const MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/${accountId}`; //trang thông tin 
+// export const MEDICAL_RECORD_CREATE = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}`; //tạo
 
-export const LAB_TEST = `${BASE_URL}api/lab-test`;
-export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
-export const GET_LAB_TEST_RESULTS = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
-export const LAB_TEST_RESULT_SEARCH = `${BASE_URL}api/lab-test-result/search`;
-export const LAB_TEST_RESULT_FROM = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
-export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
-export const SEARCH_LAB_TEST_RESULT = (params) => {
-  const query = new URLSearchParams(params).toString();
-  return `${BASE_URL}api/lab-test-result/search?${query}`;
-};
+// export const LAB_TEST = `${BASE_URL}api/lab-test`;
+// export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
+// export const GET_LAB_TEST_RESULTS = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
+// export const LAB_TEST_RESULT_SEARCH = `${BASE_URL}api/lab-test-result/search`;
+// export const LAB_TEST_RESULT_FROM = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+// export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+// export const SEARCH_LAB_TEST_RESULT = (params) => {
+//   const query = new URLSearchParams(params).toString();
+//   return `${BASE_URL}api/lab-test-result/search?${query}`;
+// };
 
-export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
-export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
+// export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
+// export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
 
-export const GET_TREATMENT_PLAN = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}/treatment-plan`;
-export const CREATE_TREATMENT_PLAN = `${BASE_URL}api/medical-record/treatment-plan`;
-export const TREATMENT_UPDATE = (id) => `${BASE_URL}api/medical-record/treatment-stage-progress/${id}`;
-export const CREATE_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
-export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
-export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
-export const DELETE_TREATMENT_SESSION = (progressId, sessionId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
+// export const GET_TREATMENT_PLAN = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}/treatment-plan`;
+// export const CREATE_TREATMENT_PLAN = `${BASE_URL}api/medical-record/treatment-plan`;
+// export const TREATMENT_UPDATE = (id) => `${BASE_URL}api/medical-record/treatment-stage-progress/${id}`;
+// export const CREATE_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
+// export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
+// export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
+// export const DELETE_TREATMENT_SESSION = (progressId, sessionId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
 
-export const GET_TREATMENT_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/details`;
-export const LAB_TEST_FOLLOW_UP = (recordId, sessionId) => `${BASE_URL}api/medical-record/${recordId}/treatment-sessions/${sessionId}/lab-test-results`;
-export const ULTRASOUND_FOLLOW_UP = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-ultrasound`;
-export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
-export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
+// export const GET_TREATMENT_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/details`;
+// export const LAB_TEST_FOLLOW_UP = (recordId, sessionId) => `${BASE_URL}api/medical-record/${recordId}/treatment-sessions/${sessionId}/lab-test-results`;
+// export const ULTRASOUND_FOLLOW_UP = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-ultrasound`;
+// export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
+// export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
+
+//Medical-Record-New
+export const GET_MEDICAL_RECORD_HISTORY = (accountId) => `${BASE_URL}api/medical-record/history/${accountId}`
 
 
 //Schedule-Management

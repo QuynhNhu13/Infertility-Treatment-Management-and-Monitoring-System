@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { GET_ALL_APPOINTMENT } from "../../api/apiUrls";
+import { GET_ALL_APPOINTMENT, GET_MEDICAL_RECORD_HISTORY } from "../../api/apiUrls";
 import ROUTES from "../../routes/RoutePath";
 import "../../styles/appointment-management/DoctorAppointmentManager.css";
 
@@ -78,9 +78,9 @@ export default function DoctorAppointmentManager() {
   }, [fetchAppointments]);
 
   const handleViewRecord = useCallback(
-    (userId) => {
-      if (userId) {
-        navigate(ROUTES.MEDICAL_RECORD(userId));
+    (accountId) => {
+      if (accountId) {
+        navigate(ROUTES.GET_MEDICAL_RECORD_HISTORY(accountId)); 
       } else {
         alert("Không có mã tài khoản để xem hồ sơ.");
       }
@@ -250,10 +250,10 @@ export default function DoctorAppointmentManager() {
                       <button
                         className="doctor-apm-view-btn"
                         onClick={() => handleViewRecord(appt.user)}
-                        disabled={!appt.user}
-                        title="Xem hồ sơ bệnh án"
+                        disabled={!appt.user || appt.status !== "CHECKED_IN"}
+                        title="Xem lịch sử hồ sơ bệnh án"
                       >
-                        Xem
+                        Xem hồ sơ bệnh án
                       </button>
                     </td>
                   </tr>

@@ -37,6 +37,8 @@ const ROUTES = {
   // // medical-record-management
   // MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,
   // LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
+  GET_MEDICAL_RECORD_HISTORY: (accountId) => `/ho-so-benh-nhan/${accountId}`,
+
 
   // schedule-management
   CREATE_SCHEDULE: `/tao-lich-lam-viec`,
