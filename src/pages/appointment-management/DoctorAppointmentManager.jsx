@@ -1,47 +1,39 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { GET_ALL_APPOINTMENT, GET_MEDICAL_RECORD_HISTORY } from "../../api/apiUrls";
-import ROUTES from "../../routes/RoutePath";
+import { GET_ALL_APPOINTMENT } from "../../api/apiUrls";
 import "../../styles/appointment-management/DoctorAppointmentManager.css";
+import { useAuth } from "../../context/AuthContext";
+import MedicalRecordHistory from "../medical-record-management/MedicalRecordHistory"; 
 
 export default function DoctorAppointmentManager() {
+  const { getJsonAuthHeader, isAuthLoaded } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
-  const navigate = useNavigate();
+
+  const [showRecordModal, setShowRecordModal] = useState(false);       
+  const [selectedAccountId, setSelectedAccountId] = useState(null);    
 
   const translateStatus = useCallback((status) => {
     switch (status) {
-      case "UNPAID":
-        return "Chưa thanh toán";
-      case "NOT_PAID":
-        return "Chưa trả tiền";
-      case "UNCHECKED_IN":
-        return "Chưa check-in";
-      case "CHECKED_IN":
-        return "Đã check-in";
-      case "CANCELLED":
-        return "Đã hủy";
-      default:
-        return "Không xác định";
+      case "UNPAID": return "Chưa thanh toán";
+      case "NOT_PAID": return "Chưa trả tiền";
+      case "UNCHECKED_IN": return "Chưa check-in";
+      case "CHECKED_IN": return "Đã check-in";
+      case "CANCELLED": return "Đã hủy";
+      default: return "Không xác định";
     }
   }, []);
 
   const getStatusColor = useCallback((status) => {
     switch (status) {
       case "UNPAID":
-      case "NOT_PAID":
-        return "warning";
-      case "UNCHECKED_IN":
-        return "info";
-      case "CHECKED_IN":
-        return "success";
-      case "CANCELLED":
-        return "error";
-      default:
-        return "default";
+      case "NOT_PAID": return "warning";
+      case "UNCHECKED_IN": return "info";
+      case "CHECKED_IN": return "success";
+      case "CANCELLED": return "error";
+      default: return "default";
     }
   }, []);
 
@@ -49,15 +41,8 @@ export default function DoctorAppointmentManager() {
     try {
       setLoading(true);
       setError(null);
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("Token không tồn tại");
-
-      const res = await fetch(GET_ALL_APPOINTMENT, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const headers = getJsonAuthHeader();
+      const res = await fetch(GET_ALL_APPOINTMENT, { headers });
 
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const json = await res.json();
@@ -71,22 +56,22 @@ export default function DoctorAppointmentManager() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [getJsonAuthHeader]);
 
   useEffect(() => {
-    fetchAppointments();
-  }, [fetchAppointments]);
+    if (isAuthLoaded) {
+      fetchAppointments();
+    }
+  }, [fetchAppointments, isAuthLoaded]);
 
-  const handleViewRecord = useCallback(
-    (accountId) => {
-      if (accountId) {
-        navigate(ROUTES.GET_MEDICAL_RECORD_HISTORY(accountId)); 
-      } else {
-        alert("Không có mã tài khoản để xem hồ sơ.");
-      }
-    },
-    [navigate]
-  );
+  const handleViewRecord = useCallback((accountId) => {
+    if (accountId) {
+      setSelectedAccountId(accountId);
+      setShowRecordModal(true); 
+    } else {
+      alert("Không có mã tài khoản để xem hồ sơ.");
+    }
+  }, []);
 
   const filteredAppointments = appointments.filter((appt) => {
     return statusFilter === "all" || appt.status === statusFilter;
@@ -98,26 +83,10 @@ export default function DoctorAppointmentManager() {
 
   const statusOptions = [
     { value: "all", label: `Tất cả (${appointments.length})` },
-    {
-      value: "UNPAID",
-      label: `Chưa thanh toán (${appointments.filter((a) => a.status === "UNPAID").length})`,
-    },
-    {
-      value: "NOT_PAID",
-      label: `Chưa trả tiền (${appointments.filter((a) => a.status === "NOT_PAID").length})`,
-    },
-    {
-      value: "UNCHECKED_IN",
-      label: `Chưa check-in (${appointments.filter((a) => a.status === "UNCHECKED_IN").length})`,
-    },
-    {
-      value: "CHECKED_IN",
-      label: `Đã check-in (${appointments.filter((a) => a.status === "CHECKED_IN").length})`,
-    },
-    {
-      value: "CANCELLED",
-      label: `Đã hủy (${appointments.filter((a) => a.status === "CANCELLED").length})`,
-    },
+    ...["UNPAID", "NOT_PAID", "UNCHECKED_IN", "CHECKED_IN", "CANCELLED"].map((status) => ({
+      value: status,
+      label: `${translateStatus(status)} (${appointments.filter((a) => a.status === status).length})`
+    }))
   ];
 
   const formatDate = (dateString) => {
@@ -143,6 +112,10 @@ export default function DoctorAppointmentManager() {
     }
   };
 
+  if (!isAuthLoaded) {
+    return <div className="doctor-apm-container"><p>Đang kiểm tra xác thực...</p></div>;
+  }
+
   if (loading) {
     return (
       <div className="doctor-apm-container">
@@ -160,9 +133,7 @@ export default function DoctorAppointmentManager() {
         <div className="doctor-apm-error">
           <h3>Có lỗi xảy ra</h3>
           <p>{error}</p>
-          <button className="doctor-apm-retry-btn" onClick={fetchAppointments}>
-            Thử lại
-          </button>
+          <button className="doctor-apm-retry-btn" onClick={fetchAppointments}>Thử lại</button>
         </div>
       </div>
     );
@@ -172,9 +143,7 @@ export default function DoctorAppointmentManager() {
     <div className="doctor-apm-container">
       <header className="doctor-apm-header">
         <h1 className="doctor-apm-title">Quản lý lịch hẹn</h1>
-        <p className="doctor-apm-subtitle">
-          Tổng cộng: <strong>{appointments.length}</strong> lịch hẹn
-        </p>
+        <p className="doctor-apm-subtitle">Tổng cộng: <strong>{appointments.length}</strong> lịch hẹn</p>
       </header>
 
       <div className="doctor-apm-controls">
@@ -191,18 +160,14 @@ export default function DoctorAppointmentManager() {
           />
         </div>
 
-        <div className="results-info">
-          Hiển thị: <strong>{sortedAppointments.length}</strong> kết quả
-        </div>
+        <div className="results-info">Hiển thị: <strong>{sortedAppointments.length}</strong> kết quả</div>
       </div>
 
       {sortedAppointments.length === 0 ? (
         <div className="doctor-apm-empty">
           <h3>Không có lịch hẹn nào</h3>
           <p>Không tìm thấy lịch hẹn phù hợp với bộ lọc</p>
-          <button className="clear-filters-btn" onClick={() => setStatusFilter("all")}>
-            Xóa bộ lọc
-          </button>
+          <button className="clear-filters-btn" onClick={() => setStatusFilter("all")}>Xóa bộ lọc</button>
         </div>
       ) : (
         <div className="doctor-apm-table-container">
@@ -226,11 +191,7 @@ export default function DoctorAppointmentManager() {
                     <td>{appt.id}</td>
                     <td>{formatDate(appt.time)}</td>
                     <td>{appt.patientName || "N/A"}</td>
-                    <td>
-                      <span>
-                        {formatTime(appt.startTime)} - {formatTime(appt.endTime)}
-                      </span>
-                    </td>
+                    <td>{formatTime(appt.startTime)} - {formatTime(appt.endTime)}</td>
                     <td>
                       <span className={`status-badge status-${getStatusColor(appt.status)}`}>
                         {translateStatus(appt.status)}
@@ -251,7 +212,6 @@ export default function DoctorAppointmentManager() {
                         className="doctor-apm-view-btn"
                         onClick={() => handleViewRecord(appt.user)}
                         disabled={!appt.user || appt.status !== "CHECKED_IN"}
-                        title="Xem lịch sử hồ sơ bệnh án"
                       >
                         Xem hồ sơ bệnh án
                       </button>
@@ -262,6 +222,16 @@ export default function DoctorAppointmentManager() {
             </table>
           </div>
         </div>
+      )}
+
+      {showRecordModal && selectedAccountId && (
+        <MedicalRecordHistory
+          accountId={selectedAccountId}
+          onClose={() => {
+            setShowRecordModal(false);
+            setSelectedAccountId(null);
+          }}
+        />
       )}
     </div>
   );

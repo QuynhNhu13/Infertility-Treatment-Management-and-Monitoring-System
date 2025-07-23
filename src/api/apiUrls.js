@@ -83,7 +83,11 @@ export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointm
 // export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 
 //Medical-Record-New
-export const GET_MEDICAL_RECORD_HISTORY = (accountId) => `${BASE_URL}api/medical-record/history/${accountId}`
+export const GET_MEDICAL_RECORD_HISTORY = (accountId) => `${BASE_URL}api/medical-record/history/${accountId}`;
+export const CREATE_MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/new/${accountId}`;
+export const GET_MEDICAL_RECORD = (recordId) => `${BASE_URL}api/medical-record/${recordId}`;
+export const UPDATE_MEDICAL_RECORD = (id) => `${BASE_URL}api/medical-record/${id}`;
+
 
 
 //Schedule-Management

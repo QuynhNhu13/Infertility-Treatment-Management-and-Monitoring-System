@@ -29,7 +29,8 @@ import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
 import PaymentResult from "../pages/appointment-management/PaymentResult";
 import ScheduleTemplateFormModal from "../pages/schedule-management/ScheduleTemplateFormModal";
 import ConsultationForm from "../pages/consultation-management/ConsultationForm";
-
+import MedicalRecordHistory from "../pages/medical-record-management/MedicalRecordHistory";
+import MedicalRecordDetail from "../pages/medical-record-management/MedicalRecordDetail";
 
 
 function AppRoutes() {
@@ -83,6 +84,10 @@ function AppRoutes() {
 
       {/* Consultation - Management */}
       <Route path={ROUTES.CONSULTATION_FORM} element={<ConsultationForm />} />
+
+      {/* MedicalRecord - Management */} 
+      <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecordHistory />} />
+      <Route path={ROUTES.MEDICAL_RECORD_DETAIL} element={<MedicalRecordDetail />} />
     </Routes>
   );
 }
