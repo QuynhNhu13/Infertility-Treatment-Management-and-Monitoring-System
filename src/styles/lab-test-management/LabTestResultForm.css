@@ -1,0 +1,213 @@
+
+
+.ltr-modal-header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+
+}
+
+.ltf-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ltf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: formFadeIn 0.3s ease-out;
+}
+
+.ltf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ltf-group label {
+  font-weight: 600;
+  color: #077BF6;
+  font-size: 14px;
+}
+
+.ltf-group input,
+.ltf-group textarea,
+.ltf-group select {
+  padding: 12px;
+  border: 2px solid #cce6ff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  resize: vertical;
+  background-color: #fff;
+}
+
+.ltf-group input:focus,
+.ltf-group textarea:focus,
+.ltf-group select:focus {
+  outline: none;
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.15);
+}
+
+.ltf-group textarea {
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.ltf-group select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg fill='none' stroke='%23077BF6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  padding-right: 40px;
+  appearance: none;
+}
+
+.ltf-success {
+  background-color: #e2f0ff;
+  color: #077BF6;
+  border: 1px solid #b3dbff;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.ltf-error {
+  background-color: #fff2f2;
+  border: 1px solid #ffcccc;
+  color: #cc0000;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.ltf-form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 10px;
+  border-top: 1px solid #ddefff;
+  margin-top: 10px;
+}
+
+.ltf-submit-btn,
+.ltf-cancel-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  text-transform: uppercase;
+}
+
+.ltf-submit-btn {
+  background-color: #077BF6;
+  color: white;
+  border: none;
+}
+
+.ltf-submit-btn:hover:not(:disabled) {
+  background-color: #005ec2;
+  box-shadow: 0 4px 10px rgba(7, 123, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.ltf-submit-btn:disabled {
+  background-color: #aacbf0;
+  cursor: not-allowed;
+}
+
+.ltf-cancel-btn {
+  background-color: #f2f8ff;
+  color: #077BF6;
+  border: 2px solid #aacbf0;
+}
+
+.ltf-cancel-btn:hover {
+  background-color: #e1efff;
+  color: #005ec2;
+}
+
+.ltf-group input::placeholder,
+.ltf-group textarea::placeholder {
+  color: #888;
+}
+
+.ltf-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 2px solid #cce6ff;
+  background-color: white;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.ltf-select:focus {
+  border-color: #077BF6;
+  box-shadow: 0 0 0 2px rgba(7, 123, 246, 0.15);
+}
+
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ltf-group textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ltf-group textarea::-webkit-scrollbar-track {
+  background: #f4f7fa;
+}
+
+.ltf-group textarea::-webkit-scrollbar-thumb {
+  background: #aacbf0;
+  border-radius: 3px;
+}
+
+.ltf-group textarea::-webkit-scrollbar-thumb:hover {
+  background: #077BF6;
+}
+
+@media (max-width: 768px) {
+  .ltf-container {
+    padding: 15px;
+  }
+
+  .ltf-form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ltf-cancel-btn,
+  .ltf-submit-btn {
+    width: 100%;
+  }
+}
+
+.css-19bb58m {
+  visibility: visible;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: inline-grid;
+  grid-area: 1 / 1 / 2 / 3;
+  grid-template-columns: 0 min-content;
+  margin: -3px !important;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  color: hsl(0, 0%, 20%);
+  box-sizing: border-box;
+}

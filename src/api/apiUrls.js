@@ -88,6 +88,18 @@ export const CREATE_MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-reco
 export const GET_MEDICAL_RECORD = (recordId) => `${BASE_URL}api/medical-record/${recordId}`;
 export const UPDATE_MEDICAL_RECORD = (id) => `${BASE_URL}api/medical-record/${id}`;
 
+//Labtest - Management
+export const LAB_TEST = `${BASE_URL}api/lab-test`;
+export const LAB_TEST_FOLLOW_UP = (recordId, sessionId) => `${BASE_URL}api/medical-record/${recordId}/treatment-sessions/${sessionId}/lab-test-results`;
+export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
+export const LAB_TEST_RESULT_FROM = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+export const SEARCH_LAB_TEST_RESULT = (params) => {
+    const query = new URLSearchParams(params).toString();
+    return `${BASE_URL}api/lab-test-result/search?${query}`;
+};
+export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+
+
 
 
 //Schedule-Management
