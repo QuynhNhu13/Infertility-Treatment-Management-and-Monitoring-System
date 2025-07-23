@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
-import { INIT_ULTRASOUND_FORM, UP_IMG, UPDATE_ULTRASOUND } from "../../api/apiUrls";
+import {
+  INIT_ULTRASOUND_FORM,
+  UP_IMG,
+  UPDATE_ULTRASOUND,
+} from "../../api/apiUrls";
 import axios from "axios";
-import "../../styles/medical-record-management/InitUltrasoundModal.css";
+import "../../styles/ultrasound-management/InitUltrasoundModal.css";
 import { Upload, XCircle, Trash2, Loader2, Image, X } from "lucide-react";
 
 export default function InitUltrasoundModal({
@@ -11,7 +15,7 @@ export default function InitUltrasoundModal({
   onClose,
   medicalRecordId,
   onSuccess,
-  initialData = null 
+  initialData = null,
 }) {
   const { getAuthHeader } = useAuth();
   const [result, setResult] = useState("");
@@ -112,7 +116,9 @@ export default function InitUltrasoundModal({
 
       const data = await res.json();
       if (res.ok) {
-        toast.success(isUpdate ? "Cập nhật siêu âm thành công!" : "Tạo siêu âm thành công!");
+        toast.success(
+          isUpdate ? "Cập nhật siêu âm thành công!" : "Tạo siêu âm thành công!"
+        );
         onSuccess?.(data.data);
         handleClose();
       } else {
@@ -148,16 +154,16 @@ export default function InitUltrasoundModal({
   if (!isOpen) return null;
 
   return (
-    <div className="us-modal-overlay" onClick={handleBackdropClick}>
-      <div className="us-modal-container">
-        <div className="us-modal-header">
+    <div className="init-ultrasound-modal-overlay" onClick={handleBackdropClick}>
+      <div className="init-ultrasound-modal-container">
+        <div className="init-ultrasound-modal-header">
           <h3>
             <Image size={20} style={{ marginRight: 6, verticalAlign: "middle" }} />
             {initialData ? "Cập nhật kết quả siêu âm" : "Nhập kết quả siêu âm"}
           </h3>
           <button
             type="button"
-            className="us-modal-close-btn"
+            className="init-ultrasound-modal-close-btn"
             onClick={handleClose}
             disabled={loading || uploadingImages}
           >
@@ -165,14 +171,14 @@ export default function InitUltrasoundModal({
           </button>
         </div>
 
-        <div className="us-modal-body">
-          <p className="us-form-description">
+        <div className="init-ultrasound-modal-body">
+          <p className="init-ultrasound-form-description">
             Vui lòng nhập kết quả và tải ảnh siêu âm để hoàn tất hồ sơ bệnh án.
           </p>
 
-          <form onSubmit={handleSubmit} className="us-form">
-            <div className="us-form-group">
-              <label className="us-label">
+          <form onSubmit={handleSubmit} className="init-ultrasound-form">
+            <div className="init-ultrasound-form-group">
+              <label className="init-ultrasound-label">
                 <span>Kết quả siêu âm *</span>
                 <span>{result.length}/1000 ký tự</span>
               </label>
@@ -182,35 +188,35 @@ export default function InitUltrasoundModal({
                 rows={5}
                 maxLength={1000}
                 placeholder="Mô tả chi tiết kết quả siêu âm..."
-                className="us-textarea"
+                className="init-ultrasound-textarea"
                 required
               />
             </div>
 
-            <div className="us-form-group">
-              <label className="us-label">
+            <div className="init-ultrasound-form-group">
+              <label className="init-ultrasound-label">
                 <span>Ảnh siêu âm *</span>
                 <span>{imageUrls.length} ảnh đã tải</span>
               </label>
 
-              <div className="us-upload-area">
+              <div className="init-ultrasound-upload-area">
                 <input
                   type="file"
                   accept="image/*"
                   multiple
                   onChange={handleFileChange}
-                  className="us-file-input"
+                  className="init-ultrasound-file-input"
                   id="image-upload"
                   disabled={uploadingImages}
                 />
-                <label htmlFor="image-upload" className="us-upload-label">
+                <label htmlFor="image-upload" className="init-ultrasound-upload-label">
                   {uploadingImages ? (
-                    <div className="us-upload-loading">
-                      <Loader2 className="us-spinner" size={20} />
+                    <div className="init-ultrasound-upload-loading">
+                      <Loader2 className="init-ultrasound-spinner" size={20} />
                       <span>Đang tải ảnh...</span>
                     </div>
                   ) : (
-                    <div className="us-upload-content">
+                    <div className="init-ultrasound-upload-content">
                       <Upload size={24} />
                       <p>Chọn ảnh để tải lên (JPG, PNG, GIF, max 5MB)</p>
                     </div>
@@ -219,32 +225,32 @@ export default function InitUltrasoundModal({
               </div>
 
               {imageUrls.length > 0 && (
-                <div className="us-image-section">
-                  <div className="us-image-header">
+                <div className="init-ultrasound-image-section">
+                  <div className="init-ultrasound-image-header">
                     <h4>Ảnh đã tải ({imageUrls.length})</h4>
                     <button
                       type="button"
-                      className="us-remove-all-btn"
+                      className="init-ultrasound-remove-all-btn"
                       onClick={removeAllImages}
                     >
                       <Trash2 size={16} /> Xóa tất cả
                     </button>
                   </div>
 
-                  <div className="us-image-grid">
+                  <div className="init-ultrasound-image-grid">
                     {imageUrls.map((url, index) => (
-                      <div key={index} className="us-image-item">
-                        <div className="us-image-wrapper">
+                      <div key={index} className="init-ultrasound-image-item">
+                        <div className="init-ultrasound-image-wrapper">
                           <img src={url} alt={`ultrasound-${index}`} />
                           <button
                             type="button"
-                            className="us-remove-btn"
+                            className="init-ultrasound-remove-btn"
                             onClick={() => removeImage(index)}
                           >
                             <XCircle size={16} />
                           </button>
                         </div>
-                        <span className="us-image-number">Ảnh {index + 1}</span>
+                        <span className="init-ultrasound-image-number">Ảnh {index + 1}</span>
                       </div>
                     ))}
                   </div>
@@ -252,10 +258,10 @@ export default function InitUltrasoundModal({
               )}
             </div>
 
-            <div className="us-form-actions">
+            <div className="init-ultrasound-form-actions">
               <button
                 type="button"
-                className="us-cancel-btn"
+                className="init-ultrasound-cancel-btn"
                 onClick={handleClose}
                 disabled={loading || uploadingImages}
               >
@@ -263,12 +269,12 @@ export default function InitUltrasoundModal({
               </button>
               <button
                 type="submit"
-                className="us-submit-btn"
+                className="init-ultrasound-submit-btn"
                 disabled={loading || uploadingImages}
               >
                 {loading ? (
-                  <span className="us-btn-loading">
-                    <Loader2 className="us-spinner" size={16} /> Đang gửi...
+                  <span className="init-ultrasound-btn-loading">
+                    <Loader2 className="init-ultrasound-spinner" size={16} /> Đang gửi...
                   </span>
                 ) : (
                   initialData ? "Cập nhật" : "Tạo kết quả siêu âm"

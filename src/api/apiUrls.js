@@ -99,6 +99,12 @@ export const SEARCH_LAB_TEST_RESULT = (params) => {
 };
 export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
 
+//Ultrasound - Mangement
+export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
+export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
+export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
+export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
+
 
 
 

@@ -1,13 +1,19 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { GET_MEDICAL_RECORD, UPDATE_MEDICAL_RECORD } from "../../api/apiUrls";
+import {
+  GET_MEDICAL_RECORD,
+  UPDATE_MEDICAL_RECORD,
+  DELETE_ULTRASOUND,
+} from "../../api/apiUrls";
 import LabTestRequestModal from "../lab-test-management/LabTestRequestModal";
-// Placeholder cho modal yêu cầu siêu âm
-// import UltrasoundRequestModal from "../ultrasound-management/UltrasoundRequestModal";
+import InitUltrasoundModal from "../ultrasound-management/InitUltrasoundModal";
+import UltrasoundImageFetcher from "../ultrasound-management/UltrasoundImageFetcher";
+import TreatmentPlan from "../treatment-plan/TreatmentPlan";
+
 
 export default function MedicalRecordDetail() {
-  const { getJsonAuthHeader } = useAuth();
+  const { getJsonAuthHeader, getAuthHeader } = useAuth();
   const { recordId } = useParams();
 
   const [record, setRecord] = useState(null);
@@ -21,9 +27,10 @@ export default function MedicalRecordDetail() {
   const [updateMessage, setUpdateMessage] = useState("");
 
   const [labResults, setLabResults] = useState([]);
-  const [ultrasoundResults, setUltrasoundResults] = useState([]);
   const [showLabModal, setShowLabModal] = useState(false);
-  const [showUltrasoundModal, setShowUltrasoundModal] = useState(false); // ✅
+
+  const [showUltrasoundModal, setShowUltrasoundModal] = useState(false);
+  const [selectedUltrasound, setSelectedUltrasound] = useState(null);
 
   const TABS = {
     INIT: "init",
@@ -60,14 +67,12 @@ export default function MedicalRecordDetail() {
       const response = await fetch(GET_MEDICAL_RECORD(recordId), {
         headers: getJsonAuthHeader(),
       });
-
       const result = await response.json();
       if (response.ok && result.data) {
         setRecord(result.data);
         setDiagnosis(result.data.diagnosis || "");
         setSymptoms(result.data.symptoms || "");
         setLabResults(result.data.initLabTestResults || []);
-        setUltrasoundResults(result.data.initUltrasounds || []);
       } else {
         throw new Error(result.message || "Không thể tải hồ sơ");
       }
@@ -103,71 +108,121 @@ export default function MedicalRecordDetail() {
         throw new Error(result.message || "Lỗi khi cập nhật");
       }
     } catch (err) {
-      setUpdateMessage(`${err.message}`);
+      setUpdateMessage(err.message);
     } finally {
       setUpdating(false);
     }
   };
 
-  const renderResultSection = (title, results, onRequest) => (
-  <div className="mr-card">
-    <div className="mr-card-header">
-      <h2>{title}</h2>
-      {onRequest && (
-        <button className="mr-create-btn" onClick={onRequest}>
-          Yêu cầu {title.toLowerCase()}
-        </button>
-      )}
-    </div>
-    <div className="mr-card-body">
-      {results.length > 0 ? (
-        <div className="mr-test-results">
-          {results.map((test) => (
-            <div key={test.id} className="mr-test-item">
-              <div className="mr-test-header">
-                <span className="mr-test-name">{test.labTestName || test.ultrasoundName}</span>
-                <span className={`mr-test-status ${test.status?.toLowerCase()}`}>
-                  {translateStatus(test.status)}
-                </span>
-              </div>
+  const handleUltrasoundSuccess = useCallback((newData) => {
+    setRecord((prev) => ({
+      ...prev,
+      initUltrasounds: [...(prev.initUltrasounds || []), newData],
+    }));
+    setShowUltrasoundModal(false);
+    setSelectedUltrasound(null);
+  }, []);
 
-              <div className="mr-test-details">
-                <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
-                <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
+  const handleUltrasoundDelete = async (id) => {
+    if (!window.confirm("Bạn có chắc chắn muốn xóa kết quả siêu âm này?")) return;
+    try {
+      const res = await fetch(DELETE_ULTRASOUND(id), {
+        method: "DELETE",
+        headers: getAuthHeader(),
+      });
+      if (res.ok) {
+        setRecord((prev) => ({
+          ...prev,
+          initUltrasounds: prev.initUltrasounds.filter((us) => us.id !== id),
+        }));
+      }
+    } catch (err) {
+      console.error("Lỗi khi xóa siêu âm:", err);
+    }
+  };
 
-                {test.status === "COMPLETED" && (
-                  <>
-                    <div><strong>Tóm tắt kết quả:</strong> {test.resultSummary || "Không có"}</div>
-                    <div><strong>Chi tiết:</strong> {test.resultDetails || "Không có"}</div>
-                    <div><strong>Ghi chú:</strong> {test.notes || "Không có"}</div>
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="mr-empty-msg">
-          <span>Chưa có {title.toLowerCase()}</span>
-        </div>
-      )}
-    </div>
-  </div>
-);
+  const renderUltrasoundResults = () => {
+    const ultrasounds = record?.initUltrasounds || [];
 
-
-  const renderTreatmentPlan = () => (
-    <div className="treatment-plan-section">
+    return (
       <div className="mr-card">
         <div className="mr-card-header">
-          <h2>Phác đồ điều trị</h2>
-          <button className="mr-create-btn">Thêm phác đồ</button>
+          <h2>Kết quả siêu âm</h2>
+          <button
+            className="mr-create-btn"
+            onClick={() => {
+              setSelectedUltrasound(null);
+              setShowUltrasoundModal(true);
+            }}
+          >
+            Cập nhật kết quả siêu âm
+          </button>
         </div>
         <div className="mr-card-body">
-          <div className="mr-empty-msg">
-            <span>Chưa có phác đồ điều trị nào</span>
-          </div>
+          {ultrasounds.length > 0 ? (
+            <div className="mr-ultrasound-results">
+              {ultrasounds.map((us) => (
+                <div key={us.id} className="mr-ultrasound-item">
+                  <div className="mr-ultrasound-header">
+                    <div><strong>Ngày:</strong> {formatDate(us.date)}</div>
+                    <div><strong>Kết quả:</strong> {us.result}</div>
+                    <div className="mr-ultrasound-actions">
+                      <button onClick={() => {
+                        setSelectedUltrasound(us);
+                        setShowUltrasoundModal(true);
+                      }}>
+                        Cập nhật
+                      </button>
+                      <button onClick={() => handleUltrasoundDelete(us.id)}>
+                        Xóa
+                      </button>
+                    </div>
+                  </div>
+                  <UltrasoundImageFetcher id={us.id} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mr-empty-msg">
+              <span>Chưa có kết quả siêu âm</span>
+            </div>
+          )}
         </div>
+      </div>
+    );
+  };
+
+  const renderLabTestResults = () => (
+    <div className="mr-card">
+      <div className="mr-card-header">
+        <h2>Kết quả xét nghiệm</h2>
+        <button className="mr-create-btn" onClick={() => setShowLabModal(true)}>
+          Yêu cầu xét nghiệm
+        </button>
+      </div>
+      <div className="mr-card-body">
+        {labResults.length > 0 ? (
+          <div className="mr-test-results">
+            {labResults.map((test) => (
+              <div key={test.id} className="mr-test-item">
+                <div className="mr-test-header">
+                  <span className="mr-test-name">{test.labTestName}</span>
+                  <span className={`mr-test-status ${test.status.toLowerCase()}`}>
+                    {translateStatus(test.status)}
+                  </span>
+                </div>
+                <div className="mr-test-details">
+                  <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
+                  <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mr-empty-msg">
+            <span>Chưa có kết quả xét nghiệm</span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -189,7 +244,7 @@ export default function MedicalRecordDetail() {
         <div><strong>CMND/CCCD:</strong> {record.identityNumber}</div>
         <div><strong>Quốc tịch:</strong> {record.nationality}</div>
         <div><strong>Số BHYT:</strong> {record.insuranceNumber}</div>
-        <div><strong>Ngày tạo:</strong> {record.createdAt}</div>
+        <div><strong>Ngày tạo:</strong> {formatDate(record.createdAt)}</div>
       </div>
 
       <hr />
@@ -252,16 +307,15 @@ export default function MedicalRecordDetail() {
               {updateMessage && <p style={{ marginTop: "10px" }}>{updateMessage}</p>}
             </div>
 
-            {renderResultSection("Kết quả xét nghiệm", labResults, () => setShowLabModal(true))}
-            {renderResultSection("Kết quả siêu âm", ultrasoundResults, () => setShowUltrasoundModal(true))}
+            {renderLabTestResults()}
+            {renderUltrasoundResults()}
           </div>
         )}
 
         {activeTab === TABS.TREATMENT && (
-          <div className="treatment-tab">
-            {renderTreatmentPlan()}
-          </div>
-        )}
+  <TreatmentPlan medicalRecordId={recordId} />
+)}
+
       </div>
 
       {showLabModal && (
@@ -275,23 +329,17 @@ export default function MedicalRecordDetail() {
         />
       )}
 
-      {/* Tạm placeholder cho modal yêu cầu siêu âm */}
       {showUltrasoundModal && (
-        <div className="modal-placeholder">
-          <div className="modal-backdrop" onClick={() => setShowUltrasoundModal(false)} />
-          <div className="modal-content">
-            <h3>Yêu cầu siêu âm (tạm placeholder)</h3>
-            <button onClick={() => setShowUltrasoundModal(false)}>Đóng</button>
-          </div>
-        </div>
-        // <UltrasoundRequestModal
-        //   recordId={recordId}
-        //   onClose={() => setShowUltrasoundModal(false)}
-        //   onSuccess={() => {
-        //     setShowUltrasoundModal(false);
-        //     fetchRecord();
-        //   }}
-        // />
+        <InitUltrasoundModal
+          isOpen={true}
+          onClose={() => {
+            setShowUltrasoundModal(false);
+            setSelectedUltrasound(null);
+          }}
+          medicalRecordId={recordId}
+          onSuccess={handleUltrasoundSuccess}
+          initialData={selectedUltrasound}
+        />
       )}
     </div>
   );

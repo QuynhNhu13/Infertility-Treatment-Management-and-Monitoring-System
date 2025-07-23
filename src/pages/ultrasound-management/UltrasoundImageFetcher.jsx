@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { ULTRASOUND_IMAGE } from "../../api/apiUrls";
-import "../../styles/medical-record-management/UltrasoundImageFetcher.css";
+import "../../styles/ultrasound-management/UltrasoundImageFetcher.css";
 
 export default function UltrasoundImageFetcher({ id }) {
   const { getAuthHeader } = useAuth();

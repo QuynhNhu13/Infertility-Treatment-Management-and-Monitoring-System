@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { INIT_ULTRASOUND_FORM, UPDATE_ULTRASOUND, UP_IMG } from "../../api/apiUrls";
-import "../../styles/medical-record-management/InitUltrasoundModal.css";
+import "../../styles/ultrasound-management/InitUltrasoundModal.css";
 import { Upload, XCircle, Trash2, Loader2, Image, X } from "lucide-react";
 import axios from "axios";
 
