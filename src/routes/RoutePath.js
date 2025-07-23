@@ -41,6 +41,9 @@ const ROUTES = {
   GET_MEDICAL_RECORD_HISTORY: (accountId) => `/ho-so-benh-nhan/${accountId}`,
   MEDICAL_RECORD_DETAIL: "/chi-tiet-ho-so/:recordId",
 
+  //lab-test-management
+  LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
+
 
 
   // schedule-management

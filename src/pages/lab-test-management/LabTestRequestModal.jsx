@@ -32,10 +32,11 @@ const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
     fetchLabTests();
   }, [getJsonAuthHeader]);
 
-  const handleToggle = (id) =>
+  const handleToggle = (id) => {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
+  };
 
   const handleSelectAll = () => {
     const filtered = labTests.filter((t) =>
@@ -64,7 +65,6 @@ const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
       setSubmitting(true);
       setError("");
 
-      console.log("Gửi yêu cầu với recordId:", numericRecordId); 
       await axios.post(
         LAB_TEST_RESULT_INIT(numericRecordId),
         { testIds: selectedIds },
@@ -84,6 +84,7 @@ const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
   const filteredTests = labTests.filter((t) =>
     t.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const selectedCount = selectedIds.length;
   const allFilteredSelected =
     filteredTests.length > 0 &&
@@ -148,11 +149,7 @@ const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
 
         <div className="lab-modal-footer">
           <div className="lab-modal-actions">
-            <button
-              className="lab-modal-cancel"
-              onClick={onClose}
-              disabled={submitting}
-            >
+            <button className="lab-modal-cancel" onClick={onClose} disabled={submitting}>
               Hủy
             </button>
             <button
@@ -165,7 +162,7 @@ const LabTestRequestModal = ({ recordId, onClose, onSuccess }) => {
               ) : (
                 <>
                   <ClipboardList size={16} />
-                  Gửi yêu cầu ({selectedIds.length})
+                  Gửi yêu cầu ({selectedCount})
                 </>
               )}
             </button>

@@ -2,10 +2,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { GET_MEDICAL_RECORD, UPDATE_MEDICAL_RECORD } from "../../api/apiUrls";
+import LabTestRequestModal from "../lab-test-management/LabTestRequestModal";
+// Placeholder cho modal yêu cầu siêu âm
+// import UltrasoundRequestModal from "../ultrasound-management/UltrasoundRequestModal";
 
 export default function MedicalRecordDetail() {
   const { getJsonAuthHeader } = useAuth();
   const { recordId } = useParams();
+
   const [record, setRecord] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -16,27 +20,26 @@ export default function MedicalRecordDetail() {
   const [updating, setUpdating] = useState(false);
   const [updateMessage, setUpdateMessage] = useState("");
 
-  const STATUS_TRANSLATIONS = {
-    COMPLETED: "Đã hoàn thành",
-    PROCESSING: "Đang xử lý"
-  };
-
-  const [labResults] = useState([]);
-  const [ultrasoundResults] = useState([]); 
-  const [selectedLabTestId] = useState(null);
-  const [showLabModal] = useState(false);
+  const [labResults, setLabResults] = useState([]);
+  const [ultrasoundResults, setUltrasoundResults] = useState([]);
+  const [showLabModal, setShowLabModal] = useState(false);
+  const [showUltrasoundModal, setShowUltrasoundModal] = useState(false); // ✅
 
   const TABS = {
     INIT: "init",
     TREATMENT: "treatment",
   };
-  
   const [activeTab, setActiveTab] = useState(TABS.INIT);
-  
+
   const tabs = [
     { key: TABS.INIT, label: "Thông tin ban đầu" },
     { key: TABS.TREATMENT, label: "Phác đồ điều trị" },
   ];
+
+  const STATUS_TRANSLATIONS = {
+    COMPLETED: "Đã hoàn thành",
+    PROCESSING: "Đang xử lý",
+  };
 
   const formatDate = useCallback((dateStr) => {
     if (!dateStr) return "Chưa có";
@@ -49,33 +52,35 @@ export default function MedicalRecordDetail() {
 
   const translateStatus = useCallback(
     (status) => STATUS_TRANSLATIONS[status] || status,
-    [STATUS_TRANSLATIONS]
+    []
   );
 
-  useEffect(() => {
-    const fetchRecord = async () => {
-      try {
-        const response = await fetch(GET_MEDICAL_RECORD(recordId), {
-          headers: getJsonAuthHeader(),
-        });
+  const fetchRecord = useCallback(async () => {
+    try {
+      const response = await fetch(GET_MEDICAL_RECORD(recordId), {
+        headers: getJsonAuthHeader(),
+      });
 
-        const result = await response.json();
-        if (response.ok && result.data) {
-          setRecord(result.data);
-          setDiagnosis(result.data.diagnosis || "");
-          setSymptoms(result.data.symptoms || "");
-        } else {
-          throw new Error(result.message || "Không thể tải hồ sơ");
-        }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+      const result = await response.json();
+      if (response.ok && result.data) {
+        setRecord(result.data);
+        setDiagnosis(result.data.diagnosis || "");
+        setSymptoms(result.data.symptoms || "");
+        setLabResults(result.data.initLabTestResults || []);
+        setUltrasoundResults(result.data.initUltrasounds || []);
+      } else {
+        throw new Error(result.message || "Không thể tải hồ sơ");
       }
-    };
-
-    fetchRecord();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   }, [recordId, getJsonAuthHeader]);
+
+  useEffect(() => {
+    fetchRecord();
+  }, [fetchRecord]);
 
   const handleUpdate = async () => {
     setUpdating(true);
@@ -104,41 +109,52 @@ export default function MedicalRecordDetail() {
     }
   };
 
-  const renderResultSection = (title, results) => (
-    <div className="mr-card">
-      <div className="mr-card-header">
-        <h2>{title}</h2>
-        <button className="mr-create-btn">Yêu cầu {title.toLowerCase()}</button>
-      </div>
-      <div className="mr-card-body">
-        {results.length > 0 ? (
-          <div className="mr-test-results">
-            {results.map((test) => (
-              <div key={test.id} className="mr-test-item">
-                <div className="mr-test-header">
-                  <span className="mr-test-name">{test.labTestName}</span>
-                  <span className={`mr-test-status ${test.status.toLowerCase()}`}>
-                    {translateStatus(test.status)}
-                  </span>
-                </div>
-                <div className="mr-test-details">
-                  <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
-                  <div><strong>Nhân viên:</strong> {test.staffFullName}</div>
-                </div>
+  const renderResultSection = (title, results, onRequest) => (
+  <div className="mr-card">
+    <div className="mr-card-header">
+      <h2>{title}</h2>
+      {onRequest && (
+        <button className="mr-create-btn" onClick={onRequest}>
+          Yêu cầu {title.toLowerCase()}
+        </button>
+      )}
+    </div>
+    <div className="mr-card-body">
+      {results.length > 0 ? (
+        <div className="mr-test-results">
+          {results.map((test) => (
+            <div key={test.id} className="mr-test-item">
+              <div className="mr-test-header">
+                <span className="mr-test-name">{test.labTestName || test.ultrasoundName}</span>
+                <span className={`mr-test-status ${test.status?.toLowerCase()}`}>
+                  {translateStatus(test.status)}
+                </span>
+              </div>
+
+              <div className="mr-test-details">
+                <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
+                <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
+
                 {test.status === "COMPLETED" && (
-                  <button className="mr-view-btn">Xem kết quả</button>
+                  <>
+                    <div><strong>Tóm tắt kết quả:</strong> {test.resultSummary || "Không có"}</div>
+                    <div><strong>Chi tiết:</strong> {test.resultDetails || "Không có"}</div>
+                    <div><strong>Ghi chú:</strong> {test.notes || "Không có"}</div>
+                  </>
                 )}
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="mr-empty-msg">
-            <span>Chưa có {title.toLowerCase()}</span>
-          </div>
-        )}
-      </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mr-empty-msg">
+          <span>Chưa có {title.toLowerCase()}</span>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
+
 
   const renderTreatmentPlan = () => (
     <div className="treatment-plan-section">
@@ -163,7 +179,7 @@ export default function MedicalRecordDetail() {
   return (
     <div className="medical-record-detail">
       <h2>Chi tiết hồ sơ bệnh án</h2>
-      
+
       <div className="patient-info">
         <div><strong>Họ tên:</strong> {record.fullName}</div>
         <div><strong>Ngày sinh:</strong> {record.dob}</div>
@@ -178,12 +194,11 @@ export default function MedicalRecordDetail() {
 
       <hr />
 
-
       <div className="tab-navigation">
         {tabs.map((tab) => (
           <button
             key={tab.key}
-            className={`tab-button ${activeTab === tab.key ? 'active' : ''}`}
+            className={`tab-button ${activeTab === tab.key ? "active" : ""}`}
             onClick={() => setActiveTab(tab.key)}
           >
             {tab.label}
@@ -237,9 +252,8 @@ export default function MedicalRecordDetail() {
               {updateMessage && <p style={{ marginTop: "10px" }}>{updateMessage}</p>}
             </div>
 
-            {renderResultSection("Kết quả xét nghiệm", labResults)}
-
-            {renderResultSection("Kết quả siêu âm", ultrasoundResults)}
+            {renderResultSection("Kết quả xét nghiệm", labResults, () => setShowLabModal(true))}
+            {renderResultSection("Kết quả siêu âm", ultrasoundResults, () => setShowUltrasoundModal(true))}
           </div>
         )}
 
@@ -249,6 +263,36 @@ export default function MedicalRecordDetail() {
           </div>
         )}
       </div>
+
+      {showLabModal && (
+        <LabTestRequestModal
+          recordId={recordId}
+          onClose={() => setShowLabModal(false)}
+          onSuccess={() => {
+            setShowLabModal(false);
+            fetchRecord();
+          }}
+        />
+      )}
+
+      {/* Tạm placeholder cho modal yêu cầu siêu âm */}
+      {showUltrasoundModal && (
+        <div className="modal-placeholder">
+          <div className="modal-backdrop" onClick={() => setShowUltrasoundModal(false)} />
+          <div className="modal-content">
+            <h3>Yêu cầu siêu âm (tạm placeholder)</h3>
+            <button onClick={() => setShowUltrasoundModal(false)}>Đóng</button>
+          </div>
+        </div>
+        // <UltrasoundRequestModal
+        //   recordId={recordId}
+        //   onClose={() => setShowUltrasoundModal(false)}
+        //   onSuccess={() => {
+        //     setShowUltrasoundModal(false);
+        //     fetchRecord();
+        //   }}
+        // />
+      )}
     </div>
   );
 }

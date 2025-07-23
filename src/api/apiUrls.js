@@ -97,7 +97,6 @@ export const SEARCH_LAB_TEST_RESULT = (params) => {
     const query = new URLSearchParams(params).toString();
     return `${BASE_URL}api/lab-test-result/search?${query}`;
 };
-export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
 
 
 

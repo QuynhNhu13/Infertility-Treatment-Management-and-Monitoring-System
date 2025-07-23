@@ -31,6 +31,7 @@ import ScheduleTemplateFormModal from "../pages/schedule-management/ScheduleTemp
 import ConsultationForm from "../pages/consultation-management/ConsultationForm";
 import MedicalRecordHistory from "../pages/medical-record-management/MedicalRecordHistory";
 import MedicalRecordDetail from "../pages/medical-record-management/MedicalRecordDetail";
+import LabTestResultList from "../pages/lab-test-management/LabTestResultList";
 
 
 function AppRoutes() {
@@ -50,7 +51,7 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
-      
+      <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
       </Route>
 
 
