@@ -9,8 +9,8 @@ import {
 import LabTestRequestModal from "../lab-test-management/LabTestRequestModal";
 import InitUltrasoundModal from "../ultrasound-management/InitUltrasoundModal";
 import UltrasoundImageFetcher from "../ultrasound-management/UltrasoundImageFetcher";
-import TreatmentPlan from "../treatment-plan/TreatmentPlan";
-
+import TreatmentPlan from "../treatment-plan-management/TreatmentPlan";
+import "../../styles/medical-record-management/MedicalRecordDetail.css";
 
 export default function MedicalRecordDetail() {
   const { getJsonAuthHeader, getAuthHeader } = useAuth();
@@ -145,11 +145,11 @@ export default function MedicalRecordDetail() {
     const ultrasounds = record?.initUltrasounds || [];
 
     return (
-      <div className="mr-card">
-        <div className="mr-card-header">
+      <div className="mr-detail-card">
+        <div className="mr-detail-card-header">
           <h2>Kết quả siêu âm</h2>
           <button
-            className="mr-create-btn"
+            className="mr-detail-create-btn"
             onClick={() => {
               setSelectedUltrasound(null);
               setShowUltrasoundModal(true);
@@ -158,15 +158,15 @@ export default function MedicalRecordDetail() {
             Cập nhật kết quả siêu âm
           </button>
         </div>
-        <div className="mr-card-body">
+        <div className="mr-detail-card-body">
           {ultrasounds.length > 0 ? (
-            <div className="mr-ultrasound-results">
+            <div className="mr-detail-ultrasound-results">
               {ultrasounds.map((us) => (
-                <div key={us.id} className="mr-ultrasound-item">
-                  <div className="mr-ultrasound-header">
+                <div key={us.id} className="mr-detail-ultrasound-item">
+                  <div className="mr-detail-ultrasound-header">
                     <div><strong>Ngày:</strong> {formatDate(us.date)}</div>
                     <div><strong>Kết quả:</strong> {us.result}</div>
-                    <div className="mr-ultrasound-actions">
+                    <div className="mr-detail-ultrasound-actions">
                       <button onClick={() => {
                         setSelectedUltrasound(us);
                         setShowUltrasoundModal(true);
@@ -183,7 +183,7 @@ export default function MedicalRecordDetail() {
               ))}
             </div>
           ) : (
-            <div className="mr-empty-msg">
+            <div className="mr-detail-empty-msg">
               <span>Chưa có kết quả siêu âm</span>
             </div>
           )}
@@ -193,25 +193,25 @@ export default function MedicalRecordDetail() {
   };
 
   const renderLabTestResults = () => (
-    <div className="mr-card">
-      <div className="mr-card-header">
+    <div className="mr-detail-card">
+      <div className="mr-detail-card-header">
         <h2>Kết quả xét nghiệm</h2>
-        <button className="mr-create-btn" onClick={() => setShowLabModal(true)}>
+        <button className="mr-detail-create-btn" onClick={() => setShowLabModal(true)}>
           Yêu cầu xét nghiệm
         </button>
       </div>
-      <div className="mr-card-body">
+      <div className="mr-detail-card-body">
         {labResults.length > 0 ? (
-          <div className="mr-test-results">
+          <div className="mr-detail-test-results">
             {labResults.map((test) => (
-              <div key={test.id} className="mr-test-item">
-                <div className="mr-test-header">
-                  <span className="mr-test-name">{test.labTestName}</span>
-                  <span className={`mr-test-status ${test.status.toLowerCase()}`}>
+              <div key={test.id} className="mr-detail-test-item">
+                <div className="mr-detail-test-header">
+                  <span className="mr-detail-test-name">{test.labTestName}</span>
+                  <span className={`mr-detail-test-status ${test.status.toLowerCase()}`}>
                     {translateStatus(test.status)}
                   </span>
                 </div>
-                <div className="mr-test-details">
+                <div className="mr-detail-test-details">
                   <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
                   <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
                 </div>
@@ -219,7 +219,7 @@ export default function MedicalRecordDetail() {
             ))}
           </div>
         ) : (
-          <div className="mr-empty-msg">
+          <div className="mr-detail-empty-msg">
             <span>Chưa có kết quả xét nghiệm</span>
           </div>
         )}
@@ -228,14 +228,14 @@ export default function MedicalRecordDetail() {
   );
 
   if (loading) return <p>Đang tải hồ sơ...</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (error) return <p className="mr-detail-error">{error}</p>;
   if (!record) return <p>Không tìm thấy hồ sơ</p>;
 
   return (
     <div className="medical-record-detail">
       <h2>Chi tiết hồ sơ bệnh án</h2>
 
-      <div className="patient-info">
+      <div className="mr-detail-patient-info">
         <div><strong>Họ tên:</strong> {record.fullName}</div>
         <div><strong>Ngày sinh:</strong> {record.dob}</div>
         <div><strong>Giới tính:</strong> {record.gender || "Chưa cập nhật"}</div>
@@ -249,11 +249,11 @@ export default function MedicalRecordDetail() {
 
       <hr />
 
-      <div className="tab-navigation">
+      <div className="mr-detail-tab-navigation">
         {tabs.map((tab) => (
           <button
             key={tab.key}
-            className={`tab-button ${activeTab === tab.key ? "active" : ""}`}
+            className={`mr-detail-tab-button ${activeTab === tab.key ? "active" : ""}`}
             onClick={() => setActiveTab(tab.key)}
           >
             {tab.label}
@@ -261,11 +261,11 @@ export default function MedicalRecordDetail() {
         ))}
       </div>
 
-      <div className="tab-content">
+      <div className="mr-detail-tab-content">
         {activeTab === TABS.INIT && (
-          <div className="init-tab">
-            <div className="medical-section">
-              <div className="section-header">
+          <div className="mr-detail-init-tab">
+            <div className="mr-detail-medical-section">
+              <div className="mr-detail-section-header">
                 <h3>Thông tin y tế</h3>
                 <button onClick={() => setIsEditing(!isEditing)}>
                   {isEditing ? "Ẩn" : "Cập nhật thông tin"}
@@ -313,9 +313,8 @@ export default function MedicalRecordDetail() {
         )}
 
         {activeTab === TABS.TREATMENT && (
-  <TreatmentPlan medicalRecordId={recordId} />
-)}
-
+          <TreatmentPlan medicalRecordId={recordId} />
+        )}
       </div>
 
       {showLabModal && (
