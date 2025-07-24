@@ -82,6 +82,9 @@ export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointm
 // export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 // export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 
+// export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
+
+
 //Medical-Record-New
 export const GET_MEDICAL_RECORD_HISTORY = (accountId) => `${BASE_URL}api/medical-record/history/${accountId}`;
 export const CREATE_MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/new/${accountId}`;
@@ -105,6 +108,16 @@ export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
 
+//Treatment - Plan
+export const GET_TREATMENT_PLAN = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}/treatment-plan`;
+export const CREATE_TREATMENT_PLAN = `${BASE_URL}api/medical-record/treatment-plan`;
+export const UPDATE_TREATMENT_PLAN = (planId) => `${BASE_URL}api/medical-record/treatment-plan/${planId}`;
+export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
+
+export const GET_AVAILABLE_DATES = `${BASE_URL}api/schedules/my-available-dates`;
+export const GET_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-date`;
+export const CREATE_TREATMENT_SESSION = (progressId) =>
+  `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
 
 
 
