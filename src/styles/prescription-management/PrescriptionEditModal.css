@@ -1,0 +1,121 @@
+.pum-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.pum-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 29, 84, 0.2);
+  width: 70%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px 30px;
+}
+
+.pum-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #001D54;
+  border-bottom: 2px solid #077BF6;
+  padding-bottom: 10px;
+}
+
+.pum-close-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #001D54;
+}
+
+.pum-modal-content {
+  margin-top: 20px;
+}
+
+.pum-notes-input {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+  padding: 10px;
+  border: 1px solid #077BF6;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.pum-medication-card {
+  background-color: #E2EFFF;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.pum-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #001D54;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pum-btn-remove {
+  background: transparent;
+  border: none;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.pum-input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.pum-input-group input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #077BF6;
+}
+
+.pum-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pum-btn-cancel,
+.pum-btn-submit {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pum-btn-cancel {
+  background: #ccc;
+  color: #333;
+}
+
+.pum-btn-submit {
+  background: #077BF6;
+  color: white;
+  transition: background 0.3s;
+}
+
+.pum-btn-submit:hover {
+  background: #005dc0;
+}

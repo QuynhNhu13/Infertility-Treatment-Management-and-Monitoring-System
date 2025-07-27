@@ -32,7 +32,8 @@ import ConsultationForm from "../pages/consultation-management/ConsultationForm"
 import MedicalRecordHistory from "../pages/medical-record-management/MedicalRecordHistory";
 import MedicalRecordDetail from "../pages/medical-record-management/MedicalRecordDetail";
 import LabTestResultList from "../pages/lab-test-management/LabTestResultList";
-
+import FollowUpDetail from "../pages/treatment-plan-management/FollowUpDetail";
+import TreatmentSessionPage from "../pages/treatment-plan-management/TreatmentSessionPage";
 
 function AppRoutes() {
   return (
@@ -89,6 +90,10 @@ function AppRoutes() {
       {/* MedicalRecord - Management */} 
       <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecordHistory />} />
       <Route path={ROUTES.MEDICAL_RECORD_DETAIL} element={<MedicalRecordDetail />} />
+
+      {/* Treatment Plan - Management */}
+      <Route path="/ho-so-benh-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPage />} />
+
     </Routes>
   );
 }

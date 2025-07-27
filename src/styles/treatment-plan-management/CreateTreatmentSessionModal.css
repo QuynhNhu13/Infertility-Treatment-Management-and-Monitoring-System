@@ -1,46 +1,297 @@
-.ts-modal-overlay {
+.cts-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(7, 123, 246, 0.1);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cts-modal {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(7, 123, 246, 0.15);
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba(7, 123, 246, 0.1);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cts-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #077BF6;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  border-bottom: 2px solid rgba(7, 123, 246, 0.1);
+  padding-bottom: 0.75rem;
+}
+
+.cts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cts-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cts-form-group label {
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.cts-form-group select,
+.cts-form-group textarea {
+  padding: 0.75rem;
+  border: 2px solid rgba(7, 123, 246, 0.2);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #2c3e50;
+  position: relative;
+}
+
+.cts-form-group select {
+  background-image: linear-gradient(45deg, transparent 50%, #077BF6 50%), linear-gradient(135deg, #077BF6 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.cts-form-group select:focus,
+.cts-form-group textarea:focus {
+  outline: none;
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.cts-form-group select:hover,
+.cts-form-group textarea:hover {
+  border-color: rgba(7, 123, 246, 0.4);
+  background-color: rgba(7, 123, 246, 0.02);
+}
+
+.cts-form-group select:focus {
+  background-image: linear-gradient(45deg, transparent 50%, #0056b3 50%), linear-gradient(135deg, #0056b3 50%, transparent 50%);
+}
+
+.cts-form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.cts-form-group select option {
+  padding: 0.75rem;
+  color: #2c3e50;
+  background-color: #ffffff;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.cts-form-group select option:hover {
+  background-color: rgba(7, 123, 246, 0.1);
+  color: #077BF6;
+}
+
+.cts-form-group select option:checked,
+.cts-form-group select option:selected {
+  background-color: #077BF6;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.cts-form-group select option:disabled {
+  color: #cbd5e0;
+  background-color: #f8f9fa;
+}
+
+.cts-form-group select[value=""]:not(:focus) {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.cts-form-group {
+  position: relative;
+}
+
+.cts-form-group::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #077BF6, #0056b3);
+  transition: width 0.3s ease;
+}
+
+.cts-form-group:focus-within::after {
+  width: 100%;
+}
+
+.cts-modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+.cts-submit-btn {
+  background: linear-gradient(135deg, #077BF6, #0056b3);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.cts-submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3, #003d82);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7, 123, 246, 0.4);
+}
+
+.cts-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.3);
+}
+
+.cts-submit-btn:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cts-cancel-btn {
+  background: transparent;
+  color: #077BF6;
+  border: 2px solid #077BF6;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cts-cancel-btn:hover {
+  background: rgba(7, 123, 246, 0.05);
+  transform: translateY(-1px);
+}
+
+.cts-cancel-btn:active {
+  transform: translateY(0);
+  background: rgba(7, 123, 246, 0.1);
+}
+
+@media (max-width: 768px) {
+  .cts-modal {
+    padding: 1.5rem;
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .cts-title {
+    font-size: 1.25rem;
+  }
+  
+  .cts-modal-actions {
+    flex-direction: column;
+  }
+  
+  .cts-submit-btn,
+  .cts-cancel-btn {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+.cts-submit-btn:disabled {
+  position: relative;
+  overflow: hidden;
+}
+
+.cts-submit-btn:disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: loading 1.5s infinite;
 }
 
-.ts-modal {
-  background: white;
-  padding: 24px;
-  border-radius: 8px;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
-.ts-modal h2 {
-  margin-bottom: 16px;
+.cts-form-group textarea::-webkit-scrollbar {
+  width: 6px;
 }
 
-.ts-modal label {
-  font-weight: bold;
-  display: block;
-  margin-top: 12px;
+.cts-form-group textarea::-webkit-scrollbar-track {
+  background: rgba(7, 123, 246, 0.1);
+  border-radius: 3px;
 }
 
-.ts-modal textarea,
-.ts-modal select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.cts-form-group textarea::-webkit-scrollbar-thumb {
+  background: rgba(7, 123, 246, 0.3);
+  border-radius: 3px;
 }
 
-.modal-actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
+.cts-form-group textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(7, 123, 246, 0.5);
 }

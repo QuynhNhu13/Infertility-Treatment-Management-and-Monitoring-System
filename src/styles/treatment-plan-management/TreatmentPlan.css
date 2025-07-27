@@ -1,0 +1,435 @@
+.treatment-plan {
+  /* max-width: 1200px; */
+  margin: 5px auto;
+  padding: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* background: linear-gradient(135deg, #f8fbff 0%, #e6f4ff 100%); */
+  /* min-height: 100vh; */
+}
+
+.treatment-plan__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, #077BF6 0%, #0561d1 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(7, 123, 246, 0.2);
+}
+
+.treatment-plan__title {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-plan__btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-plan__btn--create {
+  background: linear-gradient(135deg, #077BF6 0%, #0561d1 100%);
+  color: white;
+}
+
+.treatment-plan__btn--create:hover {
+  background: linear-gradient(135deg, #0561d1 0%, #044bb5 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7, 123, 246, 0.3);
+}
+
+.treatment-plan__btn--update {
+  background: linear-gradient(135deg, #40c3f7 0%, #2bb0ed 100%);
+  color: white;
+}
+
+.treatment-plan__btn--update:hover {
+  background: linear-gradient(135deg, #2bb0ed 0%, #1992d4 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(64, 195, 247, 0.3);
+}
+
+.treatment-plan__btn--session {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  font-size: 13px;
+  padding: 8px 12px;
+  margin-top: 12px;
+}
+
+.treatment-plan__btn--session:hover {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(79, 172, 254, 0.3);
+}
+
+.treatment-plan__loading,
+.treatment-plan__error {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin: 20px 0;
+  box-shadow: 0 4px 16px rgba(7, 123, 246, 0.1);
+}
+
+.treatment-plan__loading {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  color: #077BF6;
+  font-size: 16px;
+  border: 1px solid #b3e4ff;
+}
+
+.treatment-plan__error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fce7e7 100%);
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-size: 16px;
+}
+
+.treatment-plan__empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  border-radius: 16px;
+  border: 2px dashed #077BF6;
+  box-shadow: 0 4px 16px rgba(7, 123, 246, 0.1);
+}
+
+.treatment-plan__empty p {
+  margin: 8px 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.treatment-plan__empty p:first-child {
+  font-weight: 500;
+  color: #077BF6;
+}
+
+.treatment-plan__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.treatment-plan__item {
+  background: linear-gradient(135deg, #ffffff 0%, #fbfdff 100%);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(7, 123, 246, 0.08);
+  border: 1px solid #e1f2ff;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.treatment-plan__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, #077BF6 0%, #40c3f7 100%);
+}
+
+.treatment-plan__item:hover {
+  box-shadow: 0 8px 32px rgba(7, 123, 246, 0.15);
+  border-color: #077BF6;
+  transform: translateY(-2px);
+}
+
+.treatment-plan__info {
+  margin-bottom: 20px;
+}
+
+.treatment-plan__service {
+  font-size: 20px;
+  font-weight: 600;
+  color: #077BF6;
+  margin: 0 0 12px 0;
+}
+
+.treatment-plan__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.treatment-plan__status {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-plan__status--in_progress {
+  background: linear-gradient(135deg, #077BF6 0%, #40c3f7 100%);
+  color: white;
+}
+
+.treatment-plan__status--completed {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.treatment-plan__status--pending {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+}
+
+.treatment-plan__status--cancelled {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.treatment-plan__dates {
+  color: #4b6c85;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f0f9ff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid #e1f2ff;
+}
+
+.treatment-plan__stages {
+  border-top: 1px solid #e1f2ff;
+  padding-top: 20px;
+}
+
+.treatment-plan__stages-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #077BF6;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.treatment-plan__stages-title::before {
+  content: '▶';
+  font-size: 14px;
+}
+
+.treatment-plan__stage {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fcff 100%);
+  border: 1px solid #e1f2ff;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.05);
+}
+
+.treatment-plan__stage:hover {
+  border-color: #077BF6;
+  box-shadow: 0 4px 16px rgba(7, 123, 246, 0.1);
+}
+
+.treatment-plan__stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+  border-bottom: 1px solid #e1f2ff;
+  transition: all 0.2s ease;
+}
+
+.treatment-plan__stage-header:hover {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e6f4ff 100%);
+}
+
+.treatment-plan__stage-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.treatment-plan__stage-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #077BF6;
+}
+
+.treatment-plan__stage-status {
+  padding: 3px 10px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-plan__stage-status--in_progress {
+  background: linear-gradient(135deg, #077BF6 0%, #40c3f7 100%);
+  color: white;
+}
+
+.treatment-plan__stage-status--completed {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.treatment-plan__stage-status--pending {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+}
+
+.treatment-plan__stage-toggle {
+  background: linear-gradient(135deg, #077BF6 0%, #40c3f7 100%);
+  border: none;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.2);
+}
+
+.treatment-plan__stage-toggle:hover {
+  background: linear-gradient(135deg, #0561d1 0%, #2bb0ed 100%);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.treatment-plan__stage-meta {
+  padding: 0 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.treatment-plan__stage-dates {
+  font-size: 13px;
+  color: #4b6c85;
+  font-weight: 500;
+  background: #f0f9ff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.treatment-plan__stage-notes {
+  font-size: 13px;
+  color: #6b7e94;
+  font-style: italic;
+  background: #fafcff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border-left: 3px solid #077BF6;
+}
+
+.treatment-plan__stage-content {
+  padding: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #fafcff 100%);
+  border-top: 1px solid #e1f2ff;
+}
+
+.treatment-plan__sessions {
+  margin-bottom: 12px;
+}
+
+.treatment-plan__sessions-empty {
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+  padding: 16px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #f8fcff 0%, #f0f9ff 100%);
+  border-radius: 8px;
+  border: 2px dashed #c3dafe;
+}
+
+@media (max-width: 768px) {
+  .treatment-plan {
+    padding: 16px;
+    background: linear-gradient(135deg, #f8fbff 0%, #e6f4ff 100%);
+  }
+  
+  .treatment-plan__header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    padding: 20px;
+  }
+  
+  .treatment-plan__title {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .treatment-plan__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .treatment-plan__stage-header {
+    padding: 12px;
+  }
+  
+  .treatment-plan__stage-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .treatment-plan__stage-meta {
+    padding: 0 12px 12px 12px;
+  }
+  
+  .treatment-plan__stage-content {
+    padding: 12px;
+  }
+  
+  .treatment-plan__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .treatment-plan {
+    padding: 12px;
+  }
+  
+  .treatment-plan__item {
+    padding: 16px;
+  }
+  
+  .treatment-plan__service {
+    font-size: 18px;
+  }
+  
+  .treatment-plan__header {
+    padding: 16px;
+  }
+  
+  .treatment-plan__title {
+    font-size: 22px;
+  }
+}

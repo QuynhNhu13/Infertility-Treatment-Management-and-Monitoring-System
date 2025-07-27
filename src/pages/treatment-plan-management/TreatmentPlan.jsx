@@ -6,8 +6,9 @@ import {
   UPDATE_TREATMENT_PLAN,
 } from "../../api/apiUrls";
 import ServiceSelectionModal from "../../pages/service-management/ServiceSelectionModal";
-import CreateTreatmentSessionModal from "./CreateTreatmentSessionModal"; // sửa lại path nếu cần
-
+import CreateTreatmentSessionModal from "./CreateTreatmentSessionModal";
+import TreatmentSessionView from "./TreatmentSessionView";
+import "../../styles/treatment-plan-management/TreatmentPlan.css";
 
 export default function TreatmentPlan({ medicalRecordId }) {
   const { getAuthHeader } = useAuth();
@@ -17,9 +18,8 @@ export default function TreatmentPlan({ medicalRecordId }) {
   const [error, setError] = useState("");
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
-
-  const [selectedStage, setSelectedStage] = useState(null); // để mở modal tạo session
-
+  const [selectedStage, setSelectedStage] = useState(null);
+  const [expandedStages, setExpandedStages] = useState({});
 
   useEffect(() => {
     if (medicalRecordId) {
@@ -35,7 +35,17 @@ export default function TreatmentPlan({ medicalRecordId }) {
         headers: getAuthHeader(),
       });
       const result = await res.json();
-      if (!res.ok) throw new Error(result.message || "Lỗi khi lấy phác đồ điều trị");
+
+      if (res.status === 404) {
+        setTreatmentPlans([]);
+        setError("");
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error(result.message || "Lỗi khi lấy phác đồ điều trị");
+      }
+
       setTreatmentPlans(result.data || []);
       setError("");
     } catch (err) {
@@ -88,6 +98,7 @@ export default function TreatmentPlan({ medicalRecordId }) {
       });
 
       const result = await res.json();
+
       if (res.ok) {
         alert("Cập nhật phác đồ thành công");
         await fetchTreatmentPlans();
@@ -104,30 +115,79 @@ export default function TreatmentPlan({ medicalRecordId }) {
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "Chưa xác định";
-    const d = new Date(dateStr);
-    return isNaN(d.getTime())
+    const date = new Date(dateStr);
+    return isNaN(date.getTime())
       ? "Không hợp lệ"
-      : d.toLocaleDateString("vi-VN", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        });
+      : date.toLocaleDateString("vi-VN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
   };
 
+  const getStatusText = (status) => {
+    const statusMap = {
+      IN_PROGRESS: "Đang thực hiện",
+      COMPLETED: "Đã hoàn thành",
+      PENDING: "Chờ xử lý",
+      CANCELLED: "Đã hủy"
+    };
+    return statusMap[status] || status;
+  };
+
+  const toggleStageExpansion = (stageId) => {
+    setExpandedStages(prev => ({
+      ...prev,
+      [stageId]: !prev[stageId]
+    }));
+  };
+
+  const handleServiceModalConfirm = async (serviceId) => {
+    if (isUpdate && treatmentPlans.length > 0) {
+      const plan = treatmentPlans[0];
+      const updateData = {
+        medicalRecordId: Number(medicalRecordId),
+        serviceId,
+      };
+      return await handleUpdateTreatmentPlan(plan.id, updateData);
+    } else {
+      return await handleCreateTreatmentPlan(serviceId);
+    }
+  };
+
+  const handleSessionCreated = () => {
+    alert("Tạo buổi khám thành công");
+    fetchTreatmentPlans();
+    setSelectedStage(null);
+  };
+
+  const closeServiceModal = () => {
+    setIsServiceModalOpen(false);
+    setIsUpdate(false);
+  };
+
+  if (loading) {
+    return <div className="treatment-plan__loading">Đang tải dữ liệu...</div>;
+  }
+
+  if (error) {
+    return <div className="treatment-plan__error">Lỗi: {error}</div>;
+  }
+
   return (
-    <div className="tp-container">
-      <div className="tp-header">
-        <h2>Phác đồ điều trị</h2>
+    <div className="treatment-plan">
+      <div className="treatment-plan__header">
+        <h2 className="treatment-plan__title">Phác đồ điều trị</h2>
         {treatmentPlans.length === 0 ? (
           <button
-            className="tp-create-btn"
+            className="treatment-plan__btn treatment-plan__btn--create"
             onClick={() => setIsServiceModalOpen(true)}
           >
             + Tạo phác đồ điều trị
           </button>
         ) : (
           <button
-            className="tp-create-btn"
+            className="treatment-plan__btn treatment-plan__btn--update"
             onClick={() => {
               setIsServiceModalOpen(true);
               setIsUpdate(true);
@@ -138,47 +198,72 @@ export default function TreatmentPlan({ medicalRecordId }) {
         )}
       </div>
 
-      {loading ? (
-        <div className="tp-loading">Đang tải dữ liệu...</div>
-      ) : error ? (
-        <div className="tp-error">Lỗi: {error}</div>
-      ) : treatmentPlans.length === 0 ? (
-        <div className="tp-empty">
+      {treatmentPlans.length === 0 ? (
+        <div className="treatment-plan__empty">
           <p>Chưa có phác đồ điều trị nào.</p>
           <p>Bấm nút "Tạo phác đồ điều trị" để bắt đầu.</p>
         </div>
       ) : (
-        <div className="tp-list">
+        <div className="treatment-plan__list">
           {treatmentPlans.map((plan) => (
-            <div className="tp-item" key={plan.id}>
-              <h3>Dịch vụ: {plan.serviceName}</h3>
-              <p>Trạng thái: {plan.status === "IN_PROGRESS" ? "Đang thực hiện" : plan.status}</p>
-              <p>
-                Ngày bắt đầu: {formatDate(plan.dateStart)} | Ngày kết thúc:{" "}
-                {formatDate(plan.dateEnd)}
-              </p>
+            <div className="treatment-plan__item" key={plan.id}>
+              <div className="treatment-plan__info">
+                <h3 className="treatment-plan__service">Dịch vụ: {plan.serviceName}</h3>
+                <div className="treatment-plan__meta">
+                  <span className={`treatment-plan__status treatment-plan__status--${plan.status.toLowerCase()}`}>
+                    {getStatusText(plan.status)}
+                  </span>
+                  {/* <span className="treatment-plan__dates">
+                    {formatDate(plan.dateStart)} - {formatDate(plan.dateEnd)}
+                  </span> */}
+                </div>
+              </div>
 
-              <div className="tp-stages">
-                <h4>Giai đoạn điều trị:</h4>
+              <div className="treatment-plan__stages">
+                <h4 className="treatment-plan__stages-title">Giai đoạn điều trị:</h4>
                 {plan.treatmentStageProgressResponses?.map((stage) => (
-  <div className="stage-item" key={stage.id}>
-    <strong>{stage.stageName}</strong>
-    <p>Trạng thái: {stage.status}</p>
-    <p>
-      Từ {formatDate(stage.dateStart)} đến{" "}
-      {formatDate(stage.dateComplete)}
-    </p>
-    <p>Ghi chú: {stage.notes || "Không có"}</p>
-    
-    <button
-      className="stage-session-btn"
-      onClick={() => setSelectedStage(stage)}
-    >
-      + Tạo lịch hẹn
-    </button>
-  </div>
-))}
+                  <div className="treatment-plan__stage" key={stage.id}>
+                    <div
+                      className="treatment-plan__stage-header"
+                      onClick={() => toggleStageExpansion(stage.id)}
+                    >
+                      <div className="treatment-plan__stage-info">
+                        <strong className="treatment-plan__stage-name">{stage.stageName}</strong>
+                        <span className={`treatment-plan__stage-status treatment-plan__stage-status--${stage.status.toLowerCase()}`}>
+                          {getStatusText(stage.status)}
+                        </span>
+                      </div>
+                      <button className="treatment-plan__stage-toggle">
+                        {expandedStages[stage.id] ? "▲" : "▼"}
+                      </button>
+                    </div>
 
+                    <div className="treatment-plan__stage-meta">
+                      {/* <span className="treatment-plan__stage-dates">
+                        {formatDate(stage.dateStart)} - {formatDate(stage.dateComplete)}
+                      </span> */}
+                      {stage.notes && (
+                        <span className="treatment-plan__stage-notes">
+                          Ghi chú: {stage.notes}
+                        </span>
+                      )}
+                    </div>
+
+                    {expandedStages[stage.id] && (
+                      <div className="treatment-plan__stage-content">
+                        <div className="treatment-plan__sessions">
+                          <TreatmentSessionView progressId={stage.id} />
+                        </div>
+                        <button
+                          className="treatment-plan__btn treatment-plan__btn--session"
+                          onClick={() => setSelectedStage(stage)}
+                        >
+                          + Tạo lịch hẹn
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -187,37 +272,19 @@ export default function TreatmentPlan({ medicalRecordId }) {
 
       {isServiceModalOpen && (
         <ServiceSelectionModal
-          onClose={() => {
-            setIsServiceModalOpen(false);
-            setIsUpdate(false);
-          }}
-          onConfirm={async (serviceId) => {
-            if (isUpdate && treatmentPlans.length > 0) {
-              const plan = treatmentPlans[0]; // Giả định chỉ có 1 plan
-              const updateData = {
-                medicalRecordId: Number(medicalRecordId),
-                serviceId,
-              };
-              return await handleUpdateTreatmentPlan(plan.id, updateData);
-            } else {
-              return await handleCreateTreatmentPlan(serviceId);
-            }
-          }}
+          onClose={closeServiceModal}
+          onConfirm={handleServiceModalConfirm}
           getAuthHeader={getAuthHeader}
         />
       )}
 
       {selectedStage && (
-  <CreateTreatmentSessionModal
-    progressId={selectedStage.id}
-    onClose={() => setSelectedStage(null)}
-    onSuccess={() => {
-      alert("Tạo buổi khám thành công");
-      fetchTreatmentPlans(); // reload để hiển thị mới
-    }}
-  />
-)}
-
+        <CreateTreatmentSessionModal
+          progressId={selectedStage.id}
+          onClose={() => setSelectedStage(null)}
+          onSuccess={handleSessionCreated}
+        />
+      )}
     </div>
   );
 }

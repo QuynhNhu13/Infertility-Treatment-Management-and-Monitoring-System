@@ -33,26 +33,26 @@
   --transition: all 0.3s ease;
 }
 
-/* Main Container */
 .medical-record-detail {
-  min-height: 100vh;
-  background: #E2EFFF;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+ margin-top: -85px;
+    min-height: 100vh;
+    background: #E2EFFF;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .medical-record-detail > h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 30px;
-  text-shadow: 0 2px 4px rgba(7, 123, 246, 0.1);
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--primary-ultra-light);
+margin-top: -35px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(7, 123, 246, 0.1);
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--primary-ultra-light);
 }
 
-/* Patient Info Section */
 .mr-detail-patient-info {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -87,7 +87,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Tab Navigation */
 .mr-detail-tab-navigation {
   display: flex;
   background: var(--bg-light);
@@ -122,7 +121,6 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Tab Content */
 .mr-detail-tab-content {
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -138,7 +136,6 @@
   gap: 25px;
 }
 
-/* Medical Section */
 .mr-detail-medical-section {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -244,7 +241,6 @@
   transform: none;
 }
 
-/* Card Components */
 .mr-detail-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -299,7 +295,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Test Results */
 .mr-detail-test-results {
   display: flex;
   flex-direction: column;
@@ -386,7 +381,6 @@
   gap: 5px;
 }
 
-/* Ultrasound Results */
 .mr-detail-ultrasound-results {
   display: flex;
   flex-direction: column;
@@ -475,7 +469,6 @@
   transform: translateY(-1px);
 }
 
-/* Empty State */
 .mr-detail-empty-msg {
   text-align: center;
   padding: 40px 20px;
@@ -492,7 +485,6 @@
   border: 2px dashed var(--border-color);
 }
 
-/* Error State */
 .mr-detail-error {
   text-align: center;
   padding: 40px 20px;
@@ -504,7 +496,6 @@
   border: 1px solid #ffcccc;
 }
 
-/* Loading State */
 .mr-detail-loading {
   display: flex;
   flex-direction: column;
@@ -529,7 +520,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .medical-record-detail {
     padding: 10px;

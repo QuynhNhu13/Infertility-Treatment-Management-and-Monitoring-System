@@ -8,7 +8,7 @@ export const GG_LOGIN = `${BASE_URL}oauth2/authorization/google`; //bug
 export const PROFILE = `${BASE_URL}api/user/profile`;
 export const REGISTER = `${BASE_URL}api/auth/register`;
 export const REGISTER_CONFIRM_EMAIL = `${BASE_URL}api/auth/register/confirm-email`;
-export const RESEND_VERIFICATION_EMAIL = `${BASE_URL}api/auth/register/resend-verification-email"`;
+export const RESEND_VERIFICATION_EMAIL = `${BASE_URL}api/auth/register/resend-verification-email`;
 export const FORGOT_PASSWORD = `${BASE_URL}api/auth/forgot-password`;
 export const RESET_PASSWORD = `${BASE_URL}api/auth/reset-password`;
 
@@ -50,41 +50,6 @@ export const PAYMENT_VNPAY = `${BASE_URL}api/payment/vn-pay`;//nhan
 export const PAYMENT_VNPAY_CALLBACK = `${BASE_URL}api/payment/vn-pay-callback`;//nhan
 export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointment`;//nhan
 
-//Medical-Record
-// export const MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/${accountId}`; //trang thông tin 
-// export const MEDICAL_RECORD_CREATE = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}`; //tạo
-
-// export const LAB_TEST = `${BASE_URL}api/lab-test`;
-// export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
-// export const GET_LAB_TEST_RESULTS = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
-// export const LAB_TEST_RESULT_SEARCH = `${BASE_URL}api/lab-test-result/search`;
-// export const LAB_TEST_RESULT_FROM = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
-// export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
-// export const SEARCH_LAB_TEST_RESULT = (params) => {
-//   const query = new URLSearchParams(params).toString();
-//   return `${BASE_URL}api/lab-test-result/search?${query}`;
-// };
-
-// export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
-// export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
-
-// export const GET_TREATMENT_PLAN = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}/treatment-plan`;
-// export const CREATE_TREATMENT_PLAN = `${BASE_URL}api/medical-record/treatment-plan`;
-// export const TREATMENT_UPDATE = (id) => `${BASE_URL}api/medical-record/treatment-stage-progress/${id}`;
-// export const CREATE_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
-// export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
-// export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
-// export const DELETE_TREATMENT_SESSION = (progressId, sessionId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
-
-// export const GET_TREATMENT_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/details`;
-// export const LAB_TEST_FOLLOW_UP = (recordId, sessionId) => `${BASE_URL}api/medical-record/${recordId}/treatment-sessions/${sessionId}/lab-test-results`;
-// export const ULTRASOUND_FOLLOW_UP = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-ultrasound`;
-// export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
-// export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
-
-// export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
-
-
 //Medical-Record-New
 export const GET_MEDICAL_RECORD_HISTORY = (accountId) => `${BASE_URL}api/medical-record/history/${accountId}`;
 export const CREATE_MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-record/new/${accountId}`;
@@ -101,12 +66,17 @@ export const SEARCH_LAB_TEST_RESULT = (params) => {
     return `${BASE_URL}api/lab-test-result/search?${query}`;
 };
 export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
+export const GET_LAB_TEST_SESSION = (sessionId) => `${BASE_URL}api/session/${sessionId}/lab-test-results`;
+export const GET_LAB_TEST_FOLLOW = (sessionId) => `${BASE_URL}api/session/${sessionId}/lab-test-results`;
 
 //Ultrasound - Mangement
 export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
 export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 export const DELETE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
 export const ULTRASOUND_IMAGE = (id) => `${BASE_URL}api/ultrasounds/images/${id}`;
+
+export const FOLLOW_UP_ULTRASOUND = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-ultrasound`;
+export const GET_FOLLOW_UP_ULTRASOUND = (sessionId) => `${BASE_URL}api/session/${sessionId}/ultrasound`;
 
 //Treatment - Plan
 export const GET_TREATMENT_PLAN = (medicalRecordId) => `${BASE_URL}api/medical-record/${medicalRecordId}/treatment-plan`;
@@ -116,10 +86,11 @@ export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-s
 
 export const GET_AVAILABLE_DATES = `${BASE_URL}api/schedules/my-available-dates`;
 export const GET_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-date`;
-export const CREATE_TREATMENT_SESSION = (progressId) =>
-  `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
-
-
+export const CREATE_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
+export const GET_SESSION_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-details`;
+export const UPDATE_SESSION = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;
+export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) => 
+  `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
 
 //Schedule-Management
 export const CREATE_SCHEDULE = `${BASE_URL}api/schedules`;
@@ -129,3 +100,10 @@ export const GET_ALL_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;
 
 //Consultation - Management
 export const CONSULTATION_FORM = `${BASE_URL}api/consultation`;
+
+
+//Prescription - Management
+export const GET_PRESCRIPTION = (sessionId) => `${BASE_URL}api/prescription/${sessionId}`;
+export const CREATE_PRESCRIPTION = `${BASE_URL}api/prescription`;
+export const GET_ALL_MEDICATIONS = `${BASE_URL}api/medications`;
+export const UPDATE_PRESCRIPTION = (id) => `${BASE_URL}api/prescription/${id}`;

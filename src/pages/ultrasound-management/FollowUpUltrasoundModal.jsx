@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
-import { INIT_ULTRASOUND_FORM, UPDATE_ULTRASOUND, UP_IMG } from "../../api/apiUrls";
+import { FOLLOW_UP_ULTRASOUND, UPDATE_ULTRASOUND, UP_IMG } from "../../api/apiUrls";
 import "../../styles/ultrasound-management/InitUltrasoundModal.css";
 import { Upload, XCircle, Trash2, Loader2, Image, X } from "lucide-react";
 import axios from "axios";
@@ -10,13 +10,14 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const MAX_RESULT_LENGTH = 1000;
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
-export default function InitUltrasoundModal({
+export default function FollowUpUltrasoundModal({
   isOpen,
   onClose,
   medicalRecordId,
   onSuccess,
   mode = "create",
   initialData = null,
+  sessionId,
 }) {
   const { getAuthHeader } = useAuth();
   const [result, setResult] = useState("");
@@ -134,7 +135,7 @@ export default function InitUltrasoundModal({
 
     try {
       setLoading(true);
-      const url = mode === "update" ? UPDATE_ULTRASOUND(initialData.id) : INIT_ULTRASOUND_FORM;
+      const url = mode === "update" ? UPDATE_ULTRASOUND(initialData.id) : FOLLOW_UP_ULTRASOUND(sessionId);
       const method = mode === "update" ? "PUT" : "POST";
 
       const res = await fetch(url, {

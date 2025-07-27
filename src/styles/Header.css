@@ -1,10 +1,11 @@
-/*main*/
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  padding-top: 80px; 
+  /* chỗ này phải là 80 thì home không lỗi 0*/
+  padding-top: 80px;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
   background-color: #E2EFFF;
@@ -12,7 +13,7 @@ html, body {
 }
 
 .custom-header {
-  width: 100vw; 
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,7 +28,7 @@ html, body {
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -55,7 +56,7 @@ html, body {
   justify-content: center;
   width: 30px;
   height: 30px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .info-text h5 {
@@ -101,7 +102,7 @@ html, body {
   text-decoration: none;
   font-size: 14px;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button-dangky {
@@ -145,7 +146,7 @@ html, body {
   font-weight: bold;
   cursor: pointer;
   font-size: 18px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transition: background-color 0.2s;
 }
 
@@ -156,18 +157,18 @@ html, body {
 
 
 .dropdown-menu {
-position: absolute;
-    top: 1px;
-    right: 44px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    padding: 0px;
-    min-width: max-content;
-    display: flex;
-    flex-direction: row;
-    gap: -6px;
-    z-index: 3000;
+  position: absolute;
+  top: 1px;
+  right: 44px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 0px;
+  min-width: max-content;
+  display: flex;
+  flex-direction: row;
+  gap: -6px;
+  z-index: 3000;
 }
 
 .dropdown-menu button {
@@ -188,5 +189,3 @@ position: absolute;
   color: #077BF6;
   font-weight: bold;
 }
-
-

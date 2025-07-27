@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
   GET_MEDICAL_RECORD,
@@ -11,10 +11,12 @@ import InitUltrasoundModal from "../ultrasound-management/InitUltrasoundModal";
 import UltrasoundImageFetcher from "../ultrasound-management/UltrasoundImageFetcher";
 import TreatmentPlan from "../treatment-plan-management/TreatmentPlan";
 import "../../styles/medical-record-management/MedicalRecordDetail.css";
+import HeaderPage from "../../components/HeaderPage";
 
 export default function MedicalRecordDetail() {
   const { getJsonAuthHeader, getAuthHeader } = useAuth();
   const { recordId } = useParams();
+    const navigate = useNavigate();
 
   const [record, setRecord] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -193,39 +195,50 @@ export default function MedicalRecordDetail() {
   };
 
   const renderLabTestResults = () => (
-    <div className="mr-detail-card">
-      <div className="mr-detail-card-header">
-        <h2>Kết quả xét nghiệm</h2>
-        <button className="mr-detail-create-btn" onClick={() => setShowLabModal(true)}>
-          Yêu cầu xét nghiệm
-        </button>
-      </div>
-      <div className="mr-detail-card-body">
-        {labResults.length > 0 ? (
-          <div className="mr-detail-test-results">
-            {labResults.map((test) => (
-              <div key={test.id} className="mr-detail-test-item">
-                <div className="mr-detail-test-header">
-                  <span className="mr-detail-test-name">{test.labTestName}</span>
-                  <span className={`mr-detail-test-status ${test.status.toLowerCase()}`}>
-                    {translateStatus(test.status)}
-                  </span>
-                </div>
-                <div className="mr-detail-test-details">
-                  <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
-                  <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="mr-detail-empty-msg">
-            <span>Chưa có kết quả xét nghiệm</span>
-          </div>
-        )}
-      </div>
+  <div className="mr-detail-card">
+    <div className="mr-detail-card-header">
+      <h2>Kết quả xét nghiệm</h2>
+      <button className="mr-detail-create-btn" onClick={() => setShowLabModal(true)}>
+        Yêu cầu xét nghiệm
+      </button>
     </div>
-  );
+    <div className="mr-detail-card-body">
+      {labResults.length > 0 ? (
+        <div className="mr-detail-test-results">
+          {labResults.map((test) => (
+            <div key={test.id} className="mr-detail-test-item">
+              <div className="mr-detail-test-header">
+                <span className="mr-detail-test-name">{test.labTestName}</span>
+                <span className={`mr-detail-test-status ${test.status.toLowerCase()}`}>
+                  {translateStatus(test.status)}
+                </span>
+              </div>
+
+              <div className="mr-detail-test-details">
+                <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
+                <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
+              </div>
+
+              {/* Thông tin kết quả nếu đã có */}
+              {test.status === "COMPLETED" && (
+                <div className="mr-detail-test-result">
+                  <div><strong>Kết quả tóm tắt:</strong> {test.resultSummary || "Không có"}</div>
+                  <div><strong>Chi tiết kết quả:</strong> {test.resultDetails || "Không có"}</div>
+                  <div><strong>Ghi chú:</strong> {test.notes || "Không có"}</div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mr-detail-empty-msg">
+          <span>Chưa có kết quả xét nghiệm</span>
+        </div>
+      )}
+    </div>
+  </div>
+);
+
 
   if (loading) return <p>Đang tải hồ sơ...</p>;
   if (error) return <p className="mr-detail-error">{error}</p>;
@@ -233,6 +246,13 @@ export default function MedicalRecordDetail() {
 
   return (
     <div className="medical-record-detail">
+      <HeaderPage />
+              <button
+          onClick={() => navigate(-1)}
+          className="treatment-session-page__back-btn"
+        >
+          ←
+        </button>
       <h2>Chi tiết hồ sơ bệnh án</h2>
 
       <div className="mr-detail-patient-info">

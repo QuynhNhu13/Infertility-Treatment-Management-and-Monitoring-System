@@ -25,11 +25,11 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
     try {
       setLoading(true);
       setError("");
-      
+
       const response = await axios.get(LAB_TEST, {
         headers: getJsonAuthHeader(),
       });
-      
+
       const data = response.data?.data || [];
       setLabTests(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -45,8 +45,8 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
   }, [fetchLabTests]);
 
   const handleToggle = useCallback((id) => {
-    setSelectedIds(prev => 
-      prev.includes(id) 
+    setSelectedIds(prev =>
+      prev.includes(id)
         ? prev.filter(selectedId => selectedId !== id)
         : [...prev, id]
     );
@@ -55,7 +55,7 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
   const handleSelectAll = useCallback(() => {
     const filteredIds = filteredTests.map(test => test.id);
     const allSelected = filteredIds.every(id => selectedIds.includes(id));
-    
+
     setSelectedIds(prev => {
       if (allSelected) {
         return prev.filter(id => !filteredIds.includes(id));
@@ -116,7 +116,7 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
   }, [fetchLabTests]);
 
   const selectedCount = selectedIds.length;
-  const allFilteredSelected = filteredTests.length > 0 && 
+  const allFilteredSelected = filteredTests.length > 0 &&
     filteredTests.every(test => selectedIds.includes(test.id));
 
   return (
@@ -129,8 +129,8 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
               Chọn các xét nghiệm cần thực hiện cho buổi khám này
             </p>
           </div>
-          <button 
-            className="lab-modal-close-btn" 
+          <button
+            className="lab-modal-close-btn"
             onClick={handleClose}
             disabled={submitting}
             aria-label="Đóng modal"
@@ -163,7 +163,7 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
                 disabled={loading}
               />
             </div>
-            
+
             <div className="selection-info">
               <span className="selected-count">
                 Đã chọn: <strong>{selectedCount}</strong>
@@ -172,8 +172,8 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
                 )}
               </span>
               {filteredTests.length > 0 && (
-                <button 
-                  className="select-all-btn" 
+                <button
+                  className="select-all-btn"
                   onClick={handleSelectAll}
                   disabled={loading}
                 >
@@ -193,13 +193,12 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
               <div className="no-results">
                 <ClipboardList size={48} className="no-results-icon" />
                 <p>
-                  {labTests.length === 0 
-                    ? "Không có xét nghiệm nào trong hệ thống" 
-                    : "Không tìm thấy xét nghiệm phù hợp"
-                  }
+                  {labTests.length === 0
+                    ? "Không có xét nghiệm nào trong hệ thống"
+                    : "Không tìm thấy xét nghiệm phù hợp"}
                 </p>
                 {searchTerm && (
-                  <button 
+                  <button
                     onClick={() => setSearchTerm("")}
                     className="clear-search-btn"
                   >
@@ -227,9 +226,9 @@ const LabTestFollowUpRequestModal = ({ recordId, sessionId, onClose, onSuccess }
 
         <div className="lab-modal-footer">
           <div className="lab-modal-actions">
-            <button 
-              className="lab-modal-cancel" 
-              onClick={handleClose} 
+            <button
+              className="lab-modal-cancel"
+              onClick={handleClose}
               disabled={submitting}
             >
               Hủy

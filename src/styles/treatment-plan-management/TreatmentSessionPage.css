@@ -1,0 +1,475 @@
+.treatment-session-page {
+  /* max-width: 1200px; */
+  margin: -80px auto;
+  padding: 20px;
+  padding-top: 20px !important;
+  background-color: #E2EFFF;
+  /* min-height: 100vh; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.treatment-session-page__header {
+  display: flex;
+  align-items: center;
+  gap: 555px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.treatment-session-page__back-btn {
+  background: #077BF6;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.treatment-session-page__back-btn:hover {
+  background: #0563d1;
+  transform: translateY(-1px);
+}
+
+.treatment-session-page__page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #077BF6;
+  margin: 0;
+}
+
+.treatment-session-page__section {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.treatment-session-page__section-header {
+  background: linear-gradient(135deg, #077BF6 0%, #0563d1 100%);
+  color: white;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.treatment-session-page__section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.treatment-session-page__section-icon {
+  font-size: 24px;
+}
+
+.treatment-session-page__section-content {
+  padding: 24px;
+}
+
+
+.treatment-session-page__action-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.treatment-session-page__action-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+
+.treatment-session-page__updated-info {
+  margin-top: 24px;
+  padding: 20px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border-left: 4px solid #077BF6;
+}
+
+.treatment-session-page__updated-info-title {
+  color: #077BF6;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.treatment-session-page__info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.treatment-session-page__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.treatment-session-page__info-label {
+  font-weight: 600;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.treatment-session-page__info-value {
+  color: #1e293b;
+  font-size: 15px;
+  padding: 8px 0;
+}
+
+.treatment-session-page__lab-test-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.treatment-session-page__lab-test-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.2s ease;
+  background: #fefefe;
+}
+
+.treatment-session-page__lab-test-card:hover {
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.treatment-session-page__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.treatment-session-page__card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.treatment-session-page__status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.treatment-session-page__status-badge--pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.treatment-session-page__status-badge--in_progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.treatment-session-page__status-badge--completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.treatment-session-page__card-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.treatment-session-page__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.treatment-session-page__meta-icon {
+  font-size: 16px;
+}
+
+.treatment-session-page__test-results {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 3px solid #077BF6;
+}
+
+.treatment-session-page__result-item {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.treatment-session-page__result-item:last-child {
+  margin-bottom: 0;
+}
+
+.treatment-session-page__result-item strong {
+  color: #077BF6;
+}
+
+.treatment-session-page__ultrasound-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.treatment-session-page__ultrasound-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  background: #fefefe;
+  transition: all 0.2s ease;
+}
+
+.treatment-session-page__ultrasound-card:hover {
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.treatment-session-page__ultrasound-date {
+  font-size: 12px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.treatment-session-page__ultrasound-result {
+  margin: 16px 0;
+  padding: 12px;
+  background: #f0f9ff;
+  border-radius: 6px;
+  border-left: 3px solid #077BF6;
+}
+
+.treatment-session-page__ultrasound-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.treatment-session-page__image-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.treatment-session-page__image-container:hover {
+  transform: scale(1.05);
+}
+
+.treatment-session-page__ultrasound-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.treatment-session-page__image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 123, 246, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.treatment-session-page__image-container:hover .treatment-session-page__image-overlay {
+  opacity: 1;
+}
+
+.treatment-session-page__update-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.treatment-session-page__update-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.treatment-session-page__update-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(7, 123, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.treatment-session-page__update-card:hover::before {
+  left: 100%;
+}
+
+.treatment-session-page__update-card:hover {
+  border-color: #077BF6;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px -5px rgba(7, 123, 246, 0.2);
+}
+
+.treatment-session-page__update-card-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.treatment-session-page__update-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+}
+
+.treatment-session-page__update-card p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+.treatment-session-page__update-btn {
+  background: #077BF6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.treatment-session-page__update-btn:hover {
+  background: #0563d1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.treatment-session-page__update-btn--success:hover {
+  background: #0563d1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.treatment-session-page__empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: #64748b;
+}
+
+.treatment-session-page__empty-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.treatment-session-page__empty-state p {
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .treatment-session-page {
+    padding: 16px;
+  }
+  
+  .treatment-session-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .treatment-session-page__page-title {
+    font-size: 24px;
+  }
+  
+  .treatment-session-page__section-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .treatment-session-page__lab-test-grid,
+  .treatment-session-page__ultrasound-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .treatment-session-page__info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .treatment-session-page__update-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .treatment-session-page__card-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .treatment-session-page__section-content {
+    padding: 16px;
+  }
+  
+  .treatment-session-page__section-header {
+    padding: 16px 20px;
+  }
+  
+  .treatment-session-page__ultrasound-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
