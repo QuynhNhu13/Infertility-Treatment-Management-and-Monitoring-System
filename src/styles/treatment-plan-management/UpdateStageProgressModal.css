@@ -1,0 +1,74 @@
+.stage-progress-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.stage-progress-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  width: 500px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif;
+}
+
+.stage-progress-modal-title {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #001D54;
+  text-align: center;
+}
+
+.stage-progress-modal-textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+  margin-bottom: 20px;
+}
+
+.stage-progress-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.stage-progress-btn-cancel,
+.stage-progress-btn-save {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.stage-progress-btn-cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.stage-progress-btn-save {
+  background-color: #077BF6;
+  color: white;
+}
+
+.stage-progress-btn-save:hover {
+  background-color: #005fcc;
+}
+
+.stage-progress-btn-cancel:hover {
+  background-color: #b0b0b0;
+}

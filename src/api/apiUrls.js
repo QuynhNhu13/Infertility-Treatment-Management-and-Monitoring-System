@@ -83,6 +83,7 @@ export const GET_TREATMENT_PLAN = (medicalRecordId) => `${BASE_URL}api/medical-r
 export const CREATE_TREATMENT_PLAN = `${BASE_URL}api/medical-record/treatment-plan`;
 export const UPDATE_TREATMENT_PLAN = (planId) => `${BASE_URL}api/medical-record/treatment-plan/${planId}`;
 export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
+export const UPDATE_STAGE_PROGRESS = (stageId) => `${BASE_URL}api/medical-record/treatment-stage-progress/${stageId}`;
 
 export const GET_AVAILABLE_DATES = `${BASE_URL}api/schedules/my-available-dates`;
 export const GET_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-date`;

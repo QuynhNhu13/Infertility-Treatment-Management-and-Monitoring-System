@@ -9,6 +9,7 @@ import ServiceSelectionModal from "../../pages/service-management/ServiceSelecti
 import CreateTreatmentSessionModal from "./CreateTreatmentSessionModal";
 import TreatmentSessionView from "./TreatmentSessionView";
 import "../../styles/treatment-plan-management/TreatmentPlan.css";
+import UpdateStageProgressModal from "./UpdateStageProgressModal";
 
 export default function TreatmentPlan({ medicalRecordId }) {
   const { getAuthHeader } = useAuth();
@@ -20,6 +21,18 @@ export default function TreatmentPlan({ medicalRecordId }) {
   const [isUpdate, setIsUpdate] = useState(false);
   const [selectedStage, setSelectedStage] = useState(null);
   const [expandedStages, setExpandedStages] = useState({});
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [selectedStageId, setSelectedStageId] = useState(null);
+
+  const openUpdateModal = (id) => {
+    setSelectedStageId(id);
+    setIsUpdateModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
+    setSelectedStageId(null);
+  };
 
   useEffect(() => {
     if (medicalRecordId) {
@@ -119,10 +132,10 @@ export default function TreatmentPlan({ medicalRecordId }) {
     return isNaN(date.getTime())
       ? "Không hợp lệ"
       : date.toLocaleDateString("vi-VN", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
   };
 
   const getStatusText = (status) => {
@@ -130,15 +143,16 @@ export default function TreatmentPlan({ medicalRecordId }) {
       IN_PROGRESS: "Đang thực hiện",
       COMPLETED: "Đã hoàn thành",
       PENDING: "Chờ xử lý",
-      CANCELLED: "Đã hủy"
+      CANCELLED: "Đã hủy",
+      NOT_STARTED: "Chưa bắt đầu",
     };
     return statusMap[status] || status;
   };
 
   const toggleStageExpansion = (stageId) => {
-    setExpandedStages(prev => ({
+    setExpandedStages((prev) => ({
       ...prev,
-      [stageId]: !prev[stageId]
+      [stageId]: !prev[stageId],
     }));
   };
 
@@ -210,12 +224,11 @@ export default function TreatmentPlan({ medicalRecordId }) {
               <div className="treatment-plan__info">
                 <h3 className="treatment-plan__service">Dịch vụ: {plan.serviceName}</h3>
                 <div className="treatment-plan__meta">
-                  <span className={`treatment-plan__status treatment-plan__status--${plan.status.toLowerCase()}`}>
+                  <span
+                    className={`treatment-plan__status treatment-plan__status--${plan.status.toLowerCase()}`}
+                  >
                     {getStatusText(plan.status)}
                   </span>
-                  {/* <span className="treatment-plan__dates">
-                    {formatDate(plan.dateStart)} - {formatDate(plan.dateEnd)}
-                  </span> */}
                 </div>
               </div>
 
@@ -229,7 +242,9 @@ export default function TreatmentPlan({ medicalRecordId }) {
                     >
                       <div className="treatment-plan__stage-info">
                         <strong className="treatment-plan__stage-name">{stage.stageName}</strong>
-                        <span className={`treatment-plan__stage-status treatment-plan__stage-status--${stage.status.toLowerCase()}`}>
+                        <span
+                          className={`treatment-plan__stage-status treatment-plan__stage-status--${stage.status.toLowerCase()}`}
+                        >
                           {getStatusText(stage.status)}
                         </span>
                       </div>
@@ -239,9 +254,6 @@ export default function TreatmentPlan({ medicalRecordId }) {
                     </div>
 
                     <div className="treatment-plan__stage-meta">
-                      {/* <span className="treatment-plan__stage-dates">
-                        {formatDate(stage.dateStart)} - {formatDate(stage.dateComplete)}
-                      </span> */}
                       {stage.notes && (
                         <span className="treatment-plan__stage-notes">
                           Ghi chú: {stage.notes}
@@ -254,12 +266,20 @@ export default function TreatmentPlan({ medicalRecordId }) {
                         <div className="treatment-plan__sessions">
                           <TreatmentSessionView progressId={stage.id} />
                         </div>
-                        <button
-                          className="treatment-plan__btn treatment-plan__btn--session"
-                          onClick={() => setSelectedStage(stage)}
-                        >
-                          + Tạo lịch hẹn
-                        </button>
+                        <div className="treatment-plan__stage-buttons">
+                          <button
+                            className="treatment-plan__btn treatment-plan__btn--session"
+                            onClick={() => setSelectedStage(stage)}
+                          >
+                            + Tạo lịch hẹn
+                          </button>
+                          <button
+                            className="treatment-plan__btn treatment-plan__btn--update-stage"
+                            onClick={() => openUpdateModal(stage.id)}
+                          >
+                            ✎ Cập nhật tiến trình
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -269,6 +289,13 @@ export default function TreatmentPlan({ medicalRecordId }) {
           ))}
         </div>
       )}
+
+      <UpdateStageProgressModal
+        isOpen={isUpdateModalOpen}
+        onClose={closeUpdateModal}
+        stageId={selectedStageId}
+        onUpdateSuccess={fetchTreatmentPlans}
+      />
 
       {isServiceModalOpen && (
         <ServiceSelectionModal
