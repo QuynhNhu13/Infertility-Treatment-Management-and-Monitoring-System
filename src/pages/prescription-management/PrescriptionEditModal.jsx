@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/prescription-management/PrescriptionEditModal.css";
 import { useAuth } from "../../context/AuthContext";
-import { UPDATE_PRESCRIPTION } from "../../api/apiUrls";
+import { GET_ALL_MEDICATIONS, UPDATE_PRESCRIPTION } from "../../api/apiUrls";
 import Select from "react-select";
 
 export default function PrescriptionEditModal({ prescription, onSuccess, onClose }) {
   const { getAuthHeader } = useAuth();
+  const [medications, setMedications] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [notes, setNotes] = useState(prescription?.notes || "");
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,17 @@ export default function PrescriptionEditModal({ prescription, onSuccess, onClose
     }),
   };
 
+  // Fetch thuốc có sẵn
+  useEffect(() => {
+    fetch(GET_ALL_MEDICATIONS, { headers: getAuthHeader() })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.data) setMedications(result.data);
+      })
+      .catch((error) => console.error("Lỗi khi lấy danh sách thuốc:", error));
+  }, []);
+
+  // Load dữ liệu đơn thuốc
   useEffect(() => {
     setSelectedItems(
       prescription?.medications?.map((med) => ({
@@ -45,7 +57,27 @@ export default function PrescriptionEditModal({ prescription, onSuccess, onClose
         route: med.route || "ORAL",
       })) || []
     );
+    setNotes(prescription?.notes || "");
   }, [prescription]);
+
+  // Thêm thuốc từ danh sách trái
+  const handleAddMedication = (med) => {
+    if (!selectedItems.find((item) => item.medicationId === med.id)) {
+      setSelectedItems([
+        ...selectedItems,
+        {
+          id: undefined,
+          medicationId: med.id,
+          medicationName: med.name,
+          dosage: med.strength || "",
+          quantity: 0,
+          frequency: "",
+          usageInstruction: "",
+          route: "ORAL",
+        },
+      ]);
+    }
+  };
 
   const handleUpdate = (index, field, value) => {
     const updated = [...selectedItems];
@@ -73,7 +105,7 @@ export default function PrescriptionEditModal({ prescription, onSuccess, onClose
     const payload = {
       notes,
       medications: selectedItems.map((item) => ({
-        id: item.id,
+        id: item.id, // nếu là thuốc mới thêm thì id sẽ là undefined
         medicationId: item.medicationId,
         dosage: item.dosage,
         quantity: Number(item.quantity),
@@ -110,65 +142,83 @@ export default function PrescriptionEditModal({ prescription, onSuccess, onClose
   };
 
   return (
-    <div className="pum-modal-overlay">
-      <div className="pum-modal">
-        <div className="pum-modal-header">
+    <div className="pam-modal-overlay">
+      <div className="pam-modal">
+        <div className="pam-modal-header">
           <h2>Cập nhật đơn thuốc #{prescription?.id}</h2>
-          <button className="pum-close-btn" onClick={onClose}>×</button>
+          <button className="pam-modal-close-btn" onClick={onClose}>×</button>
         </div>
 
-        <div className="pum-modal-content">
-          <textarea
-            className="pum-notes-input"
-            placeholder="Ghi chú đơn thuốc..."
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          />
-          {selectedItems.map((item, index) => (
-            <div key={index} className="pum-medication-card">
-              <div className="pum-card-header">
-                <strong>{item.medicationName}</strong>
-                <button className="pum-btn-remove" onClick={() => handleRemove(index)}>🗑</button>
-              </div>
-              <div className="pum-input-group">
-                <input
-                  type="text"
-                  placeholder="Liều dùng"
-                  value={item.dosage}
-                  onChange={(e) => handleUpdate(index, "dosage", e.target.value)}
-                />
-                <input
-                  type="number"
-                  placeholder="Số lượng"
-                  value={item.quantity}
-                  onChange={(e) => handleUpdate(index, "quantity", e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Tần suất"
-                  value={item.frequency}
-                  onChange={(e) => handleUpdate(index, "frequency", e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Cách dùng"
-                  value={item.usageInstruction}
-                  onChange={(e) => handleUpdate(index, "usageInstruction", e.target.value)}
-                />
-                <Select
-                  options={medicationRoutes}
-                  value={medicationRoutes.find((opt) => opt.value === item.route)}
-                  onChange={(opt) => handleUpdate(index, "route", opt.value)}
-                  styles={customSelectStyles}
-                />
-              </div>
+        <div className="pam-modal-content">
+          <div className="pam-left-panel">
+            <h3>💊 Thêm thuốc</h3>
+            <div className="pam-medication-list">
+              {medications.map((med) => (
+                <div key={med.id} className="pam-medication-item">
+                  <div>
+                    <strong>{med.name}</strong><br />
+                    <span className="pam-med-subinfo">{med.strength} – {med.form} – {med.manufacturer}</span>
+                  </div>
+                  <button className="pam-btn-add" onClick={() => handleAddMedication(med)}>+</button>
+                </div>
+              ))}
             </div>
-          ))}
-          <div className="pum-form-actions">
-            <button className="pum-btn-cancel" onClick={onClose}>Hủy</button>
-            <button className="pum-btn-submit" onClick={handleSubmit} disabled={loading}>
-              {loading ? "Đang cập nhật..." : "💾 Lưu đơn thuốc"}
-            </button>
+          </div>
+
+          <div className="pam-right-panel">
+            <h3 className="pam-panel-title">📝 Đơn thuốc</h3>
+            <textarea
+              className="pam-notes-input"
+              placeholder="Ghi chú đơn thuốc..."
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
+            {selectedItems.map((item, index) => (
+              <div key={index} className="pam-medication-card">
+                <div className="pam-card-header">
+                  <strong>{item.medicationName}</strong>
+                  <button className="pam-btn-remove" onClick={() => handleRemove(index)}>🗑</button>
+                </div>
+                <div className="pam-input-group">
+                  <input
+                    type="text"
+                    placeholder="Liều dùng"
+                    value={item.dosage}
+                    onChange={(e) => handleUpdate(index, "dosage", e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Số lượng"
+                    value={item.quantity}
+                    onChange={(e) => handleUpdate(index, "quantity", e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Tần suất"
+                    value={item.frequency}
+                    onChange={(e) => handleUpdate(index, "frequency", e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Cách dùng"
+                    value={item.usageInstruction}
+                    onChange={(e) => handleUpdate(index, "usageInstruction", e.target.value)}
+                  />
+                  <Select
+                    options={medicationRoutes}
+                    value={medicationRoutes.find((opt) => opt.value === item.route)}
+                    onChange={(opt) => handleUpdate(index, "route", opt.value)}
+                    styles={customSelectStyles}
+                  />
+                </div>
+              </div>
+            ))}
+            <div className="pam-form-actions">
+              <button className="pam-btn-cancel" onClick={onClose}>Hủy</button>
+              <button className="pam-btn-submit" onClick={handleSubmit} disabled={loading}>
+                {loading ? "Đang cập nhật..." : "💾 Lưu đơn thuốc"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

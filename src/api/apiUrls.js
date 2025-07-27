@@ -101,7 +101,6 @@ export const GET_ALL_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;
 //Consultation - Management
 export const CONSULTATION_FORM = `${BASE_URL}api/consultation`;
 
-
 //Prescription - Management
 export const GET_PRESCRIPTION = (sessionId) => `${BASE_URL}api/prescription/${sessionId}`;
 export const CREATE_PRESCRIPTION = `${BASE_URL}api/prescription`;
