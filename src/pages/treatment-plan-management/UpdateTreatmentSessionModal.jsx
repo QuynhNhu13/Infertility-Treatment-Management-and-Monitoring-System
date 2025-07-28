@@ -22,15 +22,24 @@ export default function UpdateTreatmentSessionModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [successData, setSuccessData] = useState(null);
 
+  // Reset success message & error when modal is opened
   useEffect(() => {
-    if (sessionData) {
+    if (isOpen) {
+      setSuccessData(null);
+      setErrorMessage("");
+    }
+  }, [isOpen]);
+
+  // Load sessionData vào form nếu chưa cập nhật
+  useEffect(() => {
+    if (sessionData && !successData) {
       setFormData({
         diagnosis: sessionData.diagnosis || "",
         symptoms: sessionData.symptoms || "",
         notes: sessionData.notes || "",
       });
     }
-  }, [sessionData]);
+  }, [sessionData, successData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

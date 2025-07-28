@@ -5,7 +5,7 @@ import UpdateTreatmentSessionModal from "./UpdateTreatmentSessionModal";
 import LabTestFollowUpRequestModal from "../../pages/lab-test-management/LabTestFollowUpRequestModal";
 import FollowUpUltrasoundModal from "../../pages/ultrasound-management/FollowUpUltrasoundModal";
 import PrescriptionSystem from "../../pages/prescription-management/PrescriptionSystem";
-import { GET_LAB_TEST_FOLLOW, GET_FOLLOW_UP_ULTRASOUND } from "../../api/apiUrls";
+import { GET_LAB_TEST_FOLLOW, GET_FOLLOW_UP_ULTRASOUND, GET_TREATMENT_SESSION_RESULT } from "../../api/apiUrls";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/treatment-plan-management/TreatmentSessionPage.css";
 import HeaderPage from "../../components/HeaderPage";
@@ -15,6 +15,31 @@ export default function TreatmentSessionPage() {
   const { recordId, progressId, sessionId } = useParams();
   const navigate = useNavigate();
   const { getJsonAuthHeader } = useAuth();
+
+  const fetchSessionDetail = async () => {
+  try {
+    const res = await fetch(GET_TREATMENT_SESSION_RESULT(sessionId), {
+      headers: getJsonAuthHeader(),
+    });
+    const json = await res.json();
+    if (json.statusCode === 200 && json.data) {
+      const session = json.data;
+      const isUpdated = !!(session.diagnosis || session.symptoms || session.notes || session.status);
+      setSessionData({
+        isUpdated,
+        updatedData: isUpdated ? {
+          diagnosis: session.diagnosis,
+          symptoms: session.symptoms,
+          notes: session.notes,
+          status: session.status,
+        } : null
+      });
+    }
+  } catch (error) {
+    console.error("Lỗi khi lấy chi tiết buổi khám:", error);
+  }
+};
+
 
   const [modals, setModals] = useState({
     update: false,
@@ -38,6 +63,7 @@ export default function TreatmentSessionPage() {
   }, [sessionId]);
 
   const initializeData = () => {
+     fetchSessionDetail(); 
     fetchLabTests();
     fetchUltrasoundImages();
   };
@@ -114,40 +140,7 @@ export default function TreatmentSessionPage() {
     return statusMap[status] || status;
   };
 
-  const renderSessionInfo = () => {
-    return (
-      <>
-        <FollowUpDetail sessionId={sessionId} />
-
-        {sessionData.isUpdated && sessionData.updatedData && (
-          <div className="treatment-session-page__updated-info">
-            <h4 className="treatment-session-page__updated-info-title">
-              Thông tin sau cập nhật:
-            </h4>
-            <div className="treatment-session-page__info-grid">
-              <div className="treatment-session-page__info-item">
-                <span className="treatment-session-page__info-label">Chẩn đoán:</span>
-                <span className="treatment-session-page__info-value">{sessionData.updatedData.diagnosis}</span>
-              </div>
-              <div className="treatment-session-page__info-item">
-                <span className="treatment-session-page__info-label">Triệu chứng:</span>
-                <span className="treatment-session-page__info-value">{sessionData.updatedData.symptoms}</span>
-              </div>
-              <div className="treatment-session-page__info-item">
-                <span className="treatment-session-page__info-label">Ghi chú:</span>
-                <span className="treatment-session-page__info-value">{sessionData.updatedData.notes}</span>
-              </div>
-              <div className="treatment-session-page__info-item">
-                <span className="treatment-session-page__info-label">Trạng thái:</span>
-                <span className="treatment-session-page__info-value">{sessionData.updatedData.status}</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-      </>
-    );
-  };
+  
 
   const renderLabTestSection = () => {
     return (
@@ -327,6 +320,40 @@ export default function TreatmentSessionPage() {
           </div>
         </div>
       </div>
+    );
+  };
+const renderSessionInfo = () => {
+    return (
+      <>
+        <FollowUpDetail sessionId={sessionId} />
+
+        {sessionData.isUpdated && sessionData.updatedData && (
+          <div className="treatment-session-page__updated-info">
+            <h4 className="treatment-session-page__updated-info-title">
+              Thông tin sau cập nhật:
+            </h4>
+            <div className="treatment-session-page__info-grid">
+              <div className="treatment-session-page__info-item">
+                <span className="treatment-session-page__info-label">Chẩn đoán:</span>
+                <span className="treatment-session-page__info-value">{sessionData.updatedData.diagnosis}</span>
+              </div>
+              <div className="treatment-session-page__info-item">
+                <span className="treatment-session-page__info-label">Triệu chứng:</span>
+                <span className="treatment-session-page__info-value">{sessionData.updatedData.symptoms}</span>
+              </div>
+              <div className="treatment-session-page__info-item">
+                <span className="treatment-session-page__info-label">Ghi chú:</span>
+                <span className="treatment-session-page__info-value">{sessionData.updatedData.notes}</span>
+              </div>
+              <div className="treatment-session-page__info-item">
+                <span className="treatment-session-page__info-label">Trạng thái:</span>
+                <span className="treatment-session-page__info-value">{sessionData.updatedData.status}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+      </>
     );
   };
 

@@ -189,3 +189,43 @@ body {
   color: #077BF6;
   font-weight: bold;
 }
+
+.notification-container {
+  position: relative;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.notification-bell {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.notification-container {
+  position: relative;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 2;
+  border: 2px solid white; 
+}
+

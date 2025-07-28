@@ -617,3 +617,13 @@ margin-top: -35px;
     flex: 1;
   }
 }
+
+.mr-detail-test-result{
+  color: #4A5568;
+}
+
+.mr-detail-medical-section,
+.mr-detail-patient-info,
+.mr-detail-ultrasound-results{
+  color: #4A5568;
+}

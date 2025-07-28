@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { GET_MEDICAL_RECORD } from "../../api/apiUrls";
+import { GET_MEDICAL_RECORD_USER } from "../../api/apiUrls";
 import UltrasoundImageFetcher from "../ultrasound-management/UltrasoundImageFetcher";
-import TreatmentPlan from "../treatment-plan-management/TreatmentPlan";
+import TreatmentPlanView from "../treatment-plan-management/TreatmentPlanView"; // Đã đổi ở đây
 import "../../styles/medical-record-management/MedicalRecordDetail.css";
 import HeaderPage from "../../components/HeaderPage";
 
@@ -48,7 +48,7 @@ export default function MedicalRecordDetailView() {
 
   const fetchRecord = useCallback(async () => {
     try {
-      const response = await fetch(GET_MEDICAL_RECORD(recordId), {
+      const response = await fetch(GET_MEDICAL_RECORD_USER(recordId), {
         headers: getJsonAuthHeader(),
       });
       const result = await response.json();
@@ -121,7 +121,6 @@ export default function MedicalRecordDetailView() {
 
                   <div className="mr-detail-test-details">
                     <div><strong>Ngày:</strong> {formatDate(test.testDate)}</div>
-                    <div><strong>Nhân viên:</strong> {test.staffFullName || "Chưa rõ"}</div>
                   </div>
 
                   {test.status === "COMPLETED" && (
@@ -160,15 +159,9 @@ export default function MedicalRecordDetailView() {
       <h2>Chi tiết hồ sơ bệnh án</h2>
 
       <div className="mr-detail-patient-info">
-        <div><strong>Họ tên:</strong> {record.fullName}</div>
-        <div><strong>Ngày sinh:</strong> {record.dob}</div>
-        <div><strong>Giới tính:</strong> {record.gender || "Chưa cập nhật"}</div>
-        <div><strong>Số điện thoại:</strong> {record.phoneNumber || "Chưa cập nhật"}</div>
-        <div><strong>Địa chỉ:</strong> {record.address}</div>
-        <div><strong>CMND/CCCD:</strong> {record.identityNumber}</div>
-        <div><strong>Quốc tịch:</strong> {record.nationality}</div>
-        <div><strong>Số BHYT:</strong> {record.insuranceNumber}</div>
-        <div><strong>Ngày tạo:</strong> {formatDate(record.createdAt)}</div>
+        <h4 style={{ marginBottom: "6px", color: "#077BF6" }}>Bác sĩ phụ trách</h4>
+        <div><strong>Họ tên:</strong> {record.doctorFullName || "Chưa rõ"}</div>
+        <div><strong>Chức vụ:</strong> {record.doctorPosition || "Chưa rõ"}</div>
       </div>
 
       <hr />
@@ -189,18 +182,16 @@ export default function MedicalRecordDetailView() {
         {activeTab === TABS.INIT && (
           <div className="mr-detail-init-tab">
             <div className="mr-detail-medical-section">
-              <h3>Thông tin y tế</h3>
               <div><strong>Triệu chứng:</strong> {record.symptoms || "Chưa cập nhật"}</div>
               <div><strong>Chẩn đoán ban đầu:</strong> {record.diagnosis || "Chưa cập nhật"}</div>
             </div>
-
             {renderLabTestResults()}
             {renderUltrasoundResults()}
           </div>
         )}
 
         {activeTab === TABS.TREATMENT && (
-          <TreatmentPlan medicalRecordId={recordId} />
+          <TreatmentPlanView medicalRecordId={recordId} /> // ✅ Gọi component chỉ hiển thị
         )}
       </div>
     </div>

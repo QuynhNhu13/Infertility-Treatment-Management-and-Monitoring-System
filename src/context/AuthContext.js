@@ -4,14 +4,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthLoaded, setIsAuthLoaded] = useState(false); // 👈 THÊM flag
+  const [isAuthLoaded, setIsAuthLoaded] = useState(false); 
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
-    setIsAuthLoaded(true); // 👈 Đánh dấu đã load xong user
+    setIsAuthLoaded(true); 
   }, []);
 
   const login = (userData) => {

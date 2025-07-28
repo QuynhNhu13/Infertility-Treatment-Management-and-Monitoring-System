@@ -1,18 +1,29 @@
+// src/components/Header.jsx
 import "../styles/Header.css";
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { Bell } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNotification } from "../components/NotificationContext"; // ✅ dùng context
 
 const Header = () => {
   const { user, logout, isAuthLoaded } = useAuth();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const socketRef = useRef(null);
+
+  const {
+    notifications,
+    fetchNotifications
+  } = useNotification();
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   const handleBellClick = () => {
-    console.log("Thông báo được bấm");
+    navigate("/thong-bao");
+    // Không cần reset count ở đây nếu NotificationPage đã gọi markAllAsRead
   };
 
   const toggleDropdown = () => {
@@ -33,6 +44,35 @@ const Header = () => {
   const getInitial = (fullName) => {
     return fullName?.trim().charAt(0).toUpperCase() || "?";
   };
+
+  // WebSocket để nhận thông báo mới
+  useEffect(() => {
+    if (!user || !user.email) return;
+
+    const socketUrl = `ws://localhost:8080/ws/notifications/${user.email}`;
+    socketRef.current = new WebSocket(socketUrl);
+
+    socketRef.current.onopen = () => {
+      console.log("🔌 WebSocket connected:", socketUrl);
+    };
+
+    socketRef.current.onmessage = (event) => {
+      console.log("🔔 Thông báo mới:", event.data);
+      fetchNotifications(); // Khi có noti mới thì gọi lại API để cập nhật
+    };
+
+    socketRef.current.onerror = (error) => {
+      console.error("❌ WebSocket error:", error);
+    };
+
+    socketRef.current.onclose = () => {
+      console.log("🔌 WebSocket disconnected");
+    };
+
+    return () => {
+      socketRef.current?.close();
+    };
+  }, [user, fetchNotifications]);
 
   if (!isAuthLoaded) return null;
 
@@ -59,12 +99,13 @@ const Header = () => {
       <nav className="nav-links">
         {user ? (
           <>
-            <Bell
-              className="bell-icon"
-              onClick={handleBellClick}
-              style={{ cursor: "pointer" }}
-              title="Thông báo"
-            />
+            <div className="notification-container" onClick={handleBellClick}>
+              <Bell className="bell-icon" title="Thông báo" />
+              {unreadCount > 0 && (
+  <span className="notification-dot"></span>
+)}
+
+            </div>
 
             <div className="user-dropdown">
               <div className="user-info" onClick={toggleDropdown}>

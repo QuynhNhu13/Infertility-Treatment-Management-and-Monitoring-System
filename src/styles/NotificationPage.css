@@ -1,0 +1,179 @@
+.notification-page {
+  margin: -80px auto;
+  padding: 2rem;
+  background: #E2EFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.notification-page h2 {
+  color: #077BF6;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.notification-page h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #077BF6, #4da3ff);
+  border-radius: 2px;
+}
+
+.notification-page p {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: rgba(7, 123, 246, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.notification-item {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(7, 123, 246, 0.08);
+  border: 1px solid rgba(7, 123, 246, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.notification-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #077BF6, #4da3ff);
+  transition: width 0.3s ease;
+}
+
+.notification-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(7, 123, 246, 0.15);
+}
+
+.notification-item:hover::before {
+  width: 8px;
+}
+
+.notification-item.unread {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  border-color: #077BF6;
+  box-shadow: 0 4px 25px rgba(7, 123, 246, 0.12);
+}
+
+.notification-item.unread::before {
+  background: linear-gradient(180deg, #077BF6, #0066cc);
+  width: 6px;
+}
+
+.notification-item.read {
+  background: #fafafa;
+  border-color: #e5e7eb;
+  opacity: 0.8;
+}
+
+.notification-item.read::before {
+  background: #d1d5db;
+  width: 2px;
+}
+
+.notification-item p {
+  margin: 0 0 0.75rem 0;
+  color: #1f2937;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.notification-item.read p {
+  color: #6b7280;
+}
+
+.notification-item small {
+  color: #077BF6;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notification-item small::before {
+  content: '🕒';
+  font-size: 0.75rem;
+}
+
+.notification-item.read small {
+  color: #9ca3af;
+}
+
+@media (max-width: 768px) {
+  .notification-page {
+    padding: 1rem;
+  }
+  
+  .notification-page h2 {
+    font-size: 2rem;
+  }
+  
+  .notification-item {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.notification-item {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.notification-item:nth-child(1) { animation-delay: 0.1s; }
+.notification-item:nth-child(2) { animation-delay: 0.2s; }
+.notification-item:nth-child(3) { animation-delay: 0.3s; }
+.notification-item:nth-child(4) { animation-delay: 0.4s; }
+.notification-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-page:hover .notification-item:not(:hover) {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+.back-button {
+  background-color: #077BF6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #0558C7;
+}

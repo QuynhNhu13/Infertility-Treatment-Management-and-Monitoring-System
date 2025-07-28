@@ -56,6 +56,9 @@ export const CREATE_MEDICAL_RECORD = (accountId) => `${BASE_URL}api/medical-reco
 export const GET_MEDICAL_RECORD = (recordId) => `${BASE_URL}api/medical-record/${recordId}`;
 export const UPDATE_MEDICAL_RECORD = (id) => `${BASE_URL}api/medical-record/${id}`;
 
+export const GET_MEDICAL_RECORD_HISTORY_USER = `${BASE_URL}api/medical-record/history/me`;
+export const GET_MEDICAL_RECORD_USER = (recordId) => `${BASE_URL}api/medical-record/me/${recordId}`;
+
 //Labtest - Management
 export const LAB_TEST = `${BASE_URL}api/lab-test`;
 export const LAB_TEST_FOLLOW_UP = (recordId, sessionId) => `${BASE_URL}api/medical-record/${recordId}/treatment-sessions/${sessionId}/lab-test-results`;
@@ -95,6 +98,7 @@ export const GET_SESSION_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessi
 export const UPDATE_SESSION = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;
 export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) => 
   `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
+export const GET_TREATMENT_SESSION_RESULT = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;
 
 //Schedule-Management
 export const CREATE_SCHEDULE = `${BASE_URL}api/schedules`;
@@ -110,3 +114,7 @@ export const GET_PRESCRIPTION = (sessionId) => `${BASE_URL}api/prescription/${se
 export const CREATE_PRESCRIPTION = `${BASE_URL}api/prescription`;
 export const GET_ALL_MEDICATIONS = `${BASE_URL}api/medications`;
 export const UPDATE_PRESCRIPTION = (id) => `${BASE_URL}api/prescription/${id}`;
+
+//NotificationContext
+export const GET_NOTI = `${BASE_URL}api/notifications`;
+export const READ_NOTI = `${BASE_URL}api/notifications/mark-read`;

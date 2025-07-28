@@ -35,6 +35,10 @@ import LabTestResultList from "../pages/lab-test-management/LabTestResultList";
 import FollowUpDetail from "../pages/treatment-plan-management/FollowUpDetail";
 import TreatmentSessionPage from "../pages/treatment-plan-management/TreatmentSessionPage";
 import MedicalRecordDetailView from "../pages/medical-record-management/MedicalRecordDetailView";
+import UserDashboard from "../pages/UserDashboard";
+import MedicalRecordHistoryView from "../pages/medical-record-management/MedicalRecordHistoryView";
+import TreatmentSessionPageView from "../pages/treatment-plan-management/TreatmentSessionPageView";
+import NotificationPage from "../pages/NotificationPage"; 
 
 function AppRoutes() {
   return (
@@ -53,7 +57,12 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
-      <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
+        <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
+      </Route>
+
+      <Route path={ROUTES.USER} element={<UserDashboard />}>
+        <Route path={ROUTES.MEDICAL_RECORD_HISTORY_VIEW} element={<MedicalRecordHistoryView />} />
+
       </Route>
 
 
@@ -88,14 +97,16 @@ function AppRoutes() {
       {/* Consultation - Management */}
       <Route path={ROUTES.CONSULTATION_FORM} element={<ConsultationForm />} />
 
-      {/* MedicalRecord - Management */} 
+      {/* MedicalRecord - Management */}
       <Route path="/ho-so-benh-nhan/:accountId" element={<MedicalRecordHistory />} />
       <Route path={ROUTES.MEDICAL_RECORD_DETAIL} element={<MedicalRecordDetail />} />
-      <Route path={ROUTES.MEDICAL_RECORD_DETAIL_VIEW} element={<MedicalRecordDetailView />} />
+      <Route path="/ho-so-ca-nhan/lich-su-benh-an/chi-tiet-ho-so/:recordId" element={<MedicalRecordDetailView />} />
 
       {/* Treatment Plan - Management */}
       <Route path="/ho-so-benh-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPage />} />
+      <Route path="/ho-so-ca-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPageView />} />
 
+      <Route path="/thong-bao" element={<NotificationPage />} />    
     </Routes>
   );
 }

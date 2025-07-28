@@ -5,6 +5,7 @@ const ROUTES = {
   DOCTOR: '/bac-si',
   MANAGER: '/quan-ly',
   ADMIN: '/admin',
+  USER: '/ho-so-ca-nhan',
 
 
   // login - register
@@ -34,18 +35,14 @@ const ROUTES = {
   BOOKING_FORM: 'dat-lich-kham',
   PAYMENT_RESULT: '/payment-result',
 
-  // // medical-record-management
-  // MEDICAL_RECORD: (accountId) => `/ho-so-benh-nhan/${accountId}`,
-  // LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
-  // GET_MEDICAL_RECORD_HISTORY: "/ho-so-benh-nhan/:accountId",
+  //medical-record-management
   GET_MEDICAL_RECORD_HISTORY: (accountId) => `/ho-so-benh-nhan/${accountId}`,
-  MEDICAL_RECORD_DETAIL: "/chi-tiet-ho-so/:recordId",
-  MEDICAL_RECORD_DETAIL_VIEW: "/chi-tiet-ho-so/:recordId",
+  MEDICAL_RECORD_DETAIL: `/chi-tiet-ho-so/:recordId`,
+  MEDICAL_RECORD_DETAIL_VIEW: `/ho-so-ca-nhan/lich-su-benh-an/chi-tiet-ho-so/:recordId`,
+  MEDICAL_RECORD_HISTORY_VIEW: `lich-su-benh-an`,
 
   //lab-test-management
   LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
-
-
 
   // schedule-management
   CREATE_SCHEDULE: `/tao-lich-lam-viec`,
