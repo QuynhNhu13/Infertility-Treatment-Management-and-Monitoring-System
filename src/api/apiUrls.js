@@ -69,6 +69,9 @@ export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/
 export const GET_LAB_TEST_SESSION = (sessionId) => `${BASE_URL}api/session/${sessionId}/lab-test-results`;
 export const GET_LAB_TEST_FOLLOW = (sessionId) => `${BASE_URL}api/session/${sessionId}/lab-test-results`;
 
+export const SEARCH_GROUPED_LAB_TEST_RESULT = `${BASE_URL}api/lab-test-result/grouped`;
+export const GET_GROUPED_DETAILS = `${BASE_URL}api/lab-test-result/grouped/details`;
+
 //Ultrasound - Mangement
 export const INIT_ULTRASOUND_FORM = `${BASE_URL}api/init-ultrasounds`;
 export const UPDATE_ULTRASOUND = (id) => `${BASE_URL}api/ultrasounds/${id}`;
