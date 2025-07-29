@@ -51,7 +51,7 @@ export const PAYMENT_VNPAY_CALLBACK = `${BASE_URL}api/payment/vn-pay-callback`;/
 export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointment`;//nhan
 export const STAFF_GET_DOCTOR = `${BASE_URL}api/doctor/account`;
 export const STAFF_GET_APPOINTMENT = `${BASE_URL}api/appointments/staff/filter-appointment`;
-export const USER_GET_APPOINTMENT =  `${BASE_URL}api/appointments/me`;
+export const USER_GET_APPOINTMENT = `${BASE_URL}api/appointments/me`;
 
 
 //Medical-Record-New
@@ -63,14 +63,16 @@ export const UPDATE_MEDICAL_RECORD = (id) => `${BASE_URL}api/medical-record/${id
 export const GET_MEDICAL_RECORD_HISTORY_USER = `${BASE_URL}api/medical-record/history/me`;
 export const GET_MEDICAL_RECORD_USER = (recordId) => `${BASE_URL}api/medical-record/me/${recordId}`;
 
+export const DOCTOR_LIST_PATIENT = `${BASE_URL}api/patient/me`;
+
 //Labtest - Management
 export const LAB_TEST = `${BASE_URL}api/lab-test`;
 export const LAB_TEST_FOLLOW_UP = (recordId, sessionId) => `${BASE_URL}api/medical-record/${recordId}/treatment-sessions/${sessionId}/lab-test-results`;
 export const LAB_TEST_RESULT_INIT = (recordId) => `${BASE_URL}api/lab-test-result/init/${recordId}`;
 export const LAB_TEST_RESULT_FROM = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
 export const SEARCH_LAB_TEST_RESULT = (params) => {
-    const query = new URLSearchParams(params).toString();
-    return `${BASE_URL}api/lab-test-result/search?${query}`;
+  const query = new URLSearchParams(params).toString();
+  return `${BASE_URL}api/lab-test-result/search?${query}`;
 };
 export const GET_LAB_TEST_RESULT_VIEW = (id) => `${BASE_URL}api/lab-test-result/${id}/staff`;
 export const GET_LAB_TEST_SESSION = (sessionId) => `${BASE_URL}api/session/${sessionId}/lab-test-results`;
@@ -100,7 +102,7 @@ export const GET_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-da
 export const CREATE_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
 export const GET_SESSION_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-details`;
 export const UPDATE_SESSION = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;
-export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) => 
+export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) =>
   `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
 export const GET_TREATMENT_SESSION_RESULT = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;
 

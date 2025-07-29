@@ -54,13 +54,15 @@ const SidebarDoctor = () => {
           className={isActive(`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_APPOINTMENT_MANAGER}`) ? "active" : ""}
         >
           <Users size={18} />
+          <span>Danh sách lịch hẹn</span>
+        </Link>
+        <Link
+          to={`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_LIST_PATIENT}`}
+          className={isActive(`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_LIST_PATIENT}`) ? "active" : ""}
+        >
+          <FileText size={18} />
           <span>Hồ sơ bệnh nhân</span>
         </Link>
-        <Link to={`${ROUTES.MANAGER}/${ROUTES.SERVICE_MANAGE}`} className={isActive("/manager/methods") ? "active" : ""}>
-          <Stethoscope size={18} />
-          <span>Tạo kế hoạch điều trị</span>
-        </Link>
-
         <Link
           to={`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_BLOG_MANAGER}`}
           className={isActive(`${ROUTES.DOCTOR}/${ROUTES.DOCTOR_BLOG_MANAGER}`) ? "active" : ""}

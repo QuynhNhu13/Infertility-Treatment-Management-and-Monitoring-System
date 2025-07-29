@@ -42,6 +42,7 @@ import NotificationPage from "../pages/NotificationPage";
 import DirectPatientManager from "../pages/account-management/DirectPatientManager";
 import StaffAppointmentList from "../pages/appointment-management/StaffAppointmentList";
 import UserAppointmentList from "../pages/appointment-management/UserAppointmentList";
+import DoctorListPatient from "../pages/medical-record-management/DoctorListPatient";
 
 function AppRoutes() {
   return (
@@ -57,6 +58,7 @@ function AppRoutes() {
       <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
         <Route path={ROUTES.DOCTOR_BLOG_MANAGER} element={<DoctorBlogManager />} />
         <Route path={ROUTES.DOCTOR_APPOINTMENT_MANAGER} element={<DoctorAppointmentManager />} />
+        <Route path={ROUTES.DOCTOR_LIST_PATIENT} element={<DoctorListPatient/>}/>
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >

@@ -1,0 +1,399 @@
+.doctor-list-patient-container {
+  max-width: 1400px;
+  margin: -30px auto;
+  padding: 2rem;
+  background: #FCFCFC;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.doctor-list-patient-container h2 {
+  color: #077BF6;
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 4px rgba(7, 123, 246, 0.1);
+  position: relative;
+}
+
+.doctor-list-patient-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #077BF6, #4da3f7);
+  border-radius: 2px;
+}
+
+.doctor-list-patient__search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.2);
+  border-left: 4px solid #077BF6;
+}
+
+.doctor-list-patient__search-bar input {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+  color: #374151;
+}
+
+.doctor-list-patient__search-bar input:focus {
+  outline: none;
+  border-color: #077BF6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.doctor-list-patient__search-bar input::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.doctor-list-patient__search-bar button {
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #077BF6 0%, #0ea5e9 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.doctor-list-patient__search-bar button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0ea5e9 0%, #077BF6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7, 123, 246, 0.4);
+}
+
+.doctor-list-patient__search-bar button:active {
+  transform: translateY(0);
+}
+
+.doctor-list-patient__search-bar button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.doctor-list-patient__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(7, 123, 246, 0.1);
+  margin-top: 1rem;
+}
+
+.doctor-list-patient__table thead {
+  background: linear-gradient(135deg, #077BF6 0%, #0ea5e9 100%);
+}
+
+.doctor-list-patient__table thead th {
+  padding: 1.2rem 1rem;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.doctor-list-patient__table thead th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.doctor-list-patient__table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.doctor-list-patient__table tbody tr:hover {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.2);
+}
+
+.doctor-list-patient__table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.doctor-list-patient__table tbody td {
+  padding: 1rem;
+  color: #374151;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  vertical-align: middle;
+  border-right: 1px solid #f3f4f6;
+}
+
+.doctor-list-patient__table tbody td:last-child {
+  border-right: none;
+}
+
+.doctor-list-patient__table tbody td[colspan="6"] {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+  font-size: 1.1rem;
+  font-style: italic;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+.doctor-list-patient__btn {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+
+.doctor-list-patient__btn:hover {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
+}
+
+.doctor-list-patient__btn:active {
+  transform: translateY(0);
+}
+
+.doctor-list-patient__table tbody td:nth-child(1) {
+  font-weight: 600;
+  color: #077BF6;
+}
+
+.doctor-list-patient__table tbody td:nth-child(4) {
+  font-weight: 500;
+  text-align: center;
+}
+
+.doctor-list-patient__table tbody td:nth-child(5) {
+  font-weight: 600;
+  text-align: center;
+}
+
+.doctor-list-patient__table tbody tr td:nth-child(5) {
+  position: relative;
+}
+
+.doctor-list-patient__table tbody tr td:nth-child(5):before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+@media (max-width: 1200px) {
+  .doctor-list-patient-container {
+    padding: 1.5rem;
+  }
+  
+  .doctor-list-patient__table {
+    font-size: 0.85rem;
+  }
+  
+  .doctor-list-patient__table thead th,
+  .doctor-list-patient__table tbody td {
+    padding: 0.8rem 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-list-patient-container {
+    padding: 1rem;
+  }
+  
+  .doctor-list-patient-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .doctor-list-patient__search-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .doctor-list-patient__search-bar button {
+    padding: 1rem;
+  }
+  
+  .doctor-list-patient__table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 12px;
+  }
+  
+  .doctor-list-patient__table thead,
+  .doctor-list-patient__table tbody,
+  .doctor-list-patient__table th,
+  .doctor-list-patient__table td,
+  .doctor-list-patient__table tr {
+    display: block;
+  }
+  
+  .doctor-list-patient__table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .doctor-list-patient__table tr {
+    background: white;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #077BF6;
+  }
+  
+  .doctor-list-patient__table td {
+    border: none !important;
+    position: relative;
+    padding: 0.5rem 0;
+    text-align: right;
+    padding-left: 45%;
+  }
+  
+  .doctor-list-patient__table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 40%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: #077BF6;
+  }
+  
+  .doctor-list-patient__table td:nth-child(1):before { content: "Họ tên:"; }
+  .doctor-list-patient__table td:nth-child(2):before { content: "Email:"; }
+  .doctor-list-patient__table td:nth-child(3):before { content: "SĐT:"; }
+  .doctor-list-patient__table td:nth-child(4):before { content: "Giới tính:"; }
+  .doctor-list-patient__table td:nth-child(5):before { content: "Trạng thái:"; }
+  .doctor-list-patient__table td:nth-child(6):before { content: "Hành động:"; }
+  
+  .doctor-list-patient__table td:nth-child(6) {
+    text-align: center;
+    padding-left: 0;
+    padding-top: 1rem;
+  }
+  
+  .doctor-list-patient__table td:nth-child(6):before {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-list-patient-container {
+    padding: 0.5rem;
+  }
+  
+  .doctor-list-patient-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .doctor-list-patient__search-bar {
+    padding: 1rem;
+  }
+  
+  .doctor-list-patient__table tr {
+    padding: 0.8rem;
+  }
+  
+  .doctor-list-patient__table td {
+    font-size: 0.85rem;
+    padding-left: 50%;
+  }
+  
+  .doctor-list-patient__table td:before {
+    width: 45%;
+    font-size: 0.8rem;
+  }
+  
+  .doctor-list-patient__btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.doctor-list-patient__search-bar button:disabled {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+
+.doctor-list-patient__table::-webkit-scrollbar {
+  height: 8px;
+}
+
+.doctor-list-patient__table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.doctor-list-patient__table::-webkit-scrollbar-thumb {
+  background: #077BF6;
+  border-radius: 4px;
+}
+
+.doctor-list-patient__table::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}
+
+.doctor-list-patient__table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  margin-top: 16px;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.1);
+}

@@ -42,6 +42,7 @@ const ROUTES = {
   MEDICAL_RECORD_DETAIL: `/chi-tiet-ho-so/:recordId`,
   MEDICAL_RECORD_DETAIL_VIEW: `/ho-so-ca-nhan/lich-su-benh-an/chi-tiet-ho-so/:recordId`,
   MEDICAL_RECORD_HISTORY_VIEW: `lich-su-benh-an`,
+  DOCTOR_LIST_PATIENT: `danh-sach-benh-nhan`,
 
   //lab-test-management
   LAB_TEST_RESULT_LIST: `quan-ly-ket-qua-xet-nghiem`,
