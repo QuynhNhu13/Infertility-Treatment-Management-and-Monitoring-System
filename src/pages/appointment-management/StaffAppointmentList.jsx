@@ -7,14 +7,29 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../../styles/appointment-management/StaffAppointmentList.css";
 import { STAFF_GET_DOCTOR, STAFF_GET_APPOINTMENT } from "../../api/apiUrls";
 import CustomDateInput from "../../components/CustomDateInput";
+import UpdateAppointmentStatusModal from "./UpdateAppointmentStatusModal";
 
 export default function StaffAppointmentList() {
   const { getAuthHeader } = useAuth();
   const [appointments, setAppointments] = useState([]);
   const [doctorOptions, setDoctorOptions] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // <== NEW
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
+
+  const openStatusModal = (id) => {
+    setSelectedAppointmentId(id);
+    setIsStatusModalOpen(true);
+  };
+
+  const closeStatusModal = () => {
+    setIsStatusModalOpen(false);
+    setSelectedAppointmentId(null);
+  };
+
 
   const [filters, setFilters] = useState({
     date: new Date(),
@@ -213,11 +228,12 @@ export default function StaffAppointmentList() {
                 <th>Bệnh nhân</th>
                 <th>Điện thoại</th>
                 <th>Giới tính</th>
-                <th>Ngày sinh</th>
+                {/* <th>Ngày sinh</th> */}
                 <th>Bác sĩ</th>
                 <th>Ngày hẹn</th>
                 <th>Giờ hẹn</th>
                 <th>Trạng thái</th>
+                <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
@@ -236,7 +252,7 @@ export default function StaffAppointmentList() {
                       <td>{item.patientName || "-"}</td>
                       <td>{item.phoneNumber || "-"}</td>
                       <td>{formatGender(item.gender)}</td>
-                      <td>{formatDate(item.dob)}</td>
+                      {/* <td>{formatDate(item.dob)}</td> */}
                       <td>{item.doctorName || "-"}</td>
                       <td>{formatDate(item.time)}</td>
                       <td>
@@ -249,7 +265,18 @@ export default function StaffAppointmentList() {
                           {statusInfo.label}
                         </span>
                       </td>
+                      <td>
+                        {item.status === "UNCHECKED_IN" && (
+                          <button
+                            className="staff-appointment-list__btn-update"
+                            onClick={() => openStatusModal(item.id)}
+                          >
+                            Cập nhật
+                          </button>
+                        )}
+                      </td>
                     </tr>
+
                   );
                 })
               )}
@@ -257,6 +284,13 @@ export default function StaffAppointmentList() {
           </table>
         )}
       </div>
+      <UpdateAppointmentStatusModal
+        isOpen={isStatusModalOpen}
+        onClose={closeStatusModal}
+        appointmentId={selectedAppointmentId}
+        onSuccess={fetchAppointments}
+      />
+
 
       {filteredAppointments.length > 0 && (
         <div className="staff-appointment-list__summary">

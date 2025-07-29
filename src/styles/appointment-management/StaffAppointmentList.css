@@ -566,3 +566,68 @@ padding: 10px;
   color: #333;
   font-weight: 500;
 }
+
+.btn-update {
+  background-color: #077BF6;
+  color: white;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.btn-update:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.modal {
+  background: white;
+  padding: 2rem;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 8px;
+  text-align: center;
+}
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.btn-confirm {
+  background-color: #10b981;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+}
+.btn-cancel {
+  background-color: #ef4444;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+}
+
+.staff-appointment-list__btn-update {
+  background-color: #077BF6;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.staff-appointment-list__btn-update:hover {
+  background-color: #0558C7;
+}

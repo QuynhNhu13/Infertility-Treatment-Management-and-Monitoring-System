@@ -52,6 +52,9 @@ export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointm
 export const STAFF_GET_DOCTOR = `${BASE_URL}api/doctor/account`;
 export const STAFF_GET_APPOINTMENT = `${BASE_URL}api/appointments/staff/filter-appointment`;
 export const USER_GET_APPOINTMENT = `${BASE_URL}api/appointments/me`;
+export const UPDATE_APPOINTMENT_STATUS = (id) =>
+  `${BASE_URL}api/appointments/update-status?id=${id}`;
+
 
 
 //Medical-Record-New

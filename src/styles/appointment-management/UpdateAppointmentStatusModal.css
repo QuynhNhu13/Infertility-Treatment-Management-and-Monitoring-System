@@ -1,0 +1,145 @@
+.update-appointment-status-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.update-appointment-status-modal__modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  max-width: 480px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid #e5e7eb;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.update-appointment-status-modal__title {
+  color: #077BF6;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  text-align: center;
+  border-bottom: 2px solid #077BF6;
+  padding-bottom: 12px;
+}
+
+.update-appointment-status-modal__text {
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+  text-align: center;
+}
+
+.update-appointment-status-modal__text strong {
+  color: #077BF6;
+  font-weight: 600;
+}
+
+.update-appointment-status-modal__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-appointment-status-modal__confirm-button {
+  background: linear-gradient(135deg, #077BF6, #0560d4);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.update-appointment-status-modal__confirm-button:hover {
+  background: linear-gradient(135deg, #0560d4, #044bb8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(7, 123, 246, 0.4);
+}
+
+.update-appointment-status-modal__confirm-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.3);
+}
+
+.update-appointment-status-modal__cancel-button {
+  background: white;
+  color: #6b7280;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.update-appointment-status-modal__cancel-button:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #374151;
+  transform: translateY(-1px);
+}
+
+.update-appointment-status-modal__cancel-button:active {
+  transform: translateY(0);
+  background: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+  .update-appointment-status-modal__modal {
+    padding: 24px;
+    margin: 20px;
+  }
+  
+  .update-appointment-status-modal__title {
+    font-size: 20px;
+  }
+  
+  .update-appointment-status-modal__text {
+    font-size: 14px;
+  }
+  
+  .update-appointment-status-modal__buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .update-appointment-status-modal__confirm-button,
+  .update-appointment-status-modal__cancel-button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
