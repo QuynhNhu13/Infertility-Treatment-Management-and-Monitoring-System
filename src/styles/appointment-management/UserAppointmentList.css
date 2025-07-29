@@ -1,0 +1,264 @@
+.user-appointment-list-container {
+  max-width: 1400px;
+  margin: -30px auto;
+  padding: 2rem;
+  background: #E2EFFF;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-appointment-list-container h2 {
+  color: #077BF6;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 4px rgba(7, 123, 246, 0.1);
+  position: relative;
+}
+
+.user-appointment-list-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #077BF6, #4da3f7);
+  border-radius: 2px;
+}
+
+.user-appointment-list-container p {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #077BF6;
+}
+
+.user-appointment-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(7, 123, 246, 0.1);
+  margin-top: 1rem;
+}
+
+.user-appointment-list-table thead {
+  background: linear-gradient(135deg, #077BF6 0%, #0ea5e9 100%);
+}
+
+.user-appointment-list-table thead th {
+  padding: 1.2rem 1rem;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.user-appointment-list-table thead th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.user-appointment-list-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.user-appointment-list-table tbody tr:hover {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.1);
+}
+
+.user-appointment-list-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.user-appointment-list-table tbody td {
+  padding: 1rem;
+  color: #374151;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  vertical-align: middle;
+  border-right: 1px solid #f3f4f6;
+}
+
+.user-appointment-list-table tbody td:last-child {
+  border-right: none;
+}
+
+.user-appointment-list-table tbody td:nth-child(1), 
+.user-appointment-list-table tbody td:nth-child(2) { 
+  font-weight: 600;
+  color: #077BF6;
+}
+
+.user-appointment-list-table tbody td:nth-child(3) { 
+  font-weight: 600;
+  color: #059669;
+}
+
+.user-appointment-list-table tbody td:nth-child(8) { 
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.user-appointment-list-table tbody td:nth-child(8) {
+  position: relative;
+}
+
+.user-appointment-list-table tbody tr:hover td:nth-child(8) {
+  background: none;
+}
+
+@media (max-width: 1200px) {
+  .user-appointment-list-container {
+    padding: 1.5rem;
+  }
+  
+  .user-appointment-list-table {
+    font-size: 0.85rem;
+  }
+  
+  .user-appointment-list-table thead th,
+  .user-appointment-list-table tbody td {
+    padding: 0.8rem 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-appointment-list-container {
+    padding: 1rem;
+  }
+  
+  .user-appointment-list-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .user-appointment-list-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 12px;
+  }
+  
+  .user-appointment-list-table thead,
+  .user-appointment-list-table tbody,
+  .user-appointment-list-table th,
+  .user-appointment-list-table td,
+  .user-appointment-list-table tr {
+    display: block;
+  }
+  
+  .user-appointment-list-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .user-appointment-list-table tr {
+    background: white;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #077BF6;
+  }
+  
+  .user-appointment-list-table td {
+    border: none !important;
+    position: relative;
+    padding: 0.5rem 0;
+    text-align: right;
+    padding-left: 45%;
+  }
+  
+  .user-appointment-list-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 40%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: #077BF6;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-appointment-list-container {
+    padding: 0.5rem;
+  }
+  
+  .user-appointment-list-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .user-appointment-list-table tr {
+    padding: 0.8rem;
+  }
+  
+  .user-appointment-list-table td {
+    font-size: 0.85rem;
+    padding-left: 50%;
+  }
+  
+  .user-appointment-list-table td:before {
+    width: 45%;
+    font-size: 0.8rem;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 468px 100%;
+}
+
+.user-appointment-list-table::-webkit-scrollbar {
+  height: 8px;
+}
+
+.user-appointment-list-table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.user-appointment-list-table::-webkit-scrollbar-thumb {
+  background: #077BF6;
+  border-radius: 4px;
+}
+
+.user-appointment-list-table::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}

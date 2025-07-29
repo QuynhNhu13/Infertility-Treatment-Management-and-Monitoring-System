@@ -49,6 +49,10 @@ export const CREATE_APPOINTMENT = `${BASE_URL}api/appointments/create`;//nhan
 export const PAYMENT_VNPAY = `${BASE_URL}api/payment/vn-pay`;//nhan
 export const PAYMENT_VNPAY_CALLBACK = `${BASE_URL}api/payment/vn-pay-callback`;//nhan
 export const CONFIRM_APPOINTMENT = `${BASE_URL}api/appointments/confirm-appointment`;//nhan
+export const STAFF_GET_DOCTOR = `${BASE_URL}api/doctor/account`;
+export const STAFF_GET_APPOINTMENT = `${BASE_URL}api/appointments/staff/filter-appointment`;
+export const USER_GET_APPOINTMENT =  `${BASE_URL}api/appointments/me`;
+
 
 //Medical-Record-New
 export const GET_MEDICAL_RECORD_HISTORY = (accountId) => `${BASE_URL}api/medical-record/history/${accountId}`;

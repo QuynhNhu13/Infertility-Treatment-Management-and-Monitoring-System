@@ -1,0 +1,22 @@
+.custom-date-input {
+  background-color: #077BF6;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.custom-date-input:hover {
+  background-color: #055fc2; 
+  transform: translateY(-1px);
+}
+
+.custom-date-input:active {
+  background-color: #044ca0;
+  transform: translateY(0);
+}

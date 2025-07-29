@@ -40,6 +40,8 @@ import MedicalRecordHistoryView from "../pages/medical-record-management/Medical
 import TreatmentSessionPageView from "../pages/treatment-plan-management/TreatmentSessionPageView";
 import NotificationPage from "../pages/NotificationPage"; 
 import DirectPatientManager from "../pages/account-management/DirectPatientManager";
+import StaffAppointmentList from "../pages/appointment-management/StaffAppointmentList";
+import UserAppointmentList from "../pages/appointment-management/UserAppointmentList";
 
 function AppRoutes() {
   return (
@@ -60,10 +62,12 @@ function AppRoutes() {
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
         <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
         <Route path={ROUTES.DIRECT_PATIENT_MANA} element={<DirectPatientManager/>}/>
+        <Route path={ROUTES.STAFF_APPOINTMENT_LIST} element={<StaffAppointmentList/>}/>
       </Route>
 
       <Route path={ROUTES.USER} element={<UserDashboard />}>
         <Route path={ROUTES.MEDICAL_RECORD_HISTORY_VIEW} element={<MedicalRecordHistoryView />} />
+        <Route path={ROUTES.USER_APPOINTMENT_LIST} element={<UserAppointmentList/>}/>
 
       </Route>
 

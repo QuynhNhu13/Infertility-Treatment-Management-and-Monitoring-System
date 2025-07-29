@@ -1,0 +1,568 @@
+
+
+.staff-appointment-list__search-input {
+padding: 10px;
+    border: 1px solid #FBFBFB;
+    border-radius: 3px;
+    width: 275px;
+    font-size: 14px;
+}
+
+
+.staff-appointment-list {
+  padding: 24px;
+  background: #E2EFFF;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.staff-appointment-list__header {
+  background: linear-gradient(135deg, #077BF6 0%, #0056d3 100%);
+  color: white;
+  padding: 32px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 30px rgba(7, 123, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.staff-appointment-list__header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.staff-appointment-list__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.staff-appointment-list__subtitle {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.95;
+  font-weight: 400;
+}
+
+.staff-appointment-list__error {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #c62828;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border-left: 4px solid #c62828;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.15);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.staff-appointment-list__filters {
+  background: linear-gradient(135deg, #ffffff 0%, #f3f9ff 100%);
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  box-shadow: 0 8px 32px rgba(7, 123, 246, 0.12);
+  border: 2px solid rgba(7, 123, 246, 0.1);
+}
+
+.staff-appointment-list__filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 24px;
+  align-items: end;
+}
+
+.staff-appointment-list__filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.staff-appointment-list__filter-group label {
+  font-weight: 600;
+  color: #077BF6;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #bbdefb;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fdff 100%);
+  color: #077BF6;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.15);
+  background: white;
+}
+
+.react-datepicker__input-container input::placeholder {
+  color: #90caf9;
+}
+
+.staff-appointment-list__select .css-control {
+  border: 2px solid #bbdefb !important;
+  border-radius: 10px !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fdff 100%) !important;
+  min-height: 48px !important;
+  transition: all 0.2s ease !important;
+}
+
+.staff-appointment-list__select .css-control:hover {
+  border-color: #077BF6 !important;
+}
+
+.staff-appointment-list__select .css-control--is-focused {
+  border-color: #077BF6 !important;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.15) !important;
+  background: white !important;
+}
+
+.staff-appointment-list__select .css-placeholder {
+  color: #90caf9 !important;
+}
+
+.staff-appointment-list__select .css-single-value {
+  color: #077BF6 !important;
+}
+
+.staff-appointment-list__btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.staff-appointment-list__btn--reset {
+  background: linear-gradient(135deg, #077BF6 0%, #0056d3 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.staff-appointment-list__btn--reset:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(7, 123, 246, 0.4);
+  background: linear-gradient(135deg, #0056d3 0%, #003d99 100%);
+}
+
+.staff-appointment-list__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.staff-appointment-list__table-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fdff 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(7, 123, 246, 0.12);
+  border: 2px solid rgba(7, 123, 246, 0.1);
+  margin-bottom: 24px;
+}
+
+.staff-appointment-list__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #077BF6;
+  gap: 16px;
+}
+
+.staff-appointment-list__spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #bbdefb;
+  border-top: 4px solid #077BF6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.staff-appointment-list__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.staff-appointment-list__table thead th {
+  background: linear-gradient(135deg, #077BF6 0%, #0056d3 100%);
+  color: white;
+  font-weight: 700;
+  padding: 20px 10px;
+  text-align: left;
+  border-bottom: 2px solid #077BF6;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.staff-appointment-list__table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.staff-appointment-list__table tbody tr:hover {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  transform: scale(1.001);
+}
+
+.staff-appointment-list__table tbody tr:nth-child(even) {
+  background: rgba(227, 242, 253, 0.3);
+}
+
+.staff-appointment-list__table tbody tr:nth-child(even):hover {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.staff-appointment-list__table td {
+  padding: 16px;
+  border-bottom: 1px solid #bbdefb;
+  vertical-align: middle;
+  color: #1565c0;
+}
+
+.staff-appointment-list__table td:first-child {
+  font-weight: 700;
+  color: #077BF6;
+  background: linear-gradient(135deg, rgba(7, 123, 246, 0.05) 0%, rgba(7, 123, 246, 0.1) 100%);
+}
+
+.staff-appointment-list__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.staff-appointment-list__status--pending {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: #e65100;
+  border: 2px solid #ff9800;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+}
+
+.staff-appointment-list__status--confirmed {
+  background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+  color: #2e7d32;
+  border: 2px solid #4caf50;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.staff-appointment-list__status--cancelled {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #c62828;
+  border: 2px solid #f44336;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.2);
+}
+
+.staff-appointment-list__status--completed {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #077BF6;
+  border: 2px solid #077BF6;
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.2);
+}
+
+.staff-appointment-list__status--default {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  color: #6b7280;
+  border: 2px solid #9ca3af;
+  box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2);
+}
+
+.staff-appointment-list__empty {
+  text-align: center;
+  padding: 60px 20px !important;
+  color: #077BF6;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  font-weight: 500;
+}
+
+.staff-appointment-list__empty div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.staff-appointment-list__summary {
+  background: linear-gradient(135deg, #077BF6 0%, #0056d3 100%);
+  color: white;
+  padding: 20px 28px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+  border: 2px solid rgba(7, 123, 246, 0.2);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.staff-appointment-list__summary strong {
+  color: #e3f2fd;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.staff-appointment-list__table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.staff-appointment-list__table-container::-webkit-scrollbar-track {
+  background: #e3f2fd;
+  border-radius: 4px;
+}
+
+.staff-appointment-list__table-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #077BF6 0%, #0056d3 100%);
+  border-radius: 4px;
+}
+
+.staff-appointment-list__table-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0056d3 0%, #003d99 100%);
+}
+
+@media (max-width: 1200px) {
+  .staff-appointment-list__filter-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .staff-appointment-list__filter-actions {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 768px) {
+  .staff-appointment-list {
+    padding: 16px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%);
+  }
+
+  .staff-appointment-list__header {
+    padding: 24px;
+  }
+
+  .staff-appointment-list__title {
+    font-size: 2rem;
+  }
+
+  .staff-appointment-list__filters {
+    padding: 20px;
+  }
+
+  .staff-appointment-list__filter-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .staff-appointment-list__table-container {
+    overflow-x: auto;
+  }
+
+  .staff-appointment-list__table {
+    min-width: 800px;
+  }
+
+  .staff-appointment-list__table th,
+  .staff-appointment-list__table td {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+  }
+
+  .staff-appointment-list__btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-appointment-list__header {
+    padding: 20px;
+  }
+
+  .staff-appointment-list__title {
+    font-size: 1.8rem;
+  }
+
+  .staff-appointment-list__subtitle {
+    font-size: 1rem;
+  }
+
+  .staff-appointment-list__filters {
+    padding: 16px;
+  }
+
+  .staff-appointment-list__table {
+    min-width: 700px;
+  }
+
+  .staff-appointment-list__table th,
+  .staff-appointment-list__table td {
+    padding: 10px 6px;
+    font-size: 0.85rem;
+  }
+
+  .staff-appointment-list__status {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+.staff-appointment-list__table-container {
+  scroll-behavior: smooth;
+}
+
+.staff-appointment-list__btn:focus-visible,
+.react-datepicker__input-container input:focus-visible {
+  outline: 3px solid #077BF6;
+  outline-offset: 2px;
+}
+
+.staff-appointment-list__table tbody tr {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.react-datepicker {
+  border: 2px solid #077BF6 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(7, 123, 246, 0.2) !important;
+}
+
+.react-datepicker__header {
+  background: linear-gradient(135deg, #077BF6 0%, #0056d3 100%) !important;
+  border-bottom: 2px solid #077BF6 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.react-datepicker__day:hover {
+  background: #077BF6 !important;
+  color: white !important;
+}
+
+.react-datepicker__day--selected {
+  background: #077BF6 !important;
+  color: white !important;
+}
+
+.react-datepicker__day--today {
+  background: #e3f2fd !important;
+  color: #077BF6 !important;
+  font-weight: 700 !important;
+}
+
+.staff-appointment-list__select .css-menu {
+  border: 2px solid #077BF6 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 32px rgba(7, 123, 246, 0.2) !important;
+}
+
+.staff-appointment-list__select .css-option {
+  color: #077BF6 !important;
+}
+
+.staff-appointment-list__select .css-option--is-focused {
+  background: #e3f2fd !important;
+  color: #077BF6 !important;
+}
+
+.staff-appointment-list__select .css-option--is-selected {
+  background: #077BF6 !important;
+  color: white !important;
+}
+
+.status--unpaid {
+  color: #FFA500; 
+  font-weight: 500;
+}
+
+.status--not-paid {
+  color: #B22222; 
+  font-weight: 500;
+}
+
+.status--unchecked-in {
+  color: #6c757d; 
+  font-weight: 500;
+}
+
+.status--checked-in {
+  color: #077BF6; 
+  font-weight: 500;
+}
+
+.status--cancelled {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.status--default {
+  color: #333;
+  font-weight: 500;
+}

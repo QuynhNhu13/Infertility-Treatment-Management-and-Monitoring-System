@@ -48,9 +48,10 @@ const SidebarStaff = () => {
           <span>Xem lịch</span>
         </Link>
 
-        <Link to="/staff/appointment-history" className={isActive("/staff/appointment-history") ? "active" : ""}>
+        <Link to={`${ROUTES.STAFF}/${ROUTES.STAFF_APPOINTMENT_LIST}`}
+          className={isActive(`${ROUTES.STAFF}/${ROUTES.STAFF_APPOINTMENT_LIST}`) ? "active" : ""}>
           <BookOpen size={18} />
-          <span>Lịch sử cuộc hẹn</span>
+          <span>Danh sách cuộc hẹn</span>
         </Link>
 
         <Link

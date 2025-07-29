@@ -1,7 +1,7 @@
 // SidebarUser.jsx
 import "../styles/SidebarUser.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { User, FileText, LogOut } from "lucide-react";
+import { User, FileText, LogOut, BookOpen, } from "lucide-react";
 import logobv from "../assets/logobv.png";
 import { useAuth } from "../context/AuthContext";
 import ROUTES from "../routes/RoutePath";
@@ -35,6 +35,12 @@ const SidebarUser = () => {
          <Link to={`${ROUTES.USER}/${ROUTES.MEDICAL_RECORD_HISTORY_VIEW}`} className={isActive(`${ROUTES.USER}/${ROUTES.MEDICAL_RECORD_HISTORY_VIEW}`) ? "active" : ""}>
           <User size={18} />
           <span>Hồ sơ điều trị</span>
+        </Link>
+
+               <Link to={`${ROUTES.USER}/${ROUTES.USER_APPOINTMENT_LIST}`}
+          className={isActive(`${ROUTES.USER}/${ROUTES.USER_APPOINTMENT_LIST}`) ? "active" : ""}>
+          <BookOpen size={18} />
+          <span>Danh sách lịch khám</span>
         </Link>
 
         <button className="logout-btn" onClick={handleLogout}>

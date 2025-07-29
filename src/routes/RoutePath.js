@@ -34,6 +34,8 @@ const ROUTES = {
   DOCTOR_APPOINTMENT_MANAGER: 'quan-ly-lich-hen',
   BOOKING_FORM: 'dat-lich-kham',
   PAYMENT_RESULT: '/payment-result',
+  STAFF_APPOINTMENT_LIST: 'danh-sach-lich-kham',
+  USER_APPOINTMENT_LIST: 'danh-sach-lich-kham-cua-toi',
 
   //medical-record-management
   GET_MEDICAL_RECORD_HISTORY: (accountId) => `/ho-so-benh-nhan/${accountId}`,

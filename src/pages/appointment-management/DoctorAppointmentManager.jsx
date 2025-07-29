@@ -3,7 +3,7 @@ import Select from "react-select";
 import { GET_ALL_APPOINTMENT } from "../../api/apiUrls";
 import "../../styles/appointment-management/DoctorAppointmentManager.css";
 import { useAuth } from "../../context/AuthContext";
-import MedicalRecordHistory from "../medical-record-management/MedicalRecordHistory"; 
+import MedicalRecordHistory from "../medical-record-management/MedicalRecordHistory";
 
 export default function DoctorAppointmentManager() {
   const { getJsonAuthHeader, isAuthLoaded } = useAuth();
@@ -12,8 +12,8 @@ export default function DoctorAppointmentManager() {
   const [error, setError] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
 
-  const [showRecordModal, setShowRecordModal] = useState(false);       
-  const [selectedAccountId, setSelectedAccountId] = useState(null);    
+  const [showRecordModal, setShowRecordModal] = useState(false);
+  const [selectedAccountId, setSelectedAccountId] = useState(null);
 
   const translateStatus = useCallback((status) => {
     switch (status) {
@@ -67,7 +67,7 @@ export default function DoctorAppointmentManager() {
   const handleViewRecord = useCallback((accountId) => {
     if (accountId) {
       setSelectedAccountId(accountId);
-      setShowRecordModal(true); 
+      setShowRecordModal(true);
     } else {
       alert("Không có mã tài khoản để xem hồ sơ.");
     }
@@ -208,13 +208,22 @@ export default function DoctorAppointmentManager() {
                     </td>
                     <td>{formatDate(appt.createAt)}</td>
                     <td>
-                      <button
+                      {/* <button
                         className="doctor-apm-view-btn"
                         onClick={() => handleViewRecord(appt.user)}
-                        disabled={!appt.user || appt.status !== "CHECKED_IN"}
+                        // disabled={!appt.user || appt.status !== "CHECKED_IN"}
                       >
                         Xem hồ sơ bệnh án
+                      </button> */}
+
+                      <button
+                        onClick={() => handleViewRecord(appt.userId)}
+                        className="doctor-apm-view-btn"
+                        disabled={!appt.userId || appt.status !== "CHECKED_IN"}
+                      >
+                        Xem hồ sơ
                       </button>
+
                     </td>
                   </tr>
                 ))}
