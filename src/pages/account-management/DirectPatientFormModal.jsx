@@ -31,7 +31,7 @@ export default function DirectPatientFormModal({ isOpen, onClose, onSuccess }) {
     phoneNumber: "",
     gender: "MALE",
     status: "ENABLED",
-    roles: "ROLE_USER", // Ẩn hoàn toàn
+    roles: "ROLE_USER", 
     address: "",
     dob: null,
     identityNumber: "",
