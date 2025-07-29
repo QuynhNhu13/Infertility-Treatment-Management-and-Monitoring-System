@@ -52,6 +52,8 @@ const ROUTES = {
   // consultation - management
   CONSULTATION_FORM: `/don-tu-van-kham`,
 
+  //Account - management
+  DIRECT_PATIENT_MANA: `quan-ly-tai-khoan-nguoi-dung-truc-tiep`,
 
 };
 

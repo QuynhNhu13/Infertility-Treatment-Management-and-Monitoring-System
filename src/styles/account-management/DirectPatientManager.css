@@ -1,0 +1,62 @@
+/* styles/account-management/DirectPatientManager.css */
+
+.direct-patient-manager__container {
+  background-color: #E2EFFF;
+  min-height: 100vh;
+  padding: 24px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.direct-patient-manager__title {
+    margin-top: 0px;
+    text-align: center;
+    color: #077BF6;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.direct-patient-manager__create-btn {
+  margin-bottom: 15px;
+  background-color: #077BF6;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.direct-patient-manager__create-btn:hover {
+  background-color: #055dc0;
+}
+
+/* Table styles */
+.direct-patient-manager__table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.direct-patient-manager__table th {
+  background-color: #077BF6;
+  color: #fff;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.direct-patient-manager__table td {
+  padding: 12px;
+  border-top: 1px solid #e0e0e0;
+  color: #333;
+}
+
+/* Row hover effect */
+.direct-patient-manager__table tr:hover {
+  background-color: #f2f9ff;
+  transition: background-color 0.2s ease-in-out;
+}

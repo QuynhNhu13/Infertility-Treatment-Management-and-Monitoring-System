@@ -118,3 +118,7 @@ export const UPDATE_PRESCRIPTION = (id) => `${BASE_URL}api/prescription/${id}`;
 //NotificationContext
 export const GET_NOTI = `${BASE_URL}api/notifications`;
 export const READ_NOTI = `${BASE_URL}api/notifications/mark-read`;
+
+//Account - Management
+export const GET_STAFF_ACC = `${BASE_URL}api/staff/direct-patients`;
+export const CREATE_STAFF_ACC = `${BASE_URL}api/staff/direct-patients`;

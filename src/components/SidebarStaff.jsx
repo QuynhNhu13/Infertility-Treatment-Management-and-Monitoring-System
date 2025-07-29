@@ -32,9 +32,10 @@ const SidebarStaff = () => {
       <div className="sidebar-section">
         <div className="section-title">TÁC VỤ NHÂN VIÊN</div>
 
-        <Link to="/staff/create-account" className={isActive("/staff/create-account") ? "active" : ""}>
+        <Link   to={`${ROUTES.STAFF}/${ROUTES.DIRECT_PATIENT_MANA}`}
+          className={isActive(`${ROUTES.STAFF}/${ROUTES.DIRECT_PATIENT_MANA}`) ? "active" : ""}>
           <Users size={18} />
-          <span>Tạo tài khoản khách</span>
+          <span>Quản lý tài khoản</span>
         </Link>
 
         <Link to="/staff/invoice-create" className={isActive("/staff/invoice-create") ? "active" : ""}>

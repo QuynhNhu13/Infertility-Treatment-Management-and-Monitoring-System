@@ -39,6 +39,7 @@ import UserDashboard from "../pages/UserDashboard";
 import MedicalRecordHistoryView from "../pages/medical-record-management/MedicalRecordHistoryView";
 import TreatmentSessionPageView from "../pages/treatment-plan-management/TreatmentSessionPageView";
 import NotificationPage from "../pages/NotificationPage"; 
+import DirectPatientManager from "../pages/account-management/DirectPatientManager";
 
 function AppRoutes() {
   return (
@@ -58,6 +59,7 @@ function AppRoutes() {
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
         <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
+        <Route path={ROUTES.DIRECT_PATIENT_MANA} element={<DirectPatientManager/>}/>
       </Route>
 
       <Route path={ROUTES.USER} element={<UserDashboard />}>
