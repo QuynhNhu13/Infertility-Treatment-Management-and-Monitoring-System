@@ -28,7 +28,7 @@ export const LIST_SERVICE_DETAILS = (serviceId) => `${BASE_URL}api/services/${se
 export const EDIT_SERVICE_DETAILS = (serviceId, id) => `${BASE_URL}api/manage/services/${serviceId}/service-details/${id}`;
 
 export const CREATE_SERVICE_STAGE = (serviceId) => `${BASE_URL}api/manage/services/${serviceId}/service-stage`;
-export const LIST_SERVICE_STAGES = (serviceId) => `${BASE_URL}api/manage/services/${serviceId}/service-stage`;
+export const LIST_SERVICE_STAGES = (serviceId) => `${BASE_URL}api/manage/services/${serviceId}/service-stage`; //thiếu
 export const EDIT_SERVICE_STAGES = (serviceId, stageId) => `${BASE_URL}api/manage/services/${serviceId}/service-stage/${stageId}`;
 export const DELETE_SERVICE_STAGE = (serviceId, stageId) => `${BASE_URL}api/manage/services/${serviceId}/service-stage/${stageId}`;
 

@@ -299,20 +299,28 @@ const ServiceManage = () => {
                     {activeMenuId === service.id && (
                       <div className="sm-action-menu-1">
                         <button onClick={() => handleOpenUpdateModal(service)}>Cập nhật</button>
-                        {servicesWithDetails &&
+                        {/* {servicesWithDetails &&
                           servicesWithDetails.length > 0 &&
                           !servicesWithDetails.some((s) => s.id === service.id) && (
                             <button onClick={() => handleAddDetails(service.id)}>
                               Thêm chi tiết
                             </button>
-                          )}
-                        {servicesWithStages &&
+                          )} */}
+                        <button onClick={() => handleAddDetails(service.id)}>
+                          Thêm chi tiết
+                        </button>
+
+                        {/* {servicesWithStages &&
                           servicesWithStages.length > 0 &&
                           !servicesWithStages.some((s) => s.id === service.id) && (
                             <button onClick={() => handleAddStages(service.id)}>
                               Thêm giai đoạn
                             </button>
-                          )}
+                          )} */}
+                        <button onClick={() => handleAddStages(service.id)}>
+                          Thêm giai đoạn
+                        </button>
+
 
                       </div>
                     )}

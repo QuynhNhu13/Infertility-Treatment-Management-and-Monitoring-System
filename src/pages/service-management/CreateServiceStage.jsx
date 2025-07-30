@@ -100,18 +100,57 @@ const CreateServiceStage = ({ serviceId, onClose, onCreated }) => {
             />
 
             {stages.length > 1 && (
-              <button type="button" onClick={() => removeStage(index)} style={{ marginTop: '10px', color: 'red' }}>
+              <button
+                type="button"
+                onClick={() => removeStage(index)}
+                style={{
+                  backgroundColor: '#E53935',
+                  color: 'white',
+                  padding: '10px 16px',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  border: 'none',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.15)',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s ease',
+                  marginTop: '10px',
+                  marginBottom: '10px'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#C62828'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#E53935'}
+              >
                 Xoá giai đoạn
               </button>
+
             )}
 
             <hr />
           </div>
         ))}
 
-        <button type="button" onClick={addStage}>
+        <button
+          type="button"
+          onClick={addStage}
+          style={{
+            backgroundColor: '#077BF6',
+            color: 'white',
+            padding: '10px 16px',
+            fontSize: '14px',
+            fontWeight: 500,
+            border: 'none',
+            borderRadius: '8px',
+            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.15)',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease',
+            marginBottom: '15px'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#005fcc'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#077BF6'}
+        >
           + Thêm giai đoạn
         </button>
+
 
         <button type="submit" disabled={loading} style={{ marginLeft: '10px' }}>
           {loading ? "Đang tạo..." : "Tạo các giai đoạn"}

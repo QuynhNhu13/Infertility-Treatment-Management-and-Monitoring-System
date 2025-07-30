@@ -11,18 +11,27 @@ import {
   Users,
   Trophy,
   BookOpen,
+  LogOut,
 } from "lucide-react";
 import logobv from "../assets/logobv.png";
+import { useAuth } from "../context/AuthContext";
+
 
 const SidebarMana = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = () => {
-    navigate("/");
+  // const handleLogout = () => {
+  //   navigate("/");
+  // };
+    const handleLogout = () => {
+    logout();
+    navigate("/dang-nhap");
   };
+
 
   return (
     <aside className="sidebar">
@@ -36,18 +45,18 @@ const SidebarMana = () => {
           <BarChart2 size={18} />
           <span>Báo cáo</span>
         </Link>
-         <Link to={`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`} className={isActive(`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`) ? "active" : ""}>
+        <Link to={`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`} className={isActive(`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`) ? "active" : ""}>
           <Calendar size={18} />
           <span>Lịch làm việc</span>
         </Link>
-        <Link to="/manager/registration" className={isActive("/manager/registration") ? "active" : ""}>
+        {/* <Link to="/manager/registration" className={isActive("/manager/registration") ? "active" : ""}>
           <FileText size={18} />
           <span>Hồ sơ đăng ký</span>
-        </Link>
-        <Link to="/manager/medical-review" className={isActive("/manager/medical-review") ? "active" : ""}>
+        </Link> */}
+        {/* <Link to="/manager/medical-review" className={isActive("/manager/medical-review") ? "active" : ""}>
           <CheckCircle size={18} />
           <span>Duyệt hồ sơ y tế</span>
-        </Link>
+        </Link> */}
       </div>
 
       <div className="sidebar-section">
@@ -65,11 +74,10 @@ const SidebarMana = () => {
           <Users size={18} />
           <span>Chuyên gia & Bác sĩ</span>
         </Link>
-        <Link to="/manager/achievements" className={isActive("/manager/achievements") ? "active" : ""}>
+        {/* <Link to="/manager/achievements" className={isActive("/manager/achievements") ? "active" : ""}>
           <Trophy size={18} />
           <span>Thành tựu</span>
-        </Link>
-
+        </Link> */}
         <Link
           to={`${ROUTES.MANAGER}/${ROUTES.LIST_BLOG_MANA}`}
           className={isActive(`${ROUTES.MANAGER}/${ROUTES.LIST_BLOG_MANA}`) ? "active" : ""}
@@ -77,6 +85,11 @@ const SidebarMana = () => {
           <Stethoscope size={18} />
           <span>Góc chia sẻ</span>
         </Link>
+        
+        <button className="logout-btn" onClick={handleLogout}>
+          <LogOut size={18} />
+          <span>Đăng xuất</span>
+        </button>
       </div>
     </aside>
   );

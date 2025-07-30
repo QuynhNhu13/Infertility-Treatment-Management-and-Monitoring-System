@@ -18,7 +18,7 @@ const SidebarUser = () => {
     navigate("/dang-nhap");
   };
 
-    const handleBackHome = () => {
+  const handleBackHome = () => {
     navigate(ROUTES.HOME);
   };
 

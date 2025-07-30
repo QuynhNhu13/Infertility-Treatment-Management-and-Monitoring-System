@@ -20,7 +20,7 @@ const ServiceDetailsPage = () => {
         const res = await axios.get(LIST_SERVICE_DETAILS(serviceId), {
           headers: getAuthHeader(),
         });
-        setDetails(res.data.data);
+        setDetails(res.data.data); 
       } catch (error) {
         console.error('Lỗi khi lấy dữ liệu chi tiết dịch vụ:', error);
       } finally {
@@ -41,8 +41,9 @@ const ServiceDetailsPage = () => {
       <Header />
       <Navbar />
 
-      <div className="service-details-container">
-        <h3 className="service-name">{details.name}</h3>
+      <div className="field-container">
+        <h3 className="field-service-name">{details.serviceName}</h3>
+
         <Section title="1. Khái niệm" htmlContent={details.concept} imgUrl={details.conceptImgUrl} />
         <Section title="2. Đối tượng áp dụng" htmlContent={details.condition} />
         <Section title="3. Người thực hiện" htmlContent={details.assignment} />
@@ -61,17 +62,17 @@ const ServiceDetailsPage = () => {
 
 const Section = ({ title, htmlContent, imgUrl }) => {
   return (
-    <section className="section-block">
+    <section className="field-section">
       <h3>{title}</h3>
       {htmlContent ? (
         <div
-          className="rich-content"
+          className="field-rich-content"
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       ) : (
         <p>Chưa có nội dung.</p>
       )}
-      {imgUrl && <img src={imgUrl} alt={title} className="detail-image" />}
+      {imgUrl && <img src={imgUrl} alt={title} className="field-image" />}
     </section>
   );
 };
