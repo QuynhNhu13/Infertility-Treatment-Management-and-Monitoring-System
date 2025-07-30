@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dashboard.css";
 import Chart from "chart.js/auto";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // import thêm CSS nếu muốn
+import 'react-calendar/dist/Calendar.css';
 
 export default function Dashboard() {
     const chartRefs = useRef({});
@@ -26,16 +25,13 @@ export default function Dashboard() {
     const fromRef = useRef();
     const toRef = useRef();
 
-
     useEffect(() => {
         const today = new Date();
         const oneWeekAgo = new Date(today);
         oneWeekAgo.setDate(today.getDate() - 6);
 
         fetchAccounts({ from: oneWeekAgo, to: today });
-
     }, []);
-
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -50,13 +46,12 @@ export default function Dashboard() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-
     const formatDate = (date) => {
         if (!(date instanceof Date)) {
             date = new Date(date);
         }
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng 0–11
+        const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
@@ -73,6 +68,7 @@ export default function Dashboard() {
                 return status;
         }
     };
+
     const fetchWithAuth = async (url, options = {}) => {
         const token = localStorage.getItem("token");
         return fetch(url, {
@@ -83,7 +79,6 @@ export default function Dashboard() {
             }
         })
     }
-
 
     const fetchAccounts = async ({ from, to }) => {
         let fromDateFormatted = formatDate(from);
@@ -102,7 +97,6 @@ export default function Dashboard() {
             const data = await res.json();
             const raw = data.data;
 
-            // 👉 Build newArray trực tiếp luôn
             const mapped = {};
             raw.forEach(item => {
                 const key = item.date;
@@ -138,7 +132,6 @@ export default function Dashboard() {
             setNumberDisabledAccount(dis.reduce((a, b) => a + b, 0));
             setNumberDeletedAccount(del.reduce((a, b) => a + b, 0));
 
-
             const r = await fetchWithAuth(`http://localhost:8080/api/accounts/accounts-report?fromDate=${fromDateFormatted}&toDate=${toDateFormatted}`, {
                 method: "GET",
             });
@@ -168,7 +161,6 @@ export default function Dashboard() {
             return d.toLocaleDateString("en-GB", {
                 weekday: "short",
                 day: "2-digit",
-                // month: "2-digit"
             });
         });
     };
@@ -177,7 +169,6 @@ export default function Dashboard() {
         if (Object.keys(newArray).length === 0) return;
         const charts = chartRefs.current;
         const createChart = (id, type, label, data, color) => {
-
             const ctx = document.getElementById(id);
             if (!ctx) return;
 
@@ -231,11 +222,9 @@ export default function Dashboard() {
             charts[id] = new Chart(ctx, config);
         };
 
-
         createChart("coin_sales1", "line", "ENABLED ACCOUNT", [...enabledAccountArray], "#ffffff");
         createChart("coin_sales2", "line", "DISABLED ACCOUNT", [...disabledAccountArray], "#ffffff");
         createChart("coin_sales3", "line", "DELETED ACCOUNT", [...deletedAccountArray], "#ffffff");
-
 
         createChart("overview-chart", "line", "Overview", [...totalAccountArray], "#007bff");
         const sum = (arr) => arr.reduce((a, b) => a + b, 0);
@@ -244,10 +233,11 @@ export default function Dashboard() {
             sum([...disabledAccountArray]),
             sum([...deletedAccountArray]),
         ], "#17a2b8");
+        
         return () => {
             Object.values(charts).forEach(chart => chart.destroy());
         };
-    }, [newArray]);// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [newArray]);
 
     const handleSearch = ({ from, to }) => {
         const f = from;
@@ -257,13 +247,10 @@ export default function Dashboard() {
             fetchAccounts({ from: f, to: actualToDate });
         } else {
             fetchAccounts({ from: f, to: t });
-
         }
     }
 
-
     return (
-
         <>
             <ToastContainer
                 position="top-right"
@@ -271,76 +258,70 @@ export default function Dashboard() {
                 theme="colored"
             />
 
-            <div className="container-fluid p-4 bg-light admin-account-container">
-                <div className="row mb-4 admin-account-container">
-                    <div className="col-md-4 admin-account-container">
-                        <div className="admin-card-dashboard text-white bg-primary mb-3">
-                            <div className="admin-card-body-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="admin-card-title-dashboard">ENABLED ACCOUNT</h5>
-                                        <p className="admin-card-text-dashboard fs-4">{numberEnabledAccount}</p>
-                                        <p className="admin-card-text-dashboard">
-                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
-                                        </p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-btc"></i>
-                                    </div>
+            <div className="admin-dashboard-container">
+                <div className="admin-stats-row">
+                    <div className="admin-stat-card admin-stat-card-primary">
+                        <div className="admin-card-body-dashboard">
+                            <div className="admin-card-content">
+                                <div className="admin-card-info">
+                                    <h5 className="admin-card-title-dashboard">ENABLED ACCOUNT</h5>
+                                    <p className="admin-card-number">{numberEnabledAccount}</p>
+                                    <p className="admin-card-date">
+                                        Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                    </p>
                                 </div>
-                                <canvas className="admin-canvas-dashboard" id="coin_sales1" height="100"></canvas>
+                                <div className="admin-card-icon">
+                                    <i className="fa fa-btc"></i>
+                                </div>
                             </div>
+                            <canvas className="admin-canvas-dashboard" id="coin_sales1" height="100"></canvas>
                         </div>
                     </div>
 
-                    <div className="col-md-4 admin-account-container">
-                        <div className="admin-card-dashboard text-white bg-warning mb-3">
-                            <div className="admin-card-body-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="admin-card-title-dashboard">DISABLED ACCOUNT</h5>
-                                        <p className="admin-card-text-dashboard fs-4">{numberDisabledAccount}</p>
-                                        <p className="admin-card-text-dashboard">
-                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
-                                        </p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-btc"></i>
-                                    </div>
+                    <div className="admin-stat-card admin-stat-card-warning">
+                        <div className="admin-card-body-dashboard">
+                            <div className="admin-card-content">
+                                <div className="admin-card-info">
+                                    <h5 className="admin-card-title-dashboard">DISABLED ACCOUNT</h5>
+                                    <p className="admin-card-number">{numberDisabledAccount}</p>
+                                    <p className="admin-card-date">
+                                        Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                    </p>
                                 </div>
-                                <canvas className="admin-canvas-dashboard" id="coin_sales2" height="100"></canvas>
+                                <div className="admin-card-icon">
+                                    <i className="fa fa-btc"></i>
+                                </div>
                             </div>
+                            <canvas className="admin-canvas-dashboard" id="coin_sales2" height="100"></canvas>
                         </div>
                     </div>
 
-                    <div className="col-md-4 admin-account-container">
-                        <div className="admin-card-dashboard text-white bg-info mb-3">
-                            <div className="admin-card-body-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="admin-card-title-dashboard">DELETED ACCOUNT</h5>
-                                        <p className="admin-card-text-dashboard fs-4">{numberDeletedAccount}</p>
-                                        <p className="admin-card-text-dashboard">
-                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
-                                        </p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-eur"></i>
-                                    </div>
+                    <div className="admin-stat-card admin-stat-card-info">
+                        <div className="admin-card-body-dashboard">
+                            <div className="admin-card-content">
+                                <div className="admin-card-info">
+                                    <h5 className="admin-card-title-dashboard">DELETED ACCOUNT</h5>
+                                    <p className="admin-card-number">{numberDeletedAccount}</p>
+                                    <p className="admin-card-date">
+                                        Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                    </p>
                                 </div>
-                                <canvas className="admin-canvas-dashboard" id="coin_sales3" height="100"></canvas>
+                                <div className="admin-card-icon">
+                                    <i className="fa fa-eur"></i>
+                                </div>
                             </div>
+                            <canvas className="admin-canvas-dashboard" id="coin_sales3" height="100"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <div className="row admin-account-container">
-                    <div className="col-lg-9 mb-3 admin-account-container">
+                <div className="admin-main-row">
+                    <div className="admin-overview-section">
                         <div className="admin-card-dashboard">
                             <div className="admin-card-body-dashboard">
-                                <div className="d-flex justify-content-between align-items-center admin-account-container">
-                                    <h5 className="admin-card-title-dashboard mb-0">Overview</h5>
-                                    <div className="d-flex align-items-center gap-2 flex-wrap mt-2">
+                                <div className="admin-overview-header">
+                                    <h5 className="admin-card-title-dashboard">Overview</h5>
+                                    <div className="admin-date-controls">
                                         <div className="admin-calendar-container-dashboardPage" ref={fromRef}>
                                             From:
                                             <input
@@ -387,11 +368,12 @@ export default function Dashboard() {
                                             )}
                                         </div>
 
-                                        <div>
-                                            <button className="admin-button-search-dashboardPage" onClick={() => handleSearch({ from: fromDate, to: toDate })}>
-                                                Search
-                                            </button>
-                                        </div>
+                                        <button 
+                                            className="admin-button-search-dashboardPage" 
+                                            onClick={() => handleSearch({ from: fromDate, to: toDate })}
+                                        >
+                                            Search
+                                        </button>
                                     </div>
                                 </div>
                                 <canvas className="admin-canvas-dashboard" id="overview-chart" height="200"></canvas>
@@ -399,8 +381,8 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="col-lg-3 admin-account-container">
-                        <div className="admin-card-dashboard h-100">
+                    <div className="admin-distribution-section">
+                        <div className="admin-card-dashboard admin-distribution-card">
                             <div className="admin-card-body-dashboard">
                                 <h5 className="admin-card-title-dashboard">Account Distribution</h5>
                                 <canvas className="admin-canvas-dashboard" id="coin-distribution" height="200"></canvas>
@@ -447,8 +429,9 @@ export default function Dashboard() {
                             </tbody>
                         </table>
                     </div>
-                ) : (<p> No account available </p>)
-                }
+                ) : (
+                    <p>No account available</p>
+                )}
             </div>
         </>
     );

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./FinancialReport.css";
 import Chart from "chart.js/auto";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // import thêm CSS nếu muốn
+import 'react-calendar/dist/Calendar.css';
 
 export default function FinancialReport() {
     const chartRefs = useRef({});
@@ -24,16 +23,13 @@ export default function FinancialReport() {
     const fromRef = useRef();
     const toRef = useRef();
 
-
     useEffect(() => {
         const today = new Date();
         const oneWeekAgo = new Date(today);
         oneWeekAgo.setDate(today.getDate() - 6);
 
         fetchAccounts({ from: oneWeekAgo, to: today });
-
     }, []);
-
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -48,18 +44,18 @@ export default function FinancialReport() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-
     const formatDate = (date) => {
         if (!(date instanceof Date)) {
             date = new Date(date);
         }
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng 0–11
+        const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
 
     const formatStatus = (status) => (status?.toUpperCase());
+    
     const fetchWithAuth = async (url, options = {}) => {
         const token = localStorage.getItem("token");
         return fetch(url, {
@@ -70,7 +66,6 @@ export default function FinancialReport() {
             }
         })
     }
-
 
     const fetchAccounts = async ({ from, to }) => {
         let fromDateFormatted = formatDate(from);
@@ -89,7 +84,6 @@ export default function FinancialReport() {
             const data = await res.json();
             const raw = data.data;
 
-            // 👉 Build newArray trực tiếp luôn
             const mapped = {};
             raw.forEach(item => {
                 const key = item.date;
@@ -120,7 +114,6 @@ export default function FinancialReport() {
             setNumberDepositAmount(depo.reduce((a, b) => a + b, 0));
             setNumberServiceAmount(ser.reduce((a, b) => a + b, 0));
 
-
             const r = await fetchWithAuth(`http://localhost:8080/api/invoices/list-invoices?fromDate=${fromDateFormatted}&toDate=${toDateFormatted}`, {
                 method: "GET",
             });
@@ -150,7 +143,6 @@ export default function FinancialReport() {
             return d.toLocaleDateString("en-GB", {
                 weekday: "short",
                 day: "2-digit",
-                // month: "2-digit"
             });
         });
     };
@@ -212,21 +204,19 @@ export default function FinancialReport() {
             charts[id] = new Chart(ctx, config);
         };
 
-
         createChart("coin_sales1", "line", "ENABLED ACCOUNT", [...depositAmountArray], "#ffffff");
         createChart("coin_sales2", "line", "DISABLED ACCOUNT", [...serviceAmountArray], "#ffffff");
-
-
         createChart("overview-chart", "line", "Overview", [...totalAmountArray], "#007bff");
         const sum = (arr) => arr.reduce((a, b) => a + b, 0);
         createChart("coin-distribution", "doughnut", "Distribution", [
             sum([...depositAmountArray]),
             sum([...serviceAmountArray]),
         ], "#17a2b8");
+        
         return () => {
             Object.values(charts).forEach(chart => chart.destroy());
         };
-    }, [newArray]);// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [newArray]);
 
     const handleSearch = ({ from, to }) => {
         const f = from;
@@ -236,13 +226,10 @@ export default function FinancialReport() {
             fetchAccounts({ from: f, to: actualToDate });
         } else {
             fetchAccounts({ from: f, to: t });
-
         }
     }
 
-
     return (
-
         <>
             <ToastContainer
                 position="top-right"
@@ -250,18 +237,20 @@ export default function FinancialReport() {
                 theme="colored"
             />
 
-            <div className="container-fluid p-4 bg-light">
-                <div className="row mb-4">
-                    <div className="col-md-4">
-                        <div className="card-final text-white bg-primary mb-3">
+            <div className="container-fluid">
+                <div className="stats-row">
+                    <div className="stats-col">
+                        <div className="card-final card-primary">
                             <div className="card-body-final">
-                                <div className="d-flex justify-content-between">
-                                    <div>
+                                <div className="card-header-content">
+                                    <div className="card-info">
                                         <h5 className="card-title-final">DEPOSIT AMOUNT</h5>
-                                        <p className="card-text-final fs-4">{numberDepositAmount.toLocaleString('vi-VN')}</p>
-                                        <p className="card-text-final">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
+                                        <p className="card-amount">{numberDepositAmount.toLocaleString('vi-VN')}</p>
+                                        <p className="card-date">
+                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                        </p>
                                     </div>
-                                    <div className="icon fs-1">
+                                    <div className="icon">
                                         <i className="fa fa-btc"></i>
                                     </div>
                                 </div>
@@ -270,16 +259,18 @@ export default function FinancialReport() {
                         </div>
                     </div>
 
-                    <div className="col-md-4">
-                        <div className="card-final text-white bg-warning mb-3">
+                    <div className="stats-col">
+                        <div className="card-final card-warning">
                             <div className="card-body-final">
-                                <div className="d-flex justify-content-between">
-                                    <div>
+                                <div className="card-header-content">
+                                    <div className="card-info">
                                         <h5 className="card-title-final">SERVICE AMOUNT</h5>
-                                        <p className="card-text-final fs-4">{numberServiceAmount.toLocaleString('vi-VN')}</p>
-                                        <p className="card-text-final">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
+                                        <p className="card-amount">{numberServiceAmount.toLocaleString('vi-VN')}</p>
+                                        <p className="card-date">
+                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                        </p>
                                     </div>
-                                    <div className="icon fs-1">
+                                    <div className="icon">
                                         <i className="fa fa-btc"></i>
                                     </div>
                                 </div>
@@ -287,19 +278,18 @@ export default function FinancialReport() {
                             </div>
                         </div>
                     </div>
-
                 </div>
 
-                <div className="row">
-                    <div className="col-lg-9 mb-3">
+                <div className="main-row">
+                    <div className="chart-col">
                         <div className="card-final">
                             <div className="card-body-final">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <h5 className="card-title-final mb-0">Overview</h5>
-                                    <div className="d-flex align-items-center gap-2 flex-wrap mt-2">
+                                <div className="chart-header">
+                                    <h5 className="card-title-final">Overview</h5>
+                                    <div className="controls-wrapper">
                                         <div className="calendar-container-final" ref={fromRef}>
-
-                                            From:<input
+                                            From:
+                                            <input
                                                 type="text"
                                                 readOnly
                                                 placeholder="Chọn ngày"
@@ -321,7 +311,8 @@ export default function FinancialReport() {
                                         </div>
 
                                         <div className="calendar-container-final" ref={toRef}>
-                                            To:<input
+                                            To:
+                                            <input
                                                 type="text"
                                                 readOnly
                                                 placeholder="Chọn ngày"
@@ -340,11 +331,16 @@ export default function FinancialReport() {
                                                     />
                                                 </div>
                                             )}
-
                                         </div>
-                                        <div><button className="button-search-final" onClick={() => handleSearch({ from: fromDate, to: toDate })}>
-                                            Search
-                                        </button></div>
+                                        
+                                        <div>
+                                            <button 
+                                                className="button-search-final" 
+                                                onClick={() => handleSearch({ from: fromDate, to: toDate })}
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <canvas className="canvas-final" id="overview-chart" height="200"></canvas>
@@ -352,8 +348,8 @@ export default function FinancialReport() {
                         </div>
                     </div>
 
-                    <div className="col-lg-3">
-                        <div className="card-final h-100">
+                    <div className="distribution-col">
+                        <div className="card-final card-distribution">
                             <div className="card-body-final">
                                 <h5 className="card-title-final">Financial Distribution</h5>
                                 <canvas className="canvas-final" id="coin-distribution" height="200"></canvas>
@@ -361,37 +357,35 @@ export default function FinancialReport() {
                         </div>
                     </div>
                 </div>
-                {
-                    invoicesList ? (
-                        <div className="account-final">
-                            <table className="account-table-final">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>DATE</th>
-                                        <th>FINAL AMOUNT</th>
-                                        <th>STATUS</th>
-                                        <th>TYPE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {invoicesList.map((acc, index) => (
-                                        <tr key={acc.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{formatDate(acc.date)}</td>
-                                            <td>{acc.finalAmount.toLocaleString('vi-VN')}</td>
-                                            <td>
-                                                {formatStatus(acc.status)}
 
-                                            </td>
-                                            <td>{acc.type}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    ) : (<p> No account available </p>)
-                }
+                {invoicesList ? (
+                    <div className="account-final">
+                        <table className="account-table-final">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>DATE</th>
+                                    <th>FINAL AMOUNT</th>
+                                    <th>STATUS</th>
+                                    <th>TYPE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {invoicesList.map((acc, index) => (
+                                    <tr key={acc.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{formatDate(acc.date)}</td>
+                                        <td>{acc.finalAmount.toLocaleString('vi-VN')}</td>
+                                        <td>{formatStatus(acc.status)}</td>
+                                        <td>{acc.type}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <p>No account available</p>
+                )}
             </div>
         </>
     );

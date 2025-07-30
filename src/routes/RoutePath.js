@@ -68,7 +68,7 @@ const ROUTES = {
   ACHIEVEMENT_VIEW: `/thanh-tuu`,
 
   //dashboard-management
-  DASHBOARD_ADMIN_ACC: `quan-ly-tai-khoan`,
+  DASHBOARD_ADMIN_ACC: `bang-thong-ke-tai-khoan`,
   MANAGER_FINANCIAL_DASHBOARD: 'financial-dashboard-manager',
   MANAGER_DASHBOARD: 'dashboard-manager',
 

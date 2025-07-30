@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./ManaDashboard.css";
 import Chart from "chart.js/auto";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // import thêm CSS nếu muốn
+import 'react-calendar/dist/Calendar.css';
 
 export default function ManaDashboard() {
     const chartRefs = useRef({});
@@ -30,16 +29,13 @@ export default function ManaDashboard() {
     const fromRef = useRef();
     const toRef = useRef();
 
-
     useEffect(() => {
         const today = new Date();
         const oneWeekAgo = new Date(today);
         oneWeekAgo.setDate(today.getDate() - 6);
 
         fetchAccounts({ from: oneWeekAgo, to: today });
-
     }, []);
-
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -54,18 +50,16 @@ export default function ManaDashboard() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
-
     };
 
-
     const formatStatus = (status) => (status?.toUpperCase());
+    
     const fetchWithAuth = async (url, options = {}) => {
         const token = localStorage.getItem("token");
         return fetch(url, {
@@ -76,7 +70,6 @@ export default function ManaDashboard() {
             }
         })
     }
-
 
     const fetchAccounts = async ({ from, to }) => {
         let fromDateFormatted = formatDate(from);
@@ -94,7 +87,7 @@ export default function ManaDashboard() {
 
             const data = await res.json();
             const raw = data.data;
-            // 👉 Build newArray trực tiếp luôn
+            
             const mapped = {};
             raw.forEach(item => {
                 const key = item.date;
@@ -140,7 +133,6 @@ export default function ManaDashboard() {
             setUnCheckinSum(uncheck.reduce((a, b) => a + b, 0));
             setCancelledSum(cancel.reduce((a, b) => a + b, 0))
 
-
             const r = await fetchWithAuth(`http://localhost:8080/api/appointments/report/list-appointments?fromDate=${fromDateFormatted}&toDate=${toDateFormatted}`, {
                 method: "GET",
             });
@@ -163,7 +155,6 @@ export default function ManaDashboard() {
     useEffect(() => {
         console.log("✅ newArray updated:", newArray);
         console.log("✅ Raw data updated:", rawData);
-
     }, [newArray]);
 
     const getDayLabels = () => {
@@ -172,7 +163,6 @@ export default function ManaDashboard() {
             return d.toLocaleDateString("en-GB", {
                 weekday: "short",
                 day: "2-digit",
-                // month: "2-digit"
             });
         });
     };
@@ -181,7 +171,6 @@ export default function ManaDashboard() {
         if (Object.keys(newArray).length === 0) return;
         const charts = chartRefs.current;
         const createChart = (id, type, label, data, color) => {
-
             const ctx = document.getElementById(id);
             if (!ctx) return;
 
@@ -237,13 +226,11 @@ export default function ManaDashboard() {
             charts[id] = new Chart(ctx, config);
         };
 
-
         createChart("coin_sales1", "line", "ENABLED ACCOUNT", [...unPaidArray], "#ffffff");
         createChart("coin_sales2", "line", "DISABLED ACCOUNT", [...notPaidArray], "#ffffff");
         createChart("coin_sales3", "line", "DELETED ACCOUNT", [...checkinArray], "#ffffff");
         createChart("coin_sales4", "line", "DELETED ACCOUNT", [...unCheckinArray], "#ffffff");
         createChart("coin_sales5", "line", "DELETED ACCOUNT", [...cancelledArray], "#ffffff");
-
 
         createChart("overview-chart-appointment", "line", "Overview", [...totalArray], "#007bff");
         const sum = (arr) => arr.reduce((a, b) => a + b, 0);
@@ -258,8 +245,7 @@ export default function ManaDashboard() {
         return () => {
             Object.values(charts).forEach(chart => chart.destroy());
         };
-    }, [newArray]);// eslint-disable-next-line react-hooks/exhaustive-deps
-
+    }, [newArray]);
 
     const handleSearch = ({ from, to }) => {
         const f = from;
@@ -269,13 +255,10 @@ export default function ManaDashboard() {
             fetchAccounts({ from: f, to: actualToDate });
         } else {
             fetchAccounts({ from: f, to: t });
-
         }
     }
 
-
     return (
-
         <>
             <ToastContainer
                 position="top-right"
@@ -283,112 +266,99 @@ export default function ManaDashboard() {
                 theme="colored"
             />
 
-            <div className="container-fluid p-4 bg-light">
-                <div className="row mb-4">
-                    <div className="col-md-4">
-                        <div className="card-appointment-dashboard text-white bg-primary mb-3">
-                            <div className="card-body-appointment-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="card-title-appointment-dashboard">UN_PAID</h5>
-                                        <p className="card-text-appointment-dashboard fs-4">{unPaidSum}</p>
-                                        <p className="card-text-appointment-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-btc"></i>
-                                    </div>
+            <div className="dashboard-container">
+                <div className="dashboard-grid">
+                    <div className="dashboard-card primary">
+                        <div className="card-body">
+                            <div className="card-header">
+                                <div className="card-info">
+                                    <h5 className="card-title-appointment-dashboard">UN_PAID</h5>
+                                    <p className="card-value">{unPaidSum}</p>
+                                    <p className="card-date">Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
                                 </div>
-                                <canvas className="canvas-appointment-dashboard" id="coin_sales1" height="100"></canvas>
+                                <div className="icon">
+                                    <i className="fa fa-btc"></i>
+                                </div>
                             </div>
+                            <canvas className="canvas-appointment-dashboard" id="coin_sales1" height="100"></canvas>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
-                        <div className="card-appointment-dashboard text-white bg-warning mb-3">
-                            <div className="card-body-appointment-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="card-title-appointment-dashboard">NOT_PAID</h5>
-                                        <p className="card-text-appointment-dashboard fs-4">{notPaidSum}</p>
-                                        <p className="card-text-appointment-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-btc"></i>
-                                    </div>
+                    <div className="dashboard-card warning">
+                        <div className="card-body">
+                            <div className="card-header">
+                                <div className="card-info">
+                                    <h5 className="card-title-appointment-dashboard">NOT_PAID</h5>
+                                    <p className="card-value">{notPaidSum}</p>
+                                    <p className="card-date">Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
                                 </div>
-                                <canvas className="canvas-appointment-dashboard" id="coin_sales2" height="100"></canvas>
+                                <div className="icon">
+                                    <i className="fa fa-btc"></i>
+                                </div>
                             </div>
+                            <canvas className="canvas-appointment-dashboard" id="coin_sales2" height="100"></canvas>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
-                        <div className="card-appointment-dashboard text-white bg-info mb-3">
-                            <div className="card-body-appointment-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="card-title-appointment-dashboard">CHECK_IN</h5>
-                                        <p className="card-text-appointment-dashboard fs-4">{checkinSum}</p>
-                                        <p className="card-text-appointment-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-eur"></i>
-                                    </div>
+                    <div className="dashboard-card info">
+                        <div className="card-body">
+                            <div className="card-header">
+                                <div className="card-info">
+                                    <h5 className="card-title-appointment-dashboard">CHECK_IN</h5>
+                                    <p className="card-value">{checkinSum}</p>
+                                    <p className="card-date">Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
                                 </div>
-                                <canvas className="canvas-appointment-dashboard" id="coin_sales3" height="100"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row mb-4">
-                    <div className="col-md-4">
-                        <div className="card-appointment-dashboard text-white bg-danger mb-3">
-                            <div className="card-body-appointment-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="card-title-appointment-dashboard">UN_CHECK_IN</h5>
-                                        <p className="card-text-appointment-dashboard fs-4">{unCheckinSum}</p>
-                                        <p className="card-text-appointment-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-btc"></i>
-                                    </div>
+                                <div className="icon">
+                                    <i className="fa fa-eur"></i>
                                 </div>
-                                <canvas className="canvas-appointment-dashboard" id="coin_sales4" height="100"></canvas>
                             </div>
+                            <canvas className="canvas-appointment-dashboard" id="coin_sales3" height="100"></canvas>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
-                        <div className="card-appointment-dashboard text-white bg-secondary mb-3">
-                            <div className="card-body-appointment-dashboard">
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <h5 className="card-title-appointment-dashboard">CANCELLED</h5>
-                                        <p className="card-text-appointment-dashboard fs-4">{cancelledSum}</p>
-                                        <p className="card-text-appointment-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
-                                    </div>
-                                    <div className="icon fs-1">
-                                        <i className="fa fa-btc"></i>
-                                    </div>
+                    <div className="dashboard-card danger">
+                        <div className="card-body">
+                            <div className="card-header">
+                                <div className="card-info">
+                                    <h5 className="card-title-appointment-dashboard">UN_CHECK_IN</h5>
+                                    <p className="card-value">{unCheckinSum}</p>
+                                    <p className="card-date">Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
                                 </div>
-                                <canvas className="canvas-appointment-dashboard" id="coin_sales5" height="100"></canvas>
+                                <div className="icon">
+                                    <i className="fa fa-btc"></i>
+                                </div>
                             </div>
+                            <canvas className="canvas-appointment-dashboard" id="coin_sales4" height="100"></canvas>
+                        </div>
+                    </div>
+
+                    <div className="dashboard-card secondary">
+                        <div className="card-body">
+                            <div className="card-header">
+                                <div className="card-info">
+                                    <h5 className="card-title-appointment-dashboard">CANCELLED</h5>
+                                    <p className="card-value">{cancelledSum}</p>
+                                    <p className="card-date">Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
+                                </div>
+                                <div className="icon">
+                                    <i className="fa fa-btc"></i>
+                                </div>
+                            </div>
+                            <canvas className="canvas-appointment-dashboard" id="coin_sales5" height="100"></canvas>
                         </div>
                     </div>
                 </div>
 
-
-                <div className="row">
-                    <div className="col-lg-9 mb-3">
+                <div className="overview-section">
+                    <div className="overview-chart">
                         <div className="card-appointment-dashboard">
                             <div className="card-body-appointment-dashboard">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <h5 className="card-title-appointment-dashboard mb-0">Overview</h5>
-                                    <div className="d-flex align-items-center gap-2 flex-wrap mt-2">
+                                <div className="overview-header">
+                                    <h5 className="card-title-appointment-dashboard">Overview</h5>
+                                    <div className="date-controls">
                                         <div className="calendar-container-appointment-dashboard" ref={fromRef}>
-
-                                            From:<input
+                                            From:
+                                            <input
                                                 type="text"
                                                 readOnly
                                                 placeholder="Chọn ngày"
@@ -410,7 +380,8 @@ export default function ManaDashboard() {
                                         </div>
 
                                         <div className="calendar-container-appointment-dashboard" ref={toRef}>
-                                            To:<input
+                                            To:
+                                            <input
                                                 type="text"
                                                 readOnly
                                                 placeholder="Chọn ngày"
@@ -429,11 +400,11 @@ export default function ManaDashboard() {
                                                     />
                                                 </div>
                                             )}
-
                                         </div>
-                                        <div><button className="button-search-appointment" onClick={() => handleSearch({ from: fromDate, to: toDate })}>
+                                        
+                                        <button className="button-search-appointment" onClick={() => handleSearch({ from: fromDate, to: toDate })}>
                                             Search
-                                        </button></div>
+                                        </button>
                                     </div>
                                 </div>
                                 <canvas className="canvas-appointment-dashboard" id="overview-chart-appointment" height="200"></canvas>
@@ -441,8 +412,8 @@ export default function ManaDashboard() {
                         </div>
                     </div>
 
-                    <div className="col-lg-3">
-                        <div className="card-appointment-dashboard h-100">
+                    <div className="distribution-chart">
+                        <div className="card-appointment-dashboard">
                             <div className="card-body-appointment-dashboard">
                                 <h5 className="card-title-appointment-dashboard">Appointment Distribution</h5>
                                 <canvas className="canvas-appointment-dashboard" id="coin-distribution" height="200"></canvas>
@@ -450,38 +421,35 @@ export default function ManaDashboard() {
                         </div>
                     </div>
                 </div>
-                {
-                    appointment ? (
-                        <div className="account-appointment-dashboard">
-                            <table className="account-table-appointment-dashboard">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>NAME</th>
-                                        <th>TIME</th>
-                                        <th>STATUS</th>
-                                        <th>CREATE AT</th>
 
+                {appointment ? (
+                    <div className="account-appointment-dashboard">
+                        <table className="account-table-appointment-dashboard">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>NAME</th>
+                                    <th>TIME</th>
+                                    <th>STATUS</th>
+                                    <th>CREATE AT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {appointment.map((acc, index) => (
+                                    <tr key={acc.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{acc.patientName}</td>
+                                        <td>{formatDate(acc.time)}</td>
+                                        <td>{formatStatus(acc.status)}</td>
+                                        <td>{formatDate(acc.createAt)}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {appointment.map((acc, index) => (
-                                        <tr key={acc.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{acc.patientName}</td>
-                                            <td>{formatDate(acc.time)}</td>
-                                            <td>
-                                                {formatStatus(acc.status)}
-                                            </td>
-                                            <td>{formatDate(acc.createAt)}</td>
-
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    ) : (<p> No account available </p>)
-                }
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <p>No account available</p>
+                )}
             </div>
         </>
     );

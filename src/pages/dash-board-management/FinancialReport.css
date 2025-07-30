@@ -1,10 +1,103 @@
+
+.container-fluid {
+    margin-top: 85px;
+    padding: 24px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.main-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.stats-col, .chart-col, .distribution-col {
+    width: 100%;
+}
+
+.card-final {
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
+}
+
+.card-body-final {
+    padding: 24px;
+}
+
 .card-title-final {
     font-weight: 600;
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.card-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+}
+
+.card-warning {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    color: white;
+}
+
+.card-distribution {
+    height: 100%;
+}
+
+.card-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.card-info {
+    flex: 1;
+}
+
+.card-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.card-date {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0;
 }
 
 .card-final .icon {
     color: white;
     font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.controls-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .canvas-final {
@@ -13,96 +106,8 @@
     height: auto !important;
 }
 
-.card-final {
-    border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
 #coin-distribution {
     margin-top: 1rem;
-}
-
-body {
-    background-color: #f8f9fa;
-}
-
-.status-account {
-    font-weight: 600;
-}
-
-.status-account-paid {
-    color: #28a745;
-    /* Xanh lá cây */
-}
-
-.status-account-deleted {
-    color: crimson;
-    /* Màu đỏ đậm */
-}
-
-.status-account-disabled {
-    background-color: #f0f0f0;
-    color: #888888;
-}
-
-.account-final {
-    animation: fadeIn 0.7s ease;
-}
-
-.account-table-final {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: white;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    /* 👈 box shadow ngoài */
-    animation: fadeIn 0.7s ease;
-
-}
-
-/* Header */
-.account-table-final thead {
-    background-color: #007bff;
-    /* xanh dương */
-    color: white;
-}
-
-.account-table-final th,
-.account-table-final td {
-    padding: 16px 20px;
-    font-size: 15px;
-    text-align: left;
-}
-
-/* Dòng xen kẽ màu */
-.account-table-final tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-
-.calendar-container-final {
-    display: flex;
-    gap: 10px;
-}
-
-.calendar-container-final input {
-    width: 160px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid #ced4da;
-    background-color: #fff;
-    font-size: 14px;
-}
-
-.calendar-popup-final {
-    position: absolute;
-    z-index: 999;
-    margin-top: 4px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    background-color: white;
 }
 
 .calendar-container-final {
@@ -113,6 +118,27 @@ body {
     margin-right: 10px;
 }
 
+.calendar-container-final input {
+    width: 160px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.calendar-popup-final {
+    position: absolute;
+    z-index: 999;
+    margin-top: 4px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: white;
+    top: 100%;
+    left: 0;
+}
+
 .button-search-final {
     padding: 6px 16px;
     font-size: 14px;
@@ -121,10 +147,175 @@ body {
     background-color: #007bff;
     color: white;
     border: none;
+    cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .button-search-final:hover {
     transform: translateY(-3px);
     background-color: #0056b3;
+}
+
+.account-final {
+    animation: fadeIn 0.7s ease;
+    margin-top: 24px;
+}
+
+.account-table-final {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.7s ease;
+}
+
+.account-table-final thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.account-table-final th,
+.account-table-final td {
+    padding: 16px 20px;
+    font-size: 15px;
+    text-align: left;
+}
+
+.account-table-final tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.account-table-final tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+.status-account {
+    font-weight: 600;
+}
+
+.status-account-paid {
+    color: #28a745;
+}
+
+.status-account-deleted {
+    color: crimson;
+}
+
+.status-account-disabled {
+    background-color: #f0f0f0;
+    color: #888888;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (max-width: 1200px) {
+    .main-row {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls-wrapper {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 16px;
+    }
+    
+    .card-body-final {
+        padding: 16px;
+    }
+    
+    .card-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .icon {
+        align-self: flex-end;
+    }
+    
+    .calendar-container-final {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+    
+    .calendar-container-final input {
+        width: 140px;
+    }
+    
+    .controls-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .account-table-final {
+        font-size: 12px;
+    }
+    
+    .account-table-final th,
+    .account-table-final td {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-amount {
+        font-size: 1.5rem;
+    }
+    
+    .card-title-final {
+        font-size: 1rem;
+    }
+    
+    .account-table-final {
+        font-size: 11px;
+    }
+    
+    .account-table-final th,
+    .account-table-final td {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
 }

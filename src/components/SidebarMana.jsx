@@ -50,11 +50,11 @@ const SidebarMana = () => {
 
       <div className="sidebar-section">
         <div className="section-title">QUẢN LÝ HÀNH CHÍNH</div>
-        <div onClick={toggleReportDropdown} className={`dropdown-toggle-sidebarMana ${isActive("/quan-ly/dashboard-manager") ? "active" : ""}`}>
+        {/* <div onClick={toggleReportDropdown} className={`dropdown-toggle-sidebarMana ${isActive("/quan-ly/dashboard-manager") ? "active" : ""}`}>
           <BarChart2 size={18} />
           <span>Báo cáo</span>
-        </div>
-        {showReportDropdown && (
+        </div> */}
+        {/* {showReportDropdown && (
           <div className="dropdown-menu-sidebarMana">
             <Link to="/quan-ly/dashboard-manager" className={isActive("/quan-ly/dashboard-manager") ? "active" : ""}>
               <span>Báo cáo lịch khám</span>
@@ -63,7 +63,19 @@ const SidebarMana = () => {
               <span>Báo cáo tài chính</span>
             </Link>
           </div>
-        )}
+        )} */}
+
+        <div className="dropdown-menu-sidebarMana">
+          <Link to="/quan-ly/financial-dashboard-manager" className={isActive("/quan-ly/financial-dashboard-manager") ? "active" : ""}>
+              <BarChart2 size={18} />
+              <span>Báo cáo tài chính</span>
+            </Link>
+            <Link to="/quan-ly/dashboard-manager" className={isActive("/quan-ly/dashboard-manager") ? "active" : ""}>
+              <FileText size={18} />
+              <span>Báo cáo lịch khám</span>
+            </Link>
+            
+          </div>
         <Link to={`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`} className={isActive(`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`) ? "active" : ""}>
           <Calendar size={18} />
           <span>Lịch làm việc</span>
