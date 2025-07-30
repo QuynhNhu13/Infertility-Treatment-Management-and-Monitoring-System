@@ -106,7 +106,7 @@ export const GET_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-s
 export const UPDATE_STAGE_PROGRESS = (stageId) => `${BASE_URL}api/medical-record/treatment-stage-progress/${stageId}`;
 
 export const GET_AVAILABLE_DATES = `${BASE_URL}api/schedules/my-available-dates`;
-export const GET_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-date`;
+export const GET_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-date`; //CHỈNH
 export const CREATE_TREATMENT_SESSION = (progressId) => `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions`;
 export const GET_SESSION_DETAIL = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}/follow-up-details`;
 export const UPDATE_SESSION = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;

@@ -11,6 +11,8 @@ import TreatmentSessionView from "./TreatmentSessionView";
 import "../../styles/treatment-plan-management/TreatmentPlan.css";
 import UpdateStageProgressModal from "./UpdateStageProgressModal";
 import TreatmentPlanUpdateModal from "./TreatmentPlanUpdateModal";
+import { toast } from "react-toastify";
+
 
 
 export default function TreatmentPlan({ medicalRecordId }) {
@@ -75,34 +77,79 @@ export default function TreatmentPlan({ medicalRecordId }) {
     }
   };
 
-  const handleCreateTreatmentPlan = async (serviceId) => {
-    try {
-      const res = await fetch(CREATE_TREATMENT_PLAN, {
+  // const handleCreateTreatmentPlan = async (serviceId) => {
+  //   try {
+  //     const res = await fetch(CREATE_TREATMENT_PLAN, {
+  //       method: "POST",
+  //       headers: {
+  //         ...getAuthHeader(),
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         medicalRecordId: Number(medicalRecordId),
+  //         serviceId,
+  //       }),
+  //     });
+
+  //     const result = await res.json();
+      
+
+  //     if (res.ok) {
+  //       await fetchTreatmentPlans();
+  //       setIsServiceModalOpen(false);
+  //       return { success: true };
+  //     } else {
+  //       return { success: false, message: result.message };
+  //     }
+  //   } catch (err) {
+  //     console.error("Lỗi khi tạo phác đồ:", err);
+  //     return { success: false, message: err.message };
+  //   }
+  // };
+
+const handleCreateTreatmentPlan = async (serviceId) => {
+  try {
+    const res = await fetch(CREATE_TREATMENT_PLAN, {
+      method: "POST",
+      headers: {
+        ...getAuthHeader(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        medicalRecordId: Number(medicalRecordId),
+        serviceId,
+      }),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      // Sau khi tạo phác đồ thành công, gọi tiếp API tạo hóa đơn
+      const invoiceRes = await fetch(`http://localhost:8080/api/invoices/create?id=${result.data.accountId}`, {
         method: "POST",
-        headers: {
-          ...getAuthHeader(),
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          medicalRecordId: Number(medicalRecordId),
-          serviceId,
-        }),
+        headers: getAuthHeader(),
       });
 
-      const result = await res.json();
+      const invoiceResult = await invoiceRes.json();
 
-      if (res.ok) {
-        await fetchTreatmentPlans();
-        setIsServiceModalOpen(false);
-        return { success: true };
+      if (invoiceRes.ok) {
+        toast.success("Tạo phác đồ và hóa đơn thành công");
       } else {
-        return { success: false, message: result.message };
+        toast.warning("Tạo phác đồ thành công nhưng tạo hóa đơn thất bại");
       }
-    } catch (err) {
-      console.error("Lỗi khi tạo phác đồ:", err);
-      return { success: false, message: err.message };
+
+      await fetchTreatmentPlans();
+      setIsServiceModalOpen(false);
+      return { success: true };
+    } else {
+      return { success: false, message: result.message };
     }
-  };
+  } catch (err) {
+    console.error("Lỗi khi tạo phác đồ hoặc hóa đơn:", err);
+    return { success: false, message: err.message };
+  }
+};
+
 
   const handleUpdateTreatmentPlan = async (planId, updatedData) => {
     try {
