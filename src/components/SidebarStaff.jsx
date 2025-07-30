@@ -8,19 +8,22 @@ import {
   BarChart2,
   CheckCircle,
   Stethoscope,
+  LogOut
 } from "lucide-react";
 import logobv from "../assets/logobv.png";
 import ROUTES from "../routes/RoutePath";
-
+import { useAuth } from "../context/AuthContext";
 
 const SidebarStaff = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = () => {
-    navigate("/");
+   const handleLogout = () => {
+    logout();
+    navigate("/dang-nhap");
   };
 
   return (
@@ -71,6 +74,11 @@ const SidebarStaff = () => {
           <Stethoscope size={18} />
           <span>Biểu mẫu tư vấn</span>
         </Link>
+
+                <button className="logout-btn" onClick={handleLogout}>
+          <LogOut size={18} />
+          <span>Đăng xuất</span>
+        </button>
       </div>
     </aside>
   );
