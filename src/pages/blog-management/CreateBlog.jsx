@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { CREATE_BLOG, UP_IMG } from "../../api/apiUrls";
+import { CREATE_BLOG } from "../../api/apiUrls";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
@@ -11,7 +11,6 @@ const CreateBlog = ({ onClose, onBlogCreated }) => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    image: null,
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,12 +22,8 @@ const CreateBlog = ({ onClose, onBlogCreated }) => {
   };
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "image") {
-      setFormData((prev) => ({ ...prev, image: files[0] }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleContentChange = (value) => {
@@ -39,7 +34,6 @@ const CreateBlog = ({ onClose, onBlogCreated }) => {
     const newErrors = {};
     if (!formData.title.trim()) newErrors.title = "Tiêu đề không được để trống.";
     if (!formData.content.trim()) newErrors.content = "Nội dung không được để trống.";
-    if (!formData.image) newErrors.image = "Vui lòng chọn ảnh.";
     return newErrors;
   };
 
@@ -53,22 +47,9 @@ const CreateBlog = ({ onClose, onBlogCreated }) => {
 
     setIsSubmitting(true);
     try {
-      const imgForm = new FormData();
-      imgForm.append("image", formData.image); 
-
-      const imgResponse = await axios.post(UP_IMG, imgForm, {
-        headers: {
-          Authorization: getAuthHeader().Authorization,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      const imgUrl = imgResponse.data.data; 
-
       const payload = {
         title: formData.title,
         content: formData.content,
-        imgUrl: imgUrl,
       };
 
       await axios.post(CREATE_BLOG, payload, { headers: getAuthHeader() });
@@ -135,24 +116,6 @@ const CreateBlog = ({ onClose, onBlogCreated }) => {
             />
             {errors.content && (
               <span className="create-blog__error-text">{errors.content}</span>
-            )}
-          </div>
-
-          <div className="create-blog__form-group">
-            <label htmlFor="image" className="create-blog__label">
-              Ảnh minh họa <span className="create-blog__required">*</span>
-            </label>
-            <input
-              id="image"
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleChange}
-              className={`create-blog__input ${errors.image ? "create-blog__input--error" : ""}`}
-              disabled={isSubmitting}
-            />
-            {errors.image && (
-              <span className="create-blog__error-text">{errors.image}</span>
             )}
           </div>
 
