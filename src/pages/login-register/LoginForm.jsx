@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 
 import { useAuth } from "../../context/AuthContext";
-import { LOGIN, GG_LOGIN, PROFILE } from "../../api/apiUrls";
+import { LOGIN, GG_LOGIN, PROFILE_LOGIN } from "../../api/apiUrls";
 import ROUTES from "../../routes/RoutePath";
 
 import Header from "../../components/Header.jsx";
@@ -45,23 +45,18 @@ const LoginForm = () => {
 
         localStorage.setItem("token", token);
 
-        const profileResponse = await fetch(PROFILE, {
+        const profileResponse = await fetch(PROFILE_LOGIN, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
 
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
-          const user = { ...profileData.data, token };
-
-          const payload = JSON.parse(atob(token.split(".")[1]));
-          if (payload.roles && payload.roles.length > 0) {
-            user.role = payload.roles[0];
-          }
-
-          if (user.userName && !user.fullName) {
-            user.fullName = user.userName;
-          }
+          const user = {
+            fullName: profileData.data.fullName,
+            role: profileData.data.email, 
+            token: token,
+          };
 
           login(user);
           setErrorMessage("");

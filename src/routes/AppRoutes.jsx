@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ROUTES from "../routes/RoutePath";
+import { Navigate } from "react-router-dom";
 
 import Home from "../pages/Home"
 import LoginForm from "../pages/login-register/LoginForm";
@@ -43,6 +44,9 @@ import DirectPatientManager from "../pages/account-management/DirectPatientManag
 import StaffAppointmentList from "../pages/appointment-management/StaffAppointmentList";
 import UserAppointmentList from "../pages/appointment-management/UserAppointmentList";
 import DoctorListPatient from "../pages/medical-record-management/DoctorListPatient";
+import ProfileView from "../pages/account-management/ProfileView";
+import AdminDashboard from "../pages/AdminDashboard";
+import AdminManageAcc from "../pages/account-management/AdminManageAcc";
 
 function AppRoutes() {
   return (
@@ -68,9 +72,14 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.USER} element={<UserDashboard />}>
+        <Route index element={<Navigate to={ROUTES.PROFILE_VIEW} replace />} />
         <Route path={ROUTES.MEDICAL_RECORD_HISTORY_VIEW} element={<MedicalRecordHistoryView />} />
         <Route path={ROUTES.USER_APPOINTMENT_LIST} element={<UserAppointmentList/>}/>
+        <Route path={ROUTES.PROFILE_VIEW} element={<ProfileView/>}/>
+      </Route>
 
+      <Route path={ROUTES.ADMIN} element={<AdminDashboard/>}>
+        <Route path={ROUTES.ADMIN_MANA_ACC} element={<AdminManageAcc/>}/>
       </Route>
 
 

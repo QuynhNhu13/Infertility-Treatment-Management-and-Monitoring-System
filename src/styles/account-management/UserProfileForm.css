@@ -1,0 +1,35 @@
+.user-profile-form {
+  padding: 24px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.user-profile-form__row {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-form__row label {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.user-profile-form__btn {
+  background-color: #077bf6;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.user-profile-form__btn.cancel {
+  background-color: #ccc;
+  color: black;
+}
+
+.user-profile-form__btn:hover {
+  background-color: #056ad1;
+}

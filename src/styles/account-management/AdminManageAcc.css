@@ -1,0 +1,324 @@
+
+.admin-manage-acc-container {
+  padding: 32px;
+  background: #E2EFFF;
+  min-height: 100vh;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.admin-manage-acc-title {
+  color: #077bf6;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 32px 0;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(135deg, #077bf6, #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.admin-manage-acc-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #077bf6, #0ea5e9, #3b82f6);
+  border-radius: 2px;
+}
+
+.admin-manage-acc-btn-create {
+  background: linear-gradient(135deg, #077bf6 0%, #0ea5e9 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-manage-acc-btn-create::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.admin-manage-acc-btn-create:hover::before {
+  left: 100%;
+}
+
+.admin-manage-acc-btn-create:hover {
+  background: linear-gradient(135deg, #0563d4 0%, #0284c7 100%);
+  box-shadow: 0 6px 16px rgba(7, 123, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.admin-manage-acc-btn-create:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.3);
+}
+
+.admin-manage-acc-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 40px rgba(7, 123, 246, 0.08),
+    0 8px 24px rgba(7, 123, 246, 0.05),
+    0 0 0 1px rgba(7, 123, 246, 0.04);
+  animation: slideUp 0.6s ease-out;
+}
+
+.admin-manage-acc-table thead {
+  background: linear-gradient(135deg, #077bf6 0%, #0ea5e9 100%);
+}
+
+.admin-manage-acc-table thead th {
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 18px 16px;
+  text-align: left;
+  border: none;
+  position: relative;
+}
+
+.admin-manage-acc-table thead th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.admin-manage-acc-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-manage-acc-table tbody tr:hover {
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.1);
+}
+
+.admin-manage-acc-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-manage-acc-table tbody td {
+  padding: 16px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  vertical-align: middle;
+}
+
+.admin-manage-acc-table tbody td:first-child {
+  color: #077bf6;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.admin-manage-acc-btn-delete {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-manage-acc-btn-delete::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.4s ease;
+}
+
+.admin-manage-acc-btn-delete:hover::before {
+  left: 100%;
+}
+
+.admin-manage-acc-btn-delete:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
+}
+
+.admin-manage-acc-btn-delete:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
+/* Status and Role styling */
+.admin-manage-acc-table tbody td:nth-child(4) {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.admin-manage-acc-table tbody td:nth-child(5) {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+}
+
+/* Empty state */
+.admin-manage-acc-table tbody:empty::after {
+  content: 'Không có dữ liệu để hiển thị';
+  display: block;
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+.admin-manage-acc-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-manage-acc-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.admin-manage-acc-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #077bf6, #0ea5e9);
+  border-radius: 3px;
+}
+
+.admin-manage-acc-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0563d4, #0284c7);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .admin-manage-acc-container {
+    padding: 24px;
+  }
+  
+  .admin-manage-acc-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+  
+  .admin-manage-acc-table {
+    font-size: 13px;
+  }
+  
+  .admin-manage-acc-table thead th,
+  .admin-manage-acc-table tbody td {
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-manage-acc-container {
+    padding: 16px;
+  }
+  
+  .admin-manage-acc-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-manage-acc-btn-create {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .admin-manage-acc-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 12px;
+  }
+  
+  .admin-manage-acc-table thead th:nth-child(n+3),
+  .admin-manage-acc-table tbody td:nth-child(n+3) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-manage-acc-title {
+    font-size: 20px;
+  }
+  
+  .admin-manage-acc-btn-create {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .admin-manage-acc-table {
+    font-size: 12px;
+  }
+  
+  .admin-manage-acc-table thead th,
+  .admin-manage-acc-table tbody td {
+    padding: 10px 6px;
+  }
+  
+  .admin-manage-acc-btn-delete {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

@@ -57,6 +57,8 @@ const ROUTES = {
 
   //Account - management
   DIRECT_PATIENT_MANA: `quan-ly-tai-khoan-nguoi-dung-truc-tiep`,
+  PROFILE_VIEW: `thong-tin-ca-nhan`,
+  ADMIN_MANA_ACC: `quan-ly-tai-khoan`,
 
 };
 

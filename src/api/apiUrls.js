@@ -6,11 +6,14 @@ export const UP_IMG = `${BASE_URL}api/upload-image`;
 export const LOGIN = `${BASE_URL}api/auth/login`;
 export const GG_LOGIN = `${BASE_URL}oauth2/authorization/google`; //bug
 export const PROFILE = `${BASE_URL}api/user/profile`;
+export const UPDATE_PROFILE = `${BASE_URL}api/user/profile`;
 export const REGISTER = `${BASE_URL}api/auth/register`;
 export const REGISTER_CONFIRM_EMAIL = `${BASE_URL}api/auth/register/confirm-email`;
 export const RESEND_VERIFICATION_EMAIL = `${BASE_URL}api/auth/register/resend-verification-email`;
 export const FORGOT_PASSWORD = `${BASE_URL}api/auth/forgot-password`;
 export const RESET_PASSWORD = `${BASE_URL}api/auth/reset-password`;
+export const CHANGE_PASSWORD = `${BASE_URL}api/auth/change-password`;
+export const PROFILE_LOGIN = `${BASE_URL}api/accounts/login-info`;
 
 
 //Service-Management
@@ -133,3 +136,5 @@ export const READ_NOTI = `${BASE_URL}api/notifications/mark-read`;
 //Account - Management
 export const GET_STAFF_ACC = `${BASE_URL}api/staff/direct-patients`;
 export const CREATE_STAFF_ACC = `${BASE_URL}api/staff/direct-patients`;
+export const GET_ALL_ACCOUNT = `${BASE_URL}api/accounts/manage`;
+export const ADMIN_CREATE_ACC = `${BASE_URL}api/accounts/manage/create`;
