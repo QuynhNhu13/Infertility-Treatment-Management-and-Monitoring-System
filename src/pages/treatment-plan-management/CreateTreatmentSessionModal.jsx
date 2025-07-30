@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from "react-select";
 import {
   GET_AVAILABLE_DATES,
   GET_SLOTS_BY_DATE,
@@ -9,13 +10,49 @@ import axios from "axios";
 import dayjs from "dayjs";
 import "../../styles/treatment-plan-management/CreateTreatmentSessionModal.css";
 
+const customSelectStyles = {
+  control: (base, state) => ({
+    ...base,
+    borderColor: state.isFocused ? "#077BF6" : "#ccc",
+    boxShadow: state.isFocused ? "0 0 0 1px #077BF6" : "none",
+    "&:hover": {
+      borderColor: "#077BF6",
+    },
+    padding: "2px 4px",
+    borderRadius: "8px",
+    fontSize: "14px",
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected
+      ? "#077BF6"
+      : state.isFocused
+      ? "#e2efff"
+      : "#fff",
+    color: state.isSelected ? "#fff" : "#001D54",
+    padding: "10px",
+    cursor: "pointer",
+    fontSize: "14px",
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: "#001D54",
+    fontWeight: "500",
+  }),
+  menu: (base) => ({
+    ...base,
+    borderRadius: "8px",
+    zIndex: 5,
+  }),
+};
+
 export default function CreateTreatmentSessionModal({ progressId, onClose, onSuccess }) {
   const { getAuthHeader, getJsonAuthHeader } = useAuth();
 
   const [availableDates, setAvailableDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const [slots, setSlots] = useState([]);
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState(null);
   const [message, setMessage] = useState("");
   const [appointmentNote, setAppointmentNote] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,7 +76,7 @@ export default function CreateTreatmentSessionModal({ progressId, onClose, onSuc
 
     const fetchSlots = async () => {
       try {
-        const res = await axios.get(`${GET_SLOTS_BY_DATE}?date=${selectedDate}`, {
+        const res = await axios.get(`${GET_SLOTS_BY_DATE}?date=${selectedDate.value}`, {
           headers: getAuthHeader(),
         });
         setSlots(res.data.data || []);
@@ -58,9 +95,9 @@ export default function CreateTreatmentSessionModal({ progressId, onClose, onSuc
       return;
     }
 
-    const formattedDate = dayjs(selectedDate).format("YYYY-MM-DD");
+    const formattedDate = dayjs(selectedDate.value).format("YYYY-MM-DD");
+    let formattedTime = selectedTime.value.trim();
 
-    let formattedTime = selectedTime.trim();
     if (/^\d{2}:\d{2}$/.test(formattedTime)) {
       formattedTime += ":00";
     }
@@ -77,9 +114,6 @@ export default function CreateTreatmentSessionModal({ progressId, onClose, onSuc
       appointmentNote: appointmentNote.trim(),
     };
 
-    console.log("📦 Payload gửi đi:", payload);
-    console.log("🆔 Progress ID:", progressId);
-
     try {
       setLoading(true);
       const res = await axios.post(
@@ -90,12 +124,10 @@ export default function CreateTreatmentSessionModal({ progressId, onClose, onSuc
         }
       );
 
-      console.log("✅ Tạo lịch thành công:", res.data);
       onSuccess?.(res.data.data);
       onClose();
     } catch (err) {
       const errorMsg = err?.response?.data?.message || "";
-      console.error("❌ Lỗi tạo lịch:", errorMsg || err.message);
 
       if (errorMsg.includes("đã có lịch tái hẹn")) {
         alert("⚠️ Bệnh nhân đã có lịch tái hẹn trong phác đồ điều trị.");
@@ -122,34 +154,26 @@ export default function CreateTreatmentSessionModal({ progressId, onClose, onSuc
         <form onSubmit={handleSubmit} className="cts-form">
           <div className="cts-form-group">
             <label>Chọn ngày:</label>
-            <select
+            <Select
+              styles={customSelectStyles}
+              options={availableDates.map((date) => ({ label: date, value: date }))}
               value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              required
-            >
-              <option value="">-- Ngày trống --</option>
-              {availableDates.map((date) => (
-                <option key={date} value={date}>
-                  {date}
-                </option>
-              ))}
-            </select>
+              onChange={setSelectedDate}
+              placeholder="-- Ngày trống --"
+              isClearable
+            />
           </div>
 
           <div className="cts-form-group">
             <label>Chọn khung giờ:</label>
-            <select
+            <Select
+              styles={customSelectStyles}
+              options={slots.map((slot) => ({ label: slot, value: slot }))}
               value={selectedTime}
-              onChange={(e) => setSelectedTime(e.target.value)}
-              required
-            >
-              <option value="">-- Slot trống --</option>
-              {slots.map((slot, index) => (
-                <option key={index} value={slot}>
-                  {slot}
-                </option>
-              ))}
-            </select>
+              onChange={setSelectedTime}
+              placeholder="-- Slot trống --"
+              isClearable
+            />
           </div>
 
           <div className="cts-form-group">

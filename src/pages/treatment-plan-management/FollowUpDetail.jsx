@@ -119,7 +119,6 @@ export default function FollowUpDetail({ sessionId }) {
           headers: getAuthHeader(),
         }
       );
-      setStatusMessage("✅ Cập nhật lịch hẹn thành công.");
       setEditMode(false);
     } catch (error) {
       console.error("❌ Lỗi cập nhật:", error);

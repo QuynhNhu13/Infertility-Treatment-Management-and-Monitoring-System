@@ -109,6 +109,8 @@ export const UPDATE_TREATMENT_SESSION = (progressId, sessionId) =>
   `${BASE_URL}api/treatment-stage-progress/${progressId}/treatment-sessions/${sessionId}`;
 export const GET_TREATMENT_SESSION_RESULT = (sessionId) => `${BASE_URL}api/treatment-sessions/${sessionId}`;
 
+export const TREATMENT_PLAN_UPDATE = (planId) => `${BASE_URL}api/medical-record/treatment-plan/${planId}`
+
 //Schedule-Management
 export const CREATE_SCHEDULE = `${BASE_URL}api/schedules`;
 export const CREATE_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;

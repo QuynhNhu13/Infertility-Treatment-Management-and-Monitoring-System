@@ -1,0 +1,251 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(7, 123, 246, 0.1);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.treatment-plan-update-modal {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border-radius: 16px;
+  padding: 32px;
+  min-width: 500px;
+  max-width: 600px;
+  box-shadow: 
+    0 20px 60px rgba(7, 123, 246, 0.15),
+    0 8px 25px rgba(7, 123, 246, 0.08),
+    0 0 0 1px rgba(7, 123, 246, 0.05);
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Header */
+.treatment-plan-update-modal h2 {
+  color: #077BF6 !important;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px !important;
+  text-align: center;
+  position: relative;
+}
+
+.treatment-plan-update-modal h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #077BF6, #4A9EFF);
+  border-radius: 2px;
+}
+
+/* Form Fields */
+.treatment-plan-update-modal__field {
+  margin-bottom: 24px;
+}
+
+.treatment-plan-update-modal__field label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2C5282;
+  font-weight: 600 !important;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* React Select Styling */
+.treatment-plan-update-modal .css-control {
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.05);
+  transition: all 0.3s ease;
+}
+
+.treatment-plan-update-modal .css-control:hover {
+  border-color: #077BF6;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.1);
+}
+
+.treatment-plan-update-modal .css-control--is-focused {
+  border-color: #077BF6 !important;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1) !important;
+}
+
+.treatment-plan-update-modal .css-option--is-selected {
+  background-color: #077BF6 !important;
+}
+
+.treatment-plan-update-modal .css-option--is-focused {
+  background-color: rgba(7, 123, 246, 0.1) !important;
+  color: #077BF6 !important;
+}
+
+/* Textarea Styling */
+.treatment-plan-update-modal textarea {
+  width: 100% !important;
+  padding: 16px !important;
+  border: 2px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.treatment-plan-update-modal textarea:focus {
+  outline: none;
+  border-color: #077BF6 !important;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+}
+
+.treatment-plan-update-modal textarea::placeholder {
+  color: #A0AEC0;
+  font-style: italic;
+}
+
+/* Action Buttons */
+.treatment-plan-update-modal__actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px !important;
+  padding-top: 24px;
+  border-top: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.treatment-plan-update-modal__actions button {
+  padding: 14px 28px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Primary Button (Lưu thông tin) */
+.treatment-plan-update-modal__actions button:first-child {
+  background: linear-gradient(135deg, #077BF6 0%, #4A9EFF 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(7, 123, 246, 0.3);
+}
+
+.treatment-plan-update-modal__actions button:first-child:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(7, 123, 246, 0.4);
+}
+
+.treatment-plan-update-modal__actions button:first-child:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.treatment-plan-update-modal__actions button:first-child:disabled {
+  background: linear-gradient(135deg, #B8D4F0 0%, #D1E7FF 100%) !important;
+  cursor: not-allowed !important;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Secondary Button (Hủy) */
+.treatment-plan-update-modal__actions button:last-child {
+  background: linear-gradient(135deg, #F7FAFC 0%, #EDF2F7 100%) !important;
+  color: #4A5568 !important;
+  border: 2px solid #E2E8F0 !important;
+  margin-left: 0 !important;
+}
+
+.treatment-plan-update-modal__actions button:last-child:hover {
+  background: linear-gradient(135deg, #EDF2F7 0%, #E2E8F0 100%) !important;
+  border-color: #CBD5E0 !important;
+  transform: translateY(-1px);
+}
+
+/* Loading State Animation */
+.treatment-plan-update-modal__actions button:first-child:disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .treatment-plan-update-modal {
+    min-width: auto;
+    width: 90%;
+    max-width: 90%;
+    margin: 20px;
+    padding: 24px;
+  }
+  
+  .treatment-plan-update-modal__actions {
+    flex-direction: column;
+  }
+  
+  .treatment-plan-update-modal__actions button {
+    width: 100%;
+  }
+}
+
+/* Focus and Accessibility */
+.treatment-plan-update-modal *:focus-visible {
+  outline: 2px solid #077BF6;
+  outline-offset: 2px;
+}
+
+/* Scrollbar Styling for Textarea */
+.treatment-plan-update-modal textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.treatment-plan-update-modal textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.treatment-plan-update-modal textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #077BF6, #4A9EFF);
+  border-radius: 3px;
+}
+
+.treatment-plan-update-modal textarea::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0651A3, #077BF6);
+}

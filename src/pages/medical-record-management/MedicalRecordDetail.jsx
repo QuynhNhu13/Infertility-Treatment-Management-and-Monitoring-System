@@ -103,7 +103,7 @@ export default function MedicalRecordDetail() {
       const result = await response.json();
 
       if (response.ok) {
-        setUpdateMessage("Cập nhật thành công!");
+        // setUpdateMessage("Cập nhật thành công!");
         setRecord(result.data);
         setIsEditing(false);
       } else {
@@ -257,13 +257,42 @@ export default function MedicalRecordDetail() {
       <div className="mr-detail-patient-info">
         <div><strong>Họ tên:</strong> {record.fullName}</div>
         <div><strong>Ngày sinh:</strong> {record.dob}</div>
-        <div><strong>Giới tính:</strong> {record.gender || "Chưa cập nhật"}</div>
+        <div>
+          <strong>Giới tính:</strong>{" "}
+          {record.gender === "MALE"
+            ? "Nam"
+            : record.gender === "FEMALE"
+              ? "Nữ"
+              : "Chưa cập nhật"}
+        </div>
+
         <div><strong>Số điện thoại:</strong> {record.phoneNumber || "Chưa cập nhật"}</div>
         <div><strong>Địa chỉ:</strong> {record.address}</div>
         <div><strong>CMND/CCCD:</strong> {record.identityNumber}</div>
         <div><strong>Quốc tịch:</strong> {record.nationality}</div>
         <div><strong>Số BHYT:</strong> {record.insuranceNumber}</div>
         <div><strong>Ngày tạo:</strong> {formatDate(record.createdAt)}</div>
+        {record.numberOfMissed > 0 && (
+          <div
+            style={{
+              background: "linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)",
+              color: "#dc2626",
+              padding: "18px 16px",
+              borderRadius: "12px",
+              marginTop: "12px",
+              fontWeight: "600",
+              border: "1px solid #f87171",
+              boxShadow: "0 2px 8px rgba(239, 68, 68, 0.15)",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              fontSize: "15px",
+              transition: "all 0.2s ease"
+            }}
+          >
+            <span>Số lần bỏ lỡ điều trị: {record.numberOfMissed}</span>
+          </div>
+        )}
       </div>
 
       <hr />
@@ -318,9 +347,27 @@ export default function MedicalRecordDetail() {
                     />
                   </div>
 
-                  <button onClick={handleUpdate} disabled={updating}>
+                  <button
+                    onClick={handleUpdate}
+                    disabled={updating}
+                    style={{
+                      backgroundColor: updating ? "#ccc" : "#077BF6",
+                      color: "white",
+                      padding: "10px 20px",
+                      border: "none",
+                      borderRadius: "6px",
+                      fontSize: "16px",
+                      cursor: updating ? "not-allowed" : "pointer",
+                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                      marginTop: "-5px",
+                      marginBottom: "15px",
+                      marginLeft: "25px",
+                      transition: "background-color 0.3s",
+                    }}
+                  >
                     {updating ? "Đang cập nhật..." : "Lưu thông tin"}
                   </button>
+
                 </>
               )}
               {updateMessage && <p style={{ marginTop: "10px" }}>{updateMessage}</p>}

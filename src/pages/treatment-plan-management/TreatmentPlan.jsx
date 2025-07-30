@@ -10,6 +10,8 @@ import CreateTreatmentSessionModal from "./CreateTreatmentSessionModal";
 import TreatmentSessionView from "./TreatmentSessionView";
 import "../../styles/treatment-plan-management/TreatmentPlan.css";
 import UpdateStageProgressModal from "./UpdateStageProgressModal";
+import TreatmentPlanUpdateModal from "./TreatmentPlanUpdateModal";
+
 
 export default function TreatmentPlan({ medicalRecordId }) {
   const { getAuthHeader } = useAuth();
@@ -23,6 +25,9 @@ export default function TreatmentPlan({ medicalRecordId }) {
   const [expandedStages, setExpandedStages] = useState({});
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedStageId, setSelectedStageId] = useState(null);
+  const [isPlanUpdateModalOpen, setIsPlanUpdateModalOpen] = useState(false);
+  const [selectedPlanId, setSelectedPlanId] = useState(null);
+
 
   const openUpdateModal = (id) => {
     setSelectedStageId(id);
@@ -132,10 +137,10 @@ export default function TreatmentPlan({ medicalRecordId }) {
     return isNaN(date.getTime())
       ? "Không hợp lệ"
       : date.toLocaleDateString("vi-VN", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        });
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
   };
 
   const getStatusText = (status) => {
@@ -203,12 +208,16 @@ export default function TreatmentPlan({ medicalRecordId }) {
           <button
             className="treatment-plan__btn treatment-plan__btn--update"
             onClick={() => {
-              setIsServiceModalOpen(true);
-              setIsUpdate(true);
+              const firstPlan = treatmentPlans[0];
+              if (firstPlan) {
+                setSelectedPlanId(firstPlan.id);
+                setIsPlanUpdateModalOpen(true);
+              }
             }}
           >
             ✎ Cập nhật phác đồ điều trị
           </button>
+
         )}
       </div>
 
@@ -221,16 +230,38 @@ export default function TreatmentPlan({ medicalRecordId }) {
         <div className="treatment-plan__list">
           {treatmentPlans.map((plan) => (
             <div className="treatment-plan__item" key={plan.id}>
-              <div className="treatment-plan__info">
-                <h3 className="treatment-plan__service">Dịch vụ: {plan.serviceName}</h3>
-                <div className="treatment-plan__meta">
-                  <span
-                    className={`treatment-plan__status treatment-plan__status--${plan.status.toLowerCase()}`}
-                  >
-                    {getStatusText(plan.status)}
-                  </span>
+              <div className="treatment-plan__item" key={plan.id}>
+                <div className="treatment-plan__info">
+                  <h3 className="treatment-plan__service">Phương pháp: {plan.serviceName}</h3>
+
+                  <div className="treatment-plan__meta">
+                    <span
+                      className={`treatment-plan__status treatment-plan__status--${plan.status.toLowerCase()}`}
+                    >
+                      {getStatusText(plan.status)}
+                    </span>
+                  </div>
+
+                  {(plan.dateStart || plan.dateEnd || plan.notes) && (
+                    <div className="treatment-plan__details" style={{ fontSize: "14px", color: "#333" }}>
+                      {(plan.dateStart || plan.dateEnd) && (
+                        <>
+                          {plan.dateStart && (
+                            <p><strong style={{ color: "#077BF6" }}>Ngày bắt đầu:</strong> {new Date(plan.dateStart).toLocaleDateString()}</p>
+                          )}
+                          {plan.dateEnd && (
+                            <p><strong style={{ color: "#077BF6" }}>Ngày kết thúc:</strong> {new Date(plan.dateEnd).toLocaleDateString()}</p>
+                          )}
+                        </>
+                      )}
+                      {plan.notes && (
+                        <p><strong style={{ color: "#077BF6" }}>Ghi chú:</strong> {plan.notes}</p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
+
 
               <div className="treatment-plan__stages">
                 <h4 className="treatment-plan__stages-title">Giai đoạn điều trị:</h4>
@@ -274,11 +305,26 @@ export default function TreatmentPlan({ medicalRecordId }) {
                             + Tạo lịch hẹn
                           </button>
                           <button
-                            className="treatment-plan__btn treatment-plan__btn--update-stage"
                             onClick={() => openUpdateModal(stage.id)}
+                            style={{
+                              marginLeft: "15px",
+                              backgroundImage: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+                              color: "#fff",
+                              padding: "6px 14px",
+                              border: "none",
+                              borderRadius: "8px",
+                              fontSize: "13px",
+                              cursor: "pointer",
+                              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                              transition: "filter 0.3s ease"
+                            }}
+                            onMouseOver={(e) => (e.currentTarget.style.filter = "brightness(0.95)")}
+                            onMouseOut={(e) => (e.currentTarget.style.filter = "brightness(1)")}
                           >
                             ✎ Cập nhật tiến trình
                           </button>
+
+
                         </div>
                       </div>
                     )}
@@ -312,6 +358,19 @@ export default function TreatmentPlan({ medicalRecordId }) {
           onSuccess={handleSessionCreated}
         />
       )}
+
+      {isPlanUpdateModalOpen && selectedPlanId && (
+        <TreatmentPlanUpdateModal
+          isOpen={isPlanUpdateModalOpen}
+          onRequestClose={() => {
+            setIsPlanUpdateModalOpen(false);
+            setSelectedPlanId(null);
+          }}
+          planId={selectedPlanId}
+          onUpdated={fetchTreatmentPlans}
+        />
+      )}
+
     </div>
   );
 }
