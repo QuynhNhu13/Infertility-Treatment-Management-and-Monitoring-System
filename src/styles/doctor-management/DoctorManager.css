@@ -1,0 +1,86 @@
+.dm-container {
+  padding: 30px;
+  background-color: #E2EFFF;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.dm-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #001D54;
+  margin-bottom: 20px;
+}
+
+.dm-detail-button {
+  background-color: #077bf6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dm-detail-button:hover {
+  background-color: #005ec2;
+}
+
+
+.dm-add-button {
+  background-color: #077BF6;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.dm-add-button:hover {
+  background-color: #005fcc;
+}
+
+.dm-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dm-table th, .dm-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dm-table th {
+  background-color: #E2EFFF;
+  color: #001D54;
+  font-weight: 600;
+}
+
+.dm-table tr:hover {
+  background-color: #f2f7ff;
+}
+
+.dm-edit-button {
+  background-color: #ffa500;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.dm-edit-button:hover {
+  background-color: #e69500;
+}

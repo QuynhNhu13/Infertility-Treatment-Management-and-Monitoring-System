@@ -60,6 +60,10 @@ const ROUTES = {
   PROFILE_VIEW: `thong-tin-ca-nhan`,
   ADMIN_MANA_ACC: `quan-ly-tai-khoan`,
 
+   // doctor - management
+  LIST_DOCTOR: `/danh-sach-chuyen-gia-bac-si`, //CHƯA LÀM
+  DOCTOR_MANAGER: `quan-ly-bac-si`,
+
 };
 
 export default ROUTES;

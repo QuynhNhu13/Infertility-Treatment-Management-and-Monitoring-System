@@ -1,0 +1,48 @@
+.doctor-detail-container {
+  padding: 40px;
+  background-color: #e2efff;
+  min-height: 100vh;
+}
+
+.doctor-detail-card {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.doctor-detail-avatar {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+}
+
+.doctor-detail-info {
+  flex: 1;
+  padding: 24px;
+}
+
+.doctor-detail-name {
+  font-size: 28px;
+  color: #001d54;
+  margin-bottom: 12px;
+}
+
+.doctor-detail-position,
+.doctor-detail-expertise,
+.doctor-detail-status,
+.doctor-detail-achievements,
+.doctor-detail-description {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.doctor-description-html p {
+  margin-bottom: 12px;
+}

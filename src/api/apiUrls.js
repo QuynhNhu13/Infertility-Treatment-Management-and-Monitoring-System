@@ -140,3 +140,11 @@ export const GET_STAFF_ACC = `${BASE_URL}api/staff/direct-patients`;
 export const CREATE_STAFF_ACC = `${BASE_URL}api/staff/direct-patients`;
 export const GET_ALL_ACCOUNT = `${BASE_URL}api/accounts/manage`;
 export const ADMIN_CREATE_ACC = `${BASE_URL}api/accounts/manage/create`;
+
+// Doctor-Management
+export const GET_DOCTORS_IN_HOME = `${BASE_URL}api/home/doctors`;
+export const GET_DOCTOR_BY_ID = (id) => `${BASE_URL}api/doctors/${id}`;
+export const GET_DOCTOR_BY_EMAIL = (email) => `${BASE_URL}api/manage/doctors/details?email=${email}`;
+export const UPDATE_DOCTOR = (id) => `${BASE_URL}api/manage/doctors/details/${id}`;
+export const CREATE_DOCTOR = `${BASE_URL}api/manage/doctors/details`;
+export const GET_DOCTOR_DETAIL_BY_ID = (id) => `${BASE_URL}api/doctors/${id}`;

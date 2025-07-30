@@ -1,0 +1,104 @@
+.doctor-list-container {
+  padding: 30px;
+  background-color: #e2efff;
+  min-height: 100vh;
+}
+
+.doctor-list-title {
+  font-size: 35px;
+  color: #001d54;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.doctor-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.doctor-list-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.doctor-list-card:hover {
+  transform: translateY(-5px);
+}
+
+.doctor-list-avatar {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: top; /* Lấy ảnh từ phía trên xuống */
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.doctor-list-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #004080;
+  margin-bottom: 8px;
+}
+
+.doctor-list-expertise {
+  color: #077bf6;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.doctor-list-description {
+  font-size: 14px;
+  color: #474646;
+  margin-bottom: 12px;
+}
+
+.doctor-list-detail-button {
+  background-color: #077bf6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.doctor-list-detail-button:hover {
+  background-color: #005ec2;
+}
+.doctor-list-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.doctor-list-detail-button,
+.doctor-list-appointment-button {
+  background-color: #077bf6;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.doctor-list-detail-button:hover,
+.doctor-list-appointment-button:hover {
+  background-color: #005ec2;
+}
+
+.doctor-list-appointment-button {
+  background-color: #00a859;
+}
+
+.doctor-list-appointment-button:hover {
+  background-color: #007d43;
+}

@@ -36,7 +36,7 @@ const Navbar = () => {
         <Link to={ROUTES.HOME} className={location.pathname === ROUTES.HOME ? 'nav-link active' : 'nav-link'}
         >TRANG CHỦ</Link>
         <Link to={ROUTES.LIST_SERVICE} className={location.pathname === ROUTES.LIST_SERVICE ? "nav-link active" : "nav-link"}>PHƯƠNG PHÁP</Link>
-        <Link to="/chuyen-gia-bac-si" className={location.pathname === "/chuyen-gia-bac-si" ? "nav-link active" : "nav-link"}>CHUYÊN GIA - BÁC SĨ</Link>
+        <Link to="/danh-sach-chuyen-gia-bac-si" className={location.pathname === "/danh-sach-chuyen-gia-bac-si" ? "nav-link active" : "nav-link"}>CHUYÊN GIA - BÁC SĨ</Link>
         <Link to="/thanh-tuu" className={location.pathname === "/thanh-tuu" ? "nav-link active" : "nav-link"}>THÀNH TỰU</Link>
         <Link to="/goc-chia-se" className={location.pathname === "/goc-chia-se" ? "nav-link active" : "nav-link"}>GÓC CHIA SẺ</Link>
       </div>

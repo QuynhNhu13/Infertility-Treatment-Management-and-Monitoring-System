@@ -5,7 +5,7 @@ import { FaStethoscope, FaCalendarCheck } from "react-icons/fa";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import ListServiceHome from "./service-management/ListServiceHome";
-
+import ListDoctorHome from "./doctor-management/ListDoctorHome";
 
 import Footer from "../components/Footer";
 import doctor01 from "../assets/doctor01.png";
@@ -76,6 +76,7 @@ const Home = () => {
 
         <ListServiceHome />
 
+<ListDoctorHome/>
         <Footer />
 
       </div >

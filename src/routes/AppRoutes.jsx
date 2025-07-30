@@ -47,6 +47,9 @@ import DoctorListPatient from "../pages/medical-record-management/DoctorListPati
 import ProfileView from "../pages/account-management/ProfileView";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminManageAcc from "../pages/account-management/AdminManageAcc";
+import DoctorManager from "../pages/doctor-management/DoctorManager";
+import DoctorList from "../pages/doctor-management/DoctorList";
+import DoctorDetail from "../pages/doctor-management/DoctorDetail"
 
 function AppRoutes() {
   return (
@@ -123,7 +126,11 @@ function AppRoutes() {
       <Route path="/ho-so-benh-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPage />} />
       <Route path="/ho-so-ca-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPageView />} />
 
-      <Route path="/thong-bao" element={<NotificationPage />} />    
+      <Route path="/thong-bao" element={<NotificationPage />} />   
+
+            {/* Doctor - Management */}
+      <Route path={ROUTES.LIST_DOCTOR} element={<DoctorList />} />
+      <Route path="/bac-si/:id" element={<DoctorDetail />} /> 
     </Routes>
   );
 }

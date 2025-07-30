@@ -1,0 +1,79 @@
+.list-doctor-home-header {
+    max-width: 1332px;
+    margin: -10px auto -4px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.list-doctor-home-header-left {
+    flex: 1;
+    min-width: 300px;
+}
+
+.list-doctor-home-h1 {
+    font-size: 35px;
+    color: #001D53;
+    margin-top: 19px;
+    margin-bottom: -16px;
+    text-align: left;
+}
+
+.list-doctor-home-h2 {
+    font-size: 46px;
+    color: #077BF6;
+    margin-bottom: 16px;
+    margin-top: 17px;
+    text-align: left;
+}
+
+.list-doctor-home-header-right {
+    flex: 2;
+    min-width: 300px;
+}
+
+.list-doctor-home-description {
+    font-size: 15px;
+    color: #474646;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.list-doctor-home-button {
+    display: block;
+    width: fit-content;
+    margin: 4px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #007bff;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.list-doctor-home-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.list-doctor-home-image-wrapper {
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.list-doctor-home-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
