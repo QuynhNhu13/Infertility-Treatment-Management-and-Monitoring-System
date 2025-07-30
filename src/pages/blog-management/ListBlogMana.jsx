@@ -75,29 +75,6 @@ const ListBlogMana = () => {
     updateBlogStatus(id, "REJECTED", note);
   };
 
-  const handleDelete = (id) => {
-    if (!note.trim()) {
-      alert("Vui lòng nhập lý do xóa.");
-      return;
-    }
-    updateBlogStatus(id, "DELETED", note);
-  };
-
-  const getStatusStyle = (status) => {
-    switch (status) {
-      case "PENDING":
-        return { color: "#f39c12" };
-      case "APPROVED":
-        return { color: "#2ecc71" };
-      case "REJECTED":
-        return { color: "#e74c3c" };
-      case "DELETED":
-        return { color: "#95a5a6" };
-      default:
-        return {};
-    }
-  };
-
   const getStatusText = (status) => {
     switch (status) {
       case "PENDING":
@@ -185,7 +162,7 @@ const ListBlogMana = () => {
                 &times;
               </button>
             </div>
-            
+
             <div className="modal-info">
               <span>Người viết: {selectedBlog.createdBy?.fullName || "Không rõ"}</span>
               <span>Ngày tạo: {new Date(selectedBlog.createdAt).toLocaleDateString("vi-VN")}</span>
@@ -213,15 +190,6 @@ const ListBlogMana = () => {
                 >
                   Từ chối
                 </button>
-                <button
-                  className="delete"
-                  onClick={() => {
-                    setNoteMode("DELETE");
-                    setShowNoteInput(true);
-                  }}
-                >
-                  Xóa
-                </button>
               </div>
             )}
 
@@ -232,15 +200,6 @@ const ListBlogMana = () => {
                   onClick={() => navigate("/goc-chia-se", { state: { selectedBlog } })}
                 >
                   Xem chi tiết
-                </button>
-                <button
-                  className="delete"
-                  onClick={() => {
-                    setNoteMode("DELETE");
-                    setShowNoteInput(true);
-                  }}
-                >
-                  Xóa
                 </button>
               </div>
             )}
@@ -254,9 +213,7 @@ const ListBlogMana = () => {
             {showNoteInput && (
               <div className="list-blog-mana-note-input">
                 <textarea
-                  placeholder={
-                    noteMode === "REJECT" ? "Nhập lý do từ chối..." : "Nhập lý do xóa..."
-                  }
+                  placeholder="Nhập lý do từ chối..."
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
                 />
@@ -272,13 +229,9 @@ const ListBlogMana = () => {
                   </button>
                   <button
                     className="submit-btn"
-                    onClick={() =>
-                      noteMode === "REJECT"
-                        ? handleReject(selectedBlog.id)
-                        : handleDelete(selectedBlog.id)
-                    }
+                    onClick={() => handleReject(selectedBlog.id)}
                   >
-                    {noteMode === "REJECT" ? "Từ chối" : "Xóa"}
+                    Từ chối
                   </button>
                 </div>
               </div>

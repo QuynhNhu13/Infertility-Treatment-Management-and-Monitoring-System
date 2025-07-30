@@ -59,7 +59,7 @@
   margin: 0;
   font-size: 24px;
   font-weight: 600;
-  color: white;
+  color: white m !important;
 }
 
 .mrh-create-btn {
