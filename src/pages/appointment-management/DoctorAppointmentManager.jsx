@@ -103,12 +103,13 @@ export default function DoctorAppointmentManager() {
           Danh sách các cuộc hẹn bạn sẽ thực hiện
         </p>
       </div>
-
+      
+{/* 
       {error && (
         <div className="staff-appointment-list__error">
           <span>⚠️ {error}</span>
         </div>
-      )}
+      )} */}
 
       <div className="staff-appointment-list__filters">
         <div className="staff-appointment-list__filter-row">
