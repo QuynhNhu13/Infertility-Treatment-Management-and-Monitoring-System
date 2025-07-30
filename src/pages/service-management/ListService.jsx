@@ -43,7 +43,7 @@ const ListService = () => {
             <Header />
             <Navbar />
             <div className="service-list-page">
-                <h2 className="service-list-title">Danh sách dịch vụ</h2>
+                <h2 className="service-list-title">DANH SÁCH DỊCH VỤ</h2>
                 {loading ? (
                     <p>Đang tải dữ liệu...</p>
                 ) : (

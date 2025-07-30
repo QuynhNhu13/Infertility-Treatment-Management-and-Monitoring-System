@@ -15,7 +15,7 @@ const genderOptions = [
 export default function ModalProfileUpdate({ isOpen, onClose, initialData, onSuccess }) {
   const { getAuthHeader } = useAuth();
   const [form, setForm] = useState({
-    fullName: "",
+    userName: "",
     email: "",
     phoneNumber: "",
     dob: "",
@@ -28,7 +28,7 @@ export default function ModalProfileUpdate({ isOpen, onClose, initialData, onSuc
 useEffect(() => {
   if (initialData) {
     setForm({
-      fullName: initialData.fullName || "",
+      userName: initialData.userName || "",
       email: initialData.email || "",
       phoneNumber: initialData.phoneNumber || "",
       dob: initialData.dob || initialData.dateOfBirth || "",
@@ -70,8 +70,8 @@ useEffect(() => {
       <h2 className="modal-profile-update__title">Cập nhật hồ sơ</h2>
       <div className="modal-profile-update__form">
         <input
-          name="fullName"
-          value={form.fullName}
+          name="userName"
+          value={form.userName}
           onChange={handleChange}
           placeholder="Họ tên"
           className="modal-profile-update__input"

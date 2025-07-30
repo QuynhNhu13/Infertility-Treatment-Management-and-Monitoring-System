@@ -31,8 +31,8 @@ const SidebarUser = () => {
       <div className="sidebar-section">
         <div className="section-title">TÀI KHOẢN CÁ NHÂN</div>
 
-        <Link to={`${ROUTES.USER}/${ROUTES.USER_PROFILE_FORM}`}
-          className={isActive(`${ROUTES.USER}/${ROUTES.USER_PROFILE_FORM}`) ? "active" : ""}>
+        <Link to={`${ROUTES.USER}/${ROUTES.PROFILE_VIEW}`}
+          className={isActive(`${ROUTES.USER}/${ROUTES.PROFILE_VIEW}`) ? "active" : ""}>
           <User size={18} />
           <span>Thông tin tài khoản</span>
         </Link>

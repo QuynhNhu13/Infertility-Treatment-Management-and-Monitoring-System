@@ -34,7 +34,7 @@ const SidebarDoctor = () => {
         <img src={logobv} alt="Bệnh viện Đa khoa Thành Nhân" className="logobv" />
       </div>
 
-      <div className="sidebar-section">
+      {/* <div className="sidebar-section">
         <div className="section-title">QUẢN LÝ HÀNH CHÍNH</div>
         <Link to="/manager/schedule" className={isActive("/manager/schedule") ? "active" : ""}>
           <Calendar size={18} />
@@ -48,7 +48,7 @@ const SidebarDoctor = () => {
           <CheckCircle size={18} />
           <span>Đơn xin nghỉ phép</span>
         </Link>
-      </div>
+      </div> */}
 
       <div className="sidebar-section">
         <div className="section-title section-special">QUẢN LÝ CHUYÊN MÔN</div>

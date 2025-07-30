@@ -91,12 +91,12 @@ const HeaderPage = () => {
             </div>
           </div>
 
-          {showDropdown && (
+          {/* {showDropdown && (
             <div className="header-page__dropdown">
               <button onClick={goToProfile}>Tài khoản</button>
               <button onClick={handleLogout}>Đăng xuất</button>
             </div>
-          )}
+          )} */}
         </div>
       </nav>
     </header>
