@@ -18,19 +18,19 @@ export default function PaymentResult() {
             const token = localStorage.getItem("token");
             const appointmentPending = localStorage.getItem("appointmentPending");
 
-            if (!appointmentPending) {
-                setStatus("invalid");
-                return;
-            }
+            // if (!appointmentPending) {
+            //     setStatus("invalid");
+            //     return;
+            // }
 
             try {
                 const searchParams = new URLSearchParams(window.location.search);
 
                 const res = await fetch(`${PAYMENT_VNPAY_CALLBACK}?${searchParams.toString()}`, {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
+                    // headers: {
+                    //     "Authorization": `Bearer ${token}`
+                    // }
                 });
 
                 if (!res.ok) throw new Error("Lỗi khi xác thực kết quả thanh toán");
@@ -40,15 +40,15 @@ export default function PaymentResult() {
                 const date = localStorage.getItem("selectedDate")
                 console.log(paymentCode);
                 if (paymentCode === "00") {
-                    const confirmRes = await fetch(`${CONFIRM_APPOINTMENT}?date=${date}`, {
-                        method: "PUT",
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                            "Content-Type": "application/json"
-                        }
-                    });
+                    // const confirmRes = await fetch(`${CONFIRM_APPOINTMENT}?date=${date}`, {
+                    //     method: "PUT",
+                    //     headers: {
+                    //         // "Authorization": `Bearer ${token}`,
+                    //         "Content-Type": "application/json"
+                    //     }
+                    // });
 
-                    if (!confirmRes.ok) throw new Error("Lỗi khi xác nhận lịch khám");
+                    // if (!confirmRes.ok) throw new Error("Lỗi khi xác nhận lịch khám");
 
                     setStatus("success");
                     localStorage.removeItem("appointmentPending");

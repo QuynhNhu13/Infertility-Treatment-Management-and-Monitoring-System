@@ -1,0 +1,333 @@
+/* Base styles
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+} */
+
+/* Main container */
+.admin-dashboard-container {
+    margin-top: -4px;
+    width: 100%;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Stats row - 3 cards layout */
+.admin-stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-stat-card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    overflow: hidden;
+}
+
+.admin-stat-card-primary {
+    background-color: #007bff;
+}
+
+.admin-stat-card-warning {
+    background-color: #ffc107;
+}
+
+.admin-stat-card-info {
+    background-color: #17a2b8;
+}
+
+.admin-card-body-dashboard {
+    padding: 1.5rem;
+}
+
+.admin-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.admin-card-info {
+    flex: 1;
+}
+
+.admin-card-title-dashboard {
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+.admin-card-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.admin-card-date {
+    font-size: 0.875rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.admin-card-icon {
+    color: white;
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+/* Main content row */
+.admin-main-row {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .admin-main-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-overview-section {
+    min-height: 400px;
+}
+
+.admin-distribution-section {
+    min-height: 400px;
+}
+
+.admin-distribution-card {
+    height: 100%;
+}
+
+.admin-card-dashboard {
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.admin-overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.admin-date-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Canvas styles */
+.admin-canvas-dashboard {
+    margin-top: 10px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+#coin-distribution {
+    margin-top: 1rem;
+}
+
+/* Calendar styles */
+.admin-calendar-container-dashboardPage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+}
+
+.admin-calendar-container-dashboardPage input {
+    width: 160px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin-calendar-popup-dashboardPage {
+    position: absolute;
+    z-index: 999;
+    margin-top: 4px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.admin-button-search-dashboardPage {
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.admin-button-search-dashboardPage:hover {
+    transform: translateY(-3px);
+    background-color: #0056b3;
+}
+
+/* Table styles */
+.admin-account-dashboardPage {
+    animation: fadeIn 0.7s ease;
+    margin-top: 1.5rem;
+}
+
+.admin-account-table-dashboardPage {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.7s ease;
+}
+
+.admin-account-table-dashboardPage thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.admin-account-table-dashboardPage th,
+.admin-account-table-dashboardPage td {
+    padding: 16px 20px;
+    font-size: 15px;
+    text-align: left;
+}
+
+.admin-account-table-dashboardPage tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.admin-account-table-dashboardPage tbody tr:hover {
+    background-color: #f1f3f4;
+}
+
+/* Status styles */
+.admin-status-account {
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.admin-status-account-enabled {
+    color: #28a745;
+    background-color: #d4edda;
+}
+
+.admin-status-account-deleted {
+    color: crimson;
+    background-color: #f8d7da;
+}
+
+.admin-status-account-disabled {
+    background-color: #f0f0f0;
+    color: #888888;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .admin-dashboard-container {
+        padding: 1rem;
+    }
+    
+    .admin-stats-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .admin-overview-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .admin-date-controls {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .admin-calendar-container-dashboardPage {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .admin-calendar-container-dashboardPage input {
+        width: 140px;
+    }
+    
+    .admin-account-table-dashboardPage {
+        font-size: 14px;
+    }
+    
+    .admin-account-table-dashboardPage th,
+    .admin-account-table-dashboardPage td {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-card-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .admin-card-icon {
+        align-self: flex-end;
+        font-size: 2rem;
+    }
+    
+    .admin-date-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .admin-calendar-container-dashboardPage {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .admin-calendar-container-dashboardPage input {
+        width: 100%;
+    }
+    
+    .admin-button-search-dashboardPage {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}

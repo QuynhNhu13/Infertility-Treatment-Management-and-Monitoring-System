@@ -51,6 +51,9 @@ import DoctorManager from "../pages/doctor-management/DoctorManager";
 import DoctorList from "../pages/doctor-management/DoctorList";
 import DoctorDetail from "../pages/doctor-management/DoctorDetail";
 import AchievementPage from "../components/achievement/AchievementPage";
+import Dashboard from "../pages/dash-board-management/Dashboard";
+import ManaDashboard from "../pages/dash-board-management/ManaDashboard";
+import FinancialReport from "../pages/dash-board-management/FinancialReport";
 
 function AppRoutes() {
   return (
@@ -58,10 +61,13 @@ function AppRoutes() {
       <Route path={ROUTES.HOME} element={<Home />} />
 
       <Route path={ROUTES.MANAGER} element={<ManagerDashboard />}>
+      <Route index element={<Navigate to={ROUTES.MANAGER_FINANCIAL_DASHBOARD} replace />} />
         <Route path={ROUTES.SERVICE_MANAGE} element={<ServiceManage />} />
         <Route path={ROUTES.LIST_BLOG_MANA} element={<ListBlogMana />} />
         <Route path={ROUTES.SCHEDULE_TEMPLATE_LIST} element={<ScheduleTemplateList />} />
         <Route path={ROUTES.DOCTOR_MANAGER} element={<DoctorManager />} />
+        <Route path={ROUTES.MANAGER_DASHBOARD} element={<ManaDashboard />} />
+        <Route path={ROUTES.MANAGER_FINANCIAL_DASHBOARD} element={<FinancialReport />} />
       </Route>
 
       <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
@@ -84,6 +90,8 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.ADMIN} element={<AdminDashboard />}>
+        <Route index element={<Navigate to={ROUTES.DASHBOARD_ADMIN_ACC} replace />} />
+        <Route path={ROUTES.DASHBOARD_ADMIN_ACC} element={<Dashboard />} />
         <Route path={ROUTES.ADMIN_MANA_ACC} element={<AdminManageAcc />} />
       </Route>
 
@@ -135,7 +143,7 @@ function AppRoutes() {
       <Route path="/bac-si/:id" element={<DoctorDetail />} />
 
       {/* Achievement */}
-      <Route path={ROUTES.ACHIEVEMENT_VIEW} element={<AchievementPage/>}/>
+      <Route path={ROUTES.ACHIEVEMENT_VIEW} element={<AchievementPage />} />
     </Routes>
   );
 }

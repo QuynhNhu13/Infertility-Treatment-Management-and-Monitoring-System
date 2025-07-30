@@ -31,6 +31,14 @@ const SidebarAdmin = () => {
         <div className="section-title">QUẢN LÝ HỆ THỐNG</div>
 
         <Link
+          to={`${ROUTES.ADMIN}/${ROUTES.DASHBOARD_ADMIN_ACC}`}
+          className={isActive(`${ROUTES.ADMIN}/${ROUTES.DASHBOARD_ADMIN_ACC}`) ? "active" : ""}
+        >
+          <Users size={18} />
+          <span>Tổng quan nhân sự</span>
+        </Link>
+
+        <Link
           to={`${ROUTES.ADMIN}/${ROUTES.ADMIN_MANA_ACC}`}
           className={isActive(`${ROUTES.ADMIN}/${ROUTES.ADMIN_MANA_ACC}`) ? "active" : ""}
         >

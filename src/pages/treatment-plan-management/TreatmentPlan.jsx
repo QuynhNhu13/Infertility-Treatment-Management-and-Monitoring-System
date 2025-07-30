@@ -11,8 +11,6 @@ import TreatmentSessionView from "./TreatmentSessionView";
 import "../../styles/treatment-plan-management/TreatmentPlan.css";
 import UpdateStageProgressModal from "./UpdateStageProgressModal";
 import TreatmentPlanUpdateModal from "./TreatmentPlanUpdateModal";
-import { toast } from "react-toastify";
-
 
 
 export default function TreatmentPlan({ medicalRecordId }) {

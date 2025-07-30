@@ -60,12 +60,17 @@ const ROUTES = {
   PROFILE_VIEW: `thong-tin-ca-nhan`,
   ADMIN_MANA_ACC: `quan-ly-tai-khoan`,
 
-   // doctor - management
+  // doctor - management
   LIST_DOCTOR: `/danh-sach-chuyen-gia-bac-si`, //CHƯA LÀM
   DOCTOR_MANAGER: `quan-ly-bac-si`,
 
   // achievement
   ACHIEVEMENT_VIEW: `/thanh-tuu`,
+
+  //dashboard-management
+  DASHBOARD_ADMIN_ACC: `bang-thong-ke-tai-khoan`,
+  MANAGER_FINANCIAL_DASHBOARD: 'financial-dashboard-manager',
+  MANAGER_DASHBOARD: 'dashboard-manager',
 
 };
 

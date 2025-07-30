@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import logobv from "../assets/logobv.png";
 import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
 
 
 const SidebarMana = () => {
@@ -27,9 +28,17 @@ const SidebarMana = () => {
   // const handleLogout = () => {
   //   navigate("/");
   // };
-    const handleLogout = () => {
+  const handleLogout = () => {
     logout();
     navigate("/dang-nhap");
+  };
+
+
+
+  const [showReportDropdown, setShowReportDropdown] = useState(false);
+
+  const toggleReportDropdown = () => {
+    setShowReportDropdown(!showReportDropdown);
   };
 
 
@@ -41,10 +50,32 @@ const SidebarMana = () => {
 
       <div className="sidebar-section">
         <div className="section-title">QUẢN LÝ HÀNH CHÍNH</div>
-        <Link to="/manager/reports" className={isActive("/manager/reports") ? "active" : ""}>
+        {/* <div onClick={toggleReportDropdown} className={`dropdown-toggle-sidebarMana ${isActive("/quan-ly/dashboard-manager") ? "active" : ""}`}>
           <BarChart2 size={18} />
           <span>Báo cáo</span>
-        </Link>
+        </div> */}
+        {/* {showReportDropdown && (
+          <div className="dropdown-menu-sidebarMana">
+            <Link to="/quan-ly/dashboard-manager" className={isActive("/quan-ly/dashboard-manager") ? "active" : ""}>
+              <span>Báo cáo lịch khám</span>
+            </Link>
+            <Link to="/quan-ly/financial-dashboard-manager" className={isActive("/quan-ly/financial-dashboard-manager") ? "active" : ""}>
+              <span>Báo cáo tài chính</span>
+            </Link>
+          </div>
+        )} */}
+
+        <div className="dropdown-menu-sidebarMana">
+          <Link to="/quan-ly/financial-dashboard-manager" className={isActive("/quan-ly/financial-dashboard-manager") ? "active" : ""}>
+              <BarChart2 size={18} />
+              <span>Báo cáo tài chính</span>
+            </Link>
+            <Link to="/quan-ly/dashboard-manager" className={isActive("/quan-ly/dashboard-manager") ? "active" : ""}>
+              <FileText size={18} />
+              <span>Báo cáo lịch khám</span>
+            </Link>
+            
+          </div>
         <Link to={`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`} className={isActive(`${ROUTES.MANAGER}/${ROUTES.SCHEDULE_TEMPLATE_LIST}`) ? "active" : ""}>
           <Calendar size={18} />
           <span>Lịch làm việc</span>
@@ -70,7 +101,7 @@ const SidebarMana = () => {
           <span>Phương pháp</span>
         </Link>
 
-        <Link  to={`${ROUTES.MANAGER}/${ROUTES.DOCTOR_MANAGER}`}
+        <Link to={`${ROUTES.MANAGER}/${ROUTES.DOCTOR_MANAGER}`}
           className={isActive(`${ROUTES.MANAGER}/${ROUTES.DOCTOR_MANAGER}`) ? "active" : ""}>
           <Users size={18} />
           <span>Chuyên gia & Bác sĩ</span>
@@ -86,7 +117,7 @@ const SidebarMana = () => {
           <Stethoscope size={18} />
           <span>Góc chia sẻ</span>
         </Link>
-        
+
         <button className="logout-btn" onClick={handleLogout}>
           <LogOut size={18} />
           <span>Đăng xuất</span>
