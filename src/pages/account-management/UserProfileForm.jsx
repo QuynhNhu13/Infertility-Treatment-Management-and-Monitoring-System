@@ -29,7 +29,7 @@ export default function UserProfileForm() {
       if (res.data && res.data.data) {
         const data = res.data.data;
         setProfile({
-          userName: data.userName || data.fullName || "",
+          userName: data.userName || "",
           email: data.email || "",
           phoneNumber: data.phoneNumber || "",
           dateOfBirth: data.dateOfBirth || data.dob || "",
@@ -56,7 +56,7 @@ export default function UserProfileForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
-      fullName: profile.userName,
+      userName: profile.userName,
       email: profile.email,
       phoneNumber: profile.phoneNumber,
       dob: profile.dateOfBirth,

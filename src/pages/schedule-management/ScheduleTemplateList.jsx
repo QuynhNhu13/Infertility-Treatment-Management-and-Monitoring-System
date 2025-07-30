@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { GET_ALL_SCHEDULE_TEMPLATE } from "../../api/apiUrls";
-import ScheduleTemplateFormModal from "./ScheduleTemplateFormModal";
-import CreateSchedule from "./CreateSchedule"; 
 import "../../styles/schedule-management/ScheduleTemplateList.css";
+import UpdateTemplateModal from "./UpdateTemplateModal";
+import CreateScheduleModal from "./CreateScheduleModal"; // ✅ import modal mới
 
 export default function ScheduleTemplateList() {
   const { getAuthHeader } = useAuth();
-  const [templates, setTemplates] = useState([]);
   const [groupedTemplates, setGroupedTemplates] = useState({});
-  const [showTemplateModal, setShowTemplateModal] = useState(false);
-  const [showCreateScheduleModal, setShowCreateScheduleModal] = useState(false);
-  const [selectedDayGroup, setSelectedDayGroup] = useState(null);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [showCreateModal, setShowCreateModal] = useState(false); // ✅ modal toggle
 
   const fetchTemplates = async () => {
     try {
@@ -21,7 +19,6 @@ export default function ScheduleTemplateList() {
       });
       const data = await res.json();
       if (res.ok) {
-        setTemplates(data.data || []);
         groupByDay(data.data || []);
       }
     } catch (error) {
@@ -45,16 +42,13 @@ export default function ScheduleTemplateList() {
 
   return (
     <div className="stl-container">
-      <h2 className="stl-title">QUẢN LÝ MẪU LÀM VIỆC</h2>
+      <h2 className="stl-title">DANH SÁCH MẪU LỊCH</h2>
 
       <button
         className="stl-add-button"
-        onClick={() => {
-          setSelectedDayGroup(null);
-          setShowTemplateModal(true);
-        }}
+        onClick={() => setShowCreateModal(true)}
       >
-        + Thêm mẫu mới
+        + Tạo lịch làm việc theo mẫu
       </button>
 
       {Object.entries(groupedTemplates).length === 0 ? (
@@ -78,23 +72,12 @@ export default function ScheduleTemplateList() {
                     <td>{shift.shiftTime}</td>
                     <td>{shift.maxDoctors}</td>
                     <td>{shift.maxStaffs}</td>
-                    <td className="stl-action-cell">
+                    <td>
                       <button
                         className="stl-edit-button"
-                        onClick={() => {
-                          setSelectedDayGroup(shift);
-                          setShowTemplateModal(true);
-                        }}
+                        onClick={() => setSelectedTemplate(shift)}
                       >
-                        Sửa
-                      </button>
-                      <button
-                        className="stl-generate-button"
-                        onClick={() => {
-                          setShowCreateScheduleModal(true);
-                        }}
-                      >
-                        Tạo lịch làm việc
+                        Cập nhật
                       </button>
                     </td>
                   </tr>
@@ -105,27 +88,21 @@ export default function ScheduleTemplateList() {
         ))
       )}
 
-      {showTemplateModal && (
-        <ScheduleTemplateFormModal
-          initialData={selectedDayGroup}
-          mode={selectedDayGroup ? "edit" : "create"}
-          onClose={() => {
-            setShowTemplateModal(false);
-            fetchTemplates();
-          }}
+      {selectedTemplate && (
+        <UpdateTemplateModal
+          template={selectedTemplate}
+          onClose={() => setSelectedTemplate(null)}
           onSuccess={() => {
-            setShowTemplateModal(false);
+            setSelectedTemplate(null);
             fetchTemplates();
           }}
         />
       )}
 
-      {showCreateScheduleModal && (
-        <CreateSchedule
-          onClose={() => setShowCreateScheduleModal(false)}
-          onSuccess={() => {
-            setShowCreateScheduleModal(false);
-          }}
+      {showCreateModal && (
+        <CreateScheduleModal
+          onClose={() => setShowCreateModal(false)}
+          onSuccess={() => setShowCreateModal(false)}
         />
       )}
     </div>

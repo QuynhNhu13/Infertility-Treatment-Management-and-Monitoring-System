@@ -118,6 +118,7 @@ export const TREATMENT_PLAN_UPDATE = (planId) => `${BASE_URL}api/medical-record/
 
 //Schedule-Management
 export const CREATE_SCHEDULE = `${BASE_URL}api/schedules`;
+// // export const CREATE_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;
 export const CREATE_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;
 export const UPDATE_SCHEDULE_TEMPLATE = (id) => `${BASE_URL}api/schedule-template?id=${id}`;
 export const GET_ALL_SCHEDULE_TEMPLATE = `${BASE_URL}api/schedule-template`;

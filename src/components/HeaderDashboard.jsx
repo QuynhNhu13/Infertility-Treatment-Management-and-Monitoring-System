@@ -91,12 +91,12 @@ const HeaderDashboard = () => {
             </div>
           </div>
 
-          {showDropdown && (
+          {/* {showDropdown && (
             <div className="dashboard-dropdown-menu">
               <button onClick={goToProfile}>Tài khoản</button>
               <button onClick={handleLogout}>Đăng xuất</button>
             </div>
-          )}
+          )} */}
         </div>
       </nav>
     </header>

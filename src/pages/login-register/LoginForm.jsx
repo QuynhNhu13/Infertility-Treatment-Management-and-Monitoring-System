@@ -54,7 +54,7 @@ const LoginForm = () => {
           const profileData = await profileResponse.json();
           const user = {
             fullName: profileData.data.fullName,
-            role: profileData.data.email, 
+            role: profileData.data.role, 
             token: token,
           };
 

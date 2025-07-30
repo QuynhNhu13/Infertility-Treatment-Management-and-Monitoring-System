@@ -24,11 +24,9 @@ import ListBlogMana from "../pages/blog-management/ListBlogMana";
 import DoctorAppointmentManager from "../pages/appointment-management/DoctorAppointmentManager";
 import StaffDashboard from "../pages/StaffDashboard";
 import PublicBlogList from "../pages/blog-management/PublicBlogList";
-import CreateSchedule from "../pages/schedule-management/CreateSchedule";
 import ScheduleTemplateList from "../pages/schedule-management/ScheduleTemplateList";
 import DatLichKhamBenh from "../pages/appointment-management/DatLichKhamBenh";
 import PaymentResult from "../pages/appointment-management/PaymentResult";
-import ScheduleTemplateFormModal from "../pages/schedule-management/ScheduleTemplateFormModal";
 import ConsultationForm from "../pages/consultation-management/ConsultationForm";
 import MedicalRecordHistory from "../pages/medical-record-management/MedicalRecordHistory";
 import MedicalRecordDetail from "../pages/medical-record-management/MedicalRecordDetail";
@@ -61,7 +59,7 @@ function AppRoutes() {
       <Route path={ROUTES.HOME} element={<Home />} />
 
       <Route path={ROUTES.MANAGER} element={<ManagerDashboard />}>
-      <Route index element={<Navigate to={ROUTES.MANAGER_FINANCIAL_DASHBOARD} replace />} />
+        <Route index element={<Navigate to={ROUTES.MANAGER_FINANCIAL_DASHBOARD} replace />} />
         <Route path={ROUTES.SERVICE_MANAGE} element={<ServiceManage />} />
         <Route path={ROUTES.LIST_BLOG_MANA} element={<ListBlogMana />} />
         <Route path={ROUTES.SCHEDULE_TEMPLATE_LIST} element={<ScheduleTemplateList />} />
@@ -71,6 +69,7 @@ function AppRoutes() {
       </Route>
 
       <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
+      <Route index element={<Navigate to={ROUTES.DOCTOR_APPOINTMENT_MANAGER} replace />} />
         <Route path={ROUTES.DOCTOR_BLOG_MANAGER} element={<DoctorBlogManager />} />
         <Route path={ROUTES.DOCTOR_APPOINTMENT_MANAGER} element={<DoctorAppointmentManager />} />
         <Route path={ROUTES.DOCTOR_LIST_PATIENT} element={<DoctorListPatient />} />
@@ -117,8 +116,6 @@ function AppRoutes() {
 
 
       {/* Schedule - Management */}
-      <Route path={ROUTES.CREATE_SCHEDULE} element={<CreateSchedule />} />
-      <Route path={ROUTES.SCHEDULE_TEMPLATE_FORM_MODAL} element={<ScheduleTemplateFormModal />} />
 
       {/* Appointment - Management */}
       <Route path={ROUTES.BOOKING_FORM} element={<DatLichKhamBenh />} />
