@@ -41,7 +41,9 @@ export const REJECT_BLOG = (id) => `${BASE_URL}api/blogs/${id}/reject`;
 export const LIST_BLOG = `${BASE_URL}api/blogs/for-user`;
 
 //Appointment-Management
-export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/test`; //lấy api hiển thị cho doctor appointment manager
+// export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/test`; //lấy api hiển thị cho doctor appointment manager
+export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/doctor/filter-appointment`;
+
 export const GET_LAST_APPOINTMENT = `${BASE_URL}api/appointments/last-appointment`; //cua nhan
 export const APPOINTMENT_DOCTOR = `${BASE_URL}api/user/appointments/available-doctors`; //nhan
 export const APPOINTMENT_DATE = `${BASE_URL}api/schedules/available-dates-by-date`; //nhan

@@ -1,240 +1,245 @@
-import React, { useEffect, useState, useCallback } from "react";
-import Select from "react-select";
-import { GET_ALL_APPOINTMENT } from "../../api/apiUrls";
-import "../../styles/appointment-management/DoctorAppointmentManager.css";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import DatePicker from "react-datepicker";
 import { useAuth } from "../../context/AuthContext";
-import MedicalRecordHistory from "../medical-record-management/MedicalRecordHistory";
+import "react-datepicker/dist/react-datepicker.css";
+import "../../styles/appointment-management/StaffAppointmentList.css";
+import { GET_ALL_APPOINTMENT } from "../../api/apiUrls";
+import CustomDateInput from "../../components/CustomDateInput";
+import MedicalRecordHistoryModal from "../medical-record-management/MedicalRecordHistory";
 
 export default function DoctorAppointmentManager() {
-  const { getJsonAuthHeader, isAuthLoaded } = useAuth();
+  const { getAuthHeader } = useAuth();
   const [appointments, setAppointments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [showRecordModal, setShowRecordModal] = useState(false);
   const [selectedAccountId, setSelectedAccountId] = useState(null);
 
-  const translateStatus = useCallback((status) => {
-    switch (status) {
-      case "UNPAID": return "Chưa thanh toán";
-      case "NOT_PAID": return "Chưa trả tiền";
-      case "UNCHECKED_IN": return "Chưa check-in";
-      case "CHECKED_IN": return "Đã check-in";
-      case "CANCELLED": return "Đã hủy";
-      default: return "Không xác định";
-    }
-  }, []);
+  const [filters, setFilters] = useState({
+    date: new Date(),
+  });
 
-  const getStatusColor = useCallback((status) => {
-    switch (status) {
-      case "UNPAID":
-      case "NOT_PAID": return "warning";
-      case "UNCHECKED_IN": return "info";
-      case "CHECKED_IN": return "success";
-      case "CANCELLED": return "error";
-      default: return "default";
-    }
-  }, []);
-
-  const fetchAppointments = useCallback(async () => {
+  const fetchAppointments = async () => {
     try {
       setLoading(true);
-      setError(null);
-      const headers = getJsonAuthHeader();
-      const res = await fetch(GET_ALL_APPOINTMENT, { headers });
-
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      const json = await res.json();
-      if (json.statusCode === 200 && json.data) {
-        setAppointments(json.data);
-      } else {
-        throw new Error(json.message || "Lỗi khi fetch danh sách lịch hẹn");
-      }
+      setError("");
+      const params = {
+        date: filters.date ? filters.date.toISOString().split("T")[0] : null,
+      };
+      const res = await axios.get(GET_ALL_APPOINTMENT, {
+        headers: getAuthHeader(),
+        params,
+      });
+      setAppointments(res.data.data || []);
     } catch (err) {
-      setError(err.message || "Có lỗi xảy ra khi tải dữ liệu");
+      console.error("Lỗi khi lấy danh sách cuộc hẹn:", err);
+      setError("Không thể tải danh sách lịch hẹn");
     } finally {
       setLoading(false);
     }
-  }, [getJsonAuthHeader]);
+  };
 
   useEffect(() => {
-    if (isAuthLoaded) {
-      fetchAppointments();
-    }
-  }, [fetchAppointments, isAuthLoaded]);
+    fetchAppointments();
+  }, [filters]);
 
-  const handleViewRecord = useCallback((accountId) => {
-    if (accountId) {
-      setSelectedAccountId(accountId);
-      setShowRecordModal(true);
-    } else {
-      alert("Không có mã tài khoản để xem hồ sơ.");
-    }
-  }, []);
+  const handleFilterChange = (field, value) => {
+    setFilters((prev) => ({ ...prev, [field]: value }));
+  };
 
-  const filteredAppointments = appointments.filter((appt) => {
-    return statusFilter === "all" || appt.status === statusFilter;
-  });
+  const handleReset = () => {
+    setFilters({ date: new Date() });
+    setSearchQuery("");
+  };
 
-  const sortedAppointments = [...filteredAppointments].sort(
-    (a, b) => new Date(b.createAt) - new Date(a.createAt)
-  );
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
 
-  const statusOptions = [
-    { value: "all", label: `Tất cả (${appointments.length})` },
-    ...["UNPAID", "NOT_PAID", "UNCHECKED_IN", "CHECKED_IN", "CANCELLED"].map((status) => ({
-      value: status,
-      label: `${translateStatus(status)} (${appointments.filter((a) => a.status === status).length})`
-    }))
-  ];
+  const handleOpenMedicalRecord = (accountId) => {
+    setSelectedAccountId(accountId);
+    setShowRecordModal(true);
+  };
+
+  const getStatusLabel = (status) => {
+    const statusMap = {
+      UNPAID: { label: "Chưa thanh toán", class: "status--unpaid" },
+      NOT_PAID: { label: "Không thanh toán", class: "status--not-paid" },
+      UNCHECKED_IN: { label: "Chưa đến", class: "status--unchecked-in" },
+      CHECKED_IN: { label: "Đã đến", class: "status--checked-in" },
+      CANCELLED: { label: "Đã hủy", class: "status--cancelled" },
+    };
+    return statusMap[status] || { label: status, class: "status--default" };
+  };
+
+  const formatGender = (gender) => {
+    const genderMap = {
+      MALE: "Nam",
+      FEMALE: "Nữ",
+      OTHER: "Khác",
+    };
+    return genderMap[gender] || "-";
+  };
 
   const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString("vi-VN");
-    } catch {
-      return dateString;
-    }
+    if (!dateString) return "-";
+    return new Date(dateString).toLocaleDateString("vi-VN");
   };
 
-  const formatTime = (timeString) => {
-    if (!timeString) return "N/A";
-    try {
-      if (timeString.includes("T")) {
-        const date = new Date(timeString);
-        return date.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
-      }
-      return timeString;
-    } catch {
-      return timeString;
-    }
-  };
-
-  if (!isAuthLoaded) {
-    return <div className="doctor-apm-container"><p>Đang kiểm tra xác thực...</p></div>;
-  }
-
-  if (loading) {
-    return (
-      <div className="doctor-apm-container">
-        <div className="doctor-apm-loading">
-          <div className="spinner"></div>
-          <p>Đang tải danh sách lịch hẹn...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="doctor-apm-container">
-        <div className="doctor-apm-error">
-          <h3>Có lỗi xảy ra</h3>
-          <p>{error}</p>
-          <button className="doctor-apm-retry-btn" onClick={fetchAppointments}>Thử lại</button>
-        </div>
-      </div>
-    );
-  }
+  const filteredAppointments = appointments.filter((item) => {
+    const name = item.patientName?.toLowerCase() || "";
+    const phone = item.phoneNumber || "";
+    return name.includes(searchQuery) || phone.includes(searchQuery);
+  });
 
   return (
-    <div className="doctor-apm-container">
-      <header className="doctor-apm-header">
-        <h1 className="doctor-apm-title">Quản lý lịch hẹn</h1>
-        <p className="doctor-apm-subtitle">Tổng cộng: <strong>{appointments.length}</strong> lịch hẹn</p>
-      </header>
-
-      <div className="doctor-apm-controls">
-        <div className="filter-group">
-          <label htmlFor="status-filter">Trạng thái:</label>
-          <Select
-            id="status-filter"
-            options={statusOptions}
-            value={statusOptions.find((opt) => opt.value === statusFilter)}
-            onChange={(selected) => setStatusFilter(selected.value)}
-            className="doctor-apm-react-select"
-            classNamePrefix="react-select"
-            isSearchable={false}
-          />
-        </div>
-
-        <div className="results-info">Hiển thị: <strong>{sortedAppointments.length}</strong> kết quả</div>
+    <div className="staff-appointment-list">
+      <div className="staff-appointment-list__header">
+        <h2 className="staff-appointment-list__title">Lịch hẹn của tôi</h2>
+        <p className="staff-appointment-list__subtitle">
+          Danh sách các cuộc hẹn bạn sẽ thực hiện
+        </p>
       </div>
 
-      {sortedAppointments.length === 0 ? (
-        <div className="doctor-apm-empty">
-          <h3>Không có lịch hẹn nào</h3>
-          <p>Không tìm thấy lịch hẹn phù hợp với bộ lọc</p>
-          <button className="clear-filters-btn" onClick={() => setStatusFilter("all")}>Xóa bộ lọc</button>
+      {error && (
+        <div className="staff-appointment-list__error">
+          <span>⚠️ {error}</span>
         </div>
-      ) : (
-        <div className="doctor-apm-table-container">
-          <div className="doctor-apm-table-wrapper">
-            <table className="doctor-apm-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Ngày hẹn</th>
-                  <th>Tên bệnh nhân</th>
-                  <th>Thời gian</th>
-                  <th>Trạng thái</th>
-                  <th>Ghi chú</th>
-                  <th>Ngày tạo</th>
-                  <th>Thao tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedAppointments.map((appt) => (
-                  <tr key={appt.id} className="appointment-row">
-                    <td>{appt.id}</td>
-                    <td>{formatDate(appt.time)}</td>
-                    <td>{appt.patientName || "N/A"}</td>
-                    <td>{formatTime(appt.startTime)} - {formatTime(appt.endTime)}</td>
-                    <td>
-                      <span className={`status-badge status-${getStatusColor(appt.status)}`}>
-                        {translateStatus(appt.status)}
-                      </span>
-                    </td>
-                    <td>
-                      {appt.note ? (
-                        <span title={appt.note}>
-                          {appt.note.length > 30 ? `${appt.note.substring(0, 30)}...` : appt.note}
-                        </span>
-                      ) : (
-                        <span className="no-note">Không có</span>
-                      )}
-                    </td>
-                    <td>{formatDate(appt.createAt)}</td>
-                    <td>
-                      {/* <button
-                        className="doctor-apm-view-btn"
-                        onClick={() => handleViewRecord(appt.user)}
-                        // disabled={!appt.user || appt.status !== "CHECKED_IN"}
-                      >
-                        Xem hồ sơ bệnh án
-                      </button> */}
+      )}
 
-                      <button
-                        onClick={() => handleViewRecord(appt.userId)}
-                        className="doctor-apm-view-btn"
-                        disabled={!appt.userId || appt.status !== "CHECKED_IN"}
-                      >
-                        Xem hồ sơ
-                      </button>
-
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <div className="staff-appointment-list__filters">
+        <div className="staff-appointment-list__filter-row">
+          <div className="staff-appointment-list__filter-group">
+            <label>Ngày hẹn:</label>
+            <DatePicker
+              selected={filters.date}
+              onChange={(date) => handleFilterChange("date", date)}
+              placeholderText="Chọn ngày hẹn"
+              dateFormat="dd/MM/yyyy"
+              customInput={<CustomDateInput />}
+              withPortal
+            />
           </div>
+
+          <div className="staff-appointment-list__filter-group">
+            <label>Tìm kiếm:</label>
+            <input
+              type="text"
+              placeholder="Nhập tên hoặc số điện thoại"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="staff-appointment-list__search-input"
+            />
+          </div>
+
+          <div className="staff-appointment-list__filter-actions">
+            <button
+              className="staff-appointment-list__btn staff-appointment-list__btn--reset"
+              onClick={handleReset}
+              disabled={loading}
+            >
+              Đặt lại
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="staff-appointment-list__table-container">
+        {loading ? (
+          <div className="staff-appointment-list__loading">
+            <div className="staff-appointment-list__spinner"></div>
+            <span>Đang tải dữ liệu...</span>
+          </div>
+        ) : (
+          <table className="staff-appointment-list__table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Bệnh nhân</th>
+                <th>Điện thoại</th>
+                <th>Giới tính</th>
+                <th>Ngày hẹn</th>
+                <th>Giờ hẹn</th>
+                <th>Trạng thái</th>
+                <th>Hồ sơ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredAppointments.length === 0 ? (
+                <tr>
+                  <td colSpan="8" className="staff-appointment-list__empty">
+                    <div>📅 Không có cuộc hẹn nào phù hợp</div>
+                  </td>
+                </tr>
+              ) : (
+                filteredAppointments.map((item, index) => {
+                  const statusInfo = getStatusLabel(item.status);
+                  const isDisabled =
+                    !item.userId || item.status !== "CHECKED_IN";
+                  return (
+                    <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>{item.patientName || "-"}</td>
+                      <td>{item.phoneNumber || "-"}</td>
+                      <td>{formatGender(item.gender)}</td>
+                      <td>{formatDate(item.time)}</td>
+                      <td>
+                        {item.startTime && item.endTime
+                          ? `${item.startTime} - ${item.endTime}`
+                          : "-"}
+                      </td>
+                      <td>
+                        <span
+                          className={`staff-appointment-list__status ${statusInfo.class}`}
+                        >
+                          {statusInfo.label}
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleOpenMedicalRecord(item.userId)}
+                          disabled={isDisabled}
+                          title={
+                            isDisabled
+                              ? "Chỉ xem được sau khi bệnh nhân đã đến"
+                              : "Xem hồ sơ bệnh án"
+                          }
+                          style={{
+                            padding: "6px 12px",
+                            borderRadius: "8px",
+                            backgroundColor: isDisabled ? "#ccc" : "#077BF6",
+                            color: isDisabled ? "#666" : "#fff",
+                            border: "none",
+                            cursor: isDisabled ? "not-allowed" : "pointer",
+                            fontSize: "14px",
+                            transition: "all 0.2s ease-in-out",
+                            boxShadow: isDisabled ? "none" : "0 2px 6px rgba(0, 0, 0, 0.1)",
+                          }}
+                        >
+                          Xem hồ sơ
+                        </button>
+
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {filteredAppointments.length > 0 && (
+        <div className="staff-appointment-list__summary">
+          Tổng cộng: <strong>{filteredAppointments.length}</strong> cuộc hẹn
         </div>
       )}
 
       {showRecordModal && selectedAccountId && (
-        <MedicalRecordHistory
+        <MedicalRecordHistoryModal
           accountId={selectedAccountId}
           onClose={() => {
             setShowRecordModal(false);
