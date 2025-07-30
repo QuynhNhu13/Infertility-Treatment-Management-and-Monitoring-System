@@ -1,0 +1,433 @@
+/* ===================== Khung chính ===================== */
+.khung-xem-don-tu-van {
+    padding: 24px;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* ===================== Thanh tìm kiếm ===================== */
+.thanh-tim-kiem-account-xem-don-tu-van {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.thanh-tim-kiem-account-xem-don-tu-van input,
+.thanh-tim-kiem-account-xem-don-tu-van select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    min-width: 220px;
+    transition: border 0.3s;
+}
+
+.thanh-tim-kiem-account-xem-don-tu-van input:focus,
+.thanh-tim-kiem-account-xem-don-tu-van select:focus {
+    border-color: #077BF6;
+    outline: none;
+}
+
+.thanh-tim-kiem-account-xem-don-tu-van button {
+    background-color: #077BF6;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.reset-btn-xem-don-tu-van {
+    background-color: #6c757d;
+}
+
+/* ===================== Bảng ===================== */
+.bang-xem-don-tu-van {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bang-xem-don-tu-van th,
+.bang-xem-don-tu-van td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+}
+
+.bang-xem-don-tu-van th {
+    background-color: #077BF6;
+    color: white;
+    text-transform: uppercase;
+}
+
+/* ===================== Trạng thái ===================== */
+.status {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 13px;
+    display: inline-block;
+    text-align: center;
+}
+
+.status--deleted {
+    background-color: #ffcccc;
+    color: #d93025;
+}
+
+.status--disabled {
+    background-color: #fff3cd;
+    color: #d6a500;
+}
+
+.status--active {
+    background-color: #d4edda;
+    color: #077a3b;
+}
+
+/* ===================== Nút thao tác ===================== */
+.completed-btn-xem-don-tu-van,
+.delete-btn-xem-don-tu-van {
+    padding: 8px 14px;
+    font-size: 13px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.completed-btn-xem-don-tu-van {
+    background-color: #077BF6;
+    margin-right: 6px;
+}
+
+.delete-btn-xem-don-tu-van {
+    background-color: #dc3545;
+}
+
+/* ===================== Nút xem thêm ===================== */
+.view-more-btn-xem-don-tu-van {
+    background: none;
+    border: none;
+    color: #077BF6;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
+/* ===================== Popup ===================== */
+.popup-overlay-xem-don-tu-van {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content-xem-don-tu-van {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+.popup-header-xem-don-tu-van {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.popup-header-xem-don-tu-van h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #077BF6;
+}
+
+.close-btn-xem-don-tu-van {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #777;
+    cursor: pointer;
+}
+
+.popup-body-xem-don-tu-van {
+    font-size: 15px;
+    color: #333;
+    max-height: 300px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.popup-actions-xem-don-tu-van {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.ok-btn-xem-don-tu-van,
+.cancel-btn-xem-don-tu-van {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.ok-btn-xem-don-tu-van {
+    background-color: #077BF6;
+    color: white;
+}
+
+.cancel-btn-xem-don-tu-van {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* ===================== Phân trang ===================== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    border: 1px solid #077BF6;
+    border-radius: 4px;
+    background-color: white;
+    color: #077BF6;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.pagination button.active,
+.pagination button:hover {
+    background-color: #077BF6;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-overlay_dat_lich {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content_dat_lich {
+    background: #fff;
+    padding: 24px;
+    border-radius: 10px;
+    width: 600px;
+    max-width: 95%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Hàng đầu chỉ có 1 ô */
+.hang_dau_dat_lich {
+    margin-bottom: 20px;
+}
+
+.date_dat_lich {
+    width: 100%;
+}
+
+.input-calendar-wrapper_dat_lich {
+    position: relative;
+    width: 100%;
+}
+
+.chon-ngay_dat_lich {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+/* Calendar popup */
+.lich-container_dat_lich {
+    margin-top: 12px;
+    background: #f9f9f9;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.time-section_dat_lich {
+    margin-top: 12px;
+}
+
+.time-list_dat_lich {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.time-btn_dat_lich {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+}
+
+.time-btn_dat_lich.active-_dat_lich {
+    background-color: #007bff;
+    color: white;
+}
+
+.submit-btn_dat_lich {
+    margin-top: 12px;
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Hàng hai và ba có 2 input */
+.hang_hai_dat_lich,
+.hang_ba_dat_lich {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.information_dat_lich {
+    flex: 1;
+}
+
+.information_dat_lich p {
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.information_dat_lich input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.information_dat_lich select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    transition: border 0.3s;
+}
+
+.information_dat_lich select:focus {
+    border-color: #077BF6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(7, 123, 246, 0.2);
+}
+
+.information_dat_lich option {
+    padding: 8px;
+    font-size: 14px;
+}
+
+
+/* Hành động cuối cùng */
+.popup-actions-xem-don-tu-van {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.ok-btn-xem-don-tu-van,
+.cancel-btn-xem-don-tu-van {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.ok-btn-xem-don-tu-van {
+    background-color: #007bff;
+    color: white;
+}
+
+.cancel-btn-xem-don-tu-van {
+    background-color: #dc3545;
+    color: white;
+}
+
+.dot_blue_dat_lich {
+    width: 8px;
+    height: 8px;
+    background: #077BF6;
+    border-radius: 50%;
+}
+
+.lich-container_dat_lich {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 20px;
+    margin-top: 8px;
+    border: 2px solid rgba(7, 123, 246, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.input-calendar-wrapper_dat_lich {
+    position: relative;
+}
