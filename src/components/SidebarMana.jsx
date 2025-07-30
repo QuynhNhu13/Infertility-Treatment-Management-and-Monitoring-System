@@ -70,7 +70,8 @@ const SidebarMana = () => {
           <span>Phương pháp</span>
         </Link>
 
-        <Link to="" className={isActive("") ? "active" : ""}>
+        <Link  to={`${ROUTES.MANAGER}/${ROUTES.DOCTOR_MANAGER}`}
+          className={isActive(`${ROUTES.MANAGER}/${ROUTES.DOCTOR_MANAGER}`) ? "active" : ""}>
           <Users size={18} />
           <span>Chuyên gia & Bác sĩ</span>
         </Link>

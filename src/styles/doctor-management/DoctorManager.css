@@ -1,86 +1,622 @@
-.dm-container {
-  padding: 30px;
-  background-color: #E2EFFF;
+.doctor-manager-container {
+  padding: 24px;
+  background: #E0EDFD;
   min-height: 100vh;
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.dm-title {
+.doctor-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(7, 123, 246, 0.08);
+  border: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.doctor-manager-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: #077BF6;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.doctor-manager-icon {
+  font-size: 32px;
+  filter: drop-shadow(0 2px 4px rgba(7, 123, 246, 0.2));
+}
+
+.doctor-manager-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.doctor-manager-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-manager-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7, 123, 246, 0.4);
+}
+
+.doctor-manager-stat-number {
   font-size: 24px;
-  font-weight: bold;
-  color: #001D54;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.doctor-manager-stat-label {
+  font-size: 12px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doctor-manager-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.doctor-manager-search-section {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  max-width: 800px;
+}
+
+.doctor-manager-search-input,
+.doctor-manager-filter-select,
+.doctor-manager-sort-select {
+  padding: 12px 16px;
+  border: 2px solid rgba(7, 123, 246, 0.1);
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.doctor-manager-search-input {
+  flex: 2;
+  min-width: 250px;
+}
+
+.doctor-manager-filter-select,
+.doctor-manager-sort-select {
+  flex: 1;
+  min-width: 180px;
+  cursor: pointer;
+}
+
+.doctor-manager-search-input:focus,
+.doctor-manager-filter-select:focus,
+.doctor-manager-sort-select:focus {
+  border-color: #077BF6;
+  box-shadow: 0 0 0 3px rgba(7, 123, 246, 0.1);
+}
+
+.doctor-manager-action-section {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.doctor-manager-view-toggle {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid rgba(7, 123, 246, 0.1);
+  overflow: hidden;
+}
+
+.doctor-manager-view-btn {
+  padding: 10px 16px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  color: #6b7280;
+}
+
+.doctor-manager-view-btn.active {
+  background: #077BF6;
+  color: white;
+}
+
+.doctor-manager-view-btn:hover:not(.active) {
+  background: rgba(7, 123, 246, 0.05);
+  color: #077BF6;
+}
+
+.doctor-manager-add-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+  white-space: nowrap;
+}
+
+.doctor-manager-add-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(7, 123, 246, 0.4);
+}
+
+.doctor-manager-add-button:active {
+  transform: translateY(0);
+}
+
+.doctor-manager-loading-skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.doctor-manager-skeleton-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(7, 123, 246, 0.1);
+}
+
+.doctor-manager-skeleton-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  margin-bottom: 16px;
+}
+
+.doctor-manager-skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doctor-manager-skeleton-line {
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.doctor-manager-skeleton-line.long { width: 100%; }
+.doctor-manager-skeleton-line.medium { width: 70%; }
+.doctor-manager-skeleton-line.short { width: 40%; }
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.doctor-manager-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.doctor-manager-doctor-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(7, 123, 246, 0.1);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.doctor-manager-doctor-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #077BF6, #0A8DFF);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.doctor-manager-doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(7, 123, 246, 0.15);
+  border-color: rgba(7, 123, 246, 0.2);
+}
+
+.doctor-manager-doctor-card:hover::before {
+  transform: scaleX(1);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.doctor-manager-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.dm-detail-button {
-  background-color: #077bf6;
+.doctor-manager-doctor-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  border: none;
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.3);
+}
+
+.doctor-manager-status-badge {
   padding: 6px 12px;
-  margin-left: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.dm-detail-button:hover {
-  background-color: #005ec2;
+.doctor-manager-card-content {
+  margin-bottom: 24px;
 }
 
+.doctor-manager-doctor-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+}
 
-.dm-add-button {
-  background-color: #077BF6;
-  color: white;
+.doctor-manager-doctor-position,
+.doctor-manager-doctor-expertise {
+  margin: 8px 0;
+  color: #6b7280;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doctor-manager-label {
+  font-weight: 600;
+  color: #077BF6;
+  min-width: 80px;
+}
+
+.doctor-manager-card-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.doctor-manager-edit-btn,
+.doctor-manager-detail-btn {
+  flex: 1;
   padding: 10px 16px;
   border: none;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px;
+  transition: all 0.2s ease;
 }
 
-.dm-add-button:hover {
-  background-color: #005fcc;
+.doctor-manager-edit-btn {
+  background: rgba(7, 123, 246, 0.1);
+  color: #077BF6;
+  border: 1px solid rgba(7, 123, 246, 0.2);
 }
 
-.dm-table {
+.doctor-manager-edit-btn:hover {
+  background: rgba(7, 123, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.doctor-manager-detail-btn {
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.3);
+}
+
+.doctor-manager-detail-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 123, 246, 0.4);
+}
+
+.doctor-manager-table-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(7, 123, 246, 0.08);
+  border: 1px solid rgba(7, 123, 246, 0.1);
+  margin-bottom: 32px;
+}
+
+.doctor-manager-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.dm-table th, .dm-table td {
-  padding: 14px 16px;
+.doctor-manager-table thead th {
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  color: white;
+  padding: 16px;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
 }
 
-.dm-table th {
-  background-color: #E2EFFF;
-  color: #001D54;
+.doctor-manager-table tbody tr {
+  border-bottom: 1px solid rgba(7, 123, 246, 0.1);
+  transition: all 0.2s ease;
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.doctor-manager-table tbody tr:hover {
+  background: rgba(7, 123, 246, 0.02);
+}
+
+.doctor-manager-table tbody td {
+  padding: 16px;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.doctor-manager-table-doctor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.doctor-manager-table-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
   font-weight: 600;
 }
 
-.dm-table tr:hover {
-  background-color: #f2f7ff;
+.doctor-manager-expertise-tag {
+  padding: 4px 12px;
+  background: rgba(7, 123, 246, 0.1);
+  color: #077BF6;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(7, 123, 246, 0.2);
 }
 
-.dm-edit-button {
-  background-color: #ffa500;
-  color: white;
-  padding: 6px 12px;
+.doctor-manager-table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.doctor-manager-table-edit-btn,
+.doctor-manager-table-detail-btn {
+  width: 50px;
+  height: 40px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
+  transition: all 0.2s ease;
 }
 
-.dm-edit-button:hover {
-  background-color: #e69500;
+.doctor-manager-table-edit-btn {
+  background: rgba(7, 123, 246, 0.1);
+  color: #077BF6;
+  border: 1px solid rgba(7, 123, 246, 0.2);
+}
+
+.doctor-manager-table-edit-btn:hover {
+  background: rgba(7, 123, 246, 0.15);
+  transform: scale(1.05);
+}
+
+.doctor-manager-table-detail-btn {
+  background: linear-gradient(135deg, #077BF6 0%, #0A8DFF 100%);
+  color: white;
+}
+
+.doctor-manager-table-detail-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(7, 123, 246, 0.3);
+}
+
+.doctor-manager-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.doctor-manager-pagination-btn {
+  padding: 10px 20px;
+  border: 2px solid rgba(7, 123, 246, 0.2);
+  background: white;
+  color: #077BF6;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.doctor-manager-pagination-btn:hover:not(:disabled) {
+  background: rgba(7, 123, 246, 0.05);
+  border-color: #077BF6;
+  transform: translateY(-1px);
+}
+
+.doctor-manager-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.doctor-manager-pagination-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid rgba(7, 123, 246, 0.1);
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.doctor-manager-current-page {
+  color: #077BF6;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.doctor-manager-total-pages {
+  color: #9ca3af;
+}
+
+.doctor-manager-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(7, 123, 246, 0.1);
+  margin-top: 24px;
+}
+
+.doctor-manager-empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.doctor-manager-empty p {
+  color: #6b7280;
+  font-size: 16px;
+  margin: 0;
+}
+
+
+@media (max-width: 1024px) {
+  .doctor-manager-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .doctor-manager-search-section {
+    max-width: none;
+  }
+  
+  .doctor-manager-action-section {
+    justify-content: center;
+  }
+  
+  .doctor-manager-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-manager-container {
+    padding: 16px;
+  }
+  
+  .doctor-manager-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .doctor-manager-search-section {
+    flex-direction: column;
+  }
+  
+  .doctor-manager-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .doctor-manager-table-container {
+    overflow-x: auto;
+  }
+  
+  .doctor-manager-table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-manager-title {
+    font-size: 24px;
+  }
+  
+  .doctor-manager-stats {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .doctor-manager-stat-card {
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .doctor-manager-doctor-card {
+    padding: 16px;
+  }
+  
+  .doctor-manager-card-actions {
+    flex-direction: column;
+  }
 }

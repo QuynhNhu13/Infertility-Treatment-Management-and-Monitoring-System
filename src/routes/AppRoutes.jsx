@@ -61,6 +61,7 @@ function AppRoutes() {
         <Route path={ROUTES.SERVICE_MANAGE} element={<ServiceManage />} />
         <Route path={ROUTES.LIST_BLOG_MANA} element={<ListBlogMana />} />
         <Route path={ROUTES.SCHEDULE_TEMPLATE_LIST} element={<ScheduleTemplateList />} />
+        <Route path={ROUTES.DOCTOR_MANAGER} element={<DoctorManager />} />
       </Route>
 
       <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
