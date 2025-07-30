@@ -17,28 +17,28 @@ export default function TreatmentSessionPage() {
   const { getJsonAuthHeader } = useAuth();
 
   const fetchSessionDetail = async () => {
-  try {
-    const res = await fetch(GET_TREATMENT_SESSION_RESULT(sessionId), {
-      headers: getJsonAuthHeader(),
-    });
-    const json = await res.json();
-    if (json.statusCode === 200 && json.data) {
-      const session = json.data;
-      const isUpdated = !!(session.diagnosis || session.symptoms || session.notes || session.status);
-      setSessionData({
-        isUpdated,
-        updatedData: isUpdated ? {
-          diagnosis: session.diagnosis,
-          symptoms: session.symptoms,
-          notes: session.notes,
-          status: session.status,
-        } : null
+    try {
+      const res = await fetch(GET_TREATMENT_SESSION_RESULT(sessionId), {
+        headers: getJsonAuthHeader(),
       });
+      const json = await res.json();
+      if (json.statusCode === 200 && json.data) {
+        const session = json.data;
+        const isUpdated = !!(session.diagnosis || session.symptoms || session.notes || session.status);
+        setSessionData({
+          updatedData: {
+            diagnosis: session.diagnosis,
+            symptoms: session.symptoms,
+            notes: session.notes,
+            status: session.status,
+          }
+        });
+
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy chi tiết buổi khám:", error);
     }
-  } catch (error) {
-    console.error("Lỗi khi lấy chi tiết buổi khám:", error);
-  }
-};
+  };
 
 
   const [modals, setModals] = useState({
@@ -63,7 +63,7 @@ export default function TreatmentSessionPage() {
   }, [sessionId]);
 
   const initializeData = () => {
-     fetchSessionDetail(); 
+    fetchSessionDetail();
     fetchLabTests();
     fetchUltrasoundImages();
   };
@@ -140,17 +140,32 @@ export default function TreatmentSessionPage() {
     return statusMap[status] || status;
   };
 
-  
+
 
   const renderLabTestSection = () => {
     return (
       <div className="treatment-session-page__section treatment-session-page__lab-section">
-        <div className="treatment-session-page__section-header">
+        {/* <div className="treatment-session-page__section-header">
           <h2 className="treatment-session-page__section-title">
             <span className="treatment-session-page__section-icon">🔬</span>
             Kết quả xét nghiệm
           </h2>
           {!sessionData.isUpdated && (
+            <button
+              onClick={() => handleModalToggle('labTest', true)}
+              className="treatment-session-page__action-btn treatment-session-page__action-btn--lab"
+            >
+              + Yêu cầu xét nghiệm
+            </button>
+          )}
+        </div> */}
+
+        <div className="treatment-session-page__section-header">
+          <h2 className="treatment-session-page__section-title">
+            <span className="treatment-session-page__section-icon">🔬</span>
+            Kết quả xét nghiệm
+          </h2>
+          {(
             <button
               onClick={() => handleModalToggle('labTest', true)}
               className="treatment-session-page__action-btn treatment-session-page__action-btn--lab"
@@ -305,7 +320,7 @@ export default function TreatmentSessionPage() {
 
         <div className="treatment-session-page__section-content">
           <div className="treatment-session-page__update-actions">
-            <div className="treatment-session-page__update-card">
+            {/* <div className="treatment-session-page__update-card">
               <div className="treatment-session-page__update-card-icon">📋</div>
               <h4>Cập nhật thông tin khám</h4>
               <p>Cập nhật chẩn đoán, triệu chứng và ghi chú của buổi khám</p>
@@ -315,14 +330,28 @@ export default function TreatmentSessionPage() {
               >
                 Cập nhật thông tin
               </button>
-            </div>
+            </div> */}
+            {sessionData.updatedData?.status !== "COMPLETED" && (
+              <div className="treatment-session-page__update-card">
+                <div className="treatment-session-page__update-card-icon">📋</div>
+                <h4>Cập nhật thông tin khám</h4>
+                <p>Cập nhật chẩn đoán, triệu chứng và ghi chú của buổi khám</p>
+                <button
+                  onClick={() => handleModalToggle('update', true)}
+                  className="treatment-session-page__update-btn treatment-session-page__update-btn--primary"
+                >
+                  Cập nhật thông tin
+                </button>
+              </div>
+            )}
+
 
           </div>
         </div>
       </div>
     );
   };
-const renderSessionInfo = () => {
+  const renderSessionInfo = () => {
     return (
       <>
         <FollowUpDetail sessionId={sessionId} />
