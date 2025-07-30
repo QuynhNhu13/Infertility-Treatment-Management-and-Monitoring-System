@@ -11,7 +11,7 @@ import TreatmentSessionView from "./TreatmentSessionView";
 import "../../styles/treatment-plan-management/TreatmentPlan.css";
 import UpdateStageProgressModal from "./UpdateStageProgressModal";
 import TreatmentPlanUpdateModal from "./TreatmentPlanUpdateModal";
-
+import { toast } from "react-toastify";
 
 export default function TreatmentPlan({ medicalRecordId }) {
   const { getAuthHeader } = useAuth();
@@ -122,18 +122,22 @@ const handleCreateTreatmentPlan = async (serviceId) => {
     const result = await res.json();
 
     if (res.ok) {
-      // Sau khi tạo phác đồ thành công, gọi tiếp API tạo hóa đơn
-      const invoiceRes = await fetch(`http://localhost:8080/api/invoices/create?id=${result.data.accountId}`, {
-        method: "POST",
-        headers: getAuthHeader(),
-      });
+      const invoiceRes = await fetch(
+        `http://localhost:8080/api/invoices/create?id=${medicalRecordId}`,
+        {
+          method: "POST",
+          headers: getAuthHeader(),
+        }
+      );
 
       const invoiceResult = await invoiceRes.json();
 
       if (invoiceRes.ok) {
         toast.success("Tạo phác đồ và hóa đơn thành công");
       } else {
-        toast.warning("Tạo phác đồ thành công nhưng tạo hóa đơn thất bại");
+        toast.warning(
+          `Tạo phác đồ thành công nhưng tạo hóa đơn thất bại: ${invoiceResult.message || "Không rõ lỗi"}`
+        );
       }
 
       await fetchTreatmentPlans();
