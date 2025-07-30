@@ -1,0 +1,130 @@
+.card-title-dashboard {
+    font-weight: 600;
+}
+
+.card-dashboard .icon {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.canvas-dashboard {
+    margin-top: 10px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.card-dashboard {
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#coin-distribution {
+    margin-top: 1rem;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.status-account {
+    font-weight: 600;
+}
+
+.status-account-enabled {
+    color: #28a745;
+    /* Xanh lá cây */
+}
+
+.status-account-deleted {
+    color: crimson;
+    /* Màu đỏ đậm */
+}
+
+.status-account-disabled {
+    background-color: #f0f0f0;
+    color: #888888;
+}
+
+.account-dashboardPage {
+    animation: fadeIn 0.7s ease;
+}
+
+.account-table-dashboardPage {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    /* 👈 box shadow ngoài */
+    animation: fadeIn 0.7s ease;
+
+}
+
+/* Header */
+.account-table-dashboardPage thead {
+    background-color: #007bff;
+    /* xanh dương */
+    color: white;
+}
+
+.account-table-dashboardPage th,
+.account-table-dashboardPage td {
+    padding: 16px 20px;
+    font-size: 15px;
+    text-align: left;
+}
+
+/* Dòng xen kẽ màu */
+.account-table-dashboardPage tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+.calendar-container-dashboardPage {
+    display: flex;
+    gap: 10px;
+}
+
+.calendar-container-dashboardPage input {
+    width: 160px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.calendar-popup-dashboardPage {
+    position: absolute;
+    z-index: 999;
+    margin-top: 4px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.calendar-container-dashboardPage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+}
+
+.button-search-dashboardPage {
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.button-search-dashboardPage:hover {
+    transform: translateY(-3px);
+    background-color: #0056b3;
+}
