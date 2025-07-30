@@ -44,12 +44,12 @@ export const LIST_BLOG = `${BASE_URL}api/blogs/for-user`; //thiếu
 // export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/test`; //lấy api hiển thị cho doctor appointment manager
 export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/doctor/filter-appointment`;
 
-export const GET_LAST_APPOINTMENT = `${BASE_URL}api/appointments/last-appointment`; //cua nhan
+export const GET_USER_PROFILE = `${BASE_URL}api/user/profile`; //cua nhan
 export const APPOINTMENT_DOCTOR = `${BASE_URL}api/user/appointments/available-doctors`; //nhan
 export const APPOINTMENT_DATE = `${BASE_URL}api/schedules/available-dates-by-date`; //nhan
 export const AVAILABLE_DATES_BY_DOCTOR = `${BASE_URL}api/schedules/available-dates-by-doctor`; //nhan
 export const SCHEDULE_SLOTS_BY_DOCTOR_AND_DATE = `${BASE_URL}api/schedules/slots`; //nhan
-export const SCHEDULE_SLOTS_BY_DATE = `${BASE_URL}api/schedules/slots-by-date`; //nhan
+export const SCHEDULE_SLOTS_BY_DATE = `${BASE_URL}api/schedules/available-slots-by-date`; //nhan
 export const CREATE_APPOINTMENT = `${BASE_URL}api/appointments/create`;//nhan
 export const PAYMENT_VNPAY = `${BASE_URL}api/payment/vn-pay`;//nhan
 export const PAYMENT_VNPAY_CALLBACK = `${BASE_URL}api/payment/vn-pay-callback`;//nhan

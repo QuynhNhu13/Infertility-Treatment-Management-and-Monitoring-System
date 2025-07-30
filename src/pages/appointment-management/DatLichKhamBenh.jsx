@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import "../../styles/appointment-management/DatLichKhamBenh.css"
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useSearchParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
-    APPOINTMENT_DATE, APPOINTMENT_DOCTOR, GET_LAST_APPOINTMENT, AVAILABLE_DATES_BY_DOCTOR,
+    APPOINTMENT_DATE, APPOINTMENT_DOCTOR, GET_USER_PROFILE, AVAILABLE_DATES_BY_DOCTOR,
     SCHEDULE_SLOTS_BY_DOCTOR_AND_DATE, SCHEDULE_SLOTS_BY_DATE, CREATE_APPOINTMENT, PAYMENT_VNPAY
 } from "../../api/apiUrls.js";
 
@@ -19,7 +20,7 @@ export default function DatLichKhamBenh() {
     const [availableTimes, setAvailableTimes] = useState([]);
     const [doctorList, setDoctorList] = useState([]);
     const [showCalender, setShowCalender] = useState(false);
-    const [showDobCalendar, setShowDobCalendar] = useState(false);
+    const [canNotGetCusInfo, setCanNotGetCusInfo] = useState(false);
 
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
@@ -45,42 +46,42 @@ export default function DatLichKhamBenh() {
         })
     }
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const userData = await fetchWithAuth(GET_LAST_APPOINTMENT, {
-                    method: "GET",
-                })
-                if (!userData.ok) throw new Error("Lỗi khi gọi API thông tin người dùng");
-                const data = await userData.json();
-                if (data.data === null) {
-                    setFormData((prev) => ({
-                        ...prev,
-                        patientName: "",
-                        phoneNumber: "",
-                        gender: "",
-                        dob: ""
-                    }))
-                } else {
-                    setFormData(prev => ({
-                        ...prev,
-                        patientName: data.data.patientName,
-                        phoneNumber: data.data.phoneNumber,
-                        gender: data.data.gender,
-                        dob: data.data.dob
-                    }))
-                }
-
-            } catch (error) {
-                console.error("Lỗi lấy thông tin người dùng:", error);
+    const fetchUserData = async () => {
+        try {
+            const userData = await fetchWithAuth(GET_USER_PROFILE, {
+                method: "GET",
+            })
+            if (!userData.ok) throw new Error("Lỗi khi gọi API thông tin người dùng");
+            const data = await userData.json();
+            if (data.data === null) {
+                setFormData((prev) => ({
+                    ...prev,
+                    patientName: "",
+                    phoneNumber: "",
+                    gender: "",
+                    dateOfBirth: ""
+                }))
+                setCanNotGetCusInfo(true)
+                return;
+            } else {
+                setFormData(prev => ({
+                    ...prev,
+                    patientName: data.data.userName,
+                    phoneNumber: data.data.phoneNumber,
+                    gender: data.data.gender,
+                    dob: data.data.dateOfBirth
+                }))
+                setCanNotGetCusInfo(false)
             }
+
+        } catch (error) {
+            console.error("Lỗi lấy thông tin người dùng:", error);
         }
+    }
+
+    useEffect(() => {
         fetchUserData();
-
-    }, []);
-
-
-
+    }, [])
     useEffect(() => {
 
         const fetchData = async () => {
@@ -104,6 +105,7 @@ export default function DatLichKhamBenh() {
 
                 if (datLichKhamTheo === "doctor") {
                     setDoctorList(data.data);
+                    console.log(data.data)
                 } else {
                     setAvailableDates(data.data);
                 }
@@ -130,14 +132,10 @@ export default function DatLichKhamBenh() {
 
 
     const calendarRef = useRef("");
-    const dobCalendarRef = useRef("");
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (calendarRef.current && !calendarRef.current.contains(event.target)) {
                 setShowCalender(false);
-            }
-            if (dobCalendarRef.current && !dobCalendarRef.current.contains(event.target)) {
-                setShowDobCalendar(false);
             }
         };
 
@@ -188,7 +186,7 @@ export default function DatLichKhamBenh() {
                 const data = await res.json()
                 setAvailableTimes(data.data)
             } catch (error) {
-                console.error(error)
+                toast.error("Lỗi không thể tải danh sách giờ làm của bác sĩ" + error)
             }
         } else {
             setAvailableTimes([])
@@ -204,7 +202,6 @@ export default function DatLichKhamBenh() {
                 time: ""
             }))
             setSelectedDate(dateStr);
-            // Gọi API lấy giờ dựa trên ngày (theo ngày)
             try {
                 const res = await fetchWithAuth(`${SCHEDULE_SLOTS_BY_DATE}?date=${dateStr}`, {
                     method: "GET"
@@ -213,7 +210,7 @@ export default function DatLichKhamBenh() {
                 const data = await res.json()
                 setAvailableTimes(data.data)
             } catch (error) {
-                console.error(error)
+                toast.error("Lỗi không thể lấy được ngày làm việc của bác sĩ: " + error)
             }
         } else {
             setAvailableTimes([]);
@@ -234,7 +231,7 @@ export default function DatLichKhamBenh() {
     const tileContent = ({ date, view }) => {
         const dateStr = formatDate(date);
         if (view === 'month' && availableDates.includes(dateStr)) {
-            return <div className="dot"></div>; // dot là dấu tròn nhỏ
+            return <div className="dot-dat-lich-kham"></div>;
         }
         return null;
     };
@@ -251,8 +248,8 @@ export default function DatLichKhamBenh() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.date || !formData.time || !formData.patientName.trim() || !formData.phoneNumber.trim() || !formData.dob.trim() || !formData.gender) {
-            alert("Vui lòng điền đầy đủ thông tin trước khi tiếp tục.");
+        if (!formData.date || !formData.time) {
+            toast.warn("Vui lòng điền đầy đủ thông tin trước khi tiếp tục.");
             return;
         }
         console.log("Dữ liệu gửi lên:", formData);
@@ -266,14 +263,17 @@ export default function DatLichKhamBenh() {
                 throw new Error("Lỗi khi gửi data lên server " + response.status);
             }
 
-            const data = await response.json();
+            // const data = await response.json();
 
-            if (!data.success) {
-                throw new Error("Lỗi từ API: " + data.message);
+            // if (!data.ok) {
+            //     throw new Error("Lỗi từ API: " + data.message);
+            // }
+
+            else {
+                toast.success("Tạo appointment thành công .")
             }
 
             localStorage.setItem("appointmentPending", "true");
-            // Sau khi đặt lịch xong thì gọi VNPay
             const paymentResponse = await fetchWithAuth(`${PAYMENT_VNPAY}?amount=300000&vnp_BankCode=VNBANK`, {
                 method: "GET"
             });
@@ -286,8 +286,7 @@ export default function DatLichKhamBenh() {
 
 
         } catch (error) {
-            console.error("Lỗi khi đặt lịch:", error);
-            alert("❌ Đặt lịch thất bại: " + error.message);
+            toast.error("Bạn không thể đặt 2 lịch khám trong cùng 1 ngày")
         }
 
     };
@@ -296,247 +295,187 @@ export default function DatLichKhamBenh() {
         <>
             <Header />
             <Navbar />
-
-            <div className="form-dangkylichkham">
-                <div className="title" >
-                    <h1>ĐĂNG KÝ KHÁM BỆNH</h1>
-                </div>
-
-
-                <div className="khung-dat-lich">
-
-                    <p className="loi_mo_dau"><i>Đối với các khách hàng lần đầu đến khám và sử dụng dịch vụ tại Hệ thống Bệnh viện Đa khoa Thành Nhân, xin vui lòng cung cấp đầy đủ các thông tin của người đến khám theo mẫu bên dưới. Việc cung cấp đầy đủ thông tin sẽ giúp Quý khách tiết kiệm được thời gian làm hồ sơ khách hàng tại bệnh viện.</i></p>
-
-                    <div className="chon-loai-dich-vu">
-                        <p>ĐẶT LỊCH KHÁM</p>
-                        <div className="nut-chon-dich-vu">
-                            <button className={datLichKhamTheo === "doctor" ? 'active' : ''}
-                                onClick={() => setDatLichKhamTheo("doctor")}
-                            >THEO BÁC SĨ</button>
-                            <button className={datLichKhamTheo === "date" ? 'active' : ''}
-                                onClick={() => setDatLichKhamTheo("date")}>THEO NGÀY</button>
+            {
+                canNotGetCusInfo === true ? (
+                    <div>
+                        <div className="max-w-md mx-auto mt-6 p-4 bg-red-50 border border-red-300 rounded-lg text-center shadow-md">
+                            <p className="text-red-700 font-semibold mb-3">
+                                ⚠️ Không thể lấy thông tin người dùng.
+                            </p>
+                            <button
+                                className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition duration-200"
+                                onClick={fetchUserData}
+                            >
+                                Tải lại thông tin
+                            </button>
                         </div>
-
                     </div>
-
-
-                    <br /><br />
-                    <div className="hang_dau">
-                        <div>
-                            {
-                                datLichKhamTheo === "doctor" && (
-                                    <form onSubmit={handleSubmit} >
-                                        <div className="doctor">
-                                            <p>Chọn bác sĩ:</p>
-                                            <select value={formData.doctorID} onChange={handleChonBacSiTheoBacSi}
-                                                required
-                                            >
-
-                                                <option value="">Chọn bác sĩ</option>
-                                                {
-                                                    doctorList.map((bacSi) => (
-                                                        <option key={bacSi.id} value={bacSi.id}>{bacSi.fullName}</option>
-                                                    )
-                                                    )
-                                                }
-                                            </select>
-                                        </div>
-                                    </form>
-                                )
-                            }
-                        </div>
-                        <div>
-                            {
-                                buocTiepTheo === true && (
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="date">
-                                            <p>Chọn ngày - khung giờ muốn khám:</p>
-                                            <div className="input-calendar-wrapper">
-                                                <input type="text"
-                                                    readOnly
-                                                    className="chon-ngay"
-                                                    value={(selectedDate && selectedTime) ? `Bạn đã chọn ngày ${selectedDate}   -    ${selectedTime}` : ''}
-                                                    placeholder="Chọn ngày - giờ muốn khám"
-                                                    onClick={() => setShowCalender(true)} />
-
-                                                {
-                                                    showCalender === true && (
-
-
-
-                                                        <div ref={calendarRef} className="lich-container">
-                                                            <Calendar
-                                                                onChange={datLichKhamTheo === "doctor" ? handleDateChange : handleDateChangeTheoNgay}
-                                                                tileClassName={tileClassName}
-                                                                tileContent={tileContent}
-                                                                showNeighboringMonth={false}
-                                                                className="khung-lich"
-                                                            />
-
-                                                            <div className="legend">
-                                                                <span className="dot_blue"></span> Ngày bác sĩ có lịch khám
-                                                            </div>
-
-                                                            <div className="time-section">
-                                                                <h4>Chọn khung giờ khám</h4>
-                                                                {!selectedDate ? (
-                                                                    <div className="time-box">Vui lòng chọn ngày trước</div>
-                                                                ) : (
-                                                                    <div className="time-list">
-                                                                        {availableTimes.map((time, index) => (
-                                                                            <button
-                                                                                type="button"
-                                                                                key={index}
-                                                                                className={`time-btn ${selectedTime === time ? 'active' : ''}`}
-                                                                                onClick={() => {
-                                                                                    setSelectedTime(time)
-                                                                                    setFormData(prev => ({
-                                                                                        ...prev,
-                                                                                        time: time
-                                                                                    }))
-                                                                                }}
-                                                                            >
-                                                                                {time}
-                                                                            </button>
-                                                                        ))}
-                                                                    </div>
-                                                                )}
-                                                            </div>
-
-                                                            <button
-                                                                type="button"
-                                                                className="submit-btn"
-                                                                disabled={!selectedDate || !selectedTime}
-                                                                onClick={() => setShowCalender(false)}
-                                                            >
-                                                                {selectedDate && selectedTime
-                                                                    ? `Chọn ngày ${selectedDate}      -     ${selectedTime} giờ`
-                                                                    : 'Vui lòng chọn đầy đủ ngày và khung giờ khám'}
-                                                            </button>
-                                                        </div>
-
-
-                                                    )
-                                                }
-                                            </div>
-                                        </div>
-                                    </form>
-                                )
-                            }
+                ) : (
+                    <div className="form-dat-lich-kham">
+                        <div className="title-dat-lich-kham">
+                            <h1>ĐĂNG KÝ KHÁM BỆNH</h1>
                         </div>
 
-                    </div>
+                        <div className="khung-dat-lich-kham">
+                            <p className="loi_mo_dau-dat-lich-kham"><i>Đối với các khách hàng lần đầu đến khám và sử dụng dịch vụ tại Hệ thống Bệnh viện Đa khoa Thành Nhân, xin vui lòng cung cấp đầy đủ các thông tin của người đến khám theo mẫu bên dưới. Việc cung cấp đầy đủ thông tin sẽ giúp Quý khách tiết kiệm được thời gian làm hồ sơ khách hàng tại bệnh viện.</i></p>
 
-                    {
-                        buocTiepTheo === true && (
+                            <div className="chon-loai-dich-vu-dat-lich-kham">
+                                <p>ĐẶT LỊCH KHÁM</p>
+                                <div className="nut-chon-dich-vu-dat-lich-kham">
+                                    <button className={datLichKhamTheo === "doctor" ? 'active' : ''}
+                                        onClick={() => setDatLichKhamTheo("doctor")}
+                                    >THEO BÁC SĨ</button>
+                                    <button className={datLichKhamTheo === "date" ? 'active' : ''}
+                                        onClick={() => setDatLichKhamTheo("date")}>THEO NGÀY</button>
+                                </div>
+                            </div>
+
                             <form onSubmit={handleSubmit}>
-                                <div className="hang_hai" >
-                                    <div className="information">
-                                        <p>Họ và tên:</p>
-                                        <input type="text"
-                                            required
-                                            placeholder={"Họ và tên"}
-                                            value={formData.patientName}
-
-                                            onChange={(e) => setFormData(prev => ({
-                                                ...prev,
-                                                patientName: e.target.value
-                                            }))}
-                                            onInput={(e) => {
-                                                if (!e.target.value.trim()) {
-                                                    e.target.setCustomValidity("Vui lòng nhập tên , không được để trống");
-                                                    e.target.reportValidity();
-                                                } else {
-                                                    e.target.setCustomValidity("");
-                                                }
-                                            }}
-                                        />
+                                <div className="hang_dau-dat-lich-kham">
+                                    <div>
+                                        {
+                                            datLichKhamTheo === "doctor" && (
+                                                <div className="doctor-dat-lich-kham">
+                                                    <p>Chọn bác sĩ:</p>
+                                                    <select value={formData.doctorID} onChange={handleChonBacSiTheoBacSi} required>
+                                                        <option value="">Chọn bác sĩ</option>
+                                                        {doctorList.map((bacSi) => (
+                                                            <option key={bacSi.id} value={bacSi.id}>{bacSi.fullName}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            )
+                                        }
                                     </div>
-                                    <div className="information">
-                                        <p>Số điện thoại:</p>
-                                        <input type="text"
-                                            placeholder="Nhập số điện thoại"
-                                            value={formData.phoneNumber}
-                                            required
-                                            onChange={(e) => setFormData(prev => ({
-                                                ...prev,
-                                                phoneNumber: e.target.value
-                                            }))}
-                                            onInput={(e) => {
-                                                if (!e.target.value.trim()) {
-                                                    e.target.setCustomValidity("Vui lòng nhập số điện thoại , không được để trống");
-                                                    e.target.reportValidity();
-                                                } else {
-                                                    e.target.setCustomValidity("");
-                                                }
-                                            }}
-                                        />
+                                    <div>
+                                        {
+                                            buocTiepTheo && (
+                                                <div className="date-dat-lich-kham">
+                                                    <p>Chọn ngày - khung giờ muốn khám:</p>
+                                                    <div className="input-calendar-wrapper-dat-lich-kham">
+                                                        <input
+                                                            type="text"
+                                                            readOnly
+                                                            className="chon-ngay-dat-lich-kham"
+                                                            value={(selectedDate && selectedTime) ? `Bạn đã chọn ngày ${selectedDate}   -    ${selectedTime}` : ''}
+                                                            placeholder="Chọn ngày - giờ muốn khám"
+                                                            onClick={() => setShowCalender(true)}
+                                                        />
+
+                                                        {
+                                                            showCalender && (
+                                                                <div ref={calendarRef} className="lich-container-dat-lich-kham">
+                                                                    <Calendar
+                                                                        onChange={datLichKhamTheo === "doctor" ? handleDateChange : handleDateChangeTheoNgay}
+                                                                        tileClassName={tileClassName}
+                                                                        tileContent={tileContent}
+                                                                        showNeighboringMonth={false}
+                                                                        className="khung-lich-dat-lich-kham"
+                                                                    />
+
+                                                                    <div className="legend-dat-lich-kham">
+                                                                        <span className="dot_blue-dat-lich-kham"></span> Ngày bác sĩ có lịch khám
+                                                                    </div>
+
+                                                                    <div className="time-section-dat-lich-kham">
+                                                                        <h4>Chọn khung giờ khám</h4>
+                                                                        {!selectedDate ? (
+                                                                            <div className="time-box-dat-lich-kham">Vui lòng chọn ngày trước</div>
+                                                                        ) : (
+                                                                            <div className="time-list-dat-lich-kham">
+                                                                                {availableTimes.map((time, index) => (
+                                                                                    <button
+                                                                                        type="button"
+                                                                                        key={index}
+                                                                                        className={`time-btn-dat-lich-kham ${selectedTime === time ? 'active-dat-lich-kham' : ''}`}
+                                                                                        onClick={() => {
+                                                                                            setSelectedTime(time)
+                                                                                            setFormData(prev => ({
+                                                                                                ...prev,
+                                                                                                time: time
+                                                                                            }))
+                                                                                        }}
+                                                                                    >
+                                                                                        {time}
+                                                                                    </button>
+                                                                                ))}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+
+                                                                    <button
+                                                                        type="button"
+                                                                        className="submit-btn-dat-lich-kham"
+                                                                        disabled={!selectedDate || !selectedTime}
+                                                                        onClick={() => setShowCalender(false)}
+                                                                    >
+                                                                        {selectedDate && selectedTime
+                                                                            ? `Chọn ngày ${selectedDate}      -     ${selectedTime} giờ`
+                                                                            : 'Vui lòng chọn đầy đủ ngày và khung giờ khám'}
+                                                                    </button>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                 </div>
 
-                                <div className="hang_ba" >
-                                    <div className="information">
-                                        <p>Giới tính:</p>
-                                        <select placeholder="Vui lòng lựa chọn giới tính"
-                                            value={formData.gender}
-                                            required
-                                            onChange={(e) => setFormData(prev => ({
-                                                ...prev,
-                                                gender: e.target.value
-                                            }))}
-                                        >
-                                            <option value="">Vui lòng lựa chọn giới tính</option>
-                                            <option value="MALE">Male</option>
-                                            <option value="FEMALE">Female</option>
-                                        </select>
-                                    </div>
-                                    <div className="information">
-                                        <p>Chọn ngày sinh:</p>
-                                        <div className="input-calendar-wrapper">
-                                            <input
-                                                type="text"
-                                                placeholder="Chọn ngày sinh"
-                                                readOnly
-                                                value={formData.dob ? `Ngày sinh: ${formData.dob}` : ''}
-                                                onClick={() => setShowDobCalendar(true)}
-                                                className="input-date"
-                                            />
-                                            {showDobCalendar && (
-
-                                                <div ref={dobCalendarRef} className="lich-container">
-                                                    <Calendar
-                                                        onChange={(date) => {
-                                                            const dateStr = formatDate(date);
-                                                            setFormData(prev => ({
-                                                                ...prev,
-                                                                dob: dateStr
-                                                            }))
-                                                            setShowDobCalendar(false);
-                                                        }}
-                                                        showNeighboringMonth={false}
-                                                        maxDate={new Date()}  // không cho chọn ngày tương lai
-                                                        className="khung-lich"
+                                {
+                                    buocTiepTheo && (
+                                        <>
+                                            <div className="hang_hai-dat-lich-kham">
+                                                <div className="information-dat-lich-kham">
+                                                    <p>Họ và tên:</p>
+                                                    <input type="text"
+                                                        value={formData.patientName}
+                                                        readOnly
                                                     />
                                                 </div>
 
+                                                <div className="information-dat-lich-kham">
+                                                    <p>Số điện thoại:</p>
+                                                    <input type="text"
+                                                        value={formData.phoneNumber}
+                                                        readOnly
+                                                    />
+                                                </div>
+                                            </div>
 
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div className="hang_ba-dat-lich-kham">
+                                                <div className="information-dat-lich-kham">
+                                                    <p>Giới tính:</p>
+                                                    <input type="text"
+                                                        value={formData.gender}
+                                                        readOnly
+                                                    />
+                                                </div>
 
+                                                <div className="information-dat-lich-kham">
+                                                    <p>Ngày sinh:</p>
+                                                    <input
+                                                        type="text"
+                                                        readOnly
+                                                        value={formData.dob}
+                                                    />
+                                                </div>
+                                            </div>
 
-                                <div className="submit_but">
-                                    <button type="submit"><p>XÁC NHẬN ĐẶT LỊCH</p></button>
-                                </div>
+                                            <div className="submit_but-dat-lich-kham">
+                                                <button type="submit"><p>XÁC NHẬN ĐẶT LỊCH</p></button>
+                                            </div>
+                                        </>
+                                    )
+                                }
                             </form>
-                        )
-                    }
+                        </div>
+                    </div>
+                )
+            }
 
-                </div>
-
-
-            </div >
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
             <Footer />
         </>
 

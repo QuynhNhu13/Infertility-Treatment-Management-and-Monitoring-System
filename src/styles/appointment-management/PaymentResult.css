@@ -37,7 +37,6 @@
 }
 
 .payment-result-success .payment-result-title::before {
-    content: "✅";
     font-size: 3rem;
     display: block;
     margin-bottom: 16px;
