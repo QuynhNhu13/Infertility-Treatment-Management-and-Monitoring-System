@@ -16,10 +16,16 @@ export default function CreateSchedule({ onClose, onSuccess }) {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
+
+    if (new Date(startDate) > new Date(endDate)) {
+      setError("Ngày bắt đầu không được lớn hơn ngày kết thúc.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const res = await fetch(CREATE_SCHEDULE, {
+      const response = await fetch(CREATE_SCHEDULE, {
         method: "POST",
         headers: {
           ...getAuthHeader(),
@@ -28,16 +34,16 @@ export default function CreateSchedule({ onClose, onSuccess }) {
         body: JSON.stringify({ startDate, endDate }),
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      if (res.ok) {
+      if (response.ok) {
         setSuccessMessage("Tạo lịch làm việc thành công!");
-        onSuccess?.(); 
-        onClose();   
+        onSuccess?.();
+        onClose();
       } else {
-        setError(data.message || "Đã xảy ra lỗi.");
+        setError(data?.message || "Đã xảy ra lỗi.");
       }
-    } catch (err) {
+    } catch (error) {
       setError("Không thể kết nối đến máy chủ.");
     } finally {
       setLoading(false);
@@ -48,6 +54,7 @@ export default function CreateSchedule({ onClose, onSuccess }) {
     <div className="csm-overlay" onClick={onClose}>
       <div className="csm-modal" onClick={(e) => e.stopPropagation()}>
         <h3>Tạo lịch làm việc</h3>
+
         <form onSubmit={handleSubmit} className="csm-form">
           {error && <div className="csm-error">{error}</div>}
           {successMessage && <div className="csm-success">{successMessage}</div>}
