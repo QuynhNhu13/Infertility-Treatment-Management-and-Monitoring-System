@@ -38,7 +38,7 @@ export const GET_DOCTOR_BLOGS = `${BASE_URL}api/blogs/mine`;
 export const GET_ALL_BLOGS = `${BASE_URL}api/blogs`; //cùng link với put 
 export const APPROVE_BLOG = (id) => `${BASE_URL}api/blogs/${id}/approve`;
 export const REJECT_BLOG = (id) => `${BASE_URL}api/blogs/${id}/reject`;
-export const LIST_BLOG = `${BASE_URL}api/blogs/for-user`;
+export const LIST_BLOG = `${BASE_URL}api/blogs/for-user`; //thiếu
 
 //Appointment-Management
 // export const GET_ALL_APPOINTMENT = `${BASE_URL}api/appointments/test`; //lấy api hiển thị cho doctor appointment manager
