@@ -1,19 +1,19 @@
-.card-title-dashboard {
+.admin-card-title-dashboard {
     font-weight: 600;
 }
 
-.card-dashboard .icon {
+.admin-card-dashboard .icon {
     color: white;
     font-size: 2.5rem;
 }
 
-.canvas-dashboard {
+.admin-canvas-dashboard {
     margin-top: 10px;
     width: 100% !important;
     height: auto !important;
 }
 
-.card-dashboard {
+.admin-card-dashboard {
     border-radius: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -26,30 +26,30 @@ body {
     background-color: #f8f9fa;
 }
 
-.status-account {
+.admin-status-account {
     font-weight: 600;
 }
 
-.status-account-enabled {
+.admin-status-account-enabled {
     color: #28a745;
     /* Xanh lá cây */
 }
 
-.status-account-deleted {
+.admin-status-account-deleted {
     color: crimson;
     /* Màu đỏ đậm */
 }
 
-.status-account-disabled {
+.admin-status-account-disabled {
     background-color: #f0f0f0;
     color: #888888;
 }
 
-.account-dashboardPage {
+.admin-account-dashboardPage {
     animation: fadeIn 0.7s ease;
 }
 
-.account-table-dashboardPage {
+.admin-account-table-dashboardPage {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -57,37 +57,33 @@ body {
     overflow: hidden;
     background-color: white;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    /* 👈 box shadow ngoài */
     animation: fadeIn 0.7s ease;
-
 }
 
 /* Header */
-.account-table-dashboardPage thead {
+.admin-account-table-dashboardPage thead {
     background-color: #007bff;
-    /* xanh dương */
     color: white;
 }
 
-.account-table-dashboardPage th,
-.account-table-dashboardPage td {
+.admin-account-table-dashboardPage th,
+.admin-account-table-dashboardPage td {
     padding: 16px 20px;
     font-size: 15px;
     text-align: left;
 }
 
 /* Dòng xen kẽ màu */
-.account-table-dashboardPage tbody tr:nth-child(even) {
+.admin-account-table-dashboardPage tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-
-.calendar-container-dashboardPage {
+.admin-calendar-container-dashboardPage {
     display: flex;
     gap: 10px;
 }
 
-.calendar-container-dashboardPage input {
+.admin-calendar-container-dashboardPage input {
     width: 160px;
     padding: 6px 10px;
     border-radius: 6px;
@@ -96,7 +92,7 @@ body {
     font-size: 14px;
 }
 
-.calendar-popup-dashboardPage {
+.admin-calendar-popup-dashboardPage {
     position: absolute;
     z-index: 999;
     margin-top: 4px;
@@ -105,7 +101,7 @@ body {
     background-color: white;
 }
 
-.calendar-container-dashboardPage {
+.admin-calendar-container-dashboardPage {
     position: relative;
     display: flex;
     align-items: center;
@@ -113,7 +109,7 @@ body {
     margin-right: 10px;
 }
 
-.button-search-dashboardPage {
+.admin-button-search-dashboardPage {
     padding: 6px 16px;
     font-size: 14px;
     font-weight: 700;
@@ -124,7 +120,7 @@ body {
     transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-.button-search-dashboardPage:hover {
+.admin-button-search-dashboardPage:hover {
     transform: translateY(-3px);
     background-color: #0056b3;
 }
