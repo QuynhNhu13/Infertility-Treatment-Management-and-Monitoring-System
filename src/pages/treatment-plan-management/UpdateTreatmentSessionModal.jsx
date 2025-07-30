@@ -22,7 +22,6 @@ export default function UpdateTreatmentSessionModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [successData, setSuccessData] = useState(null);
 
-  // Reset success message & error when modal is opened
   useEffect(() => {
     if (isOpen) {
       setSuccessData(null);
@@ -30,7 +29,6 @@ export default function UpdateTreatmentSessionModal({
     }
   }, [isOpen]);
 
-  // Load sessionData vào form nếu chưa cập nhật
   useEffect(() => {
     if (sessionData && !successData) {
       setFormData({

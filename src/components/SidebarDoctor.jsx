@@ -11,17 +11,21 @@ import {
   Users,
   Trophy,
   BookOpen,
+  LogOut,
 } from "lucide-react";
 import logobv from "../assets/logobv.png";
+import { useAuth } from "../context/AuthContext";
 
 const SidebarDoctor = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = () => {
-    navigate("/");
+   const handleLogout = () => {
+    logout();
+    navigate("/dang-nhap");
   };
 
   return (
@@ -70,6 +74,10 @@ const SidebarDoctor = () => {
           <Users size={18} />
           <span>Góc chia sẻ</span>
         </Link>
+        <button className="logout-btn" onClick={handleLogout}>
+          <LogOut size={18} />
+          <span>Đăng xuất</span>
+        </button>
 
       </div>
     </aside>
