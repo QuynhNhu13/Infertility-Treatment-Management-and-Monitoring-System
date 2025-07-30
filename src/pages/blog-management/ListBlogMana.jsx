@@ -25,11 +25,11 @@ const ListBlogMana = () => {
   const navigate = useNavigate();
 
   const statusOptions = [
-  { value: "", label: "Tất cả trạng thái" },
-  { value: "PENDING", label: "Chờ duyệt" },
-  { value: "APPROVED", label: "Đã duyệt" },
-  { value: "REJECTED", label: "Bị từ chối" },
-];
+    { value: "", label: "Tất cả trạng thái" },
+    { value: "PENDING", label: "Chờ duyệt" },
+    { value: "APPROVED", label: "Đã duyệt" },
+    { value: "REJECTED", label: "Bị từ chối" },
+  ];
 
 
   const fetchBlogs = async () => {
@@ -58,12 +58,12 @@ const ListBlogMana = () => {
 
   useEffect(() => {
     let filtered = blogs.filter(blog => {
-      const matchesSearch = 
+      const matchesSearch =
         blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (blog.createdBy?.fullName || "").toLowerCase().includes(searchTerm.toLowerCase());
-      
+
       const matchesStatus = filterStatus === "" || blog.status === filterStatus;
-      
+
       return matchesSearch && matchesStatus;
     });
 
@@ -214,7 +214,7 @@ const ListBlogMana = () => {
         <h2 className="blog-mana-title">
           QUẢN LÝ BLOG
         </h2>
-        
+
         <div className="blog-mana-stats">
           <div className="blog-mana-stat-card total">
             <span className="blog-mana-stat-number">{statusCounts.total}</span>
@@ -244,7 +244,7 @@ const ListBlogMana = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="blog-mana-search-input"
           />
-          
+
           {/* <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
@@ -256,12 +256,12 @@ const ListBlogMana = () => {
             <option value="REJECTED">Bị từ chối</option>
           </select> */}
           <Select
-  options={statusOptions}
-  value={statusOptions.find(option => option.value === filterStatus)}
-  onChange={(selectedOption) => setFilterStatus(selectedOption.value)}
-  className="blog-mana-filter-select"
-  classNamePrefix="react-select"
-/>
+            options={statusOptions}
+            value={statusOptions.find(option => option.value === filterStatus)}
+            onChange={(selectedOption) => setFilterStatus(selectedOption.value)}
+            className="blog-mana-filter-select"
+            classNamePrefix="react-select"
+          />
 
 
           {/* <select
@@ -299,8 +299,8 @@ const ListBlogMana = () => {
               </thead>
               <tbody>
                 {currentBlogs.map((blog, index) => (
-                  <tr 
-                    key={blog.id} 
+                  <tr
+                    key={blog.id}
                     className="blog-mana-table-row"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
@@ -325,8 +325,8 @@ const ListBlogMana = () => {
                       </span>
                     </td>
                     <td>
-                      <button 
-                        className="blog-view-btn" 
+                      <button
+                        className="blog-view-btn"
                         onClick={() => setSelectedBlog(blog)}
                       >
                         Xem
@@ -347,13 +347,13 @@ const ListBlogMana = () => {
               >
                 ← Trước
               </button>
-              
+
               <div className="blog-mana-pagination-info">
                 <span className="blog-mana-current-page">{currentPage}</span>
                 <span> / </span>
                 <span className="blog-mana-total-pages">{totalPages}</span>
               </div>
-              
+
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
@@ -402,8 +402,8 @@ const ListBlogMana = () => {
 
             {!isActionDone && selectedBlog.status === "PENDING" && (
               <div className="blog-modal-actions">
-                <button 
-                  className="blog-approve-btn" 
+                <button
+                  className="blog-approve-btn"
                   onClick={() => handleApprove(selectedBlog.id)}
                 >
                   Duyệt bài
