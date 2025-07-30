@@ -271,73 +271,79 @@ export default function Dashboard() {
                 theme="colored"
             />
 
-            <div className="container-fluid p-4 bg-light">
-                <div className="row mb-4">
-                    <div className="col-md-4">
-                        <div className="card-dashboard text-white bg-primary mb-3">
-                            <div className="card-body-dashboard">
+            <div className="container-fluid p-4 bg-light admin-account-container">
+                <div className="row mb-4 admin-account-container">
+                    <div className="col-md-4 admin-account-container">
+                        <div className="admin-card-dashboard text-white bg-primary mb-3">
+                            <div className="admin-card-body-dashboard">
                                 <div className="d-flex justify-content-between">
                                     <div>
-                                        <h5 className="card-title-dashboard">ENABLED ACCOUNT</h5>
-                                        <p className="card-text-dashboard fs-4">{numberEnabledAccount}</p>
-                                        <p className="card-text-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
+                                        <h5 className="admin-card-title-dashboard">ENABLED ACCOUNT</h5>
+                                        <p className="admin-card-text-dashboard fs-4">{numberEnabledAccount}</p>
+                                        <p className="admin-card-text-dashboard">
+                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                        </p>
                                     </div>
                                     <div className="icon fs-1">
                                         <i className="fa fa-btc"></i>
                                     </div>
                                 </div>
-                                <canvas className="canvas-dashboard" id="coin_sales1" height="100"></canvas>
+                                <canvas className="admin-canvas-dashboard" id="coin_sales1" height="100"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
-                        <div className="card-dashboard text-white bg-warning mb-3">
-                            <div className="card-body-dashboard">
+                    <div className="col-md-4 admin-account-container">
+                        <div className="admin-card-dashboard text-white bg-warning mb-3">
+                            <div className="admin-card-body-dashboard">
                                 <div className="d-flex justify-content-between">
                                     <div>
-                                        <h5 className="card-title-dashboard">DISABLED ACCOUNT</h5>
-                                        <p className="card-text-dashboard fs-4">{numberDisabledAccount}</p>
-                                        <p className="card-text-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
+                                        <h5 className="admin-card-title-dashboard">DISABLED ACCOUNT</h5>
+                                        <p className="admin-card-text-dashboard fs-4">{numberDisabledAccount}</p>
+                                        <p className="admin-card-text-dashboard">
+                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                        </p>
                                     </div>
                                     <div className="icon fs-1">
                                         <i className="fa fa-btc"></i>
                                     </div>
                                 </div>
-                                <canvas className="canvas-dashboard" id="coin_sales2" height="100"></canvas>
+                                <canvas className="admin-canvas-dashboard" id="coin_sales2" height="100"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-md-4">
-                        <div className="card-dashboard text-white bg-info mb-3">
-                            <div className="card-body-dashboard">
+                    <div className="col-md-4 admin-account-container">
+                        <div className="admin-card-dashboard text-white bg-info mb-3">
+                            <div className="admin-card-body-dashboard">
                                 <div className="d-flex justify-content-between">
                                     <div>
-                                        <h5 className="card-title-dashboard">DELETED ACCOUNT</h5>
-                                        <p className="card-text-dashboard fs-4">{numberDeletedAccount}</p>
-                                        <p className="card-text-dashboard">  Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}</p>
+                                        <h5 className="admin-card-title-dashboard">DELETED ACCOUNT</h5>
+                                        <p className="admin-card-text-dashboard fs-4">{numberDeletedAccount}</p>
+                                        <p className="admin-card-text-dashboard">
+                                            Date: {formatDate(fromDate)} – {formatDate(toDate || new Date(new Date(fromDate).setDate(fromDate.getDate() + 6)))}
+                                        </p>
                                     </div>
                                     <div className="icon fs-1">
                                         <i className="fa fa-eur"></i>
                                     </div>
                                 </div>
-                                <canvas className="canvas-dashboard" id="coin_sales3" height="100"></canvas>
+                                <canvas className="admin-canvas-dashboard" id="coin_sales3" height="100"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-lg-9 mb-3">
-                        <div className="card-dashboard">
-                            <div className="card-body-dashboard">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <h5 className="card-title-dashboard mb-0">Overview</h5>
+                <div className="row admin-account-container">
+                    <div className="col-lg-9 mb-3 admin-account-container">
+                        <div className="admin-card-dashboard">
+                            <div className="admin-card-body-dashboard">
+                                <div className="d-flex justify-content-between align-items-center admin-account-container">
+                                    <h5 className="admin-card-title-dashboard mb-0">Overview</h5>
                                     <div className="d-flex align-items-center gap-2 flex-wrap mt-2">
-                                        <div className="calendar-container-dashboardPage" ref={fromRef}>
-
-                                            From:<input
+                                        <div className="admin-calendar-container-dashboardPage" ref={fromRef}>
+                                            From:
+                                            <input
                                                 type="text"
                                                 readOnly
                                                 placeholder="Chọn ngày"
@@ -345,7 +351,7 @@ export default function Dashboard() {
                                                 onClick={() => setShowFromCalendar(true)}
                                             />
                                             {showFromCalendar && (
-                                                <div className="calendar-popup-dashboardPage">
+                                                <div className="admin-calendar-popup-dashboardPage">
                                                     <Calendar
                                                         value={fromDate}
                                                         showNeighboringMonth={false}
@@ -358,8 +364,9 @@ export default function Dashboard() {
                                             )}
                                         </div>
 
-                                        <div className="calendar-container-dashboardPage" ref={toRef}>
-                                            To:<input
+                                        <div className="admin-calendar-container-dashboardPage" ref={toRef}>
+                                            To:
+                                            <input
                                                 type="text"
                                                 readOnly
                                                 placeholder="Chọn ngày"
@@ -367,7 +374,7 @@ export default function Dashboard() {
                                                 onClick={() => setShowToCalendar(true)}
                                             />
                                             {showToCalendar && (
-                                                <div className="calendar-popup-dashboardPage">
+                                                <div className="admin-calendar-popup-dashboardPage">
                                                     <Calendar
                                                         value={toDate}
                                                         showNeighboringMonth={false}
@@ -378,68 +385,69 @@ export default function Dashboard() {
                                                     />
                                                 </div>
                                             )}
-
                                         </div>
-                                        <div><button className="button-search-dashboardPage" onClick={() => handleSearch({ from: fromDate, to: toDate })}>
-                                            Search
-                                        </button></div>
+
+                                        <div>
+                                            <button className="admin-button-search-dashboardPage" onClick={() => handleSearch({ from: fromDate, to: toDate })}>
+                                                Search
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <canvas className="canvas-dashboard" id="overview-chart" height="200"></canvas>
+                                <canvas className="admin-canvas-dashboard" id="overview-chart" height="200"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-lg-3">
-                        <div className="card-dashboard h-100">
-                            <div className="card-body-dashboard">
-                                <h5 className="card-title-dashboard">Account Distribution</h5>
-                                <canvas className="canvas-dashboard" id="coin-distribution" height="200"></canvas>
+                    <div className="col-lg-3 admin-account-container">
+                        <div className="admin-card-dashboard h-100">
+                            <div className="admin-card-body-dashboard">
+                                <h5 className="admin-card-title-dashboard">Account Distribution</h5>
+                                <canvas className="admin-canvas-dashboard" id="coin-distribution" height="200"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-                {
-                    accounts ? (
-                        <div className="account-dashboardPage">
-                            <table className="account-table-dashboardPage">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>TÊN TÀI KHOẢN</th>
-                                        <th>SĐT</th>
-                                        <th>EMAIL</th>
-                                        <th>NGÀY TẠO</th>
-                                        <th>TRẠNG THÁI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {accounts.map((acc, index) => (
-                                        <tr key={acc.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{acc.fullName}</td>
-                                            <td>{acc.phoneNumber}</td>
-                                            <td>{acc.email}</td>
-                                            <td>{formatDate(acc.createdAt)}</td>
-                                            <td>
-                                                <span
-                                                    className={`status-account ${acc.status === "deleted"
-                                                        ? "status-account-deleted"
-                                                        : acc.status === "disabled"
-                                                            ? "status-account-disabled"
-                                                            : "status-account-enabled"
-                                                        }`}
-                                                >
-                                                    {formatStatus(acc.status)}
-                                                </span>
 
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    ) : (<p> No account available </p>)
+                {accounts ? (
+                    <div className="admin-account-dashboardPage">
+                        <table className="admin-account-table-dashboardPage">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>TÊN TÀI KHOẢN</th>
+                                    <th>SĐT</th>
+                                    <th>EMAIL</th>
+                                    <th>NGÀY TẠO</th>
+                                    <th>TRẠNG THÁI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {accounts.map((acc, index) => (
+                                    <tr key={acc.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{acc.fullName}</td>
+                                        <td>{acc.phoneNumber}</td>
+                                        <td>{acc.email}</td>
+                                        <td>{formatDate(acc.createdAt)}</td>
+                                        <td>
+                                            <span
+                                                className={`admin-status-account ${acc.status === "deleted"
+                                                    ? "admin-status-account-deleted"
+                                                    : acc.status === "disabled"
+                                                        ? "admin-status-account-disabled"
+                                                        : "admin-status-account-enabled"
+                                                    }`}
+                                            >
+                                                {formatStatus(acc.status)}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (<p> No account available </p>)
                 }
             </div>
         </>
