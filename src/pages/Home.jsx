@@ -57,6 +57,7 @@ const Home = () => {
                 if (user) {
                   navigate("/dat-lich-kham");
                 } else {
+                  alert("Vui lòng đăng nhập để đặt lịch khám!");
                   navigate("/dang-nhap");
                 }
               }}
@@ -98,6 +99,7 @@ const Home = () => {
                     if (user) {
                       navigate("/dat-lich-kham");
                     } else {
+                      alert("Vui lòng đăng nhập để đặt lịch khám!");
                       navigate("/dang-nhap");
                     }
                   }}

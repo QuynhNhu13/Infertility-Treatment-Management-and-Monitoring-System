@@ -5,10 +5,14 @@ import "../../styles/doctor-management/DoctorList.css";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useAuth } from "../../context/AuthContext"; // cập nhật path nếu khác
+
 
 export default function DoctorList() {
     const [doctors, setDoctors] = useState([]);
     const navigate = useNavigate();
+    const { user } = useAuth();
+
 
     const fetchDoctors = async () => {
         try {
@@ -30,8 +34,8 @@ export default function DoctorList() {
 
     return (
         <>
-        <Header />
-        <Navbar />
+            <Header />
+            <Navbar />
             <div className="doctor-list-container">
                 <h2 className="doctor-list-title">ĐỘI NGŨ BÁC SĨ</h2>
                 <div className="doctor-list-grid">
@@ -54,12 +58,26 @@ export default function DoctorList() {
                                 >
                                     Xem chi tiết
                                 </button>
-                                <button
+                                {/* <button
                                     className="doctor-list-appointment-button"
                                     onClick={() => navigate(`/dat-lich-kham?doctorId=${doc.id}`)}
                                 >
                                     Đặt lịch khám
+                                </button> */}
+                                <button
+                                    className="doctor-list-appointment-button"
+                                    onClick={() => {
+                                        if (user) {
+                                            navigate(`/dat-lich-kham?doctorId=${doc.id}`);
+                                        } else {
+                                            alert("Vui lòng đăng nhập để đặt lịch khám!");
+                                            navigate("/dang-nhap");
+                                        }
+                                    }}
+                                >
+                                    Đặt lịch khám
                                 </button>
+
                             </div>
                         </div>
                     ))}

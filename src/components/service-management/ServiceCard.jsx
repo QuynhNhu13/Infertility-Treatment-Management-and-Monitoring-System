@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import ROUTES from '../../routes/RoutePath';
 import '../../styles/service-management/ServiceCard.css';
 
+
 const ServiceCard = ({ id, serviceName, subTitle, imgUrl, slug, price, showPrice = true }) => {
   const defaultImg = 'https://via.placeholder.com/400x300?text=No+Image';
   const navigate = useNavigate();
