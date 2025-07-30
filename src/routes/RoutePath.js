@@ -64,6 +64,9 @@ const ROUTES = {
   LIST_DOCTOR: `/danh-sach-chuyen-gia-bac-si`, //CHƯA LÀM
   DOCTOR_MANAGER: `quan-ly-bac-si`,
 
+  // achievement
+  ACHIEVEMENT_VIEW: `/thanh-tuu`,
+
 };
 
 export default ROUTES;

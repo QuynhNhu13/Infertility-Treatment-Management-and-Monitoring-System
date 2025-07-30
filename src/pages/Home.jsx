@@ -6,6 +6,10 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import ListServiceHome from "./service-management/ListServiceHome";
 import ListDoctorHome from "./doctor-management/ListDoctorHome";
+import AchievementHome from "../components/achievement/AchievementHome";
+import { useAuth } from "../context/AuthContext"; // hoặc đường dẫn đúng
+import { useNavigate } from "react-router-dom";
+
 
 import Footer from "../components/Footer";
 import doctor01 from "../assets/doctor01.png";
@@ -15,6 +19,9 @@ import logo02 from "../assets/logo02.png";
 
 
 const Home = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <>
       <Header />
@@ -40,10 +47,26 @@ const Home = () => {
               <FaStethoscope className="action-icon" />
               <span>TƯ VẤN KHÁM</span>
             </a>
-            <a href="/dat-lich-kham" className="action-link-text">
+            {/* <a href="/dat-lich-kham" className="action-link-text">
+              <FaCalendarCheck className="action-icon" />
+              <span>ĐẶT LỊCH KHÁM</span>
+            </a> */}
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                if (user) {
+                  navigate("/dat-lich-kham");
+                } else {
+                  navigate("/dang-nhap");
+                }
+              }}
+              className="action-link-text"
+              style={{ cursor: "pointer" }}
+            >
               <FaCalendarCheck className="action-icon" />
               <span>ĐẶT LỊCH KHÁM</span>
             </a>
+
           </div>
         </div>
 
@@ -66,9 +89,23 @@ const Home = () => {
                 <a href="/tu-van-kham-benh">
                   <img src={logo01} alt="Tư vấn khám bệnh" className="icon-img" />
                 </a>
-                <a href="/dat-lich-kham-benh">
+                {/* <a href="/dat-lich-kham">
+                  <img src={logo02} alt="Đặt lịch khám bệnh" className="icon-img" />
+                </a> */}
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (user) {
+                      navigate("/dat-lich-kham");
+                    } else {
+                      navigate("/dang-nhap");
+                    }
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
                   <img src={logo02} alt="Đặt lịch khám bệnh" className="icon-img" />
                 </a>
+
               </div>
             </div>
           </div>
@@ -76,7 +113,10 @@ const Home = () => {
 
         <ListServiceHome />
 
-<ListDoctorHome/>
+        <ListDoctorHome />
+
+        <AchievementHome />
+
         <Footer />
 
       </div >

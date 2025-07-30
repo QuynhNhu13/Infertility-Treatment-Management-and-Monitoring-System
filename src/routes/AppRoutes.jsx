@@ -39,7 +39,7 @@ import MedicalRecordDetailView from "../pages/medical-record-management/MedicalR
 import UserDashboard from "../pages/UserDashboard";
 import MedicalRecordHistoryView from "../pages/medical-record-management/MedicalRecordHistoryView";
 import TreatmentSessionPageView from "../pages/treatment-plan-management/TreatmentSessionPageView";
-import NotificationPage from "../pages/NotificationPage"; 
+import NotificationPage from "../pages/NotificationPage";
 import DirectPatientManager from "../pages/account-management/DirectPatientManager";
 import StaffAppointmentList from "../pages/appointment-management/StaffAppointmentList";
 import UserAppointmentList from "../pages/appointment-management/UserAppointmentList";
@@ -49,7 +49,8 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AdminManageAcc from "../pages/account-management/AdminManageAcc";
 import DoctorManager from "../pages/doctor-management/DoctorManager";
 import DoctorList from "../pages/doctor-management/DoctorList";
-import DoctorDetail from "../pages/doctor-management/DoctorDetail"
+import DoctorDetail from "../pages/doctor-management/DoctorDetail";
+import AchievementPage from "../components/achievement/AchievementPage";
 
 function AppRoutes() {
   return (
@@ -65,24 +66,24 @@ function AppRoutes() {
       <Route path={ROUTES.DOCTOR} element={<DoctorDashboard />}>
         <Route path={ROUTES.DOCTOR_BLOG_MANAGER} element={<DoctorBlogManager />} />
         <Route path={ROUTES.DOCTOR_APPOINTMENT_MANAGER} element={<DoctorAppointmentManager />} />
-        <Route path={ROUTES.DOCTOR_LIST_PATIENT} element={<DoctorListPatient/>}/>
+        <Route path={ROUTES.DOCTOR_LIST_PATIENT} element={<DoctorListPatient />} />
       </Route>
 
       <Route path={ROUTES.STAFF} element={<StaffDashboard />} >
         <Route path={ROUTES.LAB_TEST_RESULT_LIST} element={<LabTestResultList />} />
-        <Route path={ROUTES.DIRECT_PATIENT_MANA} element={<DirectPatientManager/>}/>
-        <Route path={ROUTES.STAFF_APPOINTMENT_LIST} element={<StaffAppointmentList/>}/>
+        <Route path={ROUTES.DIRECT_PATIENT_MANA} element={<DirectPatientManager />} />
+        <Route path={ROUTES.STAFF_APPOINTMENT_LIST} element={<StaffAppointmentList />} />
       </Route>
 
       <Route path={ROUTES.USER} element={<UserDashboard />}>
         <Route index element={<Navigate to={ROUTES.PROFILE_VIEW} replace />} />
         <Route path={ROUTES.MEDICAL_RECORD_HISTORY_VIEW} element={<MedicalRecordHistoryView />} />
-        <Route path={ROUTES.USER_APPOINTMENT_LIST} element={<UserAppointmentList/>}/>
-        <Route path={ROUTES.PROFILE_VIEW} element={<ProfileView/>}/>
+        <Route path={ROUTES.USER_APPOINTMENT_LIST} element={<UserAppointmentList />} />
+        <Route path={ROUTES.PROFILE_VIEW} element={<ProfileView />} />
       </Route>
 
-      <Route path={ROUTES.ADMIN} element={<AdminDashboard/>}>
-        <Route path={ROUTES.ADMIN_MANA_ACC} element={<AdminManageAcc/>}/>
+      <Route path={ROUTES.ADMIN} element={<AdminDashboard />}>
+        <Route path={ROUTES.ADMIN_MANA_ACC} element={<AdminManageAcc />} />
       </Route>
 
 
@@ -126,11 +127,14 @@ function AppRoutes() {
       <Route path="/ho-so-benh-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPage />} />
       <Route path="/ho-so-ca-nhan/:recordId/tien-trinh-dieu-tri/:progressId/buoi-kham/:sessionId" element={<TreatmentSessionPageView />} />
 
-      <Route path="/thong-bao" element={<NotificationPage />} />   
+      <Route path="/thong-bao" element={<NotificationPage />} />
 
-            {/* Doctor - Management */}
+      {/* Doctor - Management */}
       <Route path={ROUTES.LIST_DOCTOR} element={<DoctorList />} />
-      <Route path="/bac-si/:id" element={<DoctorDetail />} /> 
+      <Route path="/bac-si/:id" element={<DoctorDetail />} />
+
+      {/* Achievement */}
+      <Route path={ROUTES.ACHIEVEMENT_VIEW} element={<AchievementPage/>}/>
     </Routes>
   );
 }
